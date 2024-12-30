@@ -26,11 +26,15 @@ jobs:
    
     - name: Run script
       run: python warp.py
-    - name: Commit and push changes
-      run: |          
-          git config --global user.email "nirevil@proton.me"
-          git config --global user.name "REvil"
-          git config credential.helper store
+    - name: Commit
+      run: |
           git add -A
-          git diff --cached --quiet || git commit -m "🪣 UPDATED: $(TZ='Asia/Tehran' date '+%A, %d %b %Y, %l:%M %p')"
-          git push
+          git diff --cached --quiet || git commit -m "ⅠⅣⅮ UPDATED: $(TZ='Asia/Tehran' date '+%A, %d %b %Y, %l:%M %p')"
+          git config --global user.email "nirevil@proton.me"
+          git config --global user.name "Diana-Cl"
+          git config credential.helper store
+
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
