@@ -22,7 +22,7 @@ jobs:
           NODE_VERSION: '20'
 
       - name: Setup PHP
-        uses: nanasess/setup-php@v4.0.2
+        uses: php-actions/phpunit@v4
         with:
           php-version: '8.3'
 
@@ -31,15 +31,15 @@ jobs:
 
       - name: Configure Git
         run: |
-          git config --global user.email "k@gmail.com"
-          git config --global user.name "k"
+          git config --global user.email "nirevil@proton.me"
+          git config --global user.name "NiREvil"
 
       - name: Commit changes
         run: |
           git add -A
-          git diff --cached --quiet || git commit -m "🔺Updated, Time is: $(TZ='Asia/Tehran' date '+%Y-%m-%d %H:%M')"
+          git diff --cached --quiet || git commit -m "ⅮⅰⅣⅪⅭΠἼ Updated▫ $(TZ='Asia/Tehran' date '+%Y-%m-%d %H:%M')"
 
       - name: Push changes
-        uses: ad-m/github-push-action@master
+        uses: ad-m/github-push-action@v0.6.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
