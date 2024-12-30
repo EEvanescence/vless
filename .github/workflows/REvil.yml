@@ -4,7 +4,7 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - 'edge/warp.py'
+      - 'warp.py'
   schedule: #every fuckin 60 minutes
     - cron: '0 * * * *'
 
@@ -25,7 +25,7 @@ jobs:
         pip install ipaddress
    
     - name: Run script
-      run: python warp.py
+      run: python edge/warp.py
     - name: Commit and push changes
       run: |          
           git config --global user.email "nirevil@proton.me"
