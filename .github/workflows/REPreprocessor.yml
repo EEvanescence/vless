@@ -1,4 +1,4 @@
-name: "CF IP collector"
+name: "PHP Environments"
 
 on:
   workflow_dispatch:
@@ -22,9 +22,9 @@ jobs:
           NODE_VERSION: '20'
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@2.31.1
         with:
-          php-version: '8.0'
+          php-version: '8.3'
 
       - name: Execute PHP script
         run: php edge/Troy.php
@@ -37,7 +37,7 @@ jobs:
       - name: Commit changes
         run: |
           git add -A
-          git diff --cached --quiet || git commit -m "🟢IPs have been updated at: $(TZ='Asia/Tehran' date '+%Y-%m-%d %H:%M')"
+          git diff --cached --quiet || git commit -m "🔺Updated, Time is: $(TZ='Asia/Tehran' date '+%Y-%m-%d %H:%M')"
 
       - name: Push changes
         uses: ad-m/github-push-action@master
