@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v2
     - name: Set up Python
       uses: actions/setup-python@v3
       with:
@@ -29,7 +29,7 @@ jobs:
     - name: Commit and push changes
       run: |          
           git config --global user.email "nirevil@proton.me"
-          git config --global user.name "REvil"
+          git config --global user.name "EEvanescence"
           git config credential.helper store
           git add -A
           git commit -m "₩₳Γ₱ ₡Ø₦₣í₲"
