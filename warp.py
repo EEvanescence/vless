@@ -17,7 +17,7 @@ warp_cidr = [
     "162.159.204.0/24",
 ]
 
-script_directory = os.path.dirname(file)
+script_directory = os.path.dirname(__file__)
 Bestip_path = os.path.join(script_directory, "Bestip.txt")
 result_path = os.path.join(script_directory, "result.csv")
 
@@ -92,7 +92,7 @@ with open("Bestip.txt", "w") as f:
         f.write(f"{ip}\n")
 
 
-formatted_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+formatted_time = datetime.datetime.now().strftime("+%A, %d %b %Y, %l:%M %p")
 
 
 def export_Hiddify(t_ips):
@@ -107,13 +107,10 @@ title = (
     + base64.b64encode("Freedom to Dream 💛✨".encode("utf-8")).decode("utf-8")
     + "\n"
 )
-update_interval = "//profile-update-interval: 5\n"
-sub_info = (
-    "//subscription-userinfo: upload=805306368000; download=2576980377600; "
-    "total=6012954214400; expire=1762677732\n"
-)
+update_interval = "//profile-update-interval: 7\n"
+sub_info = "//subscription-userinfo: upload=805306368000; download=2576980377600; total=6012954214400; expire=1762677732\n"
 profile_web = "//profile-web-page-url: https://github.com/NiREvil\n"
-last_modified = "//last update on: " + formatted_time + "\n"
+last_modified = "//Last update: " + formatted_time + "\n"
 
 config_prefix, _ = export_Hiddify(Bestip)
 with open("warp.json", "w") as op:
@@ -233,6 +230,6 @@ def main(script_dir):
             os.remove(result_path)
 
 
-if name == "main":
-    script_directory = os.path.dirname(file)
+if __name__ == "__main__":
+    script_directory = os.path.dirname(__file__)
     main(script_directory)
