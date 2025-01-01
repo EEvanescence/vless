@@ -32,5 +32,5 @@ jobs:
           git config --global user.name "Diana-Cl"
           git config credential.helper store
           git add -A
-          git diff --cached --quiet || git commit -m "ⅠⅣⅭⅯ UPDATED: $(TZ='Asia/Tehran' date '+%A, %d %b %Y, %l:%M %p')"
+          git commit -m "ⅠⅣⅭⅯ UPDATED: $(TZ='Asia/Tehran' date '+%A, %d %b %Y, %l:%M %p')"
           git push
