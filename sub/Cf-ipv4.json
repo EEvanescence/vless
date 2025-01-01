@@ -121,16 +121,6 @@
     },
     {
         "colo": "HKG",
-        "ip": "104.26.5.144",
-        "latency": 127,
-        "line": "CU",
-        "loss": 0,
-        "node": "EJIA_CU",
-        "speed": 290,
-        "time": "2024-12-31 10:15:18"
-    },
-    {
-        "colo": "HKG",
         "ip": "172.67.78.55",
         "latency": 140,
         "line": "CU",
@@ -148,5 +138,15 @@
         "node": "EJIA_CU",
         "speed": 290,
         "time": "2024-12-31 10:15:24"
+    },
+    {
+        "colo": "HKG",
+        "ip": "104.26.5.144",
+        "latency": 127,
+        "line": "CU",
+        "loss": 0,
+        "node": "EJIA_CU",
+        "speed": 290,
+        "time": "2024-12-31 10:15:18"
     }
 ]
