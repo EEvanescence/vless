@@ -51,16 +51,6 @@
     },
     {
         "colo": "IAD",
-        "ip": "172.67.121.138",
-        "latency": 231,
-        "line": "CT",
-        "loss": 0,
-        "node": "SDO_ZJCT",
-        "speed": 830,
-        "time": "2024-12-31 08:58:25"
-    },
-    {
-        "colo": "IAD",
         "ip": "172.67.84.160",
         "latency": 226,
         "line": "CT",
@@ -98,6 +88,16 @@
         "node": "SDO_HBCT",
         "speed": 645,
         "time": "2024-12-31 09:00:05"
+    },
+    {
+        "colo": "IAD",
+        "ip": "172.67.66.130",
+        "latency": 196,
+        "line": "CT",
+        "loss": 0,
+        "node": "SDO_ZJCT",
+        "speed": 620,
+        "time": "2024-12-31 09:01:53"
     },
     {
         "colo": "NRT",
