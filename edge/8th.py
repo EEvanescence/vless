@@ -17,8 +17,8 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 CHANNEL_URL = "https://t.me/s/freewireguard"
-OUTPUT_FILE_WG = 'sub/wireguard6th'
-OUTPUT_FILE_NEKO = 'sub/nekobox6th'
+OUTPUT_FILE_WG = 'sub/wireguard8th'
+OUTPUT_FILE_NEKO = 'sub/nekobox8th'
 
 def wireguard_to_neko(wg_url):
     try:
