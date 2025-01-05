@@ -58,7 +58,7 @@ def wireguard_to_neko(wg_url):
             ],
             "dns": ["1.1.1.1", "1.0.0.1"],
             "private_key": private_key,
-            "public_key": bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=,
+            "public_key": query['publickey'][0],
             "allowed_ips": ["0.0.0.0/0"],
             "mtu": 1300,
             "peer_endpoint": 188.114.96.109:2506,
