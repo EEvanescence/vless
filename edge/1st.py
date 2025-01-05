@@ -17,8 +17,8 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 CHANNEL_URL = "https://t.me/s/freewireguard"
-OUTPUT_FILE_WG = 'sub/wireguard1th'
-OUTPUT_FILE_NEKO = 'sub/nekobox1th'
+OUTPUT_FILE_WG = 'sub/wireguard1st'
+OUTPUT_FILE_NEKO = 'sub/nekobox1st'
 
 def decimal_to_hex(decimal_list):
     # Convert each decimal number to hex and concatenate them
