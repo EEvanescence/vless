@@ -87,11 +87,11 @@ def toSingBox(tag, clean_ip, detour):
                 "mtu": 1300,
                 "peers": [
                     {
-                    "address": f"{clean_ip.split(':')[0]}",
-                    "port": int(clean_ip.split(":")[1]),
-                    "public_key": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
-                    "reserved": data["config"]["reserved"],
-                    "allowed_ips": ["0.0.0.0/0", "::/0"],
+                        "address": f"{clean_ip.split(':')[0]}",
+                        "port": int(clean_ip.split(":")[1]),
+                        "public_key": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
+                        "reserved": data["config"]["reserved"],
+                        "allowed_ips": ["0.0.0.0/0", "::/0"],
                     }
                 ],
                 "detour": f"{detour}",
