@@ -35,15 +35,16 @@ edge_result_path = os.path.join(edge_directory, "Endpoints.csv")
 main_singbox_path = os.path.join(main_directory, "sing-box.json")
 main_warp_path = os.path.join(main_directory, "warp.json")
 
+
 # Create a list of cloudflare wireguard endpoints
 def create_ips():
     c = 0
     top_ips = sum(len(list(ipaddress.IPv4Network(cidr))) for cidr in warp_cidr)
 
     with open(edge_bestip_path, "w") as file:
-        all_ips = [str(addr)
-                   for cidr in warp_cidr for addr in ipaddress.IPv4Network(cidr)]
+        all_ips = [str(addr) for cidr in warp_cidr for addr in ipaddress.IPv4Network(cidr)]
         file.write("\n".join(all_ips))
+
 
 def arch_suffix():
     machine = platform.machine().lower()
@@ -57,13 +58,16 @@ def arch_suffix():
         return "s390x"
     else:
         raise ValueError(
-            "Unsupported CPU architecture. Supported architectures are: i386, i686, x86_64, amd64, armv8, arm64, aarch64, s390x")
+            "Unsupported CPU architecture. Supported architectures are: i386, i686, x86_64, amd64, armv8, arm64, aarch64, s390x"
+        )
+
 
 # warp ON warp wireguard configurations, Exclusively for hidfify clients
 def export_Hiddify(t_ips):
     config_prefix = f"warp://{t_ips[0]}?ifp=1-3&ifpm=m4#{IR_TAG}&&detour=warp://{t_ips[1]}?ifp=1-2&ifpm=m5#{DE_TAG}"
     formatted_time = datetime.datetime.now().strftime("%A, %d %b %Y, %H:%M")
     return config_prefix, formatted_time
+
 
 # warp ON warp wireguard configurations, Only for official sinbox clients
 def toSingBox(tag, clean_ip, detour):
@@ -104,9 +108,9 @@ def toSingBox(tag, clean_ip, detour):
         print("Error: Command execution failed or produced no output")
         return None
 
+
 def export_SingBox(t_ips):
-    template_path = os.path.join(
-        edge_directory, "assets", "singbox-template.json")
+    template_path = os.path.join(edge_directory, "assets", "singbox-template.json")
     with open(template_path, "r") as f:
         data = json.load(f)
 
@@ -127,6 +131,7 @@ def export_SingBox(t_ips):
 
     with open(main_singbox_path, "w") as f:
         json.dump(data, f, indent=2)
+
 
 def main():
     try:
@@ -174,8 +179,7 @@ def main():
         # Hiddify profile shits
         title = (
             "//profile-title: base64:"
-            + base64.b64encode("Freedom to Dream 💛✨".encode("utf-8")
-                               ).decode("utf-8")
+            + base64.b64encode("Freedom to Dream 💛✨".encode("utf-8")).decode("utf-8")
             + "\n"
         )
         update_interval = "//profile-update-interval: 4\n"
@@ -185,12 +189,7 @@ def main():
 
         with open(main_warp_path, "w") as op:
             op.write(
-                title
-                + update_interval
-                + sub_info
-                + profile_web
-                + last_modified
-                + config_prefix
+                title + update_interval + sub_info + profile_web + last_modified + config_prefix
             )
 
         export_SingBox(Bestip)
@@ -206,6 +205,7 @@ def main():
             os.remove(edge_bestip_path)
         if os.path.exists(warp_executable):
             os.remove(warp_executable)
+
 
 if __name__ == "__main__":
     main()
