@@ -83,7 +83,6 @@ def toSingBox(tag, clean_ip, detour):
                 "type": "wireguard",
                 "tag": tag,
                 "name": "wg0",
-                "system": true,
                 "mtu": 1280,
                 "address": ["172.16.0.2/32", "2606:4700:110:8735:bb29:91bc:1c82:aa73/128"],
                 "private_key": f"{data['private_key']}",
