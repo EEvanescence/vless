@@ -6,7 +6,7 @@
   "dns": {
     "servers": [
       {
-        "type": "tcpp",
+        "type": "tcp",
         "tag": "proxy-dns",
         "detour": "proxy",
         "domain_resolver": "local-dns",
@@ -78,7 +78,7 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [],
-      "default": "Berlin"
+      "default": "🟡Berlin"
     },
     {
       "type": "urltest",
