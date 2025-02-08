@@ -8,6 +8,8 @@ dist/
 build/
 Hiddify/
 node_modules/
+edge/spring.py
+edge/summer.py
 DNS over HTTPS/
 boringtun-boringtun-cli-0.5.2/
 
