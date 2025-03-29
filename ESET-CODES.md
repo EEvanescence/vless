@@ -1,8 +1,15 @@
-## Generated on: Sat Mar 29, 13:49:34 UTC 2025 UTC, Triggered by: workflow_dispatch
+## Generated ON: Saturday, 29 March 2025, 13:41:22 (Asia/Tehran Time - +3:30 GMT )
+> [!CAUTION]
+> Triggered by: workflow_dispatch
 
-## VPN Codes, They expire in 12 hours later.
+<br><br>  
 
-```
+### ESET VPN ACCESS CODES 
+> [!NOTE]
+> The access codes for ESET VPN will expire in 12 hours.  
+> Each code is valid for login on only one device.
+
+```ruby
 R6VFRK7198
 9KPTSEQ52L
 H2ZULGZS0N
@@ -15,51 +22,38 @@ QHITVXHP2V
 1J7UQ87PT1
 ```
 
-## ESET Security License
 
-- **Name:** ESET Small Business Security
-- **License Key:** `A7W6-XEHX-V3GE-MG9A-NEJJ`
-- **Expiry Date:** 28.04.2025
+<br>  
 
-## ESET Account
-
-- **Email:** jaiyce.dawan@thefluent.org
-- **Password:** `7_LZ4W8X"q!/]yKPO~`
-
----
-
-## Generated on: Sat Mar 29, 12:55:37 UTC 2025 UTC, Triggered by: workflow_dispatch
-
-## VPN Codes
-
-```
-63Y8DW2TYW
-OCRVXV3F28
-MJ4IKPDOLO
-B315V6FJSI
-J5LJHLNFI1
-37TUUI49HB
-W9NFIQS1GQ
-ZRSSHLZ926
-VLPLR1N3G2
-XK6ZM16LOB
+### ESET SECURITY LICENSE
+**Name:** ESET Small Business Security  
+**Expiry Date:** 28.04.2025  
+**License Key:**  
+```POV-Ray SDL
+A7W6-XEHX-V3GE-MG9A-NEJJ
 ```
 
-## ESET Security License
+<br>  
 
-- **Name:** ESET Small Business Security
-- **License Key:** `VEV2-XCH8-NDC7-DTF2-8U6D`
-- **Expiry Date:** 28.04.2025
+### ESET ACCOUNT
+**Email:**  
+```CSS
+jaiyce.dawan@thefluent.org
+```  
+**Password:**  
+```POV-Ray SDL
+7_LZ4W8X"q!/]yKPO~
+```
 
-## ESET Account
+<br>
 
-- **Email:** amrom.bostyn@thefluent.org
-- **Password:** `)$,jXhleI@0Fy'`
+### All about ESET VPN
+[READ HERE](https://t.me/F_NiREvil/2113)
 
 ---
 
-## Generated on: Sat Mar 29, 08:44:07 UTC 2025 UTC, Triggered by: schedule
 
-## NA
+<br><br>
 
----
+
+
