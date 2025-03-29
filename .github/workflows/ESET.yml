@@ -91,17 +91,15 @@ jobs:
 
           # Setup Python environment
           echo "Setting up Python environment..."
-          # (apt commands and pip install...) # No changes needed here
-          sudo apt-get update -y > /dev/null # Suppress apt output
-          sudo apt-get install -y python3-pip python3-venv > /dev/null # Suppress apt output
+          sudo apt-get update -y > /dev/null
+          sudo apt-get install -y python3-pip python3-venv > /dev/null
           python3 -m venv venv
           source venv/bin/activate
-          pip install -r requirements.txt > /dev/null # Suppress pip output
+          pip install -r requirements.txt > /dev/null
           echo "Python environment setup complete."
 
           # Generate Accounts and/or Keys and capture output to temp file
           echo "Generating accounts/keys and capturing output..."
-          # (python3 main.py commands with tee...) # No changes needed here
           if [[ ${ACCOUNT} -ne 0 ]]; then
             echo "Generating $ACCOUNT accounts..."
             python3 main.py --auto-detect-browser --account --email-api ${MAIL} --skip-update-check --no-logo --disable-progress-bar --disable-logging --repeat ${ACCOUNT} | tee "../$TEMP_OUTPUT"
@@ -132,44 +130,78 @@ jobs:
 
           # Prepare the content for THIS run in a temporary file
           NEW_ENTRY_FILE="new_entry.md.tmp"
-          echo "Generated on: $(date) UTC" > "$NEW_ENTRY_FILE"
-          echo "Triggered by: ${{ github.event_name }}" >> "$NEW_ENTRY_FILE"
+          echo "## Generated ON: $(date '+%A, %d %B %Y, %H:%M:%S' UTC" > "$NEW_ENTRY_FILE"
+          echo "" >> "$NEW_ENTRY_FILE"
+          echo "> [!CAUTION]" >> "$NEW_ENTRY_FILE"
+          echo "> Triggered by: ${{ github.event_name }}" >> "$NEW_ENTRY_FILE"
+          echo "" >> "$NEW_ENTRY_FILE"
+          echo "<br><br>" >> "$NEW_ENTRY_FILE"
           echo "" >> "$NEW_ENTRY_FILE"
 
           # 1. Add VPN Codes (if found)
           if [[ -n "$VPN_CODES_LIST" ]]; then
-            echo "## VPN Codes" >> "$NEW_ENTRY_FILE"
+            echo "### ESET VPN ACCESS CODES" >> "$NEW_ENTRY_FILE"
             echo "" >> "$NEW_ENTRY_FILE"
-            echo '```' >> "$NEW_ENTRY_FILE"
+            echo "> [!NOTE]" >> "$NEW_ENTRY_FILE"
+            echo "> The access codes for ESET VPN will expire in 12 hours.  " >> "$NEW_ENTRY_FILE"
+            echo "> Each code is valid for login on only one device." >> "$NEW_ENTRY_FILE"
+            echo "" >> "$NEW_ENTRY_FILE"
+            echo "```ruby" >> "$NEW_ENTRY_FILE"
             echo "$VPN_CODES_LIST" | sed 's/, /\n/g' >> "$NEW_ENTRY_FILE"
-            echo '```' >> "$NEW_ENTRY_FILE"
+            echo "```" >> "$NEW_ENTRY_FILE"
+            echo "" >> "$NEW_ENTRY_FILE"
+            echo "<br>" >> "$NEW_ENTRY_FILE"
             echo "" >> "$NEW_ENTRY_FILE"
           fi
 
           # 2. Add License Details (if found)
           if [[ -n "$LICENSE_KEY" ]]; then
-            echo "### ESET Security License" >> "$NEW_ENTRY_FILE"
-            echo "- **Name:** ${LICENSE_NAME:-N/A}" >> "$NEW_ENTRY_FILE"
-            echo "- **License Key:** \`$LICENSE_KEY\`" >> "$NEW_ENTRY_FILE"
-            echo "- **Expiry Date:** ${LICENSE_OUT_DATE:-N/A}" >> "$NEW_ENTRY_FILE"
+            echo "### ESET SECURITY LICENSE" >> "$NEW_ENTRY_FILE "
+            echo "" >> "$NEW_ENTRY_FILE"  
+            echo "**Name:** ${LICENSE_NAME:-N/A}  " >> "$NEW_ENTRY_FILE"
+            echo "**Expiry Date:** ${LICENSE_OUT_DATE:-N/A}  " >> "$NEW_ENTRY_FILE"
+            echo "**License Key:**" >> "$NEW_ENTRY_FILE"
+            echo "" >> "$NEW_ENTRY_FILE"
+            echo "```POV-Ray SDL" >> "$NEW_ENTRY_FILE"
+            echo "$LICENSE_KEY" >> "$NEW_ENTRY_FILE"
+            echo "```" >> "$NEW_ENTRY_FILE"
+            echo "" >> "$NEW_ENTRY_FILE"
+            echo "<br>" >> "$NEW_ENTRY_FILE"
             echo "" >> "$NEW_ENTRY_FILE"
           fi
 
           # 3. Add Account Details (if found)
           if [[ -n "$ACCOUNT_EMAIL" ]]; then
-            echo "### ESET Account" >> "$NEW_ENTRY_FILE"
-            echo "- **Email:** \`$ACCOUNT_EMAIL\`" >> "$NEW_ENTRY_FILE"
+            echo "### ESET ACCOUNT" >> "$NEW_ENTRY_FILE"
+            echo "" >> "$NEW_ENTRY_FILE"
+            echo "**Email:**" >> "$NEW_ENTRY_FILE"
+            echo "" >> "$NEW_ENTRY_FILE"
+            echo "```CSS" >> "$NEW_ENTRY_FILE"
+            echo "$ACCOUNT_EMAIL" >> "$NEW_ENTRY_FILE"
+            echo "```" >> "$NEW_ENTRY_FILE"
+            echo "" >> "$NEW_ENTRY_FILE"
             if [[ -n "$ACCOUNT_PASSWORD" ]]; then
-              echo "- **Password:** \`$ACCOUNT_PASSWORD\`" >> "$NEW_ENTRY_FILE"
+              echo "**Password:**" >> "$NEW_ENTRY_FILE"
+              echo "" >> "$NEW_ENTRY_FILE"
+              echo "```POV-Ray SDL" >> "$NEW_ENTRY_FILE"
+              echo "$ACCOUNT_PASSWORD" >> "$NEW_ENTRY_FILE"
+              echo "```" >> "$NEW_ENTRY_FILE"
             else
-              echo "- **Password:** N/A" >> "$NEW_ENTRY_FILE"
+              echo "**Password:** N/A" >> "$NEW_ENTRY_FILE"
             fi
-            echo "" >> "$NEW_ENTRY_FILE" # Add an empty line after
+            echo "" >> "$NEW_ENTRY_FILE"
+            echo "<br>" >> "$NEW_ENTRY_FILE"
+            echo "" >> "$NEW_ENTRY_FILE"
           fi
 
-          # Add a separator before potentially appending old content
+          # Add link to more information
+          echo "### All about ESET VPN" >> "$NEW_ENTRY_FILE"
+          echo "" >> "$NEW_ENTRY_FILE"
+          echo "[READ HERE](https://t.me/F_NiREvil/2113)" >> "$NEW_ENTRY_FILE"
+          echo "" >> "$NEW_ENTRY_FILE"
           echo "---" >> "$NEW_ENTRY_FILE"
           echo "" >> "$NEW_ENTRY_FILE"
+          echo "<br><br>" >> "$NEW_ENTRY_FILE"
 
           # --- Combine with previous content or Reset ---
           echo "Determining whether to prepend or overwrite..."
@@ -190,16 +222,10 @@ jobs:
               # Prepend: Combine new entry + old content
               echo "Prepending the new entry to ${OUTPUT_FILE}."
               TEMP_COMBINED_FILE="combined.md.tmp"
-              # Write new entry first, then append old file content
               cat "$NEW_ENTRY_FILE" "$OUTPUT_FILE" > "$TEMP_COMBINED_FILE"
-              # Replace the old file with the combined content
               mv "$TEMP_COMBINED_FILE" "$OUTPUT_FILE"
-              # Clean up the separate new entry file as it's now part of the combined file
               rm "$NEW_ENTRY_FILE"
           fi
-
-          # Optional: Clean up the raw output temporary file from the script execution
-          # rm "$TEMP_OUTPUT"
 
           echo "File update complete for ${OUTPUT_FILE}."
           echo "Final content of ${OUTPUT_FILE}:"
