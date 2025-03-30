@@ -156,60 +156,60 @@ jobs:
 
           # 2. Add License Details (if found)
           if [[ -n "$LICENSE_KEY" ]]; then
-            echo "### ESET SECURITY LICENSE" >> "$NEW_ENTRY_FILE "
-            echo "" >> "$NEW_ENTRY_FILE"  
-            echo "**Name:** ${LICENSE_NAME:-N/A}  " >> "$NEW_ENTRY_FILE"
-            echo "**Expiry Date:** ${LICENSE_OUT_DATE:-N/A}  " >> "$NEW_ENTRY_FILE"
-            echo "**License Key:**" >> "$NEW_ENTRY_FILE"
-            echo "" >> "$NEW_ENTRY_FILE"
-            echo "```POV-Ray SDL" >> "$NEW_ENTRY_FILE"
+            echo '### ESET SECURITY LICENSE' >> "$NEW_ENTRY_FILE "
+            echo '' >> "$NEW_ENTRY_FILE"  
+            echo '**Name:** ${LICENSE_NAME:-N/A}  ' >> "$NEW_ENTRY_FILE"
+            echo '**Expiry Date:** ${LICENSE_OUT_DATE:-N/A}  ' >> "$NEW_ENTRY_FILE"
+            echo '**License Key:**' >> "$NEW_ENTRY_FILE"
+            echo '' >> "$NEW_ENTRY_FILE"
+            echo '```POV-Ray SDL' >> "$NEW_ENTRY_FILE"
             echo "$LICENSE_KEY" >> "$NEW_ENTRY_FILE"
-            echo "```" >> "$NEW_ENTRY_FILE"
-            echo "" >> "$NEW_ENTRY_FILE"
-            echo "<br>" >> "$NEW_ENTRY_FILE"
-            echo "" >> "$NEW_ENTRY_FILE"
+            echo '```' >> "$NEW_ENTRY_FILE"
+            echo '' >> "$NEW_ENTRY_FILE"
+            echo '<br>' >> "$NEW_ENTRY_FILE"
+            echo '' >> "$NEW_ENTRY_FILE"
           fi
 
           # 3. Add Account Details (if found)
           if [[ -n "$ACCOUNT_EMAIL" ]]; then
             echo "### ESET ACCOUNT" >> "$NEW_ENTRY_FILE"
-            echo "" >> "$NEW_ENTRY_FILE"
-            echo "**Email:**" >> "$NEW_ENTRY_FILE"
-            echo "" >> "$NEW_ENTRY_FILE"
-            echo "```CSS" >> "$NEW_ENTRY_FILE"
-            echo "$ACCOUNT_EMAIL" >> "$NEW_ENTRY_FILE"
-            echo "```" >> "$NEW_ENTRY_FILE"
-            echo "" >> "$NEW_ENTRY_FILE"
+            echo '' >> "$NEW_ENTRY_FILE"
+            echo '**Email:**' >> "$NEW_ENTRY_FILE"
+            echo '' >> "$NEW_ENTRY_FILE"
+            echo '```CSS' >> "$NEW_ENTRY_FILE"
+            echo '$ACCOUNT_EMAIL' >> "$NEW_ENTRY_FILE"
+            echo '```' >> "$NEW_ENTRY_FILE"
+            echo '' >> "$NEW_ENTRY_FILE"
             if [[ -n "$ACCOUNT_PASSWORD" ]]; then
-              echo "**Password:**" >> "$NEW_ENTRY_FILE"
-              echo "" >> "$NEW_ENTRY_FILE"
-              echo "```POV-Ray SDL" >> "$NEW_ENTRY_FILE"
+              echo '**Password:**' >> "$NEW_ENTRY_FILE"
+              echo '' >> "$NEW_ENTRY_FILE"
+              echo '```POV-Ray SDL' >> "$NEW_ENTRY_FILE"
               echo "$ACCOUNT_PASSWORD" >> "$NEW_ENTRY_FILE"
-              echo "```" >> "$NEW_ENTRY_FILE"
+              echo '```' >> "$NEW_ENTRY_FILE"
             else
-              echo "**Password:** N/A" >> "$NEW_ENTRY_FILE"
+              echo '**Password:** N/A' >> "$NEW_ENTRY_FILE"
             fi
-            echo "" >> "$NEW_ENTRY_FILE"
-            echo "<br>" >> "$NEW_ENTRY_FILE"
-            echo "" >> "$NEW_ENTRY_FILE"
+            echo '' >> "$NEW_ENTRY_FILE"
+            echo '<br>' >> "$NEW_ENTRY_FILE"
+            echo '' >> "$NEW_ENTRY_FILE"
           fi
 
           # Add link to more information
-          echo "### All about ESET VPN" >> "$NEW_ENTRY_FILE"
-          echo "" >> "$NEW_ENTRY_FILE"
-          echo "[READ HERE](https://t.me/F_NiREvil/2113)" >> "$NEW_ENTRY_FILE"
-          echo "" >> "$NEW_ENTRY_FILE"
-          echo "---" >> "$NEW_ENTRY_FILE"
-          echo "" >> "$NEW_ENTRY_FILE"
-          echo "<br><br>" >> "$NEW_ENTRY_FILE"
+          echo '### All about ESET VPN' >> "$NEW_ENTRY_FILE"
+          echo '' >> "$NEW_ENTRY_FILE"
+          echo '[READ HERE](https://t.me/F_NiREvil/2113)' >> "$NEW_ENTRY_FILE"
+          echo '' >> "$NEW_ENTRY_FILE"
+          echo '---' >> "$NEW_ENTRY_FILE"
+          echo '' >> "$NEW_ENTRY_FILE"
+          echo '<br><br>' >> "$NEW_ENTRY_FILE"
 
           # --- Combine with previous content or Reset ---
           echo "Determining whether to prepend or overwrite..."
           CURRENT_HOUR_UTC=$(date -u +'%H')
           SHOULD_RESET=false
 
-          # Reset (overwrite) at 00:00 and 12:00 UTC for scheduled runs
-          if [[ "${{ github.event_name }}" == "schedule" ]] && ([[ "$CURRENT_HOUR_UTC" == "00" ]] || [[ "$CURRENT_HOUR_UTC" == "12" ]]); then
+          # Reset (overwrite) at 00:00 UTC for scheduled runs
+          if [[ "${{ github.event_name }}" == "schedule" ]] && ([[ "$CURRENT_HOUR_UTC" == "00" ]]); then
               echo "Scheduled run at UTC hour $CURRENT_HOUR_UTC. Resetting ${OUTPUT_FILE}."
               SHOULD_RESET=true
           fi
