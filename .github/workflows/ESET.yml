@@ -130,28 +130,28 @@ jobs:
 
           # Prepare the content for THIS run in a temporary file
           NEW_ENTRY_FILE="new_entry.md.tmp"
-          echo "## Generated ON: $(date '+%A, %d %B %Y, %H:%M:%S' UTC" > "$NEW_ENTRY_FILE"
-          echo "" >> "$NEW_ENTRY_FILE"
-          echo "> [!CAUTION]" >> "$NEW_ENTRY_FILE"
-          echo "> Triggered by: ${{ github.event_name }}" >> "$NEW_ENTRY_FILE"
-          echo "" >> "$NEW_ENTRY_FILE"
-          echo "<br><br>" >> "$NEW_ENTRY_FILE"
-          echo "" >> "$NEW_ENTRY_FILE"
+          echo "## Generated ON: $(date '+%A, %d %B %Y, %H:%M:%S' UTC" > "$NEW_ENTRY_FILE""
+          echo '' >> "$NEW_ENTRY_FILE"
+          echo '> [!CAUTION]' >> "$NEW_ENTRY_FILE"
+          echo '> Triggered by: ${{ github.event_name }}' >> "$NEW_ENTRY_FILE"
+          echo '' >> "$NEW_ENTRY_FILE"
+          echo '<br><br>' >> "$NEW_ENTRY_FILE"
+          echo '' >> "$NEW_ENTRY_FILE"
 
           # 1. Add VPN Codes (if found)
           if [[ -n "$VPN_CODES_LIST" ]]; then
-            echo "### ESET VPN ACCESS CODES" >> "$NEW_ENTRY_FILE"
-            echo "" >> "$NEW_ENTRY_FILE"
-            echo "> [!NOTE]" >> "$NEW_ENTRY_FILE"
-            echo "> The access codes for ESET VPN will expire in 12 hours.  " >> "$NEW_ENTRY_FILE"
-            echo "> Each code is valid for login on only one device." >> "$NEW_ENTRY_FILE"
-            echo "" >> "$NEW_ENTRY_FILE"
-            echo "```ruby" >> "$NEW_ENTRY_FILE"
+            echo '### ESET VPN ACCESS CODES' >> "$NEW_ENTRY_FILE"
+            echo '' >> "$NEW_ENTRY_FILE"
+            echo '> [!NOTE]' >> "$NEW_ENTRY_FILE"
+            echo '> The access codes for ESET VPN will expire in 12 hours.' >> "$NEW_ENTRY_FILE"
+            echo '> Each code is valid for login on only one device.' >> "$NEW_ENTRY_FILE"
+            echo '' >> "$NEW_ENTRY_FILE"
+            echo '```ruby' >> "$NEW_ENTRY_FILE"
             echo "$VPN_CODES_LIST" | sed 's/, /\n/g' >> "$NEW_ENTRY_FILE"
-            echo "```" >> "$NEW_ENTRY_FILE"
-            echo "" >> "$NEW_ENTRY_FILE"
-            echo "<br>" >> "$NEW_ENTRY_FILE"
-            echo "" >> "$NEW_ENTRY_FILE"
+            echo '```' >> "$NEW_ENTRY_FILE"
+            echo '' >> "$NEW_ENTRY_FILE"
+            echo '<br>' >> "$NEW_ENTRY_FILE"
+            echo '' >> "$NEW_ENTRY_FILE"
           fi
 
           # 2. Add License Details (if found)
