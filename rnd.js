@@ -1,5 +1,5 @@
 {
-  "remarks": "💦 BPB F - Best Ping 💥",
+  "remarks": "🟡 Fragmentation",
   "log": {
     "loglevel": "warning"
   },
@@ -93,8 +93,8 @@
       "settings": {
         "vnext": [
           {
-            "address": "miamy.victoriacross.workers.dev",
-            "port": 443,
+            "address": "creativecommons.org",
+            "port": 8443,
             "users": [
               {
                 "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
@@ -116,8 +116,8 @@
           "path": "/x451R6aiBybdoTbd/bmltYS5uc2NsLmly?ed=2560"
         },
         "tlsSettings": {
-          "allowInsecure": false,
-          "fingerprint": "randomized",
+          "allowInsecure": true,
+          "fingerprint": "chrome",
           "alpn": [
             "http/1.1"
           ],
@@ -435,8 +435,8 @@
       "settings": {
         "vnext": [
           {
-            "address": "[2606:4700:3030::6815:7001]",
-            "port": 443,
+            "address": "[::ffff:6815:1777]",
+            "port": 8443,
             "users": [
               {
                 "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
@@ -511,8 +511,8 @@
       "settings": {
         "vnext": [
           {
-            "address": "[2606:4700:3030::6815:2001]",
-            "port": 443,
+            "address": "[::ffff:681a:78]",
+            "port": 8443,
             "users": [
               {
                 "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
@@ -587,8 +587,8 @@
       "settings": {
         "vnext": [
           {
-            "address": "[2606:4700:3030::6815:1001]",
-            "port": 443,
+            "address": "[::ffff:6812:9b3e]",
+            "port": 2053,
             "users": [
               {
                 "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
@@ -663,7 +663,7 @@
       "settings": {
         "vnext": [
           {
-            "address": "[2606:4700:3030::6815:6001]",
+            "address": "104.19.64.45",
             "port": 443,
             "users": [
               {
@@ -740,7 +740,7 @@
         "vnext": [
           {
             "address": "www.speedtest.net",
-            "port": 443,
+            "port": 8443,
             "users": [
               {
                 "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
@@ -759,7 +759,7 @@
         },
         "wsSettings": {
           "host": "miamy.victoriacross.workers.dev",
-          "path": "/T67m40QaMkzn0mkA/bmltYS5uc2NsLmly?ed=2560"
+          "path": "/ApiCall?ed=2560"
         },
         "tlsSettings": {
           "allowInsecure": false,
