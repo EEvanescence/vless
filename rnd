@@ -1,0 +1,7003 @@
+{
+  "remarks": "💦 BPB F - Best Ping 💥",
+  "log": {
+    "loglevel": "warning"
+  },
+  "dns": {
+    "hosts": {
+      "geosite:category-ads-all": [
+        "127.0.0.1"
+      ],
+      "geosite:category-ads-ir": [
+        "127.0.0.1"
+      ]
+    },
+    "servers": [
+      {
+        "address": "fakedns",
+        "domains": [
+          "full:miamy.victoriacross.workers.dev",
+          "full:www.speedtest.net",
+          "full:sky.rethinkdns.com",
+          "full:www.speedtest.net",
+          "full:creativecommons.org",
+          "full:www.wto.org",
+          "full:zula.ir"
+        ]
+      },
+      {
+        "address": "https://8.8.8.8/dns-query",
+        "tag": "remote-dns"
+      },
+      {
+        "address": "8.8.8.8",
+        "domains": [
+          "geosite:category-ir"
+        ],
+        "expectIPs": [
+          "geoip:ir"
+        ],
+        "skipFallback": true
+      },
+      {
+        "address": "8.8.8.8",
+        "domains": [
+          "full:miamy.victoriacross.workers.dev",
+          "full:www.speedtest.net",
+          "full:sky.rethinkdns.com",
+          "full:www.speedtest.net",
+          "full:creativecommons.org",
+          "full:www.wto.org",
+          "full:zula.ir"
+        ],
+        "skipFallback": true
+      }
+    ],
+    "queryStrategy": "UseIP",
+    "tag": "dns"
+  },
+  "inbounds": [
+    {
+      "port": 10808,
+      "protocol": "socks",
+      "settings": {
+        "auth": "noauth",
+        "udp": true,
+        "userLevel": 8
+      },
+      "sniffing": {
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ],
+        "enabled": true,
+        "routeOnly": true
+      },
+      "tag": "socks-in"
+    },
+    {
+      "port": 10853,
+      "protocol": "dokodemo-door",
+      "settings": {
+        "address": "1.1.1.1",
+        "network": "tcp,udp",
+        "port": 53
+      },
+      "tag": "dns-in"
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "miamy.victoriacross.workers.dev",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/x451R6aiBybdoTbd/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MIAmy.VIcTOrIaCROsS.woRkERS.dEv"
+        }
+      },
+      "tag": "prox-1"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "www.speedtest.net",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/37WlZmpfAodywp7L/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miaMy.victorIACROss.woRKerS.dEV"
+        }
+      },
+      "tag": "prox-2"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.21.32.1",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/DPl4OWrGJB1nnZ8D/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miamy.vIcToRIacroSs.wOrkERs.deV"
+        }
+      },
+      "tag": "prox-3"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.21.48.1",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/MpdZKqyXJH2Zp0Xe/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIaMy.ViCtORiACROsS.WorKeRs.dev"
+        }
+      },
+      "tag": "prox-4"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.21.80.1",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/7riU8ikOxCebflra/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MIAmY.VICtoriacrOss.WORkErS.DEV"
+        }
+      },
+      "tag": "prox-5"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.21.64.1",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/oX7L7Q0vfy2pvC0d/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MiAmY.vICtORiAcrOsS.WORkeRs.dEV"
+        }
+      },
+      "tag": "prox-6"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.21.96.1",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/pix73mS85kDnCx5a/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miaMY.vICTOriacross.wORKeRs.dEV"
+        }
+      },
+      "tag": "prox-7"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.21.112.1",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/AXLH3SIy1yyiF4M8/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MIaMy.VicTOriAcrOsS.wORKerS.dEv"
+        }
+      },
+      "tag": "prox-8"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.21.16.1",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/nwiSz1fMrsQ177DE/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miamy.VIctORiacroSs.workeRs.Dev"
+        }
+      },
+      "tag": "prox-9"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "[2606:4700:3030::6815:7001]",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/2gGVGEgOEpHTDzJ6/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miAmy.vICTOriAcrosS.wORKers.dev"
+        }
+      },
+      "tag": "prox-10"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "[2606:4700:3030::6815:5001]",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/JvFW0FNmNRdTiIQm/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MiAmY.ViCTORiACRoSS.WoRkerS.dEv"
+        }
+      },
+      "tag": "prox-11"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "[2606:4700:3030::6815:2001]",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/keXtGHrKUaLNBjE1/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MIAmY.ViCtOrIacrOss.wORKeRs.Dev"
+        }
+      },
+      "tag": "prox-12"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "[2606:4700:3030::6815:4001]",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/gEKXWul6yHYW5krx/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIamY.viCTorIacROSS.WorkeRS.dEV"
+        }
+      },
+      "tag": "prox-13"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "[2606:4700:3030::6815:1001]",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/lOOFogH2hBps1Tpr/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miaMY.ViCTOriAcross.wOrkerS.dEv"
+        }
+      },
+      "tag": "prox-14"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "[2606:4700:3030::6815:3001]",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/Vv4ecsYcAtyaLB82/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MiaMy.vicToRiAcROss.worKeRs.DEV"
+        }
+      },
+      "tag": "prox-15"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "[2606:4700:3030::6815:6001]",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/i0uSCqaq4MIjT0RZ/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miaMY.vICtOrIaCROSS.WorkeRs.deV"
+        }
+      },
+      "tag": "prox-16"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "sky.rethinkdns.com",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/1mMnMJD55gyRFy7t/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIAMY.VIcTORiACRosS.WORkERs.DEv"
+        }
+      },
+      "tag": "prox-17"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "www.speedtest.net",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/T67m40QaMkzn0mkA/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MIaMy.vICToRIaCroSs.wORKers.deV"
+        }
+      },
+      "tag": "prox-18"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "creativecommons.org",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/ozyjKbUqLI2pYhRW/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MiAMy.vICToRIaCROsS.WorKErs.deV"
+        }
+      },
+      "tag": "prox-19"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "www.wto.org",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/ZzIf7FwSeyN3sPA3/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIaMY.VictOriacROSs.WOrkerS.dEV"
+        }
+      },
+      "tag": "prox-20"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "zula.ir",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/XxjuAUfkMXAh6bXg/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIAmY.victORiAcRoSS.woRkErs.DeV"
+        }
+      },
+      "tag": "prox-21"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "172.66.47.62",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/SsdEtYX9ivHjtWgv/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miamy.VIcTorIacROsS.WoRKErS.Dev"
+        }
+      },
+      "tag": "prox-22"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "172.66.44.194",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/TX8S1DH7Cz7pDchl/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIAMy.VICToRIACrOsS.woRKERs.DeV"
+        }
+      },
+      "tag": "prox-23"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "172.66.47.175",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/nSmhNOJyh6M8DRgn/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MIAmY.vIctorIaCROSs.woRKERS.deV"
+        }
+      },
+      "tag": "prox-24"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "172.66.44.81",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/jcyxBEDqlioGsouj/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MIAmY.VicTORIacross.WORKERS.deV"
+        }
+      },
+      "tag": "prox-25"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.21.80.1",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/Q5LtWJRv6eGifeeU/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MiaMY.vicTOrIACrOsS.WOrKERS.dEV"
+        }
+      },
+      "tag": "prox-26"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.21.64.1",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/HhGCLhVC2uBpT36v/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MiAmY.vICTORIacRoSS.WORkERs.DEV"
+        }
+      },
+      "tag": "prox-27"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.21.16.1",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/95zz6yngo7heyDr8/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIamY.viCtORIacroSS.WOrkers.DeV"
+        }
+      },
+      "tag": "prox-28"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.21.96.1",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/jSTSkIqSN2iWhqt1/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miAmY.VICTORiaCross.woRKeRs.Dev"
+        }
+      },
+      "tag": "prox-29"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.21.112.1",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/F2JeTvoL4ZXSQbY2/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MIAmy.VICtORIacROsS.wOrkERS.deV"
+        }
+      },
+      "tag": "prox-30"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.21.48.1",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/Bb7ENwTphjnAJI2k/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIamY.victOrIAcRoss.WorkERS.DeV"
+        }
+      },
+      "tag": "prox-31"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.16.97.251",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/AJPAOsOKPhmPZw4m/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miAmy.VICtoriAcROSs.WORKERs.deV"
+        }
+      },
+      "tag": "prox-32"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "172.67.108.79",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/ow8PzR6menyDl5oQ/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIAmy.VictoriAcrOsS.WORkerS.DeV"
+        }
+      },
+      "tag": "prox-33"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.16.187.175",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/92EFtZX0HPTVCoqX/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MIAmy.ViCtoRIACROsS.wOrKerS.DeV"
+        }
+      },
+      "tag": "prox-34"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "172.67.112.72",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/M1EDQi48aCwZPQAn/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIamy.viCtoriACRoSs.WoRkeRS.deV"
+        }
+      },
+      "tag": "prox-35"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "172.67.104.153",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/ZniuagWDMhvuZZFb/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MiAmy.ViCtORiAcrosS.woRKers.dev"
+        }
+      },
+      "tag": "prox-36"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.16.0.82",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/4dgIzHc4ya8tJSPE/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "Miamy.victoRIacRoss.WoRkeRs.DEv"
+        }
+      },
+      "tag": "prox-37"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "172.67.113.109",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/x3OIvPQX8S6pvEqf/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIAMY.viCToriACRosS.WoRKErS.DEv"
+        }
+      },
+      "tag": "prox-38"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.16.99.23",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/6FKD4qEnMWq73mq5/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIAmY.vICtorIacrosS.WOrkERS.Dev"
+        }
+      },
+      "tag": "prox-39"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.16.98.107",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/arARqecnJ7DXB8A6/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MiAmY.vIcTORIAcrOss.WorkErs.deV"
+        }
+      },
+      "tag": "prox-40"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.16.96.73",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/BfflOYqAUHfxk1T3/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MiaMy.VICToRIaCrOSS.WORkERS.deV"
+        }
+      },
+      "tag": "prox-41"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "173.245.59.224",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/BqjsvwaMq5FOV2ki/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIAmy.VicTOrIAcRoSS.WORkers.deV"
+        }
+      },
+      "tag": "prox-42"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "108.162.195.61",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/MirjaGdHwX6yKv3y/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIamy.viCtoRiACroSS.woRKErS.dEV"
+        }
+      },
+      "tag": "prox-43"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.16.51.70",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/Qlh66cKGjh6Cg2Hw/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MIAmY.VICtOrIacrOsS.woRKeRS.DeV"
+        }
+      },
+      "tag": "prox-44"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "108.162.194.122",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/6nKlO7YkAEueuRLR/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MiaMy.ViCTOrIacrOSs.worKErs.dEV"
+        }
+      },
+      "tag": "prox-45"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "108.162.196.11",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/TG4qgmKX6FHjuDhk/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MIamY.victoRIACROsS.woRkERS.deV"
+        }
+      },
+      "tag": "prox-46"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "104.17.30.239",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/zHFS4K8KhWTZ8jFJ/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miAMY.victOrIaCROSs.WorKErs.Dev"
+        }
+      },
+      "tag": "prox-47"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "173.245.49.184",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/8i47LclyzqTRj0xV/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MiaMY.viCtoriaCROsS.WORkERS.deV"
+        }
+      },
+      "tag": "prox-48"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "162.159.27.25",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/GNbzzDiTr0jJhmfs/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miaMy.vICTOriAcrOSS.workerS.DeV"
+        }
+      },
+      "tag": "prox-49"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "173.245.58.113",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/LlJeXyB9m3l3jksB/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MIAmY.vicTORIacross.WORkeRs.Dev"
+        }
+      },
+      "tag": "prox-50"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "162.159.41.52",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/KdX1FQzqTYSAImKR/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miaMY.victoriAcROSS.wOrKErS.deV"
+        }
+      },
+      "tag": "prox-51"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.99.167",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/AVbH8w37mesZIdTU/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIAMy.viCTorIaCROss.WORKerS.DeV"
+        }
+      },
+      "tag": "prox-52"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.98.224",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/C95wyX9BVQa6Qh6q/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MiamY.ViCtORIAcrOSS.WORKers.deV"
+        }
+      },
+      "tag": "prox-53"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.96.61",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/OojlndGWKNjBxHcX/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miAMy.vicToRIacrOSS.WORKeRS.dev"
+        }
+      },
+      "tag": "prox-54"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.98.176",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/thkhx4Bdvk5NCLf9/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miamY.ViCTORiaCROSs.woRkERS.Dev"
+        }
+      },
+      "tag": "prox-55"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.246.66",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/1XDFXGtHeKZHCqkB/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MIAMY.VictoRiacroSs.wORKeRs.dEv"
+        }
+      },
+      "tag": "prox-56"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.97.174",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/0JFggXdjYPYLVJL2/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MIAmy.vICtoRiAcrOsS.wOrKErS.dEV"
+        }
+      },
+      "tag": "prox-57"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.96.181",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/uE2N4oSMDdDySGQH/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIamy.vICtorIAcrosS.woRKErs.deV"
+        }
+      },
+      "tag": "prox-58"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.246.170",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/G44xImrh1BT7LDj5/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miaMY.ViCTorIacrosS.WORKerS.dEV"
+        }
+      },
+      "tag": "prox-59"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.245.108",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/TF4UV7mJCDJeYDG8/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIaMY.VicTOriacroSs.WORkerS.Dev"
+        }
+      },
+      "tag": "prox-60"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.244.201",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/qjWc3TKvIJxWfUtg/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miaMy.VIcTorIacROSs.workErS.deV"
+        }
+      },
+      "tag": "prox-61"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.96.203",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/AjLt23uYuHbXDOSG/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MiAmy.VictORIAcrosS.WOrkeRS.Dev"
+        }
+      },
+      "tag": "prox-62"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.99.40",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/JscttCn0ULobesvz/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miAmy.vICTORIACross.wORkeRs.dEv"
+        }
+      },
+      "tag": "prox-63"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.97.168",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/g2I85K7SonuciX7c/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miAMY.victoriacrosS.woRkers.deV"
+        }
+      },
+      "tag": "prox-64"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.246.117",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/xbC65zYSkoDWt3qy/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miAmY.vICtOriaCrosS.WORkers.dEV"
+        }
+      },
+      "tag": "prox-65"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.97.15",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/neBhMQoXCxgr0sEq/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MIamY.viCtOrIaCROss.woRKeRs.DEV"
+        }
+      },
+      "tag": "prox-66"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.245.201",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/qothfDFTPevj0d9m/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miAMy.ViCtOrIACroSs.wOrKeRs.dEv"
+        }
+      },
+      "tag": "prox-67"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.96.224",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/wVHFvqn5lo40Dxjq/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIAmY.vIctORIaCroSs.WOrKErS.dEV"
+        }
+      },
+      "tag": "prox-68"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.96.125",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/wavwEaUPIgNA3gZL/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MiAMY.vICtORIaCrOSS.wORKErS.dEv"
+        }
+      },
+      "tag": "prox-69"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.245.30",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/Pygejq8rKGb1Ahkj/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MiaMy.vicTORIACrOsS.wORkers.dEv"
+        }
+      },
+      "tag": "prox-70"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.99.213",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/xPB8Qdq4WS3JGbH1/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MIamy.vIcTORiACROSS.wORKErS.dev"
+        }
+      },
+      "tag": "prox-71"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.97.18",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/EjOYyXbOUDVix0P6/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MIAMy.vICToRiacROSS.WoRkErS.dEv"
+        }
+      },
+      "tag": "prox-72"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.244.3",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/oNjCbMg7JqVCMkYT/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miAMy.vICtORiacRoSS.WoRkErs.dev"
+        }
+      },
+      "tag": "prox-73"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.98.43",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/iUaFiNydC9Bcppkf/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MiAMY.ViCtoriacROSS.wORkErS.dev"
+        }
+      },
+      "tag": "prox-74"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.245.214",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/rMAXIsM7qbLU89Wz/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MIAmY.vIcToRIacrOSs.worKeRs.dev"
+        }
+      },
+      "tag": "prox-75"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.98.70",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/SvDFWOg4KgTRt1I8/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MIaMY.VICTorIAcRosS.WOrkERS.deV"
+        }
+      },
+      "tag": "prox-76"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.97.199",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/im8TWfPX73ChXtuz/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MIaMY.viCtOrIAcRoSs.WORkErs.dEv"
+        }
+      },
+      "tag": "prox-77"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.247.39",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/0pmdFfi1ZyebthVS/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIamY.VIcTORIaCrOsS.wOrKeRs.dev"
+        }
+      },
+      "tag": "prox-78"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.97.204",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/SMGEUsECBRTePgKs/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MiAMY.ViCToRiACRoSS.WoRkERs.DeV"
+        }
+      },
+      "tag": "prox-79"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.245.118",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/hhThbKTP6DL86xRC/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MIAmY.ViCTOriACROss.woRKERS.DEv"
+        }
+      },
+      "tag": "prox-80"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.245.218",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/KMa2jbRVNXci7VnT/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIaMy.VIcToRIacrosS.WOrkERS.DEv"
+        }
+      },
+      "tag": "prox-81"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.244.160",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/UKWmCu8fkKr4yJRT/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIAmy.victorIacRosS.WoRkerS.DEv"
+        }
+      },
+      "tag": "prox-82"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.245.195",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/u3zWobEgbvu7Fq8D/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miAmY.ViCtOrIaCROsS.wORKErS.dEV"
+        }
+      },
+      "tag": "prox-83"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.246.93",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/KPHyuKq1x5sgGcpy/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MiAmY.vIctorIAcrOss.WORKeRS.DEV"
+        }
+      },
+      "tag": "prox-84"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.247.43",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/LPHMkfTUVsBQR8eg/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIaMy.viCtoriaCROSS.WOrKERS.Dev"
+        }
+      },
+      "tag": "prox-85"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.245.120",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/XZUaAr1CYbPucO0y/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miaMY.VIcTORIaCROSS.wORkErS.Dev"
+        }
+      },
+      "tag": "prox-86"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.245.19",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/qd27Y8lvqYALhk9i/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MiAMY.VicTOrIAcrOsS.WorKErs.DEV"
+        }
+      },
+      "tag": "prox-87"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.99.164",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/GBhX74kAciRsBBws/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miamy.vICTOriACRosS.WOrKERs.deV"
+        }
+      },
+      "tag": "prox-88"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.98.80",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/7FgB8EXcBtc8Rkr4/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MiaMy.VictorIacroSs.wOrKeRs.DEv"
+        }
+      },
+      "tag": "prox-89"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.247.220",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/A3Y8wyZB6Qa06ndE/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MiAmY.VIctoRIaCrOSs.wOrKeRs.DEv"
+        }
+      },
+      "tag": "prox-90"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.97.195",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/OMnLvmzvo6Rj7xEp/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miAMY.VICtoRiACRoSS.WORkERs.deV"
+        }
+      },
+      "tag": "prox-91"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.244.116",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/az6GyxmndByd6vaP/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIaMY.VIctorIaCross.wOrKers.deV"
+        }
+      },
+      "tag": "prox-92"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.244.243",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/xqvlaPnmnucj5vht/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MiAmY.ViCTORIACroSs.woRKerS.deV"
+        }
+      },
+      "tag": "prox-93"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.97.70",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/yVdn1zE9t6aRE0Gt/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miAmy.VIctOriaCrosS.workerS.dEv"
+        }
+      },
+      "tag": "prox-94"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.245.150",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/rfSD9mPWcok4KqPn/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MiAmy.victoRIAcROsS.WOrkERS.DeV"
+        }
+      },
+      "tag": "prox-95"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.99.162",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/zQIjPJqDW42Sb7ra/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miaMY.VIcTORIACROSs.wORKErs.Dev"
+        }
+      },
+      "tag": "prox-96"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.246.73",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/JX1km9Txc8xyEytw/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIAMY.ViCTORIAcRoSS.workERS.dev"
+        }
+      },
+      "tag": "prox-97"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.244.117",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/InQ43AiofIWPxLAA/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MiaMy.viCTOriacroSS.wORKErs.DEV"
+        }
+      },
+      "tag": "prox-98"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.244.167",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/v2HuDW42sM8f8df3/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIAMy.vicTORiaCroSs.WorKErS.Dev"
+        }
+      },
+      "tag": "prox-99"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.245.212",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/EFf68bHaitnGlSGU/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miAMy.ViCTOriAcrOss.WOrKErs.dEV"
+        }
+      },
+      "tag": "prox-100"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.247.106",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/pA66R0eLYH1Coo6M/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miAMy.vICtOriaCRoSs.wOrkErS.Dev"
+        }
+      },
+      "tag": "prox-101"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.247.186",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/BZu3V02lWRQvJZyj/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MIaMy.viCtOrIacRoSs.WORKeRs.dEV"
+        }
+      },
+      "tag": "prox-102"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.244.4",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/vzY75SycCXyQZ2O6/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MIaMY.VictoRiaCRosS.woRkerS.DeV"
+        }
+      },
+      "tag": "prox-103"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.246.123",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/JHCS1AlhFDnE4BVe/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIAMY.VIctOriAcRosS.WORkErs.DeV"
+        }
+      },
+      "tag": "prox-104"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.99.128",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/SX1PUB1QEPOOgLaX/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MIamy.VIcTOriAcross.wORKERS.dEV"
+        }
+      },
+      "tag": "prox-105"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.96.199",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/wTgVeo0dQR1Qlksy/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MiamY.VIctORiaCRoSS.wORkERS.dEv"
+        }
+      },
+      "tag": "prox-106"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.244.103",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/VzTfX5HQxLpYD6Hw/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIAmY.VicTorIaCROsS.WorKErS.dev"
+        }
+      },
+      "tag": "prox-107"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.244.161",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/u74DJdcaBW0iZE8D/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MIamY.vIcTORiaCRoSs.WoRkerS.dEv"
+        }
+      },
+      "tag": "prox-108"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.98.110",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/MDu6DCOd3A4TbwV9/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miAMY.vICtorIACrOSs.WorKErS.Dev"
+        }
+      },
+      "tag": "prox-109"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.99.18",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/NP5nW8KF78FkGRfw/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miaMy.viCtORIaCROSS.woRkeRs.dev"
+        }
+      },
+      "tag": "prox-110"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.246.213",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/ZPjkLSCRf326SFoB/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MIamY.vICtorIaCrosS.WorKeRS.dEV"
+        }
+      },
+      "tag": "prox-111"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.96.81",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/lg1DgemrtwIVCpKc/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miaMy.viCToRiAcross.wORkErS.DEv"
+        }
+      },
+      "tag": "prox-112"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.97.94",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/IOjDX2WcpCSN97Ub/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miaMy.vIctOrIACrOsS.woRkErS.deV"
+        }
+      },
+      "tag": "prox-113"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.247.29",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/KaTZowHPs5zMoV1Q/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miAMY.victorIACrosS.WorkERS.deV"
+        }
+      },
+      "tag": "prox-114"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.247.82",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/DSunSfuqtmJLIGXy/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miAMY.vICTOriacROss.WoRkErS.dEv"
+        }
+      },
+      "tag": "prox-115"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.99.236",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/t34leVCVTanZao0T/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MIaMY.VICTorIaCrOss.WORKers.DeV"
+        }
+      },
+      "tag": "prox-116"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.244.122",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/jqV3yWPkQiyEfUaP/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MIAmY.vICtoriACroSS.worKers.DEV"
+        }
+      },
+      "tag": "prox-117"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.96.136",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/wwlM2pS3Zba77GKi/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MIaMy.ViCtoRiAcROsS.wORkeRs.dev"
+        }
+      },
+      "tag": "prox-118"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.244.37",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/y8BsFEuQngQYP6G7/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MiaMy.VicToRiACRoss.woRKerS.DEv"
+        }
+      },
+      "tag": "prox-119"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.98.11",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/tWFExnZVL12AAbp4/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIAmy.viCTORIacrosS.WORKERs.DEV"
+        }
+      },
+      "tag": "prox-120"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.97.221",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/ZpiFOifmEBTp7Ck8/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIaMy.VictoRiacROss.wOrkErs.deV"
+        }
+      },
+      "tag": "prox-121"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.246.5",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/Mwib0jsFfQduYxIT/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miAMy.viCToriacRoss.worKErS.dev"
+        }
+      },
+      "tag": "prox-122"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.245.35",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/kqUiMqq4QE5usDTu/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miaMY.vIctOrIaCrosS.WorKerS.DeV"
+        }
+      },
+      "tag": "prox-123"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.96.253",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/s8UR6aYVSI5Peg5Q/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MIAmY.viCToriAcrosS.WORKErS.dev"
+        }
+      },
+      "tag": "prox-124"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.96.174",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/jRwO9oaLkPlfHdkk/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miAmY.VicTORiacROSS.woRkerS.dEV"
+        }
+      },
+      "tag": "prox-125"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.245.146",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/jLD3ecLcfwaildLP/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIAmy.viCTorIaCRoSS.WoRKerS.DEV"
+        }
+      },
+      "tag": "prox-126"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.246.39",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/LZmLP5XvWT9DEEd1/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miaMy.VICTOrIAcrOSS.WORKERs.DeV"
+        }
+      },
+      "tag": "prox-127"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.98.140",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/zRVwl0PSembA05lr/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miamY.vIctORiAcRoSs.wORKErS.Dev"
+        }
+      },
+      "tag": "prox-128"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.96.7",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/tc6objS2JYG1K8VV/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miaMy.ViCTOrIAcrOsS.wORKErS.deV"
+        }
+      },
+      "tag": "prox-129"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.244.183",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/hnhWqfynbXT0weOr/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIAMy.viCTOriaCrOss.WOrkers.deV"
+        }
+      },
+      "tag": "prox-130"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.244.57",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/FOAHB9SiitZsKHSO/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIAmy.vICtORiaCRoSS.WoRKeRs.deV"
+        }
+      },
+      "tag": "prox-131"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.97.241",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/YD23RWjZAGLtbiSr/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miamY.VIcTORIACroSs.worKErs.dev"
+        }
+      },
+      "tag": "prox-132"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.96.166",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/4HsQ52j1KpUeTm90/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MiamY.viCTORIacROsS.wORkErS.deV"
+        }
+      },
+      "tag": "prox-133"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.98.153",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/qrwX1jg1537iICBt/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MiAmy.vIctOriACRoSS.wOrKeRs.deV"
+        }
+      },
+      "tag": "prox-134"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.97.111",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/gvVl9f8XzTeBAKVU/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miaMY.ViCtoRiACRosS.WORKers.dev"
+        }
+      },
+      "tag": "prox-135"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.99.193",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/P8qBZ31jQRTx5DJF/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIAmY.vICtOriacROss.Workers.dev"
+        }
+      },
+      "tag": "prox-136"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.99.203",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/W560DD12iUhSjee9/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIAMY.ViCtOrIACROSs.wOrkerS.deV"
+        }
+      },
+      "tag": "prox-137"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.99.136",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/E6W1c91aTVqqOTjf/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MIamy.viCTOrIacRoss.WoRKERS.dev"
+        }
+      },
+      "tag": "prox-138"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.96.33",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/fslkGrhiZWnvRzHs/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MiAmY.VIcTOriAcrOsS.wORKERs.dEv"
+        }
+      },
+      "tag": "prox-139"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.97.106",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/lyoEXXVCfuxVe4sb/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MiAMY.viCToriaCROss.WoRkErs.dev"
+        }
+      },
+      "tag": "prox-140"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.98.203",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/vLw4XRoKtJFlBXh7/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "Miamy.vICTOriACRoss.woRkErS.dEV"
+        }
+      },
+      "tag": "prox-141"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.96.229",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/NCy70hjL5oEK31ih/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIamy.VicTORiaCROsS.WOrkerS.DEv"
+        }
+      },
+      "tag": "prox-142"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.247.44",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/Nlt79fAzzfhqc28B/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MiAmY.VICToriACRoSS.woRkErs.dEV"
+        }
+      },
+      "tag": "prox-143"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.97.155",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/rjkNzJO4o7Q6D17X/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIaMY.vIctoriAcROSS.woRkERs.Dev"
+        }
+      },
+      "tag": "prox-144"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.97.61",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/gIp4dTf1xfQIrTSZ/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MIamY.vICToRIaCROSs.WOrKErS.dEV"
+        }
+      },
+      "tag": "prox-145"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.244.72",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/pyCOLPyd5KOm57Hm/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "Miamy.vicTORIaCRoSs.WorKERS.DEv"
+        }
+      },
+      "tag": "prox-146"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.98.52",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/X2ilvGKOnrkkRt98/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIamy.VICTOriACrosS.wORkerS.dev"
+        }
+      },
+      "tag": "prox-147"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.96.128",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/U16x68xc5C10EGpb/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miAMy.VICtoRIacROSS.WorKERS.dEV"
+        }
+      },
+      "tag": "prox-148"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.245.180",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/o1vSllPqdwOxtctL/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miAmY.VICToriACrOSS.wOrKers.dev"
+        }
+      },
+      "tag": "prox-149"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.97.90",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/mEFnKW1UfNL66kV7/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MiAMY.VictORiACrosS.wORkERS.deV"
+        }
+      },
+      "tag": "prox-150"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.98.30",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/GJ7RVzHCsIAzCcBX/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MiAMY.VIctorIaCroSS.WOrkErs.dEV"
+        }
+      },
+      "tag": "prox-151"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.246.148",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/OP7KujSoDtEsyspG/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIamy.ViCtORIaCRoSs.WoRkeRS.dev"
+        }
+      },
+      "tag": "prox-152"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.247.194",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/UKv0TjXGqd2uir7D/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MIamY.viCTORiACrOsS.woRKErs.dEv"
+        }
+      },
+      "tag": "prox-153"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.98.198",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/T7ZAgKwOzJtfnbpN/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miAmY.VictorIAcrOSS.WOrkeRs.Dev"
+        }
+      },
+      "tag": "prox-154"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.98.45",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/YOY5cyIRgbn6BRas/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIAMY.vIcToRiaCROss.woRKErs.DEV"
+        }
+      },
+      "tag": "prox-155"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.99.206",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/Mf7PeGFyqyeyoaHV/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIAmY.VIcToRiacRoSS.WORKERs.DEv"
+        }
+      },
+      "tag": "prox-156"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.247.56",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/6wsqzOwZ86xgkw3q/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MiaMY.vIcTOriAcRoss.wORKERs.dEv"
+        }
+      },
+      "tag": "prox-157"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.99.43",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/URdsdVCIcnnZhaGm/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miAmy.vIcTORIAcRoSS.wORKeRS.dEv"
+        }
+      },
+      "tag": "prox-158"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.245.105",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/dswEdYbE5yVrBTO8/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MiAmY.VICToriaCRoSS.WORKErs.DEv"
+        }
+      },
+      "tag": "prox-159"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.96.85",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/FuwHJ3uspvcMZtYi/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miAMY.VicTOrIacross.workERs.dEv"
+        }
+      },
+      "tag": "prox-160"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.99.124",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/j2BN62zyu38xB3z0/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MiAmY.viCtorIaCrOss.wOrkeRS.DEV"
+        }
+      },
+      "tag": "prox-161"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.246.167",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/cXZRu1hGcn44UTbR/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MiaMY.VicToRIacRoss.wORkeRS.dev"
+        }
+      },
+      "tag": "prox-162"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.98.217",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/kYmPf2H6hejj7m5m/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MIaMy.VIctoriAcroSS.WoRkERs.DEV"
+        }
+      },
+      "tag": "prox-163"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.99.182",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/KASF9d5vVaMdoRRZ/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miaMy.VIcTOriAcrOsS.WorkeRS.DeV"
+        }
+      },
+      "tag": "prox-164"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.247.62",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/1ZHoRJCO7bNlZFO1/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIAmY.VictOrIACrosS.Workers.Dev"
+        }
+      },
+      "tag": "prox-165"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.97.218",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/UrwextNRfUXWhTaF/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MIAMy.vICtoRiAcrOSs.WoRKerS.dev"
+        }
+      },
+      "tag": "prox-166"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.246.59",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/XGa4sXWWVvMOPRPq/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIaMy.VICTORiaCROSS.workeRs.DEV"
+        }
+      },
+      "tag": "prox-167"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.245.61",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/jMjsbKO5lGMNEr3R/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIAMY.vIctOrIAcroSS.WORkErS.DeV"
+        }
+      },
+      "tag": "prox-168"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.247.32",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/MkFoEUN33q2N1i9z/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MIAmy.VICtOrIACross.wOrkErs.deV"
+        }
+      },
+      "tag": "prox-169"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.97.208",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/5VsIUT3V7XPiipHS/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIAMy.ViCToriacrOSs.WOrKeRs.dev"
+        }
+      },
+      "tag": "prox-170"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.97.63",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/mI1JEMQy4ymCUfsK/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIamy.VICTOriacROsS.WORKERs.DEV"
+        }
+      },
+      "tag": "prox-171"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.96.154",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/GH5TkQiRH0InPB1h/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MiaMy.VIcTOrIaCrOsS.WOrkerS.dev"
+        }
+      },
+      "tag": "prox-172"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.244.250",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/N6ZL57E0znVIkBYx/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MiAMY.VICtorIacrOSs.WOrkErs.deV"
+        }
+      },
+      "tag": "prox-173"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.244.159",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/ENH649pgWNJlIE6M/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "miAMY.viCtoriACRosS.wORkErs.dev"
+        }
+      },
+      "tag": "prox-174"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "188.114.98.79",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/8cHI599OTEBTMLUW/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIaMY.VIctORiacrosS.wOrKeRS.deV"
+        }
+      },
+      "tag": "prox-175"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "190.93.247.87",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/yNR2f3Hgwcuydebb/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "MIAmy.VICtorIAcroSs.wORKers.DEv"
+        }
+      },
+      "tag": "prox-176"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "[2606:4700:3030::6815:6001]",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/R9mJGiYVuUdGYBHR/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIAmY.vICtORIaCRosS.wOrkers.dEV"
+        }
+      },
+      "tag": "prox-177"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "[2606:4700:3030::6815:1001]",
+            "port": 443,
+            "users": [
+              {
+                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "encryption": "none",
+                "level": 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "sockopt": {
+          "dialerProxy": "fragment"
+        },
+        "wsSettings": {
+          "host": "miamy.victoriacross.workers.dev",
+          "path": "/SKd4brR7GRPKsv9u/bmltYS5uc2NsLmly?ed=2560"
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "randomized",
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "mIAmy.viCTOriacRoss.WoRKeRS.DEv"
+        }
+      },
+      "tag": "prox-178"
+    },
+    {
+      "tag": "fragment",
+      "protocol": "freedom",
+      "settings": {
+        "fragment": {
+          "packets": "tlshello",
+          "length": "10-30",
+          "interval": "1-2"
+        },
+        "domainStrategy": "UseIPv4v6"
+      }
+    },
+    {
+      "protocol": "dns",
+      "tag": "dns-out"
+    },
+    {
+      "protocol": "freedom",
+      "settings": {
+        "domainStrategy": "UseIP"
+      },
+      "tag": "direct"
+    },
+    {
+      "protocol": "blackhole",
+      "settings": {
+        "response": {
+          "type": "http"
+        }
+      },
+      "tag": "block"
+    }
+  ],
+  "policy": {
+    "levels": {
+      "8": {
+        "connIdle": 300,
+        "downlinkOnly": 1,
+        "handshake": 4,
+        "uplinkOnly": 1
+      }
+    },
+    "system": {
+      "statsOutboundUplink": true,
+      "statsOutboundDownlink": true
+    }
+  },
+  "routing": {
+    "domainStrategy": "IPIfNonMatch",
+    "rules": [
+      {
+        "inboundTag": [
+          "dns-in"
+        ],
+        "outboundTag": "dns-out",
+        "type": "field"
+      },
+      {
+        "inboundTag": [
+          "socks-in"
+        ],
+        "port": 53,
+        "outboundTag": "dns-out",
+        "type": "field"
+      },
+      {
+        "inboundTag": [
+          "remote-dns"
+        ],
+        "balancerTag": "all",
+        "type": "field"
+      },
+      {
+        "inboundTag": [
+          "dns"
+        ],
+        "outboundTag": "direct",
+        "type": "field"
+      },
+      {
+        "domain": [
+          "geosite:private"
+        ],
+        "outboundTag": "direct",
+        "type": "field"
+      },
+      {
+        "ip": [
+          "geoip:private"
+        ],
+        "outboundTag": "direct",
+        "type": "field"
+      },
+      {
+        "domain": [
+          "geosite:category-ads-all",
+          "geosite:category-ads-ir"
+        ],
+        "outboundTag": "block",
+        "type": "field"
+      },
+      {
+        "domain": [
+          "geosite:category-ir"
+        ],
+        "outboundTag": "direct",
+        "type": "field"
+      },
+      {
+        "ip": [
+          "geoip:ir"
+        ],
+        "outboundTag": "direct",
+        "type": "field"
+      },
+      {
+        "network": "udp",
+        "outboundTag": "block",
+        "type": "field"
+      },
+      {
+        "network": "tcp",
+        "balancerTag": "all",
+        "type": "field"
+      }
+    ],
+    "balancers": [
+      {
+        "tag": "all",
+        "selector": [
+          "prox"
+        ],
+        "strategy": {
+          "type": "leastPing"
+        },
+        "fallbackTag": "prox-2"
+      }
+    ]
+  },
+  "stats": {},
+  "observatory": {
+    "subjectSelector": [
+      "prox"
+    ],
+    "probeUrl": "https://www.gstatic.com/generate_204",
+    "probeInterval": "30s",
+    "enableConcurrency": true
+  }
+}
