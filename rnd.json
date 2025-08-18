@@ -9,13 +9,25 @@
       {
         "address": "fakedns",
         "domains": [
-          "full:miamy.victoriacross.workers.dev",
+          "full:creativecommons.org",
+          "full:ballerina.pages.dev",
+          "full:time.cloudflare.com",
           "full:www.speedtest.net",
           "full:sky.rethinkdns.com",
           "full:www.speedtest.net",
-          "full:creativecommons.org",
+          "full:dd-xx.pages.dev",
+          "full:www.csgo.com",
+          "full:go.inmobi.com",
+          "full:singapore.com",
+          "full:www.visa.com",
           "full:www.wto.org",
-          "full:zula.ir"
+          "full:japan.com",
+          "full:lb.nscl.ir",
+          "full:skk.moe",
+          "full:fbi.gov",
+          "full:time.is",
+          "full:zula.ir",
+          "full:ip.sb"
         ]
       },
       {
@@ -31,13 +43,25 @@
       {
         "address": "8.8.8.8",
         "domains": [
-          "full:miamy.victoriacross.workers.dev",
+          "full:creativecommons.org",
+          "full:ballerina.pages.dev",
+          "full:time.cloudflare.com",
           "full:www.speedtest.net",
           "full:sky.rethinkdns.com",
           "full:www.speedtest.net",
-          "full:creativecommons.org",
+          "full:dd-xx.pages.dev",
+          "full:www.csgo.com",
+          "full:go.inmobi.com",
+          "full:singapore.com",
+          "full:www.visa.com",
           "full:www.wto.org",
-          "full:zula.ir"
+          "full:japan.com",
+          "full:lb.nscl.ir",
+          "full:skk.moe",
+          "full:fbi.gov",
+          "full:time.is",
+          "full:zula.ir",
+          "full:ip.sb"
         ],
         "skipFallback": true
       }
@@ -86,12 +110,12 @@
       "settings": {
         "vnext": [
           {
-            "address": "creativecommons.org",
-            "port": 8443,
+            "address": "www.speedtest.net",
+            "port": 443,
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -105,13 +129,13 @@
           "dialerProxy": "fragment"
         },
         "tlsSettings": {
-          "allowInsecure": true,
+          "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "chrome",
-          "serverName": "MIAmy.VIcTOrIaCROsS.woRkERS.dEv"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -122,12 +146,12 @@
       "settings": {
         "vnext": [
           {
-            "address": "www.speedtest.net",
-            "port": 443,
+            "address": "creativecommons.org",
+            "port": 2053,
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -143,11 +167,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miaMy.victorIACROss.woRKerS.dEV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -158,12 +182,12 @@
       "settings": {
         "vnext": [
           {
-            "address": "104.21.32.1",
+            "address": "dd-xx.pages.dev",
             "port": 443,
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -179,11 +203,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miamy.vIcToRIacroSs.wOrkERs.deV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -199,7 +223,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -215,11 +239,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIaMy.ViCtORiACROsS.WorKeRs.dev"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -235,7 +259,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -251,11 +275,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MIAmY.VICtoriacrOss.WORkErS.DEV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -271,7 +295,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -287,11 +311,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MiAmY.vICtORiAcrOsS.WORkeRs.dEV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -307,7 +331,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -323,11 +347,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miaMY.vICTOriacross.wORKeRs.dEV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -343,7 +367,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -359,11 +383,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MIaMy.VicTOriAcrOsS.wORKerS.dEv"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -374,12 +398,12 @@
       "settings": {
         "vnext": [
           {
-            "address": "[2606:4700:8ded:8ce3:26e3:19b8:6458:2efb]",
+            "address": "104.21.32.1",
             "port": 443,
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -395,11 +419,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miamy.VIctORiacroSs.workeRs.Dev"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -415,7 +439,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -431,11 +455,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miAmy.vICTOriAcrosS.wORKers.dev"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -451,7 +475,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -467,11 +491,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MiAmY.ViCTORiACRoSS.WoRkerS.dEv"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -487,7 +511,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -503,11 +527,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MIAmY.ViCtOrIacrOss.wORKeRs.Dev"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -518,12 +542,12 @@
       "settings": {
         "vnext": [
           {
-            "address": "[2606:4700:3030::6815:4001]",
+            "address": "172.66.45.9",
             "port": 443,
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -539,11 +563,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIamY.viCTorIacROSS.WorkeRS.dEV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -559,7 +583,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -575,11 +599,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miaMY.ViCTOriAcross.wOrkerS.dEv"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -590,12 +614,12 @@
       "settings": {
         "vnext": [
           {
-            "address": "[2606:4700:54:6334:e0f1:97ba:3ccc:f512]",
+            "address": "172.66.46.247",
             "port": 443,
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -611,11 +635,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MiaMy.vicToRiAcROss.worKeRs.DEV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -631,7 +655,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -647,11 +671,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miaMY.vICtOrIaCROSS.WorkeRs.deV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -667,7 +691,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -683,11 +707,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIAMY.VIcTORiACRosS.WORkERs.DEv"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -703,7 +727,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -719,11 +743,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MIaMy.vICToRIaCroSs.wORKers.deV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -739,7 +763,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -755,11 +779,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MiAMy.vICToRIaCROsS.WorKErs.deV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -775,7 +799,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -791,11 +815,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIaMY.VictOriacROSs.WOrkerS.dEV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -811,7 +835,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -827,11 +851,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIAmY.victORiAcRoSS.woRkErs.DeV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -847,7 +871,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -863,11 +887,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miamy.VIcTorIacROsS.WoRKErS.Dev"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -883,7 +907,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -899,11 +923,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIAMy.VICToRIACrOsS.woRKERs.DeV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -919,7 +943,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -935,11 +959,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MIAmY.vIctorIaCROSs.woRKERS.deV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -955,7 +979,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -971,11 +995,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MIAmY.VicTORIacross.WORKERS.deV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -991,7 +1015,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -1007,11 +1031,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MiaMY.vicTOrIACrOsS.WOrKERS.dEV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -1027,7 +1051,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -1043,11 +1067,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MiAmY.vICTORIacRoSS.WORkERs.DEV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -1063,7 +1087,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -1079,11 +1103,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIamY.viCtORIacroSS.WOrkers.DeV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -1099,7 +1123,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -1115,11 +1139,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miAmY.VICTORiaCross.woRKeRs.Dev"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -1135,7 +1159,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -1151,11 +1175,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MIAmy.VICtORIacROsS.wOrkERS.deV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -1171,7 +1195,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -1187,11 +1211,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIamY.victOrIAcRoss.WorkERS.DeV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -1207,7 +1231,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -1223,11 +1247,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miAmy.VICtoriAcROSs.WORKERs.deV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -1243,7 +1267,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -1259,11 +1283,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIAmy.VictoriAcrOsS.WORkerS.DeV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -1279,7 +1303,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -1295,11 +1319,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MIAmy.ViCtoRIACROsS.wOrKerS.DeV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -1315,7 +1339,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -1331,11 +1355,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIamy.viCtoriACRoSs.WoRkeRS.deV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -1351,7 +1375,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -1367,11 +1391,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MiAmy.ViCtORiAcrosS.woRKers.dev"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -1387,7 +1411,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -1403,11 +1427,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "Miamy.victoRIacRoss.WoRkeRs.DEv"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -1423,7 +1447,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -1439,11 +1463,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIAMY.viCToriACRosS.WoRKErS.DEv"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -1459,7 +1483,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -1475,11 +1499,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIAmY.vICtorIacrosS.WOrkERS.Dev"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -1495,7 +1519,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -1511,11 +1535,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MiAmY.vIcTORIAcrOss.WorkErs.deV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -1531,7 +1555,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -1547,11 +1571,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MiaMy.VICToRIaCrOSS.WORkERS.deV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -1567,7 +1591,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -1583,11 +1607,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIAmy.VicTOrIAcRoSS.WORkers.deV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -1603,7 +1627,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -1619,11 +1643,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIamy.viCtoRiACroSS.woRKErS.dEV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -1639,7 +1663,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -1655,11 +1679,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MIAmY.VICtOrIacrOsS.woRKeRS.DeV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -1675,7 +1699,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -1691,11 +1715,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MiaMy.ViCTOrIacrOSs.worKErs.dEV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -1711,7 +1735,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -1727,11 +1751,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MIamY.victoRIACROsS.woRkERS.deV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -1742,12 +1766,12 @@
       "settings": {
         "vnext": [
           {
-            "address": "141.101.120.246",
+            "address": "172.67.177.28",
             "port": 443,
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -1763,11 +1787,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miAMY.victOrIaCROSs.WorKErs.Dev"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -1783,7 +1807,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -1799,11 +1823,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MiaMY.viCtoriaCROsS.WORkERS.deV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -1819,7 +1843,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -1835,11 +1859,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miaMy.vICTOriAcrOSS.workerS.DeV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -1855,7 +1879,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -1871,11 +1895,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MIAmY.vicTORIacross.WORkeRs.Dev"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -1891,7 +1915,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -1907,11 +1931,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miaMY.victoriAcROSS.wOrKErS.deV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -1927,7 +1951,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -1943,11 +1967,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIAMy.viCTorIaCROss.WORKerS.DeV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -1963,7 +1987,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -1979,11 +2003,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MiamY.ViCtORIAcrOSS.WORKers.deV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -1999,7 +2023,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -2015,11 +2039,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miAMy.vicToRIacrOSS.WORKeRS.dev"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -2035,7 +2059,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -2051,11 +2075,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miamY.ViCTORiaCROSs.woRkERS.Dev"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -2071,7 +2095,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -2087,11 +2111,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MIAMY.VictoRiacroSs.wORKeRs.dEv"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -2107,7 +2131,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -2123,11 +2147,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MIAmy.vICtoRiAcrOsS.wOrKErS.dEV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -2143,7 +2167,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -2159,11 +2183,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIamy.vICtorIAcrosS.woRKErs.deV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -2179,7 +2203,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -2195,11 +2219,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miaMY.ViCTorIacrosS.WORKerS.dEV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -2215,7 +2239,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -2231,11 +2255,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIaMY.VicTOriacroSs.WORkerS.Dev"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -2251,7 +2275,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -2267,11 +2291,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miaMy.VIcTorIacROSs.workErS.deV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -2287,7 +2311,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -2303,11 +2327,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MiAmy.VictORIAcrosS.WOrkeRS.Dev"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -2323,7 +2347,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -2339,11 +2363,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miAmy.vICTORIACross.wORkeRs.dEv"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -2359,7 +2383,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -2375,11 +2399,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miAMY.victoriacrosS.woRkers.deV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -2395,7 +2419,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -2411,11 +2435,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miAmY.vICtOriaCrosS.WORkers.dEV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -2431,7 +2455,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -2447,11 +2471,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MIamY.viCtOrIaCROss.woRKeRs.DEV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -2467,7 +2491,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -2483,11 +2507,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miAMy.ViCtOrIACroSs.wOrKeRs.dEv"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -2503,7 +2527,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -2519,11 +2543,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIAmY.vIctORIaCroSs.WOrKErS.dEV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -2539,7 +2563,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -2555,11 +2579,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MiAMY.vICtORIaCrOSS.wORKErS.dEv"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -2575,7 +2599,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -2591,11 +2615,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MiaMy.vicTORIACrOsS.wORkers.dEv"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -2611,7 +2635,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -2627,11 +2651,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MIamy.vIcTORiACROSS.wORKErS.dev"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -2647,7 +2671,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -2663,11 +2687,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MIAMy.vICToRiacROSS.WoRkErS.dEv"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -2683,7 +2707,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -2699,11 +2723,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miAMy.vICtORiacRoSS.WoRkErs.dev"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -2719,7 +2743,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -2735,11 +2759,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MiAMY.ViCtoriacROSS.wORkErS.dev"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -2755,7 +2779,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -2771,11 +2795,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MIAmY.vIcToRIacrOSs.worKeRs.dev"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -2791,7 +2815,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -2807,11 +2831,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MIaMY.VICTorIAcRosS.WOrkERS.deV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -2827,7 +2851,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -2843,11 +2867,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MIaMY.viCtOrIAcRoSs.WORkErs.dEv"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -2863,7 +2887,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -2879,11 +2903,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIamY.VIcTORIaCrOsS.wOrKeRs.dev"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -2899,7 +2923,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -2915,11 +2939,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MiAMY.ViCToRiACRoSS.WoRkERs.DeV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -2935,7 +2959,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -2951,11 +2975,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MIAmY.ViCTOriACROss.woRKERS.DEv"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -2971,7 +2995,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -2987,11 +3011,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIaMy.VIcToRIacrosS.WOrkERS.DEv"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -3007,7 +3031,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -3023,11 +3047,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIAmy.victorIacRosS.WoRkerS.DEv"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -3043,7 +3067,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -3059,11 +3083,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miAmY.ViCtOrIaCROsS.wORKErS.dEV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -3079,7 +3103,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -3095,11 +3119,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MiAmY.vIctorIAcrOss.WORKeRS.DEV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -3115,7 +3139,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -3131,11 +3155,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIaMy.viCtoriaCROSS.WOrKERS.Dev"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -3151,7 +3175,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -3167,11 +3191,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miaMY.VIcTORIaCROSS.wORkErS.Dev"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -3187,7 +3211,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -3203,11 +3227,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MiAMY.VicTOrIAcrOsS.WorKErs.DEV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -3223,7 +3247,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -3239,11 +3263,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miamy.vICTOriACRosS.WOrKERs.deV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -3254,12 +3278,12 @@
       "settings": {
         "vnext": [
           {
-            "address": "188.114.98.80",
+            "address": "172.67.66.142",
             "port": 443,
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -3275,11 +3299,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MiaMy.VictorIacroSs.wOrKeRs.DEv"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -3295,7 +3319,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -3311,11 +3335,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MiAmY.VIctoRIaCrOSs.wOrKeRs.DEv"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -3331,7 +3355,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -3347,11 +3371,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miAMY.VICtoRiACRoSS.WORkERs.deV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -3367,7 +3391,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -3383,11 +3407,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIaMY.VIctorIaCross.wOrKers.deV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -3403,7 +3427,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -3419,11 +3443,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MiAmY.ViCTORIACroSs.woRKerS.deV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -3439,7 +3463,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -3455,11 +3479,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miAmy.VIctOriaCrosS.workerS.dEv"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -3475,7 +3499,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -3491,11 +3515,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MiAmy.victoRIAcROsS.WOrkERS.DeV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -3511,7 +3535,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -3527,11 +3551,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miaMY.VIcTORIACROSs.wORKErs.Dev"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -3547,7 +3571,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -3563,11 +3587,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIAMY.ViCTORIAcRoSS.workERS.dev"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -3583,7 +3607,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -3599,11 +3623,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MiaMy.viCTOriacroSS.wORKErs.DEV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -3619,7 +3643,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -3635,11 +3659,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIAMy.vicTORiaCroSs.WorKErS.Dev"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -3655,7 +3679,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -3671,11 +3695,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miAMy.ViCTOriAcrOss.WOrKErs.dEV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -3691,7 +3715,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -3707,11 +3731,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miAMy.vICtOriaCRoSs.wOrkErS.Dev"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -3727,7 +3751,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -3743,11 +3767,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MIaMy.viCtOrIacRoSs.WORKeRs.dEV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -3763,7 +3787,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -3779,11 +3803,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MIaMY.VictoRiaCRosS.woRkerS.DeV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -3799,7 +3823,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -3815,11 +3839,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIAMY.VIctOriAcRosS.WORkErs.DeV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -3835,7 +3859,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -3851,11 +3875,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MIamy.VIcTOriAcross.wORKERS.dEV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -3871,7 +3895,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -3887,11 +3911,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MiamY.VIctORiaCRoSS.wORkERS.dEv"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -3907,7 +3931,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -3923,11 +3947,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIAmY.VicTorIaCROsS.WorKErS.dev"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -3943,7 +3967,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -3959,11 +3983,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MIamY.vIcTORiaCRoSs.WoRkerS.dEv"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -3979,7 +4003,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -3995,11 +4019,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miAMY.vICtorIACrOSs.WorKErS.Dev"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -4015,7 +4039,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -4031,11 +4055,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miaMy.viCtORIaCROSS.woRkeRs.dev"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -4051,7 +4075,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -4067,11 +4091,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MIamY.vICtorIaCrosS.WorKeRS.dEV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -4082,12 +4106,12 @@
       "settings": {
         "vnext": [
           {
-            "address": "www.visa.com.sg",
+            "address": "162.159.134.162",
             "port": 443,
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -4103,11 +4127,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miaMy.viCToRiAcross.wORkErS.DEv"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -4118,12 +4142,12 @@
       "settings": {
         "vnext": [
           {
-            "address": "icook.tw",
+            "address": "www.visa.com",
             "port": 443,
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -4139,11 +4163,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miaMy.vIctOrIACrOsS.woRkErS.deV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -4154,12 +4178,12 @@
       "settings": {
         "vnext": [
           {
-            "address": "whatismyipaddress.com",
+            "address": "time.cloudflare.com",
             "port": 443,
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -4175,11 +4199,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miAMY.victorIACrosS.WorkERS.deV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -4190,12 +4214,12 @@
       "settings": {
         "vnext": [
           {
-            "address": "log.bpminecraft.com",
+            "address": "104.25.77.33",
             "port": 443,
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -4211,11 +4235,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miAMY.vICTOriacROss.WoRkErS.dEv"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -4226,12 +4250,12 @@
       "settings": {
         "vnext": [
           {
-            "address": "www.visa.com.tw",
+            "address": "104.18.26.241",
             "port": 443,
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -4247,11 +4271,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MIaMY.VICTorIaCrOss.WORKers.DeV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -4262,12 +4286,12 @@
       "settings": {
         "vnext": [
           {
-            "address": "edtunnel-dgp.pages.dev",
+            "address": "104.24.53.235",
             "port": 443,
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -4283,11 +4307,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MIAmY.vICtoriACroSS.worKers.DEV"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -4298,12 +4322,12 @@
       "settings": {
         "vnext": [
           {
-            "address": "www.ipaddress.my",
+            "address": "104.17.184.111",
             "port": 443,
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -4319,11 +4343,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MIaMy.ViCtoRiAcROsS.wORkeRs.dev"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -4339,7 +4363,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -4355,11 +4379,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MiaMy.VicToRiACRoss.woRKerS.DEv"
+          "fingerprint": "firefox",
+          "serverName": "DD-xx.PAGES.DEV"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "dd-xx.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -4370,12 +4394,12 @@
       "settings": {
         "vnext": [
           {
-            "address": "japan.com",
+            "address": "198.41.209.182",
             "port": 443,
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -4391,11 +4415,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIAmy.viCTORIacrosS.WORKERs.DEV"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -4406,12 +4430,12 @@
       "settings": {
         "vnext": [
           {
-            "address": "www.pcmag.com",
+            "address": "104.24.53.235",
             "port": 443,
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -4427,11 +4451,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIaMy.VictoRiacROss.wOrkErs.deV"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -4447,7 +4471,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -4463,11 +4487,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miAMy.viCToriacRoss.worKErS.dev"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -4478,12 +4502,12 @@
       "settings": {
         "vnext": [
           {
-            "address": "iplocation.io",
+            "address": "104.21.96.212",
             "port": 443,
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -4499,11 +4523,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miaMY.vIctOrIaCrosS.WorKerS.DeV"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -4514,12 +4538,12 @@
       "settings": {
         "vnext": [
           {
-            "address": "www.who.int",
+            "address": "104.20.49.10",
             "port": 443,
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -4535,11 +4559,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MIAmY.viCToriAcrosS.WORKErS.dev"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -4555,7 +4579,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -4571,11 +4595,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miAmY.VicTORiacROSS.woRkerS.dEV"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -4591,7 +4615,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -4607,11 +4631,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIAmy.viCTorIaCRoSS.WoRKerS.DEV"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -4627,7 +4651,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -4643,11 +4667,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miaMy.VICTOrIAcrOSS.WORKERs.DeV"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -4658,12 +4682,12 @@
       "settings": {
         "vnext": [
           {
-            "address": "www.gov.ua",
+            "address": "104.20.49.10",
             "port": 443,
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -4679,11 +4703,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miamY.vIctORiAcRoSs.wORKErS.Dev"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -4694,12 +4718,12 @@
       "settings": {
         "vnext": [
           {
-            "address": "ip.sb",
+            "address": "104.25.77.33",
             "port": 443,
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -4715,11 +4739,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miaMy.ViCTOrIAcrOsS.wORKErS.deV"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -4730,12 +4754,12 @@
       "settings": {
         "vnext": [
           {
-            "address": "190.93.244.183",
+            "address": "[2606:4700:8ded:8ce3:26e3:19b8:6458:2efb]",
             "port": 443,
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -4751,11 +4775,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIAMy.viCTOriaCrOss.WOrkers.deV"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -4766,12 +4790,12 @@
       "settings": {
         "vnext": [
           {
-            "address": "www.gov.ua",
+            "address": "104.18.26.241",
             "port": 443,
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -4787,11 +4811,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIAmy.vICtORiaCRoSS.WoRKeRs.deV"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -4807,7 +4831,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -4823,11 +4847,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miamY.VIcTORIACroSs.worKErs.dev"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -4838,12 +4862,12 @@
       "settings": {
         "vnext": [
           {
-            "address": "www.ipchicken.com",
+            "address": "198.41.209.182",
             "port": 443,
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -4859,11 +4883,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MiamY.viCTORIacROsS.wORkErS.deV"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -4874,12 +4898,12 @@
       "settings": {
         "vnext": [
           {
-            "address": "www.udacity.com",
+            "address": "www.speedtest.net",
             "port": 443,
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -4895,11 +4919,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MiAmy.vIctOriACRoSS.wOrKeRs.deV"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -4910,12 +4934,12 @@
       "settings": {
         "vnext": [
           {
-            "address": "www.ipget.net",
+            "address": "lb.nscl.ir",
             "port": 443,
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -4931,11 +4955,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miaMY.ViCtoRiACRosS.WORKers.dev"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -4946,12 +4970,12 @@
       "settings": {
         "vnext": [
           {
-            "address": "time.cloudflare.com",
+            "address": "104.17.184.111",
             "port": 443,
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -4967,11 +4991,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIAmY.vICtOriacROss.Workers.dev"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -4982,12 +5006,12 @@
       "settings": {
         "vnext": [
           {
-            "address": "www.visa.com",
+            "address": "104.19.85.52",
             "port": 443,
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -5003,11 +5027,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIAMY.ViCtOrIACROSs.wOrkerS.deV"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -5018,12 +5042,12 @@
       "settings": {
         "vnext": [
           {
-            "address": "malaysia.com",
+            "address": "104.16.252.221",
             "port": 443,
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -5039,11 +5063,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MIamy.viCTOrIacRoss.WoRKERS.dev"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -5054,12 +5078,12 @@
       "settings": {
         "vnext": [
           {
-            "address": "singapore.com",
+            "address": "104.17.197.203",
             "port": 443,
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -5075,11 +5099,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MiAmY.VIcTOriAcrOsS.wORKERs.dEv"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -5095,7 +5119,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -5111,11 +5135,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MiAMY.viCToriaCROss.WoRkErs.dev"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -5131,7 +5155,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -5147,11 +5171,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "Miamy.vICTOriACRoss.woRkErS.dEV"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -5162,12 +5186,12 @@
       "settings": {
         "vnext": [
           {
-            "address": "cdnjs.com",
+            "address": "csgo.com",
             "port": 443,
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -5183,11 +5207,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIamy.VicTORiaCROsS.WOrkerS.DEv"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -5203,7 +5227,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -5219,11 +5243,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MiAmY.VICToriACRoSS.woRkErs.dEV"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -5239,7 +5263,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -5255,11 +5279,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIaMY.vIctoriAcROSS.woRkERs.Dev"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -5270,12 +5294,12 @@
       "settings": {
         "vnext": [
           {
-            "address": "cdnjs.com",
+            "address": "japan.com",
             "port": 443,
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -5291,11 +5315,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MIamY.vICToRIaCROSs.WOrKErS.dEV"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -5311,7 +5335,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -5327,11 +5351,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "Miamy.vicTORIaCRoSs.WorKERS.DEv"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -5347,7 +5371,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -5363,11 +5387,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIamy.VICTOriACrosS.wORkerS.dev"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -5383,7 +5407,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -5399,11 +5423,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miAMy.VICtoRIacROSS.WorKERS.dEV"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -5419,7 +5443,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -5435,11 +5459,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miAmY.VICToriACrOSS.wOrKers.dev"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -5450,12 +5474,12 @@
       "settings": {
         "vnext": [
           {
-            "address": "162.159.251.118",
+            "address": "104.16.248.181",
             "port": 443,
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -5471,11 +5495,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MiAMY.VictORiACrosS.wORkERS.deV"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -5491,7 +5515,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -5507,11 +5531,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MiAMY.VIctorIaCroSS.WOrkErs.dEV"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -5522,12 +5546,12 @@
       "settings": {
         "vnext": [
           {
-            "address": "162.159.246.165",
+            "address": "162.159.233.18",
             "port": 443,
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -5543,11 +5567,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIamy.ViCtORIaCRoSs.WoRkeRS.dev"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -5558,12 +5582,12 @@
       "settings": {
         "vnext": [
           {
-            "address": "190.93.247.194",
+            "address": "198.41.209.182",
             "port": 443,
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -5579,11 +5603,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MIamY.viCTORiACrOsS.woRKErs.dEv"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -5599,7 +5623,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -5615,11 +5639,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miAmY.VictorIAcrOSS.WOrkeRs.Dev"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -5635,7 +5659,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -5651,11 +5675,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIAMY.vIcToRiaCROss.woRKErs.DEV"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -5671,7 +5695,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -5687,11 +5711,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIAmY.VIcToRiacRoSS.WORKERs.DEv"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -5707,7 +5731,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -5723,11 +5747,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MiaMY.vIcTOriAcRoss.wORKERs.dEv"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -5743,7 +5767,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -5759,11 +5783,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miAmy.vIcTORIAcRoSS.wORKeRS.dEv"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -5779,7 +5803,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -5795,11 +5819,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MiAmY.VICToriaCRoSS.WORKErs.DEv"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -5815,7 +5839,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -5831,11 +5855,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miAMY.VicTOrIacross.workERs.dEv"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -5851,7 +5875,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -5867,11 +5891,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MiAmY.viCtorIaCrOss.wOrkeRS.DEV"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -5887,7 +5911,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -5903,11 +5927,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MiaMY.VicToRIacRoss.wORkeRS.dev"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -5923,7 +5947,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -5939,11 +5963,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MIaMy.VIctoriAcroSS.WoRkERs.DEV"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -5959,7 +5983,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -5975,11 +5999,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miaMy.VIcTOriAcrOsS.WorkeRS.DeV"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -5990,12 +6014,12 @@
       "settings": {
         "vnext": [
           {
-            "address": "198.41.209.210",
+            "address": "172.67.141.191",
             "port": 443,
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -6011,11 +6035,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIAmY.VictOrIACrosS.Workers.Dev"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -6026,12 +6050,12 @@
       "settings": {
         "vnext": [
           {
-            "address": "198.41.209.231",
+            "address": "172.67.157.2",
             "port": 443,
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -6047,11 +6071,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MIAMy.vICtoRiAcrOSs.WoRKerS.dev"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -6067,7 +6091,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -6083,11 +6107,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIaMy.VICTORiaCROSS.workeRs.DEV"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -6103,7 +6127,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -6119,11 +6143,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIAMY.vIctOrIAcroSS.WORkErS.DeV"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -6134,12 +6158,12 @@
       "settings": {
         "vnext": [
           {
-            "address": "190.93.247.32",
+            "address": "162.159.253.172",
             "port": 443,
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -6155,11 +6179,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MIAmy.VICtOrIACross.wOrkErs.deV"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -6175,7 +6199,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -6191,11 +6215,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIAMy.ViCToriacrOSs.WOrKeRs.dev"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -6211,7 +6235,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -6227,11 +6251,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIamy.VICTOriacROsS.WORKERs.DEV"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -6247,7 +6271,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -6263,11 +6287,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MiaMy.VIcTOrIaCrOsS.WOrkerS.dev"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -6283,7 +6307,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -6299,11 +6323,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MiAMY.VICtorIacrOSs.WOrkErs.deV"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -6319,7 +6343,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -6335,11 +6359,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "miAMY.viCtoriACRosS.wORkErs.dev"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -6355,7 +6379,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -6371,11 +6395,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIaMY.VIctORiacrosS.wOrKeRS.deV"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -6391,7 +6415,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -6407,11 +6431,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "MIAmy.VICtorIAcroSs.wORKers.DEv"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -6427,7 +6451,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -6443,11 +6467,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIAmY.vICtORIaCRosS.wOrkers.dEV"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -6463,7 +6487,7 @@
             "users": [
               {
                 "encryption": "none",
-                "id": "10e894da-61b1-4998-ac2b-e9ccb6af9d30",
+                "id": "00c82fcb-2c67-465d-8432-6743a1593efa",
                 "level": 8
               }
             ]
@@ -6479,11 +6503,11 @@
         "tlsSettings": {
           "allowInsecure": false,
           "alpn": ["http/1.1"],
-          "fingerprint": "randomized",
-          "serverName": "mIAmy.viCTOriacRoss.WoRKeRS.DEv"
+          "fingerprint": "firefox",
+          "serverName": "BalleRiNa.PAGES.dev"
         },
         "wsSettings": {
-          "host": "miamy.victoriacross.workers.dev",
+          "host": "ballerina.pages.dev",
           "path": "/ApiCallDiana/Response?ed=2560"
         }
       },
@@ -6536,7 +6560,7 @@
       "statsOutboundUplink": true
     }
   },
-  "remarks": "🟡 Fragmentation",
+  "remarks": "🇹🇷 Fragment Balancer",
   "routing": {
     "balancers": [
       {
