@@ -6,11 +6,11 @@
 >
 > <br/>
 >
-> **Last updated:** Tue, 26 Aug 2025 01:48:31 GMT
+> **Last updated:** Wed, 27 Aug 2025 01:44:56 GMT
 >
 > <br/>
 >
-> **Next update:** Thu, 28 Aug 2025 01:48:31 GMT
+> **Next update:** Fri, 29 Aug 2025 01:44:56 GMT
 >
 > <br/>
 >
@@ -19,10 +19,10 @@
 
 ## 📊 Summary
 
-**🔹 Total working proxies:** 59  
+**🔹 Total working proxies:** 60  
 **🔹 Countries covered:** 14  
 **🔹 Different ports:** 1  
-**🔹 Success methods:** TCP (59)
+**🔹 Success methods:** TCP (60)
 
 <br/>
 
@@ -30,7 +30,7 @@
 
 | Port | Count | Percentage |
 |------|-------|------------|
-| 443  | 59     | 100.0%     |
+| 443  | 60     | 100.0%     |
 
 <br/>
 
@@ -84,7 +84,7 @@
 | `77.73.71.196` | Riga | AS42532 SIA VEESP | TCP |
 | `94.158.219.198` | Riga | AS42532 SIA VEESP | TCP |
 
-### 🇸🇪 Sweden (8 proxies)
+### 🇸🇪 Sweden (9 proxies)
 
 | Proxy IP | City | ISP / Organization | Method |
 |----------|------|--------------------|--------|
@@ -94,6 +94,7 @@
 | `46.226.164.47` | Stockholm | AS210644 AEZA INTERNATIONAL LTD | TCP |
 | `46.226.165.169` | Stockholm | AS210644 AEZA INTERNATIONAL LTD | TCP |
 | `89.22.224.125` | Stockholm | AS210644 AEZA INTERNATIONAL LTD | TCP |
+| `89.22.227.167` | Stockholm | AS210644 AEZA INTERNATIONAL LTD | TCP |
 | `89.22.227.239` | Stockholm | AS210644 AEZA INTERNATIONAL LTD | TCP |
 | `89.22.232.43` | Stockholm | AS210644 AEZA INTERNATIONAL LTD | TCP |
 
@@ -210,6 +211,7 @@
 46.226.164.47
 46.226.165.169
 89.22.224.125
+89.22.227.167
 89.22.227.239
 89.22.232.43
 45.85.93.121
@@ -555,6 +557,15 @@
   },
   {
     "ip": "89.22.224.125",
+    "port": "443",
+    "method": "TCP",
+    "country": "Sweden",
+    "city": "Stockholm",
+    "as": "AS210644 AEZA INTERNATIONAL LTD",
+    "proxy": true
+  },
+  {
+    "ip": "89.22.227.167",
     "port": "443",
     "method": "TCP",
     "country": "Sweden",
