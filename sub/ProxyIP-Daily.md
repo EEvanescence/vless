@@ -6,11 +6,11 @@
 >
 > <br/>
 >
-> **Last updated:** Sun, 31 Aug 2025 01:49:27 GMT
+> **Last updated:** Mon, 01 Sep 2025 01:58:57 GMT
 >
 > <br/>
 >
-> **Next update:** Tue, 02 Sep 2025 01:49:27 GMT
+> **Next update:** Wed, 03 Sep 2025 01:58:57 GMT
 >
 > <br/>
 >
@@ -20,7 +20,7 @@
 ## 📊 Summary
 
 **🔹 Total working proxies:** 45  
-**🔹 Countries covered:** 12  
+**🔹 Countries covered:** 13  
 **🔹 Different ports:** 1  
 **🔹 Success methods:** TCP (45)
 
@@ -38,110 +38,115 @@
 
 <br/>
 
-### 🇦🇹 Austria (24 proxies)
+### 🇺🇸 United States (9 proxies)
 
 | Proxy IP | City | ISP / Organization | Method |
 |----------|------|--------------------|--------|
-| `94.177.8.10` | Wien | AS40994 Hohl IT e.U. | TCP |
-| `94.177.8.11` | Wien | AS40994 Hohl IT e.U. | TCP |
-| `94.177.8.19` | Wien | AS40994 Hohl IT e.U. | TCP |
-| `94.177.8.2` | Wien | AS40994 Hohl IT e.U. | TCP |
-| `94.177.8.21` | Wien | AS40994 Hohl IT e.U. | TCP |
-| `94.177.8.23` | Wien | AS40994 Hohl IT e.U. | TCP |
-| `94.177.8.26` | Wien | AS40994 Hohl IT e.U. | TCP |
-| `94.177.8.3` | Wien | AS40994 Hohl IT e.U. | TCP |
-| `94.177.8.31` | Wien | AS40994 Hohl IT e.U. | TCP |
-| `94.177.8.34` | Wien | AS40994 Hohl IT e.U. | TCP |
-| `94.177.8.4` | Wien | AS40994 Hohl IT e.U. | TCP |
-| `94.177.8.40` | Wien | AS40994 Hohl IT e.U. | TCP |
-| `94.177.8.43` | Wien | AS40994 Hohl IT e.U. | TCP |
-| `94.177.8.48` | Wien | AS40994 Hohl IT e.U. | TCP |
-| `94.177.8.5` | Wien | AS40994 Hohl IT e.U. | TCP |
-| `94.177.8.50` | Wien | AS40994 Hohl IT e.U. | TCP |
-| `94.177.8.51` | Wien | AS40994 Hohl IT e.U. | TCP |
-| `94.177.8.54` | Wien | AS40994 Hohl IT e.U. | TCP |
-| `94.177.8.6` | Wien | AS40994 Hohl IT e.U. | TCP |
-| `94.177.8.60` | Wien | AS40994 Hohl IT e.U. | TCP |
-| `94.177.8.62` | Wien | AS40994 Hohl IT e.U. | TCP |
-| `94.177.8.8` | Wien | AS40994 Hohl IT e.U. | TCP |
-| `94.177.8.9` | Wien | AS40994 Hohl IT e.U. | TCP |
-| `94.228.169.84` | Vienna | AS210644 AEZA INTERNATIONAL LTD | TCP |
+| `142.171.140.152` | Los Angeles | AS35916 MULTACOM CORPORATION | TCP |
+| `142.171.233.183` | Los Angeles | AS35916 MULTACOM CORPORATION | TCP |
+| `149.248.7.208` | Los Angeles | AS20473 The Constant Company, LLC | TCP |
+| `206.223.84.247` | Los Angeles | AS979 NetLab Global | TCP |
+| `74.48.46.35` | Los Angeles | AS35916 MULTACOM CORPORATION | TCP |
+| `74.48.85.50` | Los Angeles | AS35916 MULTACOM CORPORATION | TCP |
+| `74.48.89.211` | Los Angeles | AS35916 MULTACOM CORPORATION | TCP |
+| `91.149.239.198` | Los Angeles | AS26383 Baxet Group Inc. | TCP |
+| `91.149.239.70` | Los Angeles | AS26383 Baxet Group Inc. | TCP |
 
-### 🇩🇪 Germany (4 proxies)
+### 🇫🇮 Finland (8 proxies)
 
 | Proxy IP | City | ISP / Organization | Method |
 |----------|------|--------------------|--------|
-| `18.197.218.69` | Frankfurt am Main | AS16509 Amazon.com, Inc. | TCP |
-| `185.224.248.120` | Frankfurt am Main | AS56630 Melbikomas UAB | TCP |
-| `194.58.33.218` | Frankfurt am Main | AS216127 INTERNATIONAL HOSTING COMPANY LIMITED | TCP |
-| `3.67.25.193` | Frankfurt am Main | AS16509 Amazon.com, Inc. | TCP |
+| `178.236.244.16` | Helsinki | AS210644 AEZA INTERNATIONAL LTD | TCP |
+| `185.112.82.28` | Helsinki | AS51765 Oy Creanova Hosting Solutions Ltd. | TCP |
+| `185.188.181.187` | Helsinki | AS207569 I-SERVERS LTD | TCP |
+| `217.196.99.67` | Helsinki | AS51765 Oy Creanova Hosting Solutions Ltd. | TCP |
+| `35.228.168.221` | Lappeenranta | AS396982 Google LLC | TCP |
+| `45.138.73.182` | Helsinki | AS200740 FIRST SERVER LIMITED | TCP |
+| `95.216.140.177` | Helsinki | AS24940 Hetzner Online GmbH | TCP |
+| `95.216.17.80` | Helsinki | AS24940 Hetzner Online GmbH | TCP |
 
-### 🇳🇱 The Netherlands (4 proxies)
-
-| Proxy IP | City | ISP / Organization | Method |
-|----------|------|--------------------|--------|
-| `103.106.1.2` | Meppel | AS44477 PQ HOSTING PLUS S.R.L. | TCP |
-| `194.58.68.145` | Amsterdam | AS26383 Baxet Group Inc. | TCP |
-| `37.1.221.155` | Meppel | AS58061 Scalaxy B.V. | TCP |
-| `89.42.142.79` | Meppel | AS199058 SERVA ONE LTD | TCP |
-
-### 🇫🇮 Finland (3 proxies)
+### 🌍 Latvia (7 proxies)
 
 | Proxy IP | City | ISP / Organization | Method |
 |----------|------|--------------------|--------|
-| `185.231.206.22` | Helsinki | AS44477 PQ HOSTING PLUS S.R.L. | TCP |
-| `77.221.144.210` | Helsinki | AS216300 Closed Joint Stock Company "AbkhazMedia" | TCP |
-| `92.42.102.22` | Helsinki | AS209693 OC NETWORKS LIMITED | TCP |
+| `185.242.106.215` | Riga | AS42532 SIA VEESP | TCP |
+| `195.135.252.139` | Riga | AS42532 SIA VEESP | TCP |
+| `195.135.252.244` | Riga | AS42532 SIA VEESP | TCP |
+| `216.173.70.192` | Riga | AS42532 SIA VEESP | TCP |
+| `37.128.207.111` | Riga | AS42532 SIA VEESP | TCP |
+| `37.128.207.179` | Riga | AS42532 SIA VEESP | TCP |
+| `94.158.219.198` | Riga | AS42532 SIA VEESP | TCP |
 
-### 🇯🇵 Japan (3 proxies)
+### 🇳🇱 The Netherlands (5 proxies)
 
 | Proxy IP | City | ISP / Organization | Method |
 |----------|------|--------------------|--------|
-| `154.31.113.72` | Tokyo | AS906 DMIT Cloud Services | TCP |
-| `160.16.123.65` | Tokyo | AS9370 SAKURA Internet Inc. | TCP |
-| `38.180.29.115` | Shibuya City | AS9009 M247 Europe SRL | TCP |
+| `103.137.249.117` | Amsterdam | AS216154 CLODO CLOUD SERVICE CO. L.L.C | TCP |
+| `159.100.199.200` | Amsterdam | AS11179 Aryaka Networks, Inc. | TCP |
+| `176.123.8.150` | Amsterdam | AS200019 ALEXHOST SRL | TCP |
+| `185.23.238.76` | Dronten | AS50053 Individual Entrepreneur Anton Levin | TCP |
+| `46.151.24.173` | Amsterdam | AS216071 SERVERS TECH FZCO | TCP |
+
+### 🇷🇺 Russia (4 proxies)
+
+| Proxy IP | City | ISP / Organization | Method |
+|----------|------|--------------------|--------|
+| `147.45.245.15` | Moscow | AS9123 JSC "TIMEWEB" | TCP |
+| `185.105.117.222` | Moscow | AS209641 I-SERVERS LTD | TCP |
+| `31.129.49.103` | Moscow | AS49505 JSC Selectel | TCP |
+| `77.232.142.45` | Moscow | AS210644 AEZA INTERNATIONAL LTD | TCP |
+
+### 🇸🇪 Sweden (3 proxies)
+
+| Proxy IP | City | ISP / Organization | Method |
+|----------|------|--------------------|--------|
+| `46.226.161.37` | Stockholm | AS210644 AEZA INTERNATIONAL LTD | TCP |
+| `46.226.164.47` | Stockholm | AS210644 AEZA INTERNATIONAL LTD | TCP |
+| `89.22.227.239` | Stockholm | AS210644 AEZA INTERNATIONAL LTD | TCP |
+
+### 🇪🇸 Spain (2 proxies)
+
+| Proxy IP | City | ISP / Organization | Method |
+|----------|------|--------------------|--------|
+| `212.227.90.142` | Madrid | AS8560 IONOS SE | TCP |
+| `45.86.229.28` | Madrid | AS62005 BlueVPS OU | TCP |
+
+### 🇹🇷 Türkiye (2 proxies)
+
+| Proxy IP | City | ISP / Organization | Method |
+|----------|------|--------------------|--------|
+| `185.234.66.91` | Izmir | AS44477 PQ HOSTING PLUS S.R.L. | TCP |
+| `94.131.123.44` | Istanbul | AS44477 PQ HOSTING PLUS S.R.L. | TCP |
 
 ### 🇧🇬 Bulgaria (1 proxies)
 
 | Proxy IP | City | ISP / Organization | Method |
 |----------|------|--------------------|--------|
-| `185.82.218.224` | Sofia | AS59729 GREEN FLOID LLC | TCP |
+| `85.217.171.231` | Sofia | AS44901 Belcloud LTD | TCP |
 
-### 🇨🇦 Canada (1 proxies)
-
-| Proxy IP | City | ISP / Organization | Method |
-|----------|------|--------------------|--------|
-| `140.238.158.238` | Toronto | AS31898 Oracle Corporation | TCP |
-
-### 🇫🇷 France (1 proxies)
+### 🇩🇪 Germany (1 proxies)
 
 | Proxy IP | City | ISP / Organization | Method |
 |----------|------|--------------------|--------|
-| `194.36.170.247` | Paris | AS56971 AS56971 Cloud | TCP |
+| `194.32.79.161` | Frankfurt am Main | AS202448 MVPS LTD | TCP |
 
-### 🇮🇳 India (1 proxies)
-
-| Proxy IP | City | ISP / Organization | Method |
-|----------|------|--------------------|--------|
-| `143.244.130.180` | Bengaluru | AS14061 DigitalOcean, LLC | TCP |
-
-### 🌍 Kazakhstan (1 proxies)
+### 🇮🇱 Israel (1 proxies)
 
 | Proxy IP | City | ISP / Organization | Method |
 |----------|------|--------------------|--------|
-| `86.104.73.185` | Almaty | AS44477 PQ HOSTING PLUS S.R.L. | TCP |
+| `77.91.69.146` | Tel Aviv | AS206446 CLOUD LEASE Ltd | TCP |
 
-### 🇳🇱 Netherlands (1 proxies)
-
-| Proxy IP | City | ISP / Organization | Method |
-|----------|------|--------------------|--------|
-| `212.22.74.89` | Dronten | AS41745 Baykov Ilya Sergeevich | TCP |
-
-### 🇪🇸 Spain (1 proxies)
+### 🇹🇷 Turkey (1 proxies)
 
 | Proxy IP | City | ISP / Organization | Method |
 |----------|------|--------------------|--------|
-| `38.180.52.83` | Madrid | AS9009 M247 Europe SRL | TCP |
+| `188.132.183.166` | Yakuplu | AS214036 Ultahost, Inc. | TCP |
+
+### 🇺🇦 Ukraine (1 proxies)
+
+| Proxy IP | City | ISP / Organization | Method |
+|----------|------|--------------------|--------|
+| `91.218.212.223` | Kyiv | AS42352 TOV 'Dream Line Holding' | TCP |
 
 <br/>
 
@@ -151,51 +156,51 @@
 <summary>Click to expand RAW data</summary>
 
 ```
-94.177.8.10
-94.177.8.11
-94.177.8.19
-94.177.8.2
-94.177.8.21
-94.177.8.23
-94.177.8.26
-94.177.8.3
-94.177.8.31
-94.177.8.34
-94.177.8.4
-94.177.8.40
-94.177.8.43
-94.177.8.48
-94.177.8.5
-94.177.8.50
-94.177.8.51
-94.177.8.54
-94.177.8.6
-94.177.8.60
-94.177.8.62
-94.177.8.8
-94.177.8.9
-94.228.169.84
-185.82.218.224
-140.238.158.238
-185.231.206.22
-77.221.144.210
-92.42.102.22
-194.36.170.247
-18.197.218.69
-185.224.248.120
-194.58.33.218
-3.67.25.193
-143.244.130.180
-154.31.113.72
-160.16.123.65
-38.180.29.115
-86.104.73.185
-212.22.74.89
-38.180.52.83
-103.106.1.2
-194.58.68.145
-37.1.221.155
-89.42.142.79
+85.217.171.231
+178.236.244.16
+185.112.82.28
+185.188.181.187
+217.196.99.67
+35.228.168.221
+45.138.73.182
+95.216.140.177
+95.216.17.80
+194.32.79.161
+77.91.69.146
+185.242.106.215
+195.135.252.139
+195.135.252.244
+216.173.70.192
+37.128.207.111
+37.128.207.179
+94.158.219.198
+147.45.245.15
+185.105.117.222
+31.129.49.103
+77.232.142.45
+212.227.90.142
+45.86.229.28
+46.226.161.37
+46.226.164.47
+89.22.227.239
+103.137.249.117
+159.100.199.200
+176.123.8.150
+185.23.238.76
+46.151.24.173
+188.132.183.166
+185.234.66.91
+94.131.123.44
+91.218.212.223
+142.171.140.152
+142.171.233.183
+149.248.7.208
+206.223.84.247
+74.48.46.35
+74.48.85.50
+74.48.89.211
+91.149.239.198
+91.149.239.70
 ```
 
 </details>
@@ -210,408 +215,408 @@
 ```json
 [
   {
-    "ip": "94.177.8.10",
-    "port": "443",
-    "method": "TCP",
-    "country": "Austria",
-    "city": "Wien",
-    "as": "AS40994 Hohl IT e.U.",
-    "proxy": "unknown"
-  },
-  {
-    "ip": "94.177.8.11",
-    "port": "443",
-    "method": "TCP",
-    "country": "Austria",
-    "city": "Wien",
-    "as": "AS40994 Hohl IT e.U.",
-    "proxy": "unknown"
-  },
-  {
-    "ip": "94.177.8.19",
-    "port": "443",
-    "method": "TCP",
-    "country": "Austria",
-    "city": "Wien",
-    "as": "AS40994 Hohl IT e.U.",
-    "proxy": "unknown"
-  },
-  {
-    "ip": "94.177.8.2",
-    "port": "443",
-    "method": "TCP",
-    "country": "Austria",
-    "city": "Wien",
-    "as": "AS40994 Hohl IT e.U.",
-    "proxy": "unknown"
-  },
-  {
-    "ip": "94.177.8.21",
-    "port": "443",
-    "method": "TCP",
-    "country": "Austria",
-    "city": "Wien",
-    "as": "AS40994 Hohl IT e.U.",
-    "proxy": "unknown"
-  },
-  {
-    "ip": "94.177.8.23",
-    "port": "443",
-    "method": "TCP",
-    "country": "Austria",
-    "city": "Wien",
-    "as": "AS40994 Hohl IT e.U.",
-    "proxy": true
-  },
-  {
-    "ip": "94.177.8.26",
-    "port": "443",
-    "method": "TCP",
-    "country": "Austria",
-    "city": "Wien",
-    "as": "AS40994 Hohl IT e.U.",
-    "proxy": "unknown"
-  },
-  {
-    "ip": "94.177.8.3",
-    "port": "443",
-    "method": "TCP",
-    "country": "Austria",
-    "city": "Wien",
-    "as": "AS40994 Hohl IT e.U.",
-    "proxy": "unknown"
-  },
-  {
-    "ip": "94.177.8.31",
-    "port": "443",
-    "method": "TCP",
-    "country": "Austria",
-    "city": "Wien",
-    "as": "AS40994 Hohl IT e.U.",
-    "proxy": "unknown"
-  },
-  {
-    "ip": "94.177.8.34",
-    "port": "443",
-    "method": "TCP",
-    "country": "Austria",
-    "city": "Wien",
-    "as": "AS40994 Hohl IT e.U.",
-    "proxy": "unknown"
-  },
-  {
-    "ip": "94.177.8.4",
-    "port": "443",
-    "method": "TCP",
-    "country": "Austria",
-    "city": "Wien",
-    "as": "AS40994 Hohl IT e.U.",
-    "proxy": true
-  },
-  {
-    "ip": "94.177.8.40",
-    "port": "443",
-    "method": "TCP",
-    "country": "Austria",
-    "city": "Wien",
-    "as": "AS40994 Hohl IT e.U.",
-    "proxy": "unknown"
-  },
-  {
-    "ip": "94.177.8.43",
-    "port": "443",
-    "method": "TCP",
-    "country": "Austria",
-    "city": "Wien",
-    "as": "AS40994 Hohl IT e.U.",
-    "proxy": "unknown"
-  },
-  {
-    "ip": "94.177.8.48",
-    "port": "443",
-    "method": "TCP",
-    "country": "Austria",
-    "city": "Wien",
-    "as": "AS40994 Hohl IT e.U.",
-    "proxy": "unknown"
-  },
-  {
-    "ip": "94.177.8.5",
-    "port": "443",
-    "method": "TCP",
-    "country": "Austria",
-    "city": "Wien",
-    "as": "AS40994 Hohl IT e.U.",
-    "proxy": true
-  },
-  {
-    "ip": "94.177.8.50",
-    "port": "443",
-    "method": "TCP",
-    "country": "Austria",
-    "city": "Wien",
-    "as": "AS40994 Hohl IT e.U.",
-    "proxy": "unknown"
-  },
-  {
-    "ip": "94.177.8.51",
-    "port": "443",
-    "method": "TCP",
-    "country": "Austria",
-    "city": "Wien",
-    "as": "AS40994 Hohl IT e.U.",
-    "proxy": "unknown"
-  },
-  {
-    "ip": "94.177.8.54",
-    "port": "443",
-    "method": "TCP",
-    "country": "Austria",
-    "city": "Wien",
-    "as": "AS40994 Hohl IT e.U.",
-    "proxy": "unknown"
-  },
-  {
-    "ip": "94.177.8.6",
-    "port": "443",
-    "method": "TCP",
-    "country": "Austria",
-    "city": "Wien",
-    "as": "AS40994 Hohl IT e.U.",
-    "proxy": "unknown"
-  },
-  {
-    "ip": "94.177.8.60",
-    "port": "443",
-    "method": "TCP",
-    "country": "Austria",
-    "city": "Wien",
-    "as": "AS40994 Hohl IT e.U.",
-    "proxy": true
-  },
-  {
-    "ip": "94.177.8.62",
-    "port": "443",
-    "method": "TCP",
-    "country": "Austria",
-    "city": "Wien",
-    "as": "AS40994 Hohl IT e.U.",
-    "proxy": "unknown"
-  },
-  {
-    "ip": "94.177.8.8",
-    "port": "443",
-    "method": "TCP",
-    "country": "Austria",
-    "city": "Wien",
-    "as": "AS40994 Hohl IT e.U.",
-    "proxy": "unknown"
-  },
-  {
-    "ip": "94.177.8.9",
-    "port": "443",
-    "method": "TCP",
-    "country": "Austria",
-    "city": "Wien",
-    "as": "AS40994 Hohl IT e.U.",
-    "proxy": true
-  },
-  {
-    "ip": "94.228.169.84",
-    "port": "443",
-    "method": "TCP",
-    "country": "Austria",
-    "city": "Vienna",
-    "as": "AS210644 AEZA INTERNATIONAL LTD",
-    "proxy": true
-  },
-  {
-    "ip": "185.82.218.224",
+    "ip": "85.217.171.231",
     "port": "443",
     "method": "TCP",
     "country": "Bulgaria",
     "city": "Sofia",
-    "as": "AS59729 GREEN FLOID LLC",
+    "as": "AS44901 Belcloud LTD",
     "proxy": "unknown"
   },
   {
-    "ip": "140.238.158.238",
-    "port": "443",
-    "method": "TCP",
-    "country": "Canada",
-    "city": "Toronto",
-    "as": "AS31898 Oracle Corporation",
-    "proxy": true
-  },
-  {
-    "ip": "185.231.206.22",
+    "ip": "178.236.244.16",
     "port": "443",
     "method": "TCP",
     "country": "Finland",
     "city": "Helsinki",
-    "as": "AS44477 PQ HOSTING PLUS S.R.L.",
-    "proxy": "unknown"
+    "as": "AS210644 AEZA INTERNATIONAL LTD",
+    "proxy": true
   },
   {
-    "ip": "77.221.144.210",
+    "ip": "185.112.82.28",
     "port": "443",
     "method": "TCP",
     "country": "Finland",
     "city": "Helsinki",
-    "as": "AS216300 Closed Joint Stock Company \"AbkhazMedia\"",
-    "proxy": "unknown"
+    "as": "AS51765 Oy Creanova Hosting Solutions Ltd.",
+    "proxy": true
   },
   {
-    "ip": "92.42.102.22",
+    "ip": "185.188.181.187",
     "port": "443",
     "method": "TCP",
     "country": "Finland",
     "city": "Helsinki",
-    "as": "AS209693 OC NETWORKS LIMITED",
+    "as": "AS207569 I-SERVERS LTD",
     "proxy": "unknown"
   },
   {
-    "ip": "194.36.170.247",
+    "ip": "217.196.99.67",
     "port": "443",
     "method": "TCP",
-    "country": "France",
-    "city": "Paris",
-    "as": "AS56971 AS56971 Cloud",
+    "country": "Finland",
+    "city": "Helsinki",
+    "as": "AS51765 Oy Creanova Hosting Solutions Ltd.",
     "proxy": "unknown"
   },
   {
-    "ip": "18.197.218.69",
+    "ip": "35.228.168.221",
+    "port": "443",
+    "method": "TCP",
+    "country": "Finland",
+    "city": "Lappeenranta",
+    "as": "AS396982 Google LLC",
+    "proxy": "unknown"
+  },
+  {
+    "ip": "45.138.73.182",
+    "port": "443",
+    "method": "TCP",
+    "country": "Finland",
+    "city": "Helsinki",
+    "as": "AS200740 FIRST SERVER LIMITED",
+    "proxy": "unknown"
+  },
+  {
+    "ip": "95.216.140.177",
+    "port": "443",
+    "method": "TCP",
+    "country": "Finland",
+    "city": "Helsinki",
+    "as": "AS24940 Hetzner Online GmbH",
+    "proxy": "unknown"
+  },
+  {
+    "ip": "95.216.17.80",
+    "port": "443",
+    "method": "TCP",
+    "country": "Finland",
+    "city": "Helsinki",
+    "as": "AS24940 Hetzner Online GmbH",
+    "proxy": "unknown"
+  },
+  {
+    "ip": "194.32.79.161",
     "port": "443",
     "method": "TCP",
     "country": "Germany",
     "city": "Frankfurt am Main",
-    "as": "AS16509 Amazon.com, Inc.",
-    "proxy": true
-  },
-  {
-    "ip": "185.224.248.120",
-    "port": "443",
-    "method": "TCP",
-    "country": "Germany",
-    "city": "Frankfurt am Main",
-    "as": "AS56630 Melbikomas UAB",
-    "proxy": true
-  },
-  {
-    "ip": "194.58.33.218",
-    "port": "443",
-    "method": "TCP",
-    "country": "Germany",
-    "city": "Frankfurt am Main",
-    "as": "AS216127 INTERNATIONAL HOSTING COMPANY LIMITED",
-    "proxy": true
-  },
-  {
-    "ip": "3.67.25.193",
-    "port": "443",
-    "method": "TCP",
-    "country": "Germany",
-    "city": "Frankfurt am Main",
-    "as": "AS16509 Amazon.com, Inc.",
-    "proxy": true
-  },
-  {
-    "ip": "143.244.130.180",
-    "port": "443",
-    "method": "TCP",
-    "country": "India",
-    "city": "Bengaluru",
-    "as": "AS14061 DigitalOcean, LLC",
+    "as": "AS202448 MVPS LTD",
     "proxy": "unknown"
   },
   {
-    "ip": "154.31.113.72",
+    "ip": "77.91.69.146",
     "port": "443",
     "method": "TCP",
-    "country": "Japan",
-    "city": "Tokyo",
-    "as": "AS906 DMIT Cloud Services",
+    "country": "Israel",
+    "city": "Tel Aviv",
+    "as": "AS206446 CLOUD LEASE Ltd",
+    "proxy": "unknown"
+  },
+  {
+    "ip": "185.242.106.215",
+    "port": "443",
+    "method": "TCP",
+    "country": "Latvia",
+    "city": "Riga",
+    "as": "AS42532 SIA VEESP",
+    "proxy": "unknown"
+  },
+  {
+    "ip": "195.135.252.139",
+    "port": "443",
+    "method": "TCP",
+    "country": "Latvia",
+    "city": "Riga",
+    "as": "AS42532 SIA VEESP",
+    "proxy": "unknown"
+  },
+  {
+    "ip": "195.135.252.244",
+    "port": "443",
+    "method": "TCP",
+    "country": "Latvia",
+    "city": "Riga",
+    "as": "AS42532 SIA VEESP",
+    "proxy": "unknown"
+  },
+  {
+    "ip": "216.173.70.192",
+    "port": "443",
+    "method": "TCP",
+    "country": "Latvia",
+    "city": "Riga",
+    "as": "AS42532 SIA VEESP",
+    "proxy": "unknown"
+  },
+  {
+    "ip": "37.128.207.111",
+    "port": "443",
+    "method": "TCP",
+    "country": "Latvia",
+    "city": "Riga",
+    "as": "AS42532 SIA VEESP",
+    "proxy": "unknown"
+  },
+  {
+    "ip": "37.128.207.179",
+    "port": "443",
+    "method": "TCP",
+    "country": "Latvia",
+    "city": "Riga",
+    "as": "AS42532 SIA VEESP",
+    "proxy": "unknown"
+  },
+  {
+    "ip": "94.158.219.198",
+    "port": "443",
+    "method": "TCP",
+    "country": "Latvia",
+    "city": "Riga",
+    "as": "AS42532 SIA VEESP",
+    "proxy": "unknown"
+  },
+  {
+    "ip": "147.45.245.15",
+    "port": "443",
+    "method": "TCP",
+    "country": "Russia",
+    "city": "Moscow",
+    "as": "AS9123 JSC \"TIMEWEB\"",
+    "proxy": "unknown"
+  },
+  {
+    "ip": "185.105.117.222",
+    "port": "443",
+    "method": "TCP",
+    "country": "Russia",
+    "city": "Moscow",
+    "as": "AS209641 I-SERVERS LTD",
+    "proxy": "unknown"
+  },
+  {
+    "ip": "31.129.49.103",
+    "port": "443",
+    "method": "TCP",
+    "country": "Russia",
+    "city": "Moscow",
+    "as": "AS49505 JSC Selectel",
+    "proxy": "unknown"
+  },
+  {
+    "ip": "77.232.142.45",
+    "port": "443",
+    "method": "TCP",
+    "country": "Russia",
+    "city": "Moscow",
+    "as": "AS210644 AEZA INTERNATIONAL LTD",
     "proxy": true
   },
   {
-    "ip": "160.16.123.65",
-    "port": "443",
-    "method": "TCP",
-    "country": "Japan",
-    "city": "Tokyo",
-    "as": "AS9370 SAKURA Internet Inc.",
-    "proxy": "unknown"
-  },
-  {
-    "ip": "38.180.29.115",
-    "port": "443",
-    "method": "TCP",
-    "country": "Japan",
-    "city": "Shibuya City",
-    "as": "AS9009 M247 Europe SRL",
-    "proxy": true
-  },
-  {
-    "ip": "86.104.73.185",
-    "port": "443",
-    "method": "TCP",
-    "country": "Kazakhstan",
-    "city": "Almaty",
-    "as": "AS44477 PQ HOSTING PLUS S.R.L.",
-    "proxy": "unknown"
-  },
-  {
-    "ip": "212.22.74.89",
-    "port": "443",
-    "method": "TCP",
-    "country": "Netherlands",
-    "city": "Dronten",
-    "as": "AS41745 Baykov Ilya Sergeevich",
-    "proxy": "unknown"
-  },
-  {
-    "ip": "38.180.52.83",
+    "ip": "212.227.90.142",
     "port": "443",
     "method": "TCP",
     "country": "Spain",
     "city": "Madrid",
-    "as": "AS9009 M247 Europe SRL",
-    "proxy": true
-  },
-  {
-    "ip": "103.106.1.2",
-    "port": "443",
-    "method": "TCP",
-    "country": "The Netherlands",
-    "city": "Meppel",
-    "as": "AS44477 PQ HOSTING PLUS S.R.L.",
+    "as": "AS8560 IONOS SE",
     "proxy": "unknown"
   },
   {
-    "ip": "194.58.68.145",
+    "ip": "45.86.229.28",
+    "port": "443",
+    "method": "TCP",
+    "country": "Spain",
+    "city": "Madrid",
+    "as": "AS62005 BlueVPS OU",
+    "proxy": true
+  },
+  {
+    "ip": "46.226.161.37",
+    "port": "443",
+    "method": "TCP",
+    "country": "Sweden",
+    "city": "Stockholm",
+    "as": "AS210644 AEZA INTERNATIONAL LTD",
+    "proxy": true
+  },
+  {
+    "ip": "46.226.164.47",
+    "port": "443",
+    "method": "TCP",
+    "country": "Sweden",
+    "city": "Stockholm",
+    "as": "AS210644 AEZA INTERNATIONAL LTD",
+    "proxy": true
+  },
+  {
+    "ip": "89.22.227.239",
+    "port": "443",
+    "method": "TCP",
+    "country": "Sweden",
+    "city": "Stockholm",
+    "as": "AS210644 AEZA INTERNATIONAL LTD",
+    "proxy": true
+  },
+  {
+    "ip": "103.137.249.117",
     "port": "443",
     "method": "TCP",
     "country": "The Netherlands",
     "city": "Amsterdam",
-    "as": "AS26383 Baxet Group Inc.",
-    "proxy": true
-  },
-  {
-    "ip": "37.1.221.155",
-    "port": "443",
-    "method": "TCP",
-    "country": "The Netherlands",
-    "city": "Meppel",
-    "as": "AS58061 Scalaxy B.V.",
+    "as": "AS216154 CLODO CLOUD SERVICE CO. L.L.C",
     "proxy": "unknown"
   },
   {
-    "ip": "89.42.142.79",
+    "ip": "159.100.199.200",
     "port": "443",
     "method": "TCP",
     "country": "The Netherlands",
-    "city": "Meppel",
-    "as": "AS199058 SERVA ONE LTD",
+    "city": "Amsterdam",
+    "as": "AS11179 Aryaka Networks, Inc.",
+    "proxy": "unknown"
+  },
+  {
+    "ip": "176.123.8.150",
+    "port": "443",
+    "method": "TCP",
+    "country": "The Netherlands",
+    "city": "Amsterdam",
+    "as": "AS200019 ALEXHOST SRL",
+    "proxy": "unknown"
+  },
+  {
+    "ip": "185.23.238.76",
+    "port": "443",
+    "method": "TCP",
+    "country": "The Netherlands",
+    "city": "Dronten",
+    "as": "AS50053 Individual Entrepreneur Anton Levin",
+    "proxy": "unknown"
+  },
+  {
+    "ip": "46.151.24.173",
+    "port": "443",
+    "method": "TCP",
+    "country": "The Netherlands",
+    "city": "Amsterdam",
+    "as": "AS216071 SERVERS TECH FZCO",
+    "proxy": "unknown"
+  },
+  {
+    "ip": "188.132.183.166",
+    "port": "443",
+    "method": "TCP",
+    "country": "Turkey",
+    "city": "Yakuplu",
+    "as": "AS214036 Ultahost, Inc.",
+    "proxy": "unknown"
+  },
+  {
+    "ip": "185.234.66.91",
+    "port": "443",
+    "method": "TCP",
+    "country": "Türkiye",
+    "city": "Izmir",
+    "as": "AS44477 PQ HOSTING PLUS S.R.L.",
+    "proxy": "unknown"
+  },
+  {
+    "ip": "94.131.123.44",
+    "port": "443",
+    "method": "TCP",
+    "country": "Türkiye",
+    "city": "Istanbul",
+    "as": "AS44477 PQ HOSTING PLUS S.R.L.",
+    "proxy": "unknown"
+  },
+  {
+    "ip": "91.218.212.223",
+    "port": "443",
+    "method": "TCP",
+    "country": "Ukraine",
+    "city": "Kyiv",
+    "as": "AS42352 TOV 'Dream Line Holding'",
+    "proxy": "unknown"
+  },
+  {
+    "ip": "142.171.140.152",
+    "port": "443",
+    "method": "TCP",
+    "country": "United States",
+    "city": "Los Angeles",
+    "as": "AS35916 MULTACOM CORPORATION",
+    "proxy": "unknown"
+  },
+  {
+    "ip": "142.171.233.183",
+    "port": "443",
+    "method": "TCP",
+    "country": "United States",
+    "city": "Los Angeles",
+    "as": "AS35916 MULTACOM CORPORATION",
+    "proxy": "unknown"
+  },
+  {
+    "ip": "149.248.7.208",
+    "port": "443",
+    "method": "TCP",
+    "country": "United States",
+    "city": "Los Angeles",
+    "as": "AS20473 The Constant Company, LLC",
+    "proxy": "unknown"
+  },
+  {
+    "ip": "206.223.84.247",
+    "port": "443",
+    "method": "TCP",
+    "country": "United States",
+    "city": "Los Angeles",
+    "as": "AS979 NetLab Global",
+    "proxy": "unknown"
+  },
+  {
+    "ip": "74.48.46.35",
+    "port": "443",
+    "method": "TCP",
+    "country": "United States",
+    "city": "Los Angeles",
+    "as": "AS35916 MULTACOM CORPORATION",
+    "proxy": "unknown"
+  },
+  {
+    "ip": "74.48.85.50",
+    "port": "443",
+    "method": "TCP",
+    "country": "United States",
+    "city": "Los Angeles",
+    "as": "AS35916 MULTACOM CORPORATION",
+    "proxy": "unknown"
+  },
+  {
+    "ip": "74.48.89.211",
+    "port": "443",
+    "method": "TCP",
+    "country": "United States",
+    "city": "Los Angeles",
+    "as": "AS35916 MULTACOM CORPORATION",
+    "proxy": "unknown"
+  },
+  {
+    "ip": "91.149.239.198",
+    "port": "443",
+    "method": "TCP",
+    "country": "United States",
+    "city": "Los Angeles",
+    "as": "AS26383 Baxet Group Inc.",
+    "proxy": "unknown"
+  },
+  {
+    "ip": "91.149.239.70",
+    "port": "443",
+    "method": "TCP",
+    "country": "United States",
+    "city": "Los Angeles",
+    "as": "AS26383 Baxet Group Inc.",
     "proxy": "unknown"
   }
 ]
