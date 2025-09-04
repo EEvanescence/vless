@@ -6,11 +6,11 @@
 >
 > <br/>
 >
-> **Last updated:** Wed, 03 Sep 2025 01:39:26 GMT
+> **Last updated:** Thu, 04 Sep 2025 01:40:19 GMT
 >
 > <br/>
 >
-> **Next update:** Fri, 05 Sep 2025 01:39:26 GMT
+> **Next update:** Sat, 06 Sep 2025 01:40:19 GMT
 >
 > <br/>
 >
@@ -19,10 +19,10 @@
 
 ## 📊 Summary
 
-**🔹 Total working proxies:** 55  
+**🔹 Total working proxies:** 54  
 **🔹 Countries covered:** 15  
 **🔹 Different ports:** 1  
-**🔹 Success methods:** TCP (55)
+**🔹 Success methods:** TCP (54)
 
 <br/>
 
@@ -30,7 +30,7 @@
 
 | Port | Count | Percentage |
 |------|-------|------------|
-| 443  | 55     | 100.0%     |
+| 443  | 54     | 100.0%     |
 
 <br/>
 
@@ -81,14 +81,6 @@
 | `79.133.46.166` | Frankfurt am Main | AS44066 firstcolo GmbH | TCP |
 | `87.251.87.111` | Frankfurt am Main | AS216127 INTERNATIONAL HOSTING COMPANY LIMITED | TCP |
 
-### 🇳🇱 Netherlands (3 proxies)
-
-| Proxy IP | City | ISP / Organization | Method |
-|----------|------|--------------------|--------|
-| `185.125.230.155` | Amsterdam | AS210644 AEZA INTERNATIONAL LTD | TCP |
-| `185.225.201.210` | Amsterdam | AS210644 AEZA INTERNATIONAL LTD | TCP |
-| `83.217.211.239` | Dronten | AS41745 Baykov Ilya Sergeevich | TCP |
-
 ### 🇫🇮 Finland (2 proxies)
 
 | Proxy IP | City | ISP / Organization | Method |
@@ -109,6 +101,13 @@
 |----------|------|--------------------|--------|
 | `185.135.86.207` | Riga | AS56630 Melbikomas UAB | TCP |
 | `195.123.212.250` | Riga | AS50979 GREEN FLOID LLC | TCP |
+
+### 🇳🇱 Netherlands (2 proxies)
+
+| Proxy IP | City | ISP / Organization | Method |
+|----------|------|--------------------|--------|
+| `185.125.230.155` | Amsterdam | AS210644 AEZA INTERNATIONAL LTD | TCP |
+| `83.217.211.239` | Dronten | AS41745 Baykov Ilya Sergeevich | TCP |
 
 ### 🇵🇱 Poland (2 proxies)
 
@@ -196,7 +195,6 @@
 185.135.86.207
 195.123.212.250
 185.125.230.155
-185.225.201.210
 83.217.211.239
 37.252.6.119
 91.149.253.249
@@ -417,15 +415,6 @@
   },
   {
     "ip": "185.125.230.155",
-    "port": "443",
-    "method": "TCP",
-    "country": "Netherlands",
-    "city": "Amsterdam",
-    "as": "AS210644 AEZA INTERNATIONAL LTD",
-    "proxy": "unknown"
-  },
-  {
-    "ip": "185.225.201.210",
     "port": "443",
     "method": "TCP",
     "country": "Netherlands",
