@@ -6,11 +6,11 @@
 >
 > <br/>
 >
-> **Last updated:** Thu, 04 Sep 2025 01:40:19 GMT
+> **Last updated:** Fri, 05 Sep 2025 01:42:33 GMT
 >
 > <br/>
 >
-> **Next update:** Sat, 06 Sep 2025 01:40:19 GMT
+> **Next update:** Sun, 07 Sep 2025 01:42:33 GMT
 >
 > <br/>
 >
@@ -19,10 +19,10 @@
 
 ## 📊 Summary
 
-**🔹 Total working proxies:** 54  
+**🔹 Total working proxies:** 53  
 **🔹 Countries covered:** 15  
 **🔹 Different ports:** 1  
-**🔹 Success methods:** TCP (54)
+**🔹 Success methods:** TCP (53)
 
 <br/>
 
@@ -30,7 +30,7 @@
 
 | Port | Count | Percentage |
 |------|-------|------------|
-| 443  | 54     | 100.0%     |
+| 443  | 53     | 100.0%     |
 
 <br/>
 
@@ -38,13 +38,12 @@
 
 <br/>
 
-### 🇳🇱 The Netherlands (24 proxies)
+### 🇳🇱 The Netherlands (23 proxies)
 
 | Proxy IP | City | ISP / Organization | Method |
 |----------|------|--------------------|--------|
 | `103.90.73.117` | Amsterdam | AS216154 CLODO CLOUD SERVICE CO. L.L.C | TCP |
 | `109.107.165.225` | Amsterdam | AS216071 SERVERS TECH FZCO | TCP |
-| `147.45.134.93` | Amsterdam | AS210976 Timeweb, LLP | TCP |
 | `147.45.173.149` | Amsterdam | AS210976 Timeweb, LLP | TCP |
 | `174.138.8.21` | Amsterdam | AS14061 DigitalOcean, LLC | TCP |
 | `176.222.55.17` | Amsterdam | AS57043 HOSTKEY B.V. | TCP |
@@ -204,7 +203,6 @@
 91.245.225.69
 103.90.73.117
 109.107.165.225
-147.45.134.93
 147.45.173.149
 174.138.8.21
 176.222.55.17
@@ -501,15 +499,6 @@
     "country": "The Netherlands",
     "city": "Amsterdam",
     "as": "AS216071 SERVERS TECH FZCO",
-    "proxy": "unknown"
-  },
-  {
-    "ip": "147.45.134.93",
-    "port": "443",
-    "method": "TCP",
-    "country": "The Netherlands",
-    "city": "Amsterdam",
-    "as": "AS210976 Timeweb, LLP",
     "proxy": "unknown"
   },
   {
