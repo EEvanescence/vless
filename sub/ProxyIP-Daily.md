@@ -6,11 +6,11 @@
 >
 > <br/>
 >
-> **Last updated:** Fri, 05 Sep 2025 01:42:33 GMT
+> **Last updated:** Sat, 06 Sep 2025 01:39:44 GMT
 >
 > <br/>
 >
-> **Next update:** Sun, 07 Sep 2025 01:42:33 GMT
+> **Next update:** Mon, 08 Sep 2025 01:39:44 GMT
 >
 > <br/>
 >
@@ -19,10 +19,10 @@
 
 ## 📊 Summary
 
-**🔹 Total working proxies:** 53  
+**🔹 Total working proxies:** 52  
 **🔹 Countries covered:** 15  
 **🔹 Different ports:** 1  
-**🔹 Success methods:** TCP (53)
+**🔹 Success methods:** TCP (52)
 
 <br/>
 
@@ -30,7 +30,7 @@
 
 | Port | Count | Percentage |
 |------|-------|------------|
-| 443  | 53     | 100.0%     |
+| 443  | 52     | 100.0%     |
 
 <br/>
 
@@ -66,7 +66,7 @@
 | `89.110.69.27` | Amsterdam | AS216071 SERVERS TECH FZCO | TCP |
 | `94.142.137.72` | Amsterdam | AS200740 FIRST SERVER LIMITED | TCP |
 
-### 🇩🇪 Germany (9 proxies)
+### 🇩🇪 Germany (8 proxies)
 
 | Proxy IP | City | ISP / Organization | Method |
 |----------|------|--------------------|--------|
@@ -76,7 +76,6 @@
 | `35.157.240.237` | Frankfurt am Main | AS16509 Amazon.com, Inc. | TCP |
 | `37.1.194.7` | Frankfurt am Main | AS28753 Leaseweb Deutschland GmbH | TCP |
 | `5.39.249.146` | Frankfurt Am Main | AS41745 Baykov Ilya Sergeevich | TCP |
-| `51.195.91.96` | Limburg an der Lahn | AS16276 OVH SAS | TCP |
 | `79.133.46.166` | Frankfurt am Main | AS44066 firstcolo GmbH | TCP |
 | `87.251.87.111` | Frankfurt am Main | AS216127 INTERNATIONAL HOSTING COMPANY LIMITED | TCP |
 
@@ -187,7 +186,6 @@
 35.157.240.237
 37.1.194.7
 5.39.249.146
-51.195.91.96
 79.133.46.166
 87.251.87.111
 34.253.234.62
@@ -355,15 +353,6 @@
     "country": "Germany",
     "city": "Frankfurt Am Main",
     "as": "AS41745 Baykov Ilya Sergeevich",
-    "proxy": "unknown"
-  },
-  {
-    "ip": "51.195.91.96",
-    "port": "443",
-    "method": "TCP",
-    "country": "Germany",
-    "city": "Limburg an der Lahn",
-    "as": "AS16276 OVH SAS",
     "proxy": "unknown"
   },
   {
