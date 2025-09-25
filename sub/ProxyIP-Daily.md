@@ -13,7 +13,6 @@
 > **Next update:** Sat, 27 Sep 2025 01:43:14 GMT
 >
 > <br/>
->
 
 </br>
 
@@ -22,14 +21,14 @@
 **🔹 Total working proxies:** 0  
 **🔹 Countries covered:** 0  
 **🔹 Different ports:** 1  
-**🔹 Success methods:** 
+**🔹 Success methods:**
 
 <br/>
 
 ## 🔌 Ports Distribution
 
 | Port | Count | Percentage |
-|------|-------|------------|
+| ---- | ----- | ---------- |
 | 443  | 0     | 100.0%     |
 
 <br/>
@@ -41,4 +40,3 @@ No working proxies were found in this test run. This could be due to:
 - Network connectivity issues
 - All proxies in the input file are currently offline
 - The proxy test criteria may be too strict
-
