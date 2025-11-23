@@ -271,6 +271,13 @@ fn write_markdown_file(proxies_by_country: &BTreeMap<String, Vec<(ProxyInfo, u12
         provider_buckets.insert(prov, Vec::new());
     }
 
+    let top_providers = ["Google", "Amazon", "Cloudflare", "Tencent", "Hetzner"];
+
+    let mut provider_buckets: HashMap<&str, Vec<(ProxyInfo, u128)>> = HashMap::new();
+    for prov in top_providers.iter() {
+        provider_buckets.insert(prov, Vec::new());
+    }
+
     for (_country, proxies) in proxies_by_country.iter() {
         for (info, ping) in proxies.iter() {
             for prov in top_providers.iter() {
@@ -300,12 +307,19 @@ fn write_markdown_file(proxies_by_country: &BTreeMap<String, Vec<(ProxyInfo, u12
                 sorted.sort_by_key(|&(_, p)| p);
                 for (info, ping) in sorted.iter() {
                     let location = format!("{}, {}", info.region, info.city);
-                    let emoji = if *ping < 1099 { "⚡" } else if *ping < 1599 { "🐇" } else { "🐌" };
+                    let emoji = if *ping < 1099 {
+                        "⚡"
+                    } else if *ping < 1599 {
+                        "🐇"
+                    } else {
+                        "🐌"
                     };
+                    let isp_cell = info.isp.clone();
+
                     writeln!(
                         file,
                         "| <pre><code>{}</code></pre> | {} | {} | {} ms {} |",
-                        info.ip, info.isp, location, ping, emoji
+                        info.ip, isp_cell, location, ping, emoji
                     )?;
                 }
                 writeln!(file, "\n</details>\n\n---\n")?;
@@ -316,7 +330,7 @@ fn write_markdown_file(proxies_by_country: &BTreeMap<String, Vec<(ProxyInfo, u12
     for (country, proxies) in proxies_by_country.iter() {
         let mut sorted_proxies = proxies.clone();
         sorted_proxies.sort_by_key(|&(_, ping)| ping);
-        let flag = country_flag(country);
+        let flag = country_flag(country)
         writeln!(file, "## {} {} ({} proxies)", flag, country, sorted_proxies.len())?;
         writeln!(file, "<details open>")?;
         writeln!(file, "<summary>Click to collapse</summary>\n")?;
@@ -324,14 +338,22 @@ fn write_markdown_file(proxies_by_country: &BTreeMap<String, Vec<(ProxyInfo, u12
         writeln!(file, "|:-------|:---------|:------------:|:--------:|")?;
         for (info, ping) in sorted_proxies.iter() {
             let location = format!("{}, {}", info.region, info.city);
-            let emoji = if *ping < 1099 { "⚡" } else if *ping < 1599 { "🐇" } else { "🐌" };
+            let emoji = if *ping < 1099 {
+                "⚡"
+            } else if *ping < 1599 {
+                "🐇"
+            } else {
+                "🐌"
             };
+            let isp_cell = info.isp.clone();
+
             writeln!(
                 file,
                 "| <pre><code>{}</code></pre> | {} | {} | {} ms {} |",
-                info.ip, info.isp, location, ping, emoji
+                info.ip, isp_cell, location, ping, emoji
             )?;
         }
+
         writeln!(file, "\n</details>\n\n---\n")?;
     }
 
@@ -355,8 +377,7 @@ fn provider_logo_html(isp: &str) -> Option<String> {
         if isp.to_lowercase().contains(&kw.to_lowercase()) {
             let html = format!(
                 "<img alt=\"{}\" src=\"https://www.google.com/s2/favicons?sz=16&domain_url={}\" />",
-                isp,
-                domain
+                isp, domain
             );
             return Some(html);
         }
