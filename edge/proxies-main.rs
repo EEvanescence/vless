@@ -219,11 +219,15 @@ fn write_markdown_file(proxies_by_country: &BTreeMap<String, Vec<(ProxyInfo, u12
          .replace(')', "%29")
     }
 
+    let last_badge_label = encode_badge_label(&format!("{} (UTC+3:30)", last_updated_str));
+    let next_badge_label = encode_badge_label(&format!("{} (UTC+3:30)", next_update_str));
+
     let last_badge = format!("<img src=\"https://img.shields.io/badge/Last_Update-{}-informational\" />", last_badge_label);
     let next_badge = format!("<img src=\"https://img.shields.io/badge/Next_Update-{}-informational\" />", next_badge_label);
     let active_badge = format!("<img src=\"https://img.shields.io/badge/Active_Proxies-{}-brightgreen\" />", total_active);
     let countries_badge = format!("<img src=\"https://img.shields.io/badge/Countries-{}-gold\" />", total_countries);
     let latency_badge = format!("<img src=\"https://img.shields.io/badge/Avg_Latency-{}ms-darkred\" />", avg_ping);
+
 
     writeln!(
         file,
