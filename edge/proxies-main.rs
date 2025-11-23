@@ -294,25 +294,18 @@ fn write_markdown_file(proxies_by_country: &BTreeMap<String, Vec<(ProxyInfo, u12
                 writeln!(file, "## {} ({})", prov_title, list.len())?;
                 writeln!(file, "<details open>")?;
                 writeln!(file, "<summary>Click to collapse</summary>\n")?;
-                writeln!(file, "|   IP   |  ISP   |   Location   |   Ping   |")?;
-                writeln!(file, "|:-------|:-------|:------------:|:--------:|")?;
+                writeln!(file, "|   IP   |   ISP    |   Location   |   Ping   |")?;
+                writeln!(file, "|:-------|:---------|:------------:|:--------:|")?;
                 let mut sorted = list.clone();
                 sorted.sort_by_key(|&(_, p)| p);
                 for (info, ping) in sorted.iter() {
                     let location = format!("{}, {}", info.region, info.city);
                     let emoji = if *ping < 1099 { "⚡" } else if *ping < 1599 { "🐇" } else { "🐌" };
-                    let isp_cell = match provider_logo_html(&info.isp) {
-                        Some(img_html) => format!("{} {}", img_html, info.isp),
-                        None => info.isp.clone(),
                     };
                     writeln!(
                         file,
                         "| <pre><code>{}</code></pre> | {} | {} | {} ms {} |",
-                        info.ip,
-                        isp_cell,
-                        location,
-                        ping,
-                        emoji
+                        info.ip, info.isp, location, ping, emoji
                     )?;
                 }
                 writeln!(file, "\n</details>\n\n---\n")?;
@@ -327,23 +320,16 @@ fn write_markdown_file(proxies_by_country: &BTreeMap<String, Vec<(ProxyInfo, u12
         writeln!(file, "## {} {} ({} proxies)", flag, country, sorted_proxies.len())?;
         writeln!(file, "<details open>")?;
         writeln!(file, "<summary>Click to collapse</summary>\n")?;
-        writeln!(file, "|   IP   |  ISP   |   Location   |   Ping   |")?;
-        writeln!(file, "|:-------|:-------|:------------:|:--------:|")?;
+        writeln!(file, "|   IP   |   ISP    |   Location   |   Ping   |")?;
+        writeln!(file, "|:-------|:---------|:------------:|:--------:|")?;
         for (info, ping) in sorted_proxies.iter() {
             let location = format!("{}, {}", info.region, info.city);
             let emoji = if *ping < 1099 { "⚡" } else if *ping < 1599 { "🐇" } else { "🐌" };
-            let isp_cell = match provider_logo_html(&info.isp) {
-                Some(img_html) => format!("{} {}", img_html, info.isp),
-                None => info.isp.clone(),
             };
             writeln!(
                 file,
                 "| <pre><code>{}</code></pre> | {} | {} | {} ms {} |",
-                info.ip,
-                isp_cell,
-                location,
-                ping,
-                emoji
+                info.ip, info.isp, location, ping, emoji
             )?;
         }
         writeln!(file, "\n</details>\n\n---\n")?;
@@ -355,29 +341,20 @@ fn write_markdown_file(proxies_by_country: &BTreeMap<String, Vec<(ProxyInfo, u12
 
 fn provider_logo_html(isp: &str) -> Option<String> {
     let mapping = [
-        ("3NT SOLUTIONS", "3nt.com"),
-        ("Akamai", "akamai.com"),
         ("Google", "google.com"),
         ("Amazon", "amazon.com"),
         ("Cloudflare", "cloudflare.com"),
-        ("IROKO Networks", "iroko.net"),
-        ("IONOS", "www.ionos.com"),
-        ("GCore", "gcore.com"),
-        ("G-Core Labs", "gcore.com"),
-        ("Tencent", "tencent.com"),
         ("Hetzner", "hetzner.com"),
-        ("Hypercore", "hypercore.ai"),
         ("Hostinger", "hostinger.com"),
+        ("Tencent", "www.tencent.com"),
         ("DigitalOcean", "digitalocean.com"),
         ("Vultr", "vultr.com"),
-        ("Scaleway", "scaleway.com"),
-        ("WorkTitans BV", "worktitans.nl"),
     ];
 
     for (kw, domain) in mapping.iter() {
         if isp.to_lowercase().contains(&kw.to_lowercase()) {
             let html = format!(
-                "<img alt=\"{}\" src=\"https://www.google.com/s2/favicons?sz=24&domain_url={}\" />",
+                "<img alt=\"{}\" src=\"https://www.google.com/s2/favicons?sz=16&domain_url={}\" />",
                 isp,
                 domain
             );
