@@ -234,7 +234,7 @@ fn write_markdown_file(proxies_by_country: &BTreeMap<String, Vec<(ProxyInfo, u12
     writeln!(
         file,
         r##"<p align="left">
- <img src="https://latex.codecogs.com/svg.image?\huge&space;{{\color{{Golden}}\mathrm{{PR{{\color{{black}}\O}}XY\;IP}}" width=220px" </p><br/>
+ <img src="https://latex.codecogs.com/svg.image?\huge&space;{{\color{{Golden}}\mathrm{{PR{{\color{{black}}\O}}XY\;IP}}" width=280px" </p><br/>
 
 > [!WARNING]
 >
@@ -359,26 +359,27 @@ fn write_markdown_file(proxies_by_country: &BTreeMap<String, Vec<(ProxyInfo, u12
 
 fn provider_logo_html(isp: &str) -> Option<String> {
     let mapping = [
-        ("Google", "google"),
-        ("Amazon", "amazonaws"),
-        ("Cloudflare", "cloudflare"),
-        ("Tencent", "tencent"),
-        ("Hetzner", "hetzner"),
-        ("DigitalOcean", "digitalocean"),
-        ("Vultr", "vultr"),
-        ("Contabo", "contabo"),
-        ("Scaleway", "scaleway"),
-        ("Leaseweb", "leaseweb"),
+        ("Google", "google.com"),
+        ("Amazon", "amazon.com"),
+        ("Cloudflare", "cloudflare.com"),
+        ("Tencent", "tencent.com"),
+        ("Hetzner", "hetzner.com"),
+        ("DigitalOcean", "digitalocean.com"),
+        ("Vultr", "vultr.com"),
+        ("Scaleway", "scaleway.com"),
     ];
-    for (kw, logo_name) in mapping.iter() {
+
+    for (kw, domain) in mapping.iter() {
         if isp.to_lowercase().contains(&kw.to_lowercase()) {
-            let badge = format!(
-                "<img alt=\"{}\" src=\"https://img.shields.io/badge/-{}?logo={}&style=flat-square\" height=\"20\" />",
-                isp, "", logo_name
+            let html = format!(
+                "<img alt=\"{}\" src=\"https://www.google.com/s2/favicons?sz=32&domain_url={}\" />",
+                isp,
+                domain
             );
-            return Some(badge);
+            return Some(html);
         }
     }
+
     None
 }
 
