@@ -330,12 +330,20 @@ fn write_markdown_file(proxies_by_country: &BTreeMap<String, Vec<(ProxyInfo, u12
     for (country, proxies) in proxies_by_country.iter() {
         let mut sorted_proxies = proxies.clone();
         sorted_proxies.sort_by_key(|&(_, ping)| ping);
-        let flag = country_flag(country)
-        writeln!(file, "## {} {} ({} proxies)", flag, country, sorted_proxies.len())?;
+        let flag = country_flag(country);
+
+        writeln!(
+            file,
+            "## {} {} ({} proxies)",
+            flag,
+            country,
+            sorted_proxies.len()
+        )?;
         writeln!(file, "<details open>")?;
         writeln!(file, "<summary>Click to collapse</summary>\n")?;
-        writeln!(file, "|   IP   |   ISP    |   Location   |   Ping   |")?;
-        writeln!(file, "|:-------|:---------|:------------:|:--------:|")?;
+        writeln!(file, "|   IP   |   ISP   |   Location   |   Ping   |")?;
+        writeln!(file, "|:-------|:--------|:------------:|:--------:|")?;
+
         for (info, ping) in sorted_proxies.iter() {
             let location = format!("{}, {}", info.region, info.city);
             let emoji = if *ping < 1099 {
@@ -360,7 +368,6 @@ fn write_markdown_file(proxies_by_country: &BTreeMap<String, Vec<(ProxyInfo, u12
     println!("All active proxies saved to {}", output_file);
     Ok(())
 }
-
 fn provider_logo_html(isp: &str) -> Option<String> {
     let mapping = [
         ("Google", "google.com"),
