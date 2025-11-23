@@ -219,17 +219,11 @@ fn write_markdown_file(proxies_by_country: &BTreeMap<String, Vec<(ProxyInfo, u12
          .replace(')', "%29")
     }
 
-    let last_badge_label = encode_badge_label(&format!("{} (UTC+3:30)", last_updated_str));
-    let active_badge_label = encode_badge_label(&format!("{}", total_active));
-    let countries_badge_label = encode_badge_label(&format!("{}", total_countries));
-    let latency_badge_label = encode_badge_label(&format!("{}ms", avg_ping));
-
-    writeln!(file, "<p align=\"left\">")?;
-    writeln!(file, "  <img src=\"https://img.shields.io/badge/Last_Update-{}-informational\" />", last_badge_label)?;
-    writeln!(file, "  <img src=\"https://img.shields.io/badge/Active_Proxies-{}-brightgreen\" />", active_badge_label)?;
-    writeln!(file, "  <img src=\"https://img.shields.io/badge/Countries-{}-gold\" />", countries_badge_label)?;
-    writeln!(file, "  <img src=\"https://img.shields.io/badge/Avg_Latency-{}-red\" />", latency_badge_label)?;
-    writeln!(file, "</p>\n")?;
+    let last_badge = format!("<img src=\"https://img.shields.io/badge/Last_Update-{}-informational\" />", last_badge_label);
+    let next_badge = format!("<img src=\"https://img.shields.io/badge/Next_Update-{}-informational\" />", next_badge_label);
+    let active_badge = format!("<img src=\"https://img.shields.io/badge/Active_Proxies-{}-brightgreen\" />", total_active);
+    let countries_badge = format!("<img src=\"https://img.shields.io/badge/Countries-{}-gold\" />", total_countries);
+    let latency_badge = format!("<img src=\"https://img.shields.io/badge/Avg_Latency-{}ms-darkred\" />", avg_ping);
 
     writeln!(
         file,
@@ -238,34 +232,32 @@ fn write_markdown_file(proxies_by_country: &BTreeMap<String, Vec<(ProxyInfo, u12
 
 > [!WARNING]
 >
-> <br/>
->
 > <p><b>Daily Fresh Proxies</b></p>
 >
-> A curated list of **high-quality**, fully-tested proxies sourced from reputable ISPs and major global data centers (e.g., Google, Amazon, Cloudflare, Tencent, Hetzner, and others)
+> A curated list of <b>high-quality</b>, fully-tested proxies sourced from reputable ISPs and major global data centers (e.g., Google, Amazon, Cloudflare, Tencent, Hetzner, and others)
 >
 > <br/>
 >
 > <p><b>Auto-Updated Daily</b></p>
 >
-> Last update: **{} (UTC+3:30)**  
-> Next update: **{}**
+> {last}  
+> {next}
 >
 > <br/>
 >
 > <p><b>Overview</b></p>  
 >
-> Active proxies: **{}**  
-> Countries covered: **{}**  
-> Average latency: **{} ms**
+> {active}  
+> {countries}  
+> {latency}
 >
 > <br><br/>  
 "##,
-        last_updated_str,
-        next_update_str,
-        total_active,
-        total_countries,
-        avg_ping
+        last = last_badge,
+        next = next_badge,
+        active = active_badge,
+        countries = countries_badge,
+        latency = latency_badge,
     )?;
 
     let top_providers = ["Google", "Amazon", "Cloudflare", "Tencent", "Hetzner"];
@@ -359,20 +351,29 @@ fn write_markdown_file(proxies_by_country: &BTreeMap<String, Vec<(ProxyInfo, u12
 
 fn provider_logo_html(isp: &str) -> Option<String> {
     let mapping = [
+        ("3NT SOLUTIONS", "3nt.com"),
+        ("Akamai", "akamai.com"),
         ("Google", "google.com"),
         ("Amazon", "amazon.com"),
         ("Cloudflare", "cloudflare.com"),
+        ("IROKO Networks", "iroko.net"),
+        ("IONOS", "www.ionos.com"),
+        ("GCore", "gcore.com"),
+        ("G-Core Labs", "gcore.com"),
         ("Tencent", "tencent.com"),
         ("Hetzner", "hetzner.com"),
+        ("Hypercore", "hypercore.ai"),
+        ("Hostinger", "hostinger.com"),
         ("DigitalOcean", "digitalocean.com"),
         ("Vultr", "vultr.com"),
         ("Scaleway", "scaleway.com"),
+        ("WorkTitans BV", "worktitans.nl"),
     ];
 
     for (kw, domain) in mapping.iter() {
         if isp.to_lowercase().contains(&kw.to_lowercase()) {
             let html = format!(
-                "<img alt=\"{}\" src=\"https://www.google.com/s2/favicons?sz=32&domain_url={}\" />",
+                "<img alt=\"{}\" src=\"https://www.google.com/s2/favicons?sz=24&domain_url={}\" />",
                 isp,
                 domain
             );
