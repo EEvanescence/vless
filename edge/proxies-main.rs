@@ -18,8 +18,7 @@ const DEFAULT_OUTPUT_FILE: &str = "sub/ProxyIP-Daily.md";
 const DEFAULT_MAX_CONCURRENT: usize = 50;
 const DEFAULT_TIMEOUT_SECONDS: u64 = 6;
 const REQUEST_DELAY_MS: u64 = 50;
-// You can change this to your other workers if needed
-const CHECK_URL: &str = "https://ip.victoriacross.workers.dev"; 
+const CHECK_URL: &str = "https://ipp.nscl.ir"; 
 
 const GOOD_ISPS: &[&str] = &[
     "M247","Vultr","GCore","IONOS","Google","Amazon","NetLab","Akamai","Turunc","Contabo",
@@ -48,7 +47,6 @@ struct Args {
     timeout: u64,
 }
 
-// Structure matching your Cloudflare Worker JSON
 #[derive(Debug, Clone, Deserialize)]
 struct WorkerResponse {
     ip: String,
@@ -130,9 +128,9 @@ async fn main() -> Result<()> {
 async fn fetch_self_ip() -> Result<String> {
     let client = Client::builder()
         .timeout(Duration::from_secs(5))
+        .user_agent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
         .build()?;
     
-    // Using your worker for self-check too, or ipify as backup
     match client.get(CHECK_URL).send().await {
         Ok(resp) => {
             if let Ok(json) = resp.json::<WorkerResponse>().await {
@@ -154,24 +152,14 @@ async fn check_proxy_worker(ip: &str, port: u16) -> Result<WorkerResponse> {
         .parse()
         .context("Invalid IP/port")?;
 
-    // We need to resolve the worker domain to the proxy IP? 
-    // NO. We connect TO the proxy, and ask the proxy to fetch the URL.
-    // In reqwest, .resolve() maps a domain to an IP. 
-    // But here we want to use the proxy.
-    
-    // Since we are doing a "CONNECT" tunnel or direct request via proxy IP:
-    // The previous logic used .resolve() to force the connection to the proxy IP 
-    // while pretending to be the host. This works for Cloudflare endpoints because 
-    // the proxy IS a Cloudflare IP.
-    
     let client = Client::builder()
         .timeout(timeout_duration)
-        .resolve("ip.victoriacross.workers.dev", addr) // Trick: Resolve worker domain to Proxy IP
+        .resolve("ipp.nscl.ir", addr) 
         .user_agent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
         .build()?;
 
     let response = client.get(CHECK_URL)
-        .header("Host", "ip.victoriacross.workers.dev")
+        .header("Host", "ipp.nscl.ir")
         .send()
         .await?;
 
@@ -191,7 +179,6 @@ async fn process_proxy(
     let ip = parts[0];
     let port = parts[1].parse::<u16>().unwrap_or(443);
     
-    // Fallback info from CSV if Worker returns nulls
     let csv_isp = if parts.len() > 3 { parts[3].trim().to_string() } else { "Unknown".to_string() };
 
     let start = Instant::now();
@@ -202,7 +189,7 @@ async fn process_proxy(
                 
                 let info = ProxyInfo {
                     ip: data.ip,
-                    isp: data.cf.isp.unwrap_or(csv_isp), // Prefer Worker ISP, fallback to CSV
+                    isp: data.cf.isp.unwrap_or(csv_isp), 
                     country_code: data.cf.country.unwrap_or_else(|| "XX".to_string()),
                     city: data.cf.city.unwrap_or_else(|| "Unknown".to_string()),
                     region: data.cf.region.unwrap_or_else(|| "Unknown".to_string()),
