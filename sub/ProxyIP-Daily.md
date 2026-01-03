@@ -11,8 +11,8 @@
 >
 > <p><b>Auto-Updated Daily</b></p>
 >
-> <img src="https://img.shields.io/badge/Last_Update-Fri%2C%2002%20Jan%202026%2005%3A33%20%28UTC%2B3%3A30%29-966600" />  
-> <img src="https://img.shields.io/badge/Next_Update-Sat%2C%2003%20Jan%202026%2005%3A33%20%28UTC%2B3%3A30%29-966600" />
+> <img src="https://img.shields.io/badge/Last_Update-Sat%2C%2003%20Jan%202026%2005%3A26%20%28UTC%2B3%3A30%29-966600" />  
+> <img src="https://img.shields.io/badge/Next_Update-Sun%2C%2004%20Jan%202026%2005%3A26%20%28UTC%2B3%3A30%29-966600" />
 >
 > <br/>
 >
@@ -20,7 +20,7 @@
 >
 > <img src="https://img.shields.io/badge/Active_Proxies-72-966600" />  
 > <img src="https://img.shields.io/badge/Countries-15-966600" />  
-> <img src="https://img.shields.io/badge/Avg_Latency-1660ms-darkred" />
+> <img src="https://img.shields.io/badge/Avg_Latency-1704ms-darkred" />
 >
 > <br><br/>  
 
@@ -30,9 +30,9 @@
 
 |   IP   |   ISP    |   Location   |   Ping   |
 |:-------|:---------|:------------:|:--------:|
-| <pre><code>35.241.172.224</code></pre> | Google LLC | Brussels Capital, Brussels | 916 ms ⚡ |
-| <pre><code>34.22.190.30</code></pre> | Google LLC | Brussels Capital, Brussels | 959 ms ⚡ |
-| <pre><code>34.143.159.175</code></pre> | Google LLC | Unknown, Singapore | 1749 ms 🐌 |
+| <pre><code>34.22.190.30</code></pre> | Google LLC | Brussels Capital, Brussels | 897 ms ⚡ |
+| <pre><code>34.143.159.175</code></pre> | Google LLC | Unknown, Singapore | 1691 ms 🐌 |
+| <pre><code>35.241.172.224</code></pre> | Google LLC | Brussels Capital, Brussels | 3661 ms 🐌 |
 
 </details>
 
@@ -44,17 +44,17 @@
 
 |   IP   |   ISP    |   Location   |   Ping   |
 |:-------|:---------|:------------:|:--------:|
-| <pre><code>40.177.65.8</code></pre> | Amazon Data Services Canada | Alberta, Calgary | 260 ms ⚡ |
-| <pre><code>35.182.226.236</code></pre> | Amazon Data Services Canada | Quebec, Montréal | 308 ms ⚡ |
-| <pre><code>16.176.42.97</code></pre> | Amazon Corporate Services Pty Ltd | New South Wales, Sydney | 1089 ms ⚡ |
-| <pre><code>16.63.207.85</code></pre> | Amazon Data Services Switzerland | Zurich, Zürich | 1401 ms 🐇 |
-| <pre><code>13.250.31.132</code></pre> | Amazon Data Services Singapore | Unknown, Singapore | 2138 ms 🐌 |
-| <pre><code>13.250.131.37</code></pre> | Amazon Data Services Singapore | Unknown, Singapore | 2441 ms 🐌 |
-| <pre><code>43.218.77.16</code></pre> | Amazon.com, Inc. | Jakarta, Jakarta | 2615 ms 🐌 |
-| <pre><code>3.29.76.68</code></pre> | Amazon Data Services UAE | Dubai, Dubai | 2702 ms 🐌 |
-| <pre><code>3.29.240.49</code></pre> | Amazon Data Services UAE | Dubai, Dubai | 2832 ms 🐌 |
-| <pre><code>43.198.204.35</code></pre> | Amazon.com, Inc. | Unknown, Hong Kong | 3067 ms 🐌 |
-| <pre><code>3.0.50.69</code></pre> | Amazon Data Services Singapore | Unknown, Singapore | 3325 ms 🐌 |
+| <pre><code>40.177.65.8</code></pre> | Amazon Data Services Canada | Alberta, Calgary | 199 ms ⚡ |
+| <pre><code>35.182.226.236</code></pre> | Amazon Data Services Canada | Quebec, Montréal | 407 ms ⚡ |
+| <pre><code>16.176.42.97</code></pre> | Amazon Corporate Services Pty Ltd | New South Wales, Sydney | 1028 ms ⚡ |
+| <pre><code>16.63.207.85</code></pre> | Amazon Data Services Switzerland | Zurich, Zürich | 1379 ms 🐇 |
+| <pre><code>13.250.131.37</code></pre> | Amazon Data Services Singapore | Unknown, Singapore | 2437 ms 🐌 |
+| <pre><code>3.29.76.68</code></pre> | Amazon Data Services UAE | Dubai, Dubai | 2538 ms 🐌 |
+| <pre><code>43.218.77.16</code></pre> | Amazon.com, Inc. | Jakarta, Jakarta | 2606 ms 🐌 |
+| <pre><code>3.29.240.49</code></pre> | Amazon Data Services UAE | Dubai, Dubai | 2669 ms 🐌 |
+| <pre><code>43.198.204.35</code></pre> | Amazon.com, Inc. | Unknown, Hong Kong | 3011 ms 🐌 |
+| <pre><code>13.250.31.132</code></pre> | Amazon Data Services Singapore | Unknown, Singapore | 3090 ms 🐌 |
+| <pre><code>3.0.50.69</code></pre> | Amazon Data Services Singapore | Unknown, Singapore | 3277 ms 🐌 |
 
 </details>
 
@@ -66,9 +66,9 @@
 
 |   IP   |   ISP    |   Location   |   Ping   |
 |:-------|:---------|:------------:|:--------:|
-| <pre><code>188.245.242.229</code></pre> | Hetzner Online GmbH | Bavaria, Nürnberg | 592 ms ⚡ |
-| <pre><code>128.140.96.122</code></pre> | Hetzner Online GmbH | Bavaria, Nürnberg | 624 ms ⚡ |
-| <pre><code>2a01:4ff:2f0:1e2a::1</code></pre> | Hetzner Online GmbH | Unknown, Singapore | 1793 ms 🐌 |
+| <pre><code>188.245.242.229</code></pre> | Hetzner Online GmbH | Bavaria, Nürnberg | 681 ms ⚡ |
+| <pre><code>128.140.96.122</code></pre> | Hetzner Online GmbH | Bavaria, Nürnberg | 700 ms ⚡ |
+| <pre><code>2a01:4ff:2f0:1e2a::1</code></pre> | Hetzner Online GmbH | Unknown, Singapore | 1741 ms 🐌 |
 
 </details>
 
@@ -80,11 +80,11 @@
 
 |   IP   |   ISP   |   Location   |   Ping   |
 |:-------|:--------|:------------:|:--------:|
-| <pre><code>217.195.200.138</code></pre> | G-Core Labs Customer assignment | Dubai, Dubai | 2659 ms 🐌 |
-| <pre><code>3.29.76.68</code></pre> | Amazon Data Services UAE | Dubai, Dubai | 2702 ms 🐌 |
-| <pre><code>109.61.42.20</code></pre> | G-Core Labs Customer assignment | Dubai, Dubai | 2745 ms 🐌 |
-| <pre><code>217.195.200.52</code></pre> | G-Core Labs Customer assignment | Dubai, Dubai | 2789 ms 🐌 |
-| <pre><code>3.29.240.49</code></pre> | Amazon Data Services UAE | Dubai, Dubai | 2832 ms 🐌 |
+| <pre><code>3.29.76.68</code></pre> | Amazon Data Services UAE | Dubai, Dubai | 2538 ms 🐌 |
+| <pre><code>109.61.42.20</code></pre> | G-Core Labs Customer assignment | Dubai, Dubai | 2581 ms 🐌 |
+| <pre><code>217.195.200.52</code></pre> | G-Core Labs Customer assignment | Dubai, Dubai | 2624 ms 🐌 |
+| <pre><code>3.29.240.49</code></pre> | Amazon Data Services UAE | Dubai, Dubai | 2669 ms 🐌 |
+| <pre><code>217.195.200.138</code></pre> | G-Core Labs Customer assignment | Dubai, Dubai | 2928 ms 🐌 |
 
 </details>
 
@@ -96,10 +96,10 @@
 
 |   IP   |   ISP   |   Location   |   Ping   |
 |:-------|:--------|:------------:|:--------:|
-| <pre><code>213.159.76.175</code></pre> | WorkTitans B.V. | Yerevan, Yerevan | 1280 ms 🐇 |
-| <pre><code>91.132.132.237</code></pre> | WorkTitans B.V. | Yerevan, Yerevan | 1318 ms 🐇 |
-| <pre><code>185.234.57.153</code></pre> | WorkTitans B.V. | Yerevan, Yerevan | 1374 ms 🐇 |
-| <pre><code>2a03:90c0:5f1:2903::571</code></pre> | G-Core Labs S.A. | Yerevan, Yerevan | 1403 ms 🐇 |
+| <pre><code>213.159.76.175</code></pre> | WorkTitans B.V. | Yerevan, Yerevan | 2318 ms 🐌 |
+| <pre><code>91.132.132.237</code></pre> | WorkTitans B.V. | Yerevan, Yerevan | 2362 ms 🐌 |
+| <pre><code>185.234.57.153</code></pre> | WorkTitans B.V. | Yerevan, Yerevan | 2405 ms 🐌 |
+| <pre><code>2a03:90c0:5f1:2903::571</code></pre> | G-Core Labs S.A. | Yerevan, Yerevan | 2449 ms 🐌 |
 
 </details>
 
@@ -111,7 +111,7 @@
 
 |   IP   |   ISP   |   Location   |   Ping   |
 |:-------|:--------|:------------:|:--------:|
-| <pre><code>38.180.59.113</code></pre> | 3NT SOLUTIONS LLP | Vienna, Vienna | 2442 ms 🐌 |
+| <pre><code>38.180.59.113</code></pre> | 3NT SOLUTIONS LLP | Vienna, Vienna | 1191 ms 🐇 |
 
 </details>
 
@@ -123,10 +123,10 @@
 
 |   IP   |   ISP   |   Location   |   Ping   |
 |:-------|:--------|:------------:|:--------:|
-| <pre><code>170.64.227.71</code></pre> | DigitalOcean, LLC | New South Wales, Sydney | 1051 ms ⚡ |
-| <pre><code>16.176.42.97</code></pre> | Amazon Corporate Services Pty Ltd | New South Wales, Sydney | 1089 ms ⚡ |
-| <pre><code>2400:8907::f03c:93ff:fe37:f3e5</code></pre> | Akamai Connected Cloud / Linode | New South Wales, Sydney | 1132 ms 🐇 |
-| <pre><code>45.77.236.204</code></pre> | Vultr Holdings, LLC | New South Wales, Sydney | 2392 ms 🐌 |
+| <pre><code>16.176.42.97</code></pre> | Amazon Corporate Services Pty Ltd | New South Wales, Sydney | 1028 ms ⚡ |
+| <pre><code>2400:8907::f03c:93ff:fe37:f3e5</code></pre> | Akamai Connected Cloud / Linode | New South Wales, Sydney | 1073 ms ⚡ |
+| <pre><code>170.64.227.71</code></pre> | DigitalOcean, LLC | New South Wales, Sydney | 2099 ms 🐌 |
+| <pre><code>45.77.236.204</code></pre> | Vultr Holdings, LLC | New South Wales, Sydney | 2531 ms 🐌 |
 
 </details>
 
@@ -138,11 +138,11 @@
 
 |   IP   |   ISP   |   Location   |   Ping   |
 |:-------|:--------|:------------:|:--------:|
-| <pre><code>35.241.172.224</code></pre> | Google LLC | Brussels Capital, Brussels | 916 ms ⚡ |
-| <pre><code>34.22.190.30</code></pre> | Google LLC | Brussels Capital, Brussels | 959 ms ⚡ |
-| <pre><code>45.83.20.29</code></pre> | WorkTitans B.V. | Brussels Capital, Brussels | 2045 ms 🐌 |
-| <pre><code>45.83.20.139</code></pre> | WorkTitans B.V. | Brussels Capital, Brussels | 2090 ms 🐌 |
-| <pre><code>95.164.62.196</code></pre> | WorkTitans B.V. | Brussels Capital, Brussels | 2220 ms 🐌 |
+| <pre><code>45.83.20.29</code></pre> | WorkTitans B.V. | Brussels Capital, Brussels | 766 ms ⚡ |
+| <pre><code>45.83.20.139</code></pre> | WorkTitans B.V. | Brussels Capital, Brussels | 810 ms ⚡ |
+| <pre><code>34.22.190.30</code></pre> | Google LLC | Brussels Capital, Brussels | 897 ms ⚡ |
+| <pre><code>95.164.62.196</code></pre> | WorkTitans B.V. | Brussels Capital, Brussels | 941 ms ⚡ |
+| <pre><code>35.241.172.224</code></pre> | Google LLC | Brussels Capital, Brussels | 3661 ms 🐌 |
 
 </details>
 
@@ -154,9 +154,9 @@
 
 |   IP   |   ISP   |   Location   |   Ping   |
 |:-------|:--------|:------------:|:--------:|
-| <pre><code>146.19.80.84</code></pre> | WorkTitans B.V. | Sofia-Capital, Sofia | 704 ms ⚡ |
-| <pre><code>95.164.21.123</code></pre> | WorkTitans B.V. | Sofia-Capital, Sofia | 747 ms ⚡ |
-| <pre><code>77.91.100.78</code></pre> | WorkTitans B.V. | Sofia-Capital, Sofia | 790 ms ⚡ |
+| <pre><code>146.19.80.84</code></pre> | WorkTitans B.V. | Sofia-Capital, Sofia | 673 ms ⚡ |
+| <pre><code>95.164.21.123</code></pre> | WorkTitans B.V. | Sofia-Capital, Sofia | 703 ms ⚡ |
+| <pre><code>77.91.100.78</code></pre> | WorkTitans B.V. | Sofia-Capital, Sofia | 746 ms ⚡ |
 
 </details>
 
@@ -168,9 +168,9 @@
 
 |   IP   |   ISP   |   Location   |   Ping   |
 |:-------|:--------|:------------:|:--------:|
-| <pre><code>38.180.78.255</code></pre> | 3NT SOLUTIONS LLP | São Paulo, São Paulo | 1786 ms 🐌 |
-| <pre><code>38.180.78.255</code></pre> | 3NT SOLUTIONS LLP | São Paulo, São Paulo | 1829 ms 🐌 |
-| <pre><code>45.82.245.62</code></pre> | WorkTitans B.V. | São Paulo, São Paulo | 1873 ms 🐌 |
+| <pre><code>38.180.78.255</code></pre> | 3NT SOLUTIONS LLP | São Paulo, São Paulo | 1663 ms 🐌 |
+| <pre><code>45.82.245.62</code></pre> | WorkTitans B.V. | São Paulo, São Paulo | 1707 ms 🐌 |
+| <pre><code>38.180.78.255</code></pre> | 3NT SOLUTIONS LLP | São Paulo, São Paulo | 1919 ms 🐌 |
 
 </details>
 
@@ -182,12 +182,12 @@
 
 |   IP   |   ISP   |   Location   |   Ping   |
 |:-------|:--------|:------------:|:--------:|
-| <pre><code>40.177.65.8</code></pre> | Amazon Data Services Canada | Alberta, Calgary | 260 ms ⚡ |
-| <pre><code>35.182.226.236</code></pre> | Amazon Data Services Canada | Quebec, Montréal | 308 ms ⚡ |
-| <pre><code>178.128.228.52</code></pre> | DigitalOcean, LLC | Ontario, Toronto | 1414 ms 🐇 |
-| <pre><code>85.208.108.71</code></pre> | WorkTitans B.V. | Ontario, Toronto | 1456 ms 🐇 |
-| <pre><code>178.128.228.52</code></pre> | DigitalOcean, LLC | Ontario, Toronto | 1508 ms 🐇 |
-| <pre><code>155.138.128.135</code></pre> | Vultr Holdings, LLC | Ontario, Toronto | 1600 ms 🐌 |
+| <pre><code>40.177.65.8</code></pre> | Amazon Data Services Canada | Alberta, Calgary | 199 ms ⚡ |
+| <pre><code>35.182.226.236</code></pre> | Amazon Data Services Canada | Quebec, Montréal | 407 ms ⚡ |
+| <pre><code>155.138.128.135</code></pre> | Vultr Holdings, LLC | Ontario, Toronto | 1431 ms 🐇 |
+| <pre><code>178.128.228.52</code></pre> | DigitalOcean, LLC | Ontario, Toronto | 1467 ms 🐇 |
+| <pre><code>85.208.108.71</code></pre> | WorkTitans B.V. | Ontario, Toronto | 1517 ms 🐇 |
+| <pre><code>178.128.228.52</code></pre> | DigitalOcean, LLC | Ontario, Toronto | 1560 ms 🐇 |
 
 </details>
 
@@ -199,15 +199,15 @@
 
 |   IP   |   ISP   |   Location   |   Ping   |
 |:-------|:--------|:------------:|:--------:|
-| <pre><code>5.182.36.80</code></pre> | WorkTitans B.V. | Bern, Bern | 1089 ms ⚡ |
-| <pre><code>38.180.84.86</code></pre> | 3NT SOLUTIONS LLP | Ticino, Bellinzona | 1189 ms 🐇 |
-| <pre><code>5.182.36.223</code></pre> | WorkTitans B.V. | Bern, Bern | 1214 ms 🐇 |
-| <pre><code>38.244.144.150</code></pre> | 3NT SOLUTIONS LLP | Ticino, Bellinzona | 1272 ms 🐇 |
-| <pre><code>94.131.12.15</code></pre> | WorkTitans B.V. | Bern, Bern | 1305 ms 🐇 |
-| <pre><code>38.180.161.32</code></pre> | 3NT SOLUTIONS LLP | Ticino, Bellinzona | 1355 ms 🐇 |
-| <pre><code>16.63.207.85</code></pre> | Amazon Data Services Switzerland | Zurich, Zürich | 1401 ms 🐇 |
-| <pre><code>38.180.85.203</code></pre> | 3NT SOLUTIONS LLP | Ticino, Bellinzona | 1436 ms 🐇 |
-| <pre><code>94.131.12.56</code></pre> | WorkTitans B.V. | Bern, Bern | 1603 ms 🐌 |
+| <pre><code>5.182.36.80</code></pre> | WorkTitans B.V. | Bern, Bern | 1057 ms ⚡ |
+| <pre><code>38.180.84.86</code></pre> | 3NT SOLUTIONS LLP | Ticino, Bellinzona | 1143 ms 🐇 |
+| <pre><code>5.182.36.223</code></pre> | WorkTitans B.V. | Bern, Bern | 1199 ms 🐇 |
+| <pre><code>38.244.144.150</code></pre> | 3NT SOLUTIONS LLP | Ticino, Bellinzona | 1231 ms 🐇 |
+| <pre><code>94.131.12.15</code></pre> | WorkTitans B.V. | Bern, Bern | 1284 ms 🐇 |
+| <pre><code>38.180.161.32</code></pre> | 3NT SOLUTIONS LLP | Ticino, Bellinzona | 1318 ms 🐇 |
+| <pre><code>16.63.207.85</code></pre> | Amazon Data Services Switzerland | Zurich, Zürich | 1379 ms 🐇 |
+| <pre><code>38.180.85.203</code></pre> | 3NT SOLUTIONS LLP | Ticino, Bellinzona | 1402 ms 🐇 |
+| <pre><code>94.131.12.56</code></pre> | WorkTitans B.V. | Bern, Bern | 1537 ms 🐇 |
 
 </details>
 
@@ -219,9 +219,9 @@
 
 |   IP   |   ISP   |   Location   |   Ping   |
 |:-------|:--------|:------------:|:--------:|
-| <pre><code>45.15.162.45</code></pre> | WorkTitans B.V. | Prague, Prague | 871 ms ⚡ |
-| <pre><code>2.56.176.12</code></pre> | WorkTitans B.V. | Prague, Prague | 913 ms ⚡ |
-| <pre><code>171.22.127.164</code></pre> | WorkTitans B.V. | Prague, Prague | 954 ms ⚡ |
+| <pre><code>45.15.162.45</code></pre> | WorkTitans B.V. | Prague, Prague | 830 ms ⚡ |
+| <pre><code>2.56.176.12</code></pre> | WorkTitans B.V. | Prague, Prague | 873 ms ⚡ |
+| <pre><code>171.22.127.164</code></pre> | WorkTitans B.V. | Prague, Prague | 916 ms ⚡ |
 
 </details>
 
@@ -233,15 +233,15 @@
 
 |   IP   |   ISP   |   Location   |   Ping   |
 |:-------|:--------|:------------:|:--------:|
-| <pre><code>142.93.102.178</code></pre> | DigitalOcean, LLC | Hesse, Frankfurt am Main | 528 ms ⚡ |
-| <pre><code>138.197.183.219</code></pre> | DigitalOcean, LLC | Hesse, Frankfurt am Main | 539 ms ⚡ |
-| <pre><code>46.101.189.202</code></pre> | DigitalOcean, LLC | Hesse, Frankfurt am Main | 577 ms ⚡ |
-| <pre><code>46.101.110.196</code></pre> | DigitalOcean, LLC | Hesse, Frankfurt am Main | 586 ms ⚡ |
-| <pre><code>188.245.242.229</code></pre> | Hetzner Online GmbH | Bavaria, Nürnberg | 592 ms ⚡ |
-| <pre><code>128.140.96.122</code></pre> | Hetzner Online GmbH | Bavaria, Nürnberg | 624 ms ⚡ |
-| <pre><code>104.248.46.225</code></pre> | DigitalOcean, LLC | Hesse, Frankfurt am Main | 679 ms ⚡ |
-| <pre><code>104.248.17.101</code></pre> | DigitalOcean, LLC | Hesse, Frankfurt am Main | 737 ms ⚡ |
-| <pre><code>37.1.195.124</code></pre> | IROKO Networks Corporation | Hesse, Frankfurt am Main | 818 ms ⚡ |
+| <pre><code>46.101.110.196</code></pre> | DigitalOcean, LLC | Hesse, Frankfurt am Main | 505 ms ⚡ |
+| <pre><code>142.93.102.178</code></pre> | DigitalOcean, LLC | Hesse, Frankfurt am Main | 531 ms ⚡ |
+| <pre><code>46.101.189.202</code></pre> | DigitalOcean, LLC | Hesse, Frankfurt am Main | 532 ms ⚡ |
+| <pre><code>138.197.183.219</code></pre> | DigitalOcean, LLC | Hesse, Frankfurt am Main | 580 ms ⚡ |
+| <pre><code>104.248.46.225</code></pre> | DigitalOcean, LLC | Hesse, Frankfurt am Main | 653 ms ⚡ |
+| <pre><code>188.245.242.229</code></pre> | Hetzner Online GmbH | Bavaria, Nürnberg | 681 ms ⚡ |
+| <pre><code>128.140.96.122</code></pre> | Hetzner Online GmbH | Bavaria, Nürnberg | 700 ms ⚡ |
+| <pre><code>104.248.17.101</code></pre> | DigitalOcean, LLC | Hesse, Frankfurt am Main | 704 ms ⚡ |
+| <pre><code>37.1.195.124</code></pre> | IROKO Networks Corporation | Hesse, Frankfurt am Main | 783 ms ⚡ |
 
 </details>
 
@@ -253,8 +253,8 @@
 
 |   IP   |   ISP   |   Location   |   Ping   |
 |:-------|:--------|:------------:|:--------:|
-| <pre><code>154.21.201.83</code></pre> | NetLab | Unknown, Hong Kong | 2919 ms 🐌 |
-| <pre><code>43.198.204.35</code></pre> | Amazon.com, Inc. | Unknown, Hong Kong | 3067 ms 🐌 |
+| <pre><code>43.198.204.35</code></pre> | Amazon.com, Inc. | Unknown, Hong Kong | 3011 ms 🐌 |
+| <pre><code>154.21.201.83</code></pre> | NetLab | Unknown, Hong Kong | 3055 ms 🐌 |
 
 </details>
 
@@ -266,8 +266,8 @@
 
 |   IP   |   ISP   |   Location   |   Ping   |
 |:-------|:--------|:------------:|:--------:|
-| <pre><code>2a02:4780:59:599b::1</code></pre> | Hostinger International Limited | Jakarta, Jakarta | 2581 ms 🐌 |
-| <pre><code>43.218.77.16</code></pre> | Amazon.com, Inc. | Jakarta, Jakarta | 2615 ms 🐌 |
+| <pre><code>43.218.77.16</code></pre> | Amazon.com, Inc. | Jakarta, Jakarta | 2606 ms 🐌 |
+| <pre><code>2a02:4780:59:599b::1</code></pre> | Hostinger International Limited | Jakarta, Jakarta | 3641 ms 🐌 |
 
 </details>
 
@@ -279,7 +279,7 @@
 
 |   IP   |   ISP   |   Location   |   Ping   |
 |:-------|:--------|:------------:|:--------:|
-| <pre><code>45.89.107.118</code></pre> | WorkTitans B.V. | Kuala Lumpur, Kuala Lumpur | 3740 ms 🐌 |
+| <pre><code>45.89.107.118</code></pre> | WorkTitans B.V. | Kuala Lumpur, Kuala Lumpur | 3598 ms 🐌 |
 
 </details>
 
@@ -291,21 +291,21 @@
 
 |   IP   |   ISP   |   Location   |   Ping   |
 |:-------|:--------|:------------:|:--------:|
-| <pre><code>34.143.159.175</code></pre> | Google LLC | Unknown, Singapore | 1749 ms 🐌 |
-| <pre><code>2a01:4ff:2f0:1e2a::1</code></pre> | Hetzner Online GmbH | Unknown, Singapore | 1793 ms 🐌 |
-| <pre><code>2400:6180:0:d0::ebc:1</code></pre> | DigitalOcean, LLC | Unknown, Singapore | 1836 ms 🐌 |
-| <pre><code>2400:8901::f03c:93ff:fe7c:5d0f</code></pre> | Akamai Connected Cloud / Linode | Unknown, Singapore | 1879 ms 🐌 |
-| <pre><code>2400:6180:0:d0::11aa:f001</code></pre> | DigitalOcean, LLC | Unknown, Singapore | 2008 ms 🐌 |
-| <pre><code>38.180.249.123</code></pre> | 3NT SOLUTIONS LLP | Unknown, Singapore | 2051 ms 🐌 |
-| <pre><code>13.250.31.132</code></pre> | Amazon Data Services Singapore | Unknown, Singapore | 2138 ms 🐌 |
-| <pre><code>178.128.86.3</code></pre> | DigitalOcean, LLC | Unknown, Singapore | 2224 ms 🐌 |
-| <pre><code>178.128.80.43</code></pre> | DigitalOcean, LLC | Unknown, Singapore | 2311 ms 🐌 |
-| <pre><code>128.199.134.152</code></pre> | DigitalOcean, LLC | Unknown, Singapore | 2354 ms 🐌 |
-| <pre><code>104.248.145.216</code></pre> | DigitalOcean, LLC | Unknown, Singapore | 2398 ms 🐌 |
-| <pre><code>13.250.131.37</code></pre> | Amazon Data Services Singapore | Unknown, Singapore | 2441 ms 🐌 |
-| <pre><code>167.99.73.22</code></pre> | DigitalOcean, LLC | Unknown, Singapore | 2484 ms 🐌 |
-| <pre><code>3.0.50.69</code></pre> | Amazon Data Services Singapore | Unknown, Singapore | 3325 ms 🐌 |
-| <pre><code>209.97.173.243</code></pre> | DigitalOcean, LLC | Unknown, Singapore | 3671 ms 🐌 |
+| <pre><code>34.143.159.175</code></pre> | Google LLC | Unknown, Singapore | 1691 ms 🐌 |
+| <pre><code>2a01:4ff:2f0:1e2a::1</code></pre> | Hetzner Online GmbH | Unknown, Singapore | 1741 ms 🐌 |
+| <pre><code>2400:6180:0:d0::ebc:1</code></pre> | DigitalOcean, LLC | Unknown, Singapore | 1796 ms 🐌 |
+| <pre><code>2400:8901::f03c:93ff:fe7c:5d0f</code></pre> | Akamai Connected Cloud / Linode | Unknown, Singapore | 1830 ms 🐌 |
+| <pre><code>2400:6180:0:d0::11aa:f001</code></pre> | DigitalOcean, LLC | Unknown, Singapore | 1973 ms 🐌 |
+| <pre><code>38.180.249.123</code></pre> | 3NT SOLUTIONS LLP | Unknown, Singapore | 2016 ms 🐌 |
+| <pre><code>178.128.86.3</code></pre> | DigitalOcean, LLC | Unknown, Singapore | 2190 ms 🐌 |
+| <pre><code>178.128.80.43</code></pre> | DigitalOcean, LLC | Unknown, Singapore | 2271 ms 🐌 |
+| <pre><code>128.199.134.152</code></pre> | DigitalOcean, LLC | Unknown, Singapore | 2322 ms 🐌 |
+| <pre><code>104.248.145.216</code></pre> | DigitalOcean, LLC | Unknown, Singapore | 2363 ms 🐌 |
+| <pre><code>13.250.131.37</code></pre> | Amazon Data Services Singapore | Unknown, Singapore | 2437 ms 🐌 |
+| <pre><code>167.99.73.22</code></pre> | DigitalOcean, LLC | Unknown, Singapore | 2461 ms 🐌 |
+| <pre><code>13.250.31.132</code></pre> | Amazon Data Services Singapore | Unknown, Singapore | 3090 ms 🐌 |
+| <pre><code>3.0.50.69</code></pre> | Amazon Data Services Singapore | Unknown, Singapore | 3277 ms 🐌 |
+| <pre><code>209.97.173.243</code></pre> | DigitalOcean, LLC | Unknown, Singapore | 3630 ms 🐌 |
 
 </details>
 
