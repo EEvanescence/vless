@@ -160,16 +160,12 @@ async fn main() -> Result<()> {
     // این خط باعث می‌شد ارور بگیرید اگر نبود، چون خروجی این برای تابع بعدی لازم است
     let sparkline_url = update_history_and_get_chart(&args.history_file, total_active)?;
 
-    // 2. Write Markdown (with Graph)
-    // اینجا ۳ آرگومان پاس داده می‌شود (لینک نمودار اضافه شد)
     write_markdown_file(&locked_proxies, &args.output_file, &sparkline_url)
         .context("Failed to write Markdown file")?;
 
-    // 3. Write JSON
     write_json_file(&locked_proxies, &args.json_file)
         .context("Failed to write JSON file")?;
 
-    // Terminal Summary
     println!("\n{}", "=== DEAD PROXY SUMMARY ===".bold().white());
     let stats = error_stats.lock().unwrap();
     let mut sorted_stats: Vec<_> = stats.iter().collect();
@@ -185,7 +181,6 @@ async fn main() -> Result<()> {
     Ok(())
 }
 
-// --- Logic Functions ---
 
 fn classify_error(e: &anyhow::Error) -> ProxyErrorKind {
     let msg = e.to_string().to_lowercase();
@@ -217,72 +212,10 @@ async fn process_proxy_with_retry(
 ) {
     let mut last_error = anyhow!("Unknown error");
     
-    // Try up to MAX_RETRIES + 1 times
     for attempt in 0..=MAX_RETRIES {
         match process_proxy_inner(&proxy_line, active_proxies, self_ip).await {
-            Ok(_) => return, // Success!
-            Err(e) => {
-                last_error = e;
-                if attempt < MAX_RETRIES {
-                    let kind = classify_error(&last_error);
-                    match kind {
-                        ProxyErrorKind::Timeout | ProxyErrorKind::Connect | ProxyErrorKind::Tls => {
-                            tokio::time::sleep(Duration::from_millis(RETRY_DELAY_MS)).await;
-                            continue;
-                        },
-                        _ => break,
-                    }
-                }
-            }
-        }
-    }
-
-    let kind = classify_error(&last_error);
-    {
-        let mut stats = error_stats.lock().unwrap();
-        *stats.entry(kind).or_default() += 1;
-    }
-    
-    let ip = proxy_line.split(',').next().unwrap_or("Unknown");
-    println!(
-        "{}",
-        format!("PROXY DEAD ❌ [{:?}]: {} ({})", kind, ip, last_error).red()
-    );
-}
-
-async fn process_proxy_inner(
-    proxy_line: &str,
-    active_proxies: &Arc<Mutex<BTreeMap<String, Vec<(ProxyInfo, u128)>>>>,
-    self_ip: &str,
-) -> Result<()> {
-    let parts: Vec<&str> = proxy_line.split(',').collect();
-    if parts.len() < 2 {
-        return Err(anyhow!("Invalid line format"));
-    }
-
-    let ip = parts[0];
-    let port = parts[1].parse::<u16>().unwrap_or(443);
-    let csv_isp = if parts.len() > 3 { parts[3].trim().to_string() } else { "Unknown".to_string() };
-
-    // Pass self_ip to checker
-    let (data, ping) = check_proxy_worker(ip, port, self_ip).await?;
-
-    let info = ProxyInfo {
-        ip: data.ip,
-        port,
-        isp: data.cf.isp.unwrap_or(csv_isp),
-        country_code: data.cf.country.unwrap_or_else(|| "XX".to_string()),
-        city: data.cf.city.unwrap_or_else(|| "Unknown".to_string()),
-        region: data.cf.region.unwrap_or_else(|| "Unknown".to_string()),
-    };
-
-    println!(
-        "{}",
-        format!("PROXY LIVE 🟩: {} ({} ms) - {}", info.ip, ping, info.city).green()
-    );
-
-    let mut active_proxies_locked = active_proxies.lock().unwrap_or_else(|e| e.into_inner());
-    active_proxies_locked
+            Ok(_) => return,
+Hata(lar) => {
         .entry(info.country_code.clone())
         .or_default()
         .push((info, ping));
@@ -306,7 +239,6 @@ async fn fetch_self_ip() -> Result<String> {
     Ok(resp.trim().to_string())
 }
 
-// ورودی سوم با _ شروع شده تا وارنینگ ندهد (چون دیگر چک نمی‌کنیم)
 async fn check_proxy_worker(ip: &str, port: u16, _self_ip: &str) -> Result<(WorkerResponse, u128)> {
     use native_tls::TlsConnector;
     use tokio::io::{AsyncReadExt, AsyncWriteExt};
