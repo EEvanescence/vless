@@ -259,7 +259,7 @@ async fn check_proxy_worker(ip: &str, port: u16, self_ip: &str) -> Result<(Worke
 
     Ok((
         WorkerResponse {
-            ip: out_ip,
+            ip: out_ip, 
             cf: WorkerCf {
                 isp: v.get("asOrganization").and_then(|v| v.as_str()).map(String::from),
                 city: v.get("city").and_then(|v| v.as_str()).map(String::from),
@@ -343,6 +343,7 @@ fn write_markdown_file(
     let now = Utc::now();
     let tehran_now = now.with_timezone(&Tehran);
     
+    // تاریخ تمیز برای نمایش در متن
     let last_updated_str = tehran_now.format("%a, %d %b %Y %H:%M").to_string(); 
 
     writeln!(
@@ -368,7 +369,7 @@ fn write_markdown_file(
 </p>
 "##,
         sparkline = sparkline_url,
-        last = last_updated_str,
+        last = last_updated_str, // 🔥 اینجا دیگه encode شده نیست و درست نمایش داده میشه
         active = total_active,
         countries = total_countries,
         latency = avg_ping,
@@ -428,48 +429,6 @@ fn write_markdown_file(
     Ok(())
 }
 
-
-    for (country_code, proxies) in proxies_by_country.iter() {
-        let mut sorted_proxies = proxies.clone();
-        sorted_proxies.sort_by_key(|&(_, ping)| ping);
-        let flag = country_flag(country_code);
-        let name = get_country_name(country_code);
-        writeln!(
-            file,
-            "## {} {} ({} proxies)",
-            flag,
-            name,
-            sorted_proxies.len()
-        )?;
-        writeln!(file, "<details>")?;
-        writeln!(file, "<summary>Click to expand</summary>\n")?;
-        writeln!(file, "|   IP   |   ISP   |   Location   |   Ping   |")?;
-        writeln!(file, "|:-------|:--------|:------------:|:--------:|")?;
-
-        for (info, ping) in sorted_proxies.iter() {
-            let location = format!("{}, {}", info.region, info.city);
-            let emoji = if *ping < 1099 {
-                "⚡"
-            } else if *ping < 1599 {
-                "🐇"
-            } else {
-                "🐌"
-            };
-            let isp_cell = info.isp.clone();
-
-            writeln!(
-                file,
-                "| <pre><code>{}</code></pre> | {} | {} | {} ms {} |",
-                info.ip, isp_cell, location, ping, emoji
-            )?;
-        }
-
-        writeln!(file, "\n</details>\n\n---\n")?;
-    }
-
-    println!("All active proxies saved to {}", output_file);
-    Ok(())
-}
 
 fn provider_logo_html(isp: &str) -> Option<String> {
     let mapping = [
