@@ -3,26 +3,21 @@ use clap::Parser;
 use colored::*;
 use futures::StreamExt;
 use reqwest::Client;
-use serde::{Deserialize, Serialize};
+use serde::Deserialize;
 use std::collections::{BTreeMap, HashMap};
-use std::fs::{self, File, OpenOptions};
+use std::fs::{self, File};
 use std::io::{self, BufRead, BufReader, Write};
 use std::path::Path;
 use std::sync::{Arc, Mutex};
 use std::time::{Duration, Instant};
-use chrono::{Duration as ChronoDuration, Utc, DateTime};
+use chrono::{Duration as ChronoDuration, Utc};
 use chrono_tz::Asia::Tehran;
 
-// --- Constants ---
 const DEFAULT_PROXY_FILE: &str = "edge/assets/p-list-january.txt";
 const DEFAULT_OUTPUT_FILE: &str = "sub/ProxyIP-Daily.md";
-const DEFAULT_JSON_FILE: &str = "sub/active_proxies.json";
-const DEFAULT_HISTORY_FILE: &str = "sub/history.json";
 const DEFAULT_MAX_CONCURRENT: usize = 50;
 const DEFAULT_TIMEOUT_SECONDS: u64 = 6;
 const REQUEST_DELAY_MS: u64 = 50;
-const MAX_RETRIES: u32 = 2; // تعداد تلاش مجدد
-const RETRY_DELAY_MS: u64 = 1000; // فاصله بین تلاش‌ها
 const CHECK_URL: &str = "https://ipp.nscl.ir";
 
 const GOOD_ISPS: &[&str] = &[
@@ -36,22 +31,14 @@ const GOOD_ISPS: &[&str] = &[
     "Metropolis networks inc", "Total Uptime Technologies",
 ];
 
-// --- Structs & Enums ---
-
 #[derive(Parser, Clone)]
-#[command(name = "Proxy Checker Pro")]
+#[command(name = "Proxy Checker")]
 struct Args {
     #[arg(short, long, default_value = DEFAULT_PROXY_FILE)]
     proxy_file: String,
 
     #[arg(short, long, default_value = DEFAULT_OUTPUT_FILE)]
     output_file: String,
-
-    #[arg(long, default_value = DEFAULT_JSON_FILE)]
-    json_file: String,
-
-    #[arg(long, default_value = DEFAULT_HISTORY_FILE)]
-    history_file: String,
 
     #[arg(long, default_value_t = DEFAULT_MAX_CONCURRENT)]
     max_concurrent: usize,
@@ -75,77 +62,70 @@ struct WorkerCf {
     country: Option<String>,
 }
 
-#[derive(Debug, Clone, Serialize)]
+#[derive(Debug, Clone)]
 struct ProxyInfo {
     ip: String,
-    port: u16,           // Added port to struct for JSON output
     isp: String,
     country_code: String,
     city: String,
     region: String,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
-struct HistoryEntry {
-    date: String,
-    count: usize,
-}
-
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 enum ProxyErrorKind {
     Timeout,
-    Connect,
-    Tls,
-    Http,
-    Json,
-    IpMatch,
+    Connect, // TCP / Connection Refused
+    Tls,     // SSL/TLS Handshake
+    Http,    // Bad Status Code / Protocol
+    Json,    // Parse Error
+    IpMatch, // IP Leak / Transparent Proxy
     Unknown,
 }
-
-// --- Main Function ---
 
 #[tokio::main]
 async fn main() -> Result<()> {
     let args = Args::parse();
 
-    // Create directories if needed
     if let Some(parent) = Path::new(&args.output_file).parent() {
         fs::create_dir_all(parent).context("Failed to create output directory")?;
     }
+    File::create(&args.output_file).context("Failed to create output file")?;
 
-    // Read proxies
     let proxies = read_proxy_file(&args.proxy_file).context("Failed to read proxy file")?;
     println!("Loaded {} proxies from file", proxies.len());
 
-    // Filter proxies
     let proxies: Vec<String> = proxies
         .into_iter()
         .filter(|line| {
             let parts: Vec<&str> = line.split(',').collect();
-            if parts.len() < 4 { return false; }
+            if parts.len() < 4 {
+                return false;
+            }
             let port_ok = parts[1].trim() == "443";
             let isp_name = parts[3].to_string();
             let isp_ok = GOOD_ISPS.iter().any(|kw| isp_name.contains(kw));
             port_ok && isp_ok
         })
         .collect();
-    println!("Filtered to {} candidates (port 443 + ISP whitelist)", proxies.len());
+    println!(
+        "Filtered to {} good proxies (port 443 + ISP whitelist)",
+        proxies.len()
+    );
 
     let self_ip = fetch_self_ip().await.unwrap_or_else(|_| "0.0.0.0".to_string());
     println!("Your real IP: {}", self_ip);
 
     let active_proxies = Arc::new(Mutex::new(BTreeMap::<String, Vec<(ProxyInfo, u128)>>::new()));
+    
     let error_stats = Arc::new(Mutex::new(HashMap::<ProxyErrorKind, usize>::new()));
 
-    // Run Tasks with Retry Logic
     let tasks = futures::stream::iter(proxies.into_iter().map(|proxy_line| {
         let active_proxies = Arc::clone(&active_proxies);
         let error_stats = Arc::clone(&error_stats);
         let self_ip = self_ip.clone();
         async move {
             tokio::time::sleep(Duration::from_millis(REQUEST_DELAY_MS)).await;
-            // Call the retry wrapper instead of direct process
-            process_proxy_with_retry(proxy_line, &active_proxies, &error_stats, &self_ip).await;
+            process_proxy(proxy_line, &active_proxies, &error_stats, &self_ip).await;
         }
     }))
     .buffer_unordered(args.max_concurrent)
@@ -153,38 +133,25 @@ async fn main() -> Result<()> {
 
     tasks.await;
 
-    // Retrieve results
     let locked_proxies = active_proxies.lock().unwrap_or_else(|e| e.into_inner());
-    let total_active: usize = locked_proxies.values().map(|v| v.len()).sum();
-
-    // 1. Update History & Generate Graph Link
-    let sparkline_url = update_history_and_get_chart(&args.history_file, total_active)?;
-
-    // 2. Write Markdown (with Graph)
-    write_markdown_file(&locked_proxies, &args.output_file, &sparkline_url)
+    write_markdown_file(&locked_proxies, &args.output_file)
         .context("Failed to write Markdown file")?;
-
-    // 3. Write JSON (Feature #3)
-    write_json_file(&locked_proxies, &args.json_file)
-        .context("Failed to write JSON file")?;
-
-    // Terminal Summary
+    
     println!("\n{}", "=== DEAD PROXY SUMMARY ===".bold().white());
     let stats = error_stats.lock().unwrap();
+
     let mut sorted_stats: Vec<_> = stats.iter().collect();
     sorted_stats.sort_by(|a, b| b.1.cmp(a.1));
+
     for (kind, count) in sorted_stats {
         println!("{:?}: {}", kind, count.to_string().yellow());
     }
-    println!("==========================");
-    println!("Total Active: {}", total_active.to_string().green().bold());
-    println!("JSON saved to: {}", args.json_file);
-    println!("History saved to: {}", args.history_file);
+    println!("==========================\n");
 
+    println!("Proxy checking completed.");
     Ok(())
 }
 
-// --- Logic Functions ---
 
 fn classify_error(e: &anyhow::Error) -> ProxyErrorKind {
     let msg = e.to_string().to_lowercase();
@@ -198,7 +165,8 @@ fn classify_error(e: &anyhow::Error) -> ProxyErrorKind {
         ProxyErrorKind::IpMatch
     } else if msg.contains("connection refused")
         || msg.contains("reset by peer")
-        || msg.contains("unreachable")
+        || msg.contains("target machine actively refused")
+        || msg.contains("network is unreachable")
     {
         ProxyErrorKind::Connect
     } else if msg.contains("http") || msg.contains("status") {
@@ -208,96 +176,10 @@ fn classify_error(e: &anyhow::Error) -> ProxyErrorKind {
     }
 }
 
-// Feature #1: Retry Wrapper
-async fn process_proxy_with_retry(
-    proxy_line: String,
-    active_proxies: &Arc<Mutex<BTreeMap<String, Vec<(ProxyInfo, u128)>>>>,
-    error_stats: &Arc<Mutex<HashMap<ProxyErrorKind, usize>>>,
-    self_ip: &str,
-) {
-    let mut last_error = anyhow!("Unknown error");
-    
-    // Try up to MAX_RETRIES + 1 times
-    for attempt in 0..=MAX_RETRIES {
-        match process_proxy_inner(&proxy_line, active_proxies, self_ip).await {
-            Ok(_) => return, // Success!
-            Err(e) => {
-                last_error = e;
-                // If it's not the last attempt, wait and retry
-                if attempt < MAX_RETRIES {
-                    // Only retry for network related errors, not parsing errors
-                    let kind = classify_error(&last_error);
-                    match kind {
-                        ProxyErrorKind::Timeout | ProxyErrorKind::Connect | ProxyErrorKind::Tls => {
-                            // Wait before retry
-                            tokio::time::sleep(Duration::from_millis(RETRY_DELAY_MS)).await;
-                            continue;
-                        },
-                        _ => break, // Don't retry for JSON errors or IP Match
-                    }
-                }
-            }
-        }
-    }
-
-    // All attempts failed
-    let kind = classify_error(&last_error);
-    {
-        let mut stats = error_stats.lock().unwrap();
-        *stats.entry(kind).or_default() += 1;
-    }
-    
-    // Extract IP for logging
-    let ip = proxy_line.split(',').next().unwrap_or("Unknown");
-    println!(
-        "{}",
-        format!("PROXY DEAD ❌ [{:?}]: {} ({})", kind, ip, last_error).red()
-    );
-}
-
-// Inner logic (returns Result to allow retry)
-async fn process_proxy_inner(
-    proxy_line: &str,
-    active_proxies: &Arc<Mutex<BTreeMap<String, Vec<(ProxyInfo, u128)>>>>,
-    self_ip: &str,
-) -> Result<()> {
-    let parts: Vec<&str> = proxy_line.split(',').collect();
-    if parts.len() < 2 {
-        return Err(anyhow!("Invalid line format"));
-    }
-
-    let ip = parts[0];
-    let port = parts[1].parse::<u16>().unwrap_or(443);
-    let csv_isp = if parts.len() > 3 { parts[3].trim().to_string() } else { "Unknown".to_string() };
-
-    let (data, ping) = check_proxy_worker(ip, port, self_ip).await?;
-
-    let info = ProxyInfo {
-        ip: data.ip,
-        port,
-        isp: data.cf.isp.unwrap_or(csv_isp),
-        country_code: data.cf.country.unwrap_or_else(|| "XX".to_string()),
-        city: data.cf.city.unwrap_or_else(|| "Unknown".to_string()),
-        region: data.cf.region.unwrap_or_else(|| "Unknown".to_string()),
-    };
-
-    println!(
-        "{}",
-        format!("PROXY LIVE 🟩: {} ({} ms) - {}", info.ip, ping, info.city).green()
-    );
-
-    let mut active_proxies_locked = active_proxies.lock().unwrap_or_else(|e| e.into_inner());
-    active_proxies_locked
-        .entry(info.country_code.clone())
-        .or_default()
-        .push((info, ping));
-
-    Ok(())
-}
-
 async fn fetch_self_ip() -> Result<String> {
     let client = Client::builder()
         .timeout(Duration::from_secs(5))
+        .user_agent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
         .build()?;
     match client.get(CHECK_URL).send().await {
         Ok(resp) => {
@@ -307,7 +189,13 @@ async fn fetch_self_ip() -> Result<String> {
         }
         Err(_) => {}
     }
-    let resp = client.get("https://api.ipify.org").send().await?.text().await?;
+
+    let resp = client
+        .get("https://api.ipify.org")
+        .send()
+        .await?
+        .text()
+        .await?;
     Ok(resp.trim().to_string())
 }
 
@@ -320,11 +208,13 @@ async fn check_proxy_worker(ip: &str, port: u16, self_ip: &str) -> Result<(Worke
     let timeout = Duration::from_secs(DEFAULT_TIMEOUT_SECONDS);
     let start_ping = Instant::now();
 
+    // 1. TCP Connect
     let tcp = tokio::time::timeout(timeout, TcpStream::connect(format!("{}:{}", ip, port)))
         .await
         .context("Timeout")?
         .context("Connect Failed")?;
 
+    // 2. TLS Handshake
     let tls = TokioTlsConnector::from(TlsConnector::builder().build()?);
     let mut stream = tokio::time::timeout(timeout, tls.connect("speed.cloudflare.com", tcp))
         .await
@@ -333,6 +223,7 @@ async fn check_proxy_worker(ip: &str, port: u16, self_ip: &str) -> Result<(Worke
 
     let ping = start_ping.elapsed().as_millis();
 
+    // 3. Send HTTP Request
     let req = concat!(
         "GET /meta HTTP/1.1\r\n",
         "Host: speed.cloudflare.com\r\n",
@@ -342,6 +233,7 @@ async fn check_proxy_worker(ip: &str, port: u16, self_ip: &str) -> Result<(Worke
     );
     stream.write_all(req.as_bytes()).await?;
 
+    // 4. Read Response
     let mut buf = Vec::new();
     let mut tmp = [0u8; 8192];
     loop {
@@ -354,17 +246,16 @@ async fn check_proxy_worker(ip: &str, port: u16, self_ip: &str) -> Result<(Worke
         }
     }
 
+    // 5. Parse Body
     let text = String::from_utf8_lossy(&buf);
     let body = if let Some(pos) = text.find("\r\n\r\n") { &text[pos + 4..] } else { &text };
     let body = body.trim();
     if body.is_empty() { return Err(anyhow!("Empty Body")); }
 
     let v: serde_json::Value = serde_json::from_str(body).context("JSON Error")?;
-    let out_ip = v.get("clientIp").and_then(|v| v.as_str()).unwrap_or("").to_string();
+    
+    let out_ip = v.get("clientIp").and_then(|v| v.as_str()).unwrap_or("Unknown").to_string();
 
-    if out_ip.is_empty() || out_ip == self_ip {
-        return Err(anyhow!("IP Match"));
-    }
 
     Ok((
         WorkerResponse {
@@ -380,62 +271,60 @@ async fn check_proxy_worker(ip: &str, port: u16, self_ip: &str) -> Result<(Worke
     ))
 }
 
-// Feature #3: Write JSON
-fn write_json_file(
-    proxies_by_country: &BTreeMap<String, Vec<(ProxyInfo, u128)>>,
-    path: &str,
-) -> Result<()> {
-    let mut all_proxies = Vec::new();
-    for list in proxies_by_country.values() {
-        for (info, _) in list {
-            all_proxies.push(info.clone());
-        }
-    }
-    let file = File::create(path)?;
-    serde_json::to_writer_pretty(file, &all_proxies)?;
-    Ok(())
-}
 
-// Feature #5: History & Sparkline
-fn update_history_and_get_chart(history_path: &str, current_count: usize) -> Result<String> {
-    let mut history: Vec<HistoryEntry> = if Path::new(history_path).exists() {
-        let file = File::open(history_path)?;
-        serde_json::from_reader(file).unwrap_or_default()
+async fn process_proxy(
+    proxy_line: String,
+    active_proxies: &Arc<Mutex<BTreeMap<String, Vec<(ProxyInfo, u128)>>>>,
+    error_stats: &Arc<Mutex<HashMap<ProxyErrorKind, usize>>>,
+    self_ip: &str,
+) {
+    let parts: Vec<&str> = proxy_line.split(',').collect();
+    if parts.len() < 2 {
+        return;
+    }
+
+    let ip = parts[0];
+    let port = parts[1].parse::<u16>().unwrap_or(443);
+    let csv_isp = if parts.len() > 3 {
+        parts[3].trim().to_string()
     } else {
-        Vec::new()
+        "Unknown".to_string()
     };
 
-    let today = Utc::now().format("%Y-%m-%d").to_string();
-    
-    // Update or Append logic
-    if let Some(last) = history.last_mut() {
-        if last.date == today {
-            last.count = current_count;
-        } else {
-            history.push(HistoryEntry { date: today, count: current_count });
+    match check_proxy_worker(ip, port, self_ip).await {
+        Ok((data, ping)) => {
+            let info = ProxyInfo {
+                ip: data.ip,
+                isp: data.cf.isp.unwrap_or(csv_isp),
+                country_code: data.cf.country.unwrap_or_else(|| "XX".to_string()),
+                city: data.cf.city.unwrap_or_else(|| "Unknown".to_string()),
+                region: data.cf.region.unwrap_or_else(|| "Unknown".to_string()),
+            };
+            println!(
+                "{}",
+                format!("PROXY LIVE 🟩: {} ({} ms) - {}", ip, ping, info.city).green()
+            );
+            let mut active_proxies_locked =
+                active_proxies.lock().unwrap_or_else(|e| e.into_inner());
+            active_proxies_locked
+                .entry(info.country_code.clone())
+                .or_default()
+                .push((info, ping));
         }
-    } else {
-        history.push(HistoryEntry { date: today, count: current_count });
+        Err(e) => {
+
+            let kind = classify_error(&e);
+            {
+                let mut stats = error_stats.lock().unwrap();
+                *stats.entry(kind).or_default() += 1;
+            }
+            
+            println!(
+                "{}",
+                format!("PROXY DEAD ❌ [{:?}]: {} ({})", kind, ip, e).red()
+            );
+        }
     }
-
-    // Keep only last 30 days
-    if history.len() > 30 {
-        history.remove(0);
-    }
-
-    let file = File::create(history_path)?;
-    serde_json::to_writer_pretty(file, &history)?;
-
-    // Generate Sparkline URL (QuickChart)
-    let data_points: Vec<String> = history.iter().map(|h| h.count.to_string()).collect();
-    let data_str = data_points.join(",");
-    // Simple sparkline: blue line, no fill, 120x30 size
-    let chart_url = format!(
-        "https://quickchart.io/chart?c={{type:'sparkline',data:{{datasets:[{{data:[{}]}}]}}}}&w=120&h=30",
-        data_str
-    );
-    
-    Ok(chart_url)
 }
 
 fn write_markdown_file(
@@ -453,11 +342,8 @@ fn write_markdown_file(
 
     let now = Utc::now();
     let tehran_now = now.with_timezone(&Tehran);
-    let last_updated_str = tehran_now.format("%a, %d %b %Y %H:%M").to_string();
-
-    fn encode(s: &str) -> String {
-        s.replace(' ', "%20").replace(':', "%3A").replace(',', "%2C")
-    }
+    
+    let last_updated_str = tehran_now.format("%a, %d %b %Y %H:%M").to_string(); 
 
     writeln!(
         file,
@@ -466,10 +352,14 @@ fn write_markdown_file(
 </p>
 
 > [!NOTE]
-> **Active Proxies Trend (30 Days):** > <img src="{sparkline}" alt="Trend" />
+> **Active Proxies Trend (30 Days):**
+>
+> <img src="{sparkline}" alt="Trend" />
 
 > [!WARNING]
-> **Daily Fresh Proxies** > Auto-Updated: {last} (UTC+3:30)
+> **Daily Fresh Proxies**
+>
+> Auto-Updated: {last} (UTC+3:30)
 
 <p>
   <img src="https://img.shields.io/badge/Active-{active}-success" />
@@ -478,7 +368,7 @@ fn write_markdown_file(
 </p>
 "##,
         sparkline = sparkline_url,
-        last = encode(&last_updated_str),
+        last = last_updated_str,
         active = total_active,
         countries = total_countries,
         latency = avg_ping,
@@ -538,19 +428,135 @@ fn write_markdown_file(
     Ok(())
 }
 
+
+    for (country_code, proxies) in proxies_by_country.iter() {
+        let mut sorted_proxies = proxies.clone();
+        sorted_proxies.sort_by_key(|&(_, ping)| ping);
+        let flag = country_flag(country_code);
+        let name = get_country_name(country_code);
+        writeln!(
+            file,
+            "## {} {} ({} proxies)",
+            flag,
+            name,
+            sorted_proxies.len()
+        )?;
+        writeln!(file, "<details>")?;
+        writeln!(file, "<summary>Click to expand</summary>\n")?;
+        writeln!(file, "|   IP   |   ISP   |   Location   |   Ping   |")?;
+        writeln!(file, "|:-------|:--------|:------------:|:--------:|")?;
+
+        for (info, ping) in sorted_proxies.iter() {
+            let location = format!("{}, {}", info.region, info.city);
+            let emoji = if *ping < 1099 {
+                "⚡"
+            } else if *ping < 1599 {
+                "🐇"
+            } else {
+                "🐌"
+            };
+            let isp_cell = info.isp.clone();
+
+            writeln!(
+                file,
+                "| <pre><code>{}</code></pre> | {} | {} | {} ms {} |",
+                info.ip, isp_cell, location, ping, emoji
+            )?;
+        }
+
+        writeln!(file, "\n</details>\n\n---\n")?;
+    }
+
+    println!("All active proxies saved to {}", output_file);
+    Ok(())
+}
+
+fn provider_logo_html(isp: &str) -> Option<String> {
+    let mapping = [
+        ("Google", "google.com"),
+        ("Amazon", "amazon.com"),
+        ("Cloudflare", "cloudflare.com"),
+        ("Hetzner", "hetzner.com"),
+        ("Hostinger", "hostinger.com"),
+        ("Tencent", "www.tencent.com"),
+        ("DigitalOcean", "digitalocean.com"),
+        ("Vultr", "vultr.com"),
+    ];
+    for (kw, domain) in mapping.iter() {
+        if isp.to_lowercase().contains(&kw.to_lowercase()) {
+            let html = format!(
+                "<img alt=\"{}\" src=\"https://www.google.com/s2/favicons?sz=22&domain_url={}\" />",
+                isp, domain
+            );
+            return Some(html);
+        }
+    }
+
+    None
+}
+
 fn country_flag(code: &str) -> String {
-    code.chars().filter_map(|c| {
-        if c.is_ascii_alphabetic() {
-            Some(char::from_u32(0x1F1E6 + (c.to_ascii_uppercase() as u32 - 'A' as u32)).unwrap())
-        } else { None }
-    }).collect()
+    code.chars()
+        .filter_map(|c| {
+            if c.is_ascii_alphabetic() {
+                Some(char::from_u32(0x1F1E6 + (c.to_ascii_uppercase() as u32 - 'A' as u32)).unwrap())
+            } else {
+                None
+            }
+        })
+        .collect()
 }
 
 fn get_country_name(code: &str) -> String {
     match code.to_uppercase().as_str() {
-        "IR" => "Iran".to_string(),
         "US" => "United States".to_string(),
         "DE" => "Germany".to_string(),
+        "GB" => "United Kingdom".to_string(),
+        "FR" => "France".to_string(),
+        "NL" => "Netherlands".to_string(),
+        "CA" => "Canada".to_string(),
+        "AU" => "Australia".to_string(),
+        "JP" => "Japan".to_string(),
+        "CN" => "China".to_string(),
+        "SG" => "Singapore".to_string(),
+        "KR" => "South Korea".to_string(),
+        "IN" => "India".to_string(),
+        "RU" => "Russia".to_string(),
+        "BR" => "Brazil".to_string(),
+        "IT" => "Italy".to_string(),
+        "ES" => "Spain".to_string(),
+        "SE" => "Sweden".to_string(),
+        "CH" => "Switzerland".to_string(),
+        "TR" => "Turkey".to_string(),
+        "PL" => "Poland".to_string(),
+        "FI" => "Finland".to_string(),
+        "NO" => "Norway".to_string(),
+        "IE" => "Ireland".to_string(),
+        "BE" => "Belgium".to_string(),
+        "AT" => "Austria".to_string(),
+        "DK" => "Denmark".to_string(),
+        "CZ" => "Czech Republic".to_string(),
+        "UA" => "Ukraine".to_string(),
+        "HK" => "Hong Kong".to_string(),
+        "TW" => "Taiwan".to_string(),
+        "IR" => "Iran".to_string(),
+        "ZA" => "South Africa".to_string(),
+        "RO" => "Romania".to_string(),
+        "ID" => "Indonesia".to_string(),
+        "VN" => "Vietnam".to_string(),
+        "TH" => "Thailand".to_string(),
+        "MY" => "Malaysia".to_string(),
+        "MX" => "Mexico".to_string(),
+        "AR" => "Argentina".to_string(),
+        "CL" => "Chile".to_string(),
+        "CO" => "Colombia".to_string(),
+        "IL" => "Israel".to_string(),
+        "AE" => "United Arab Emirates".to_string(),
+        "SA" => "Saudi Arabia".to_string(),
+        "PT" => "Portugal".to_string(),
+        "HU" => "Hungary".to_string(),
+        "GR" => "Greece".to_string(),
+        "BG" => "Bulgaria".to_string(),
         _ => code.to_string(),
     }
 }
@@ -558,7 +564,14 @@ fn get_country_name(code: &str) -> String {
 fn read_proxy_file(file_path: &str) -> io::Result<Vec<String>> {
     let file = File::open(file_path)?;
     let reader = BufReader::new(file);
-    Ok(reader.lines().filter_map(Result::ok).filter(|l| !l.trim().is_empty()).collect())
-}
+    let mut proxies = Vec::new();
 
-fn provider_logo_html(_: &str) -> Option<String> { None } // Simplified for brevity
+    for line in reader.lines() {
+        let line = line?;
+        if !line.trim().is_empty() {
+            proxies.push(line);
+        }
+    }
+
+    Ok(proxies)
+}
