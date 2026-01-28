@@ -144,27 +144,115 @@ async fn fetch_self_ip() -> Result<String> {
     Ok(resp.trim().to_string())
 }
 
-async fn check_proxy_worker(ip: &str, port: u16) -> Result<WorkerResponse> {
-    let timeout_duration = Duration::from_secs(DEFAULT_TIMEOUT_SECONDS);
+async fn check_proxy_cloudflare_session(
+    ip: &str,
+    port: u16,
+    self_ip: &str,
+) -> Result<(WorkerResponse, u128)> {
+    use tokio::net::TcpStream;
+    use tokio::io::{AsyncReadExt, AsyncWriteExt};
+    use native_tls::TlsConnector;
+    use tokio_native_tls::TlsConnector as TokioTlsConnector;
 
-    let addr_str = format!("{}:{}", ip, port);
-    let addr: std::net::SocketAddr = addr_str
-        .parse()
-        .context("Invalid IP/port")?;
+    let timeout = Duration::from_secs(DEFAULT_TIMEOUT_SECONDS);
+    let start_ping = Instant::now();
 
-    let client = Client::builder()
-        .timeout(timeout_duration)
-        .resolve("ipp.nscl.ir", addr) 
-        .user_agent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
-        .build()?;
+    let tcp = tokio::time::timeout(
+        timeout,
+        TcpStream::connect(format!("{}:{}", ip, port))
+    ).await??;
 
-    let response = client.get(CHECK_URL)
-        .header("Host", "ipp.nscl.ir")
-        .send()
-        .await?;
+    let tls_connector = TlsConnector::builder().build()?;
+    let tls = TokioTlsConnector::from(tls_connector);
 
-    let result = response.json::<WorkerResponse>().await?;
-    Ok(result)
+    let mut stream = tokio::time::timeout(
+        timeout,
+        tls.connect("speed.cloudflare.com", tcp)
+    ).await??;
+
+    let ping = start_ping.elapsed().as_millis();
+
+    let req_home = concat!(
+        "GET / HTTP/1.1\r\n",
+        "Host: speed.cloudflare.com\r\n",
+        "User-Agent: Mozilla/5.0\r\n",
+        "Accept: */*\r\n",
+        "Accept-Encoding: identity\r\n",
+        "Connection: close\r\n\r\n"
+    );
+
+    stream.write_all(req_home.as_bytes()).await?;
+
+    let mut buf = Vec::new();
+    let mut tmp = [0u8; 4096];
+    while let Ok(n) = stream.read(&mut tmp).await {
+        if n == 0 { break; }
+        buf.extend_from_slice(&tmp[..n]);
+    }
+
+    let text = String::from_utf8_lossy(&buf);
+    let mut cookie = String::new();
+    for line in text.lines() {
+        if line.to_lowercase().starts_with("set-cookie:") {
+            if let Some(v) = line.split(':').nth(1) {
+                cookie = v.split(';').next().unwrap_or("").trim().to_string();
+            }
+        }
+    }
+
+    let tcp = TcpStream::connect(format!("{}:{}", ip, port)).await?;
+    let mut stream = tls.connect("speed.cloudflare.com", tcp).await?;
+
+    let req_meta = format!(
+        "GET /meta HTTP/1.1\r\n\
+         Host: speed.cloudflare.com\r\n\
+         User-Agent: Mozilla/5.0\r\n\
+         Accept: */*\r\n\
+         Accept-Encoding: identity\r\n\
+         Referer: https://speed.cloudflare.com/\r\n\
+         Origin: https://speed.cloudflare.com\r\n\
+         Cookie: {}\r\n\
+         Connection: close\r\n\r\n",
+        cookie
+    );
+
+    stream.write_all(req_meta.as_bytes()).await?;
+
+    let mut buf = Vec::new();
+    let mut tmp = [0u8; 4096];
+    while let Ok(n) = stream.read(&mut tmp).await {
+        if n == 0 { break; }
+        buf.extend_from_slice(&tmp[..n]);
+    }
+
+    let body = String::from_utf8_lossy(&buf);
+    let json_start = body.find('{').ok_or("no json")?;
+    let json_end = body.rfind('}').ok_or("no json")?;
+    let json_str = &body[json_start..=json_end];
+
+    let v: serde_json::Value = serde_json::from_str(json_str)?;
+
+    let ip_out = v.get("clientIp")
+        .and_then(|v| v.as_str())
+        .unwrap_or("")
+        .to_string();
+
+    if ip_out.is_empty() || ip_out == self_ip {
+        return Err("IP match or empty".into());
+    }
+
+    Ok((
+        WorkerResponse {
+            ip: ip_out,
+            cf: WorkerCf {
+                isp: v.get("asOrganization").and_then(|v| v.as_str()).map(|s| s.to_string()),
+                city: v.get("city").and_then(|v| v.as_str()).map(|s| s.to_string()),
+                region: v.get("region").and_then(|v| v.as_str()).map(|s| s.to_string()),
+                country: v.get("country").and_then(|v| v.as_str()).map(|s| s.to_string()),
+            },
+        },
+        ping
+    ))
 }
 
 async fn process_proxy(
@@ -182,10 +270,10 @@ async fn process_proxy(
     let csv_isp = if parts.len() > 3 { parts[3].trim().to_string() } else { "Unknown".to_string() };
 
     let start = Instant::now();
-    match check_proxy_worker(ip, port).await {
+    match check_proxy_cloudflare_session(ip, port, self_ip).await {
+    Ok((data, ping)) => {
         Ok(data) => {
             if data.ip != self_ip && !data.ip.is_empty() {
-                let ping = start.elapsed().as_millis();
                 
                 let info = ProxyInfo {
                     ip: data.ip,
