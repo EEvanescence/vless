@@ -208,13 +208,11 @@ async fn check_proxy_worker(ip: &str, port: u16, self_ip: &str) -> Result<(Worke
     let timeout = Duration::from_secs(DEFAULT_TIMEOUT_SECONDS);
     let start_ping = Instant::now();
 
-    // 1. TCP Connect
     let tcp = tokio::time::timeout(timeout, TcpStream::connect(format!("{}:{}", ip, port)))
         .await
         .context("Timeout")?
         .context("Connect Failed")?;
 
-    // 2. TLS Handshake
     let tls = TokioTlsConnector::from(TlsConnector::builder().build()?);
     let mut stream = tokio::time::timeout(timeout, tls.connect("speed.cloudflare.com", tcp))
         .await
@@ -233,7 +231,6 @@ async fn check_proxy_worker(ip: &str, port: u16, self_ip: &str) -> Result<(Worke
     );
     stream.write_all(req.as_bytes()).await?;
 
-    // 4. Read Response
     let mut buf = Vec::new();
     let mut tmp = [0u8; 8192];
     loop {
@@ -342,9 +339,8 @@ fn write_markdown_file(
 
     let now = Utc::now();
     let tehran_now = now.with_timezone(&Tehran);
-    
-    // تاریخ تمیز برای نمایش در متن
-    let last_updated_str = tehran_now.format("%a, %d %b %Y %H:%M").to_string(); 
+
+    let last_updated_str = tehran_now.format("%a, %d %b %Y %H:%M").to_string();
 
     writeln!(
         file,
@@ -369,13 +365,12 @@ fn write_markdown_file(
 </p>
 "##,
         sparkline = sparkline_url,
-        last = last_updated_str, // 🔥 اینجا دیگه encode شده نیست و درست نمایش داده میشه
+        last = last_updated_str,
         active = total_active,
         countries = total_countries,
         latency = avg_ping,
     )?;
 
-    // Providers Section
     let top_providers = ["Google", "Amazon", "Cloudflare", "Tencent", "Hetzner"];
     let mut provider_buckets: HashMap<&str, Vec<(ProxyInfo, u128)>> = HashMap::new();
     for prov in top_providers.iter() { provider_buckets.insert(prov, Vec::new()); }
@@ -391,6 +386,7 @@ fn write_markdown_file(
             }
         }
     }
+
 
     for prov in top_providers.iter() {
         if let Some(list) = provider_buckets.get(prov) {
@@ -410,15 +406,17 @@ fn write_markdown_file(
         }
     }
 
-    // Countries Section
     for (code, list) in proxies_by_country {
         let mut sorted = list.clone();
         sorted.sort_by_key(|&(_, p)| p);
         let flag = country_flag(code);
-        writeln!(file, "## {} {} ({})", flag, get_country_name(code), sorted.len())?;
+        let country_name = get_country_name(code);
+        
+        writeln!(file, "## {} {} ({})", flag, country_name, sorted.len())?;
         writeln!(file, "<details><summary>Expand</summary>\n")?;
         writeln!(file, "| IP | ISP | Location | Ping |")?;
         writeln!(file, "|:---|:---|:---:|:---:|")?;
+        
         for (info, ping) in sorted {
             let emoji = if ping < 1000 { "⚡" } else { "🐢" };
             writeln!(file, "| `{}` | {} | {}, {} | {}ms {} |", info.ip, info.isp, info.region, info.city, ping, emoji)?;
@@ -429,45 +427,17 @@ fn write_markdown_file(
     Ok(())
 }
 
-
-fn provider_logo_html(isp: &str) -> Option<String> {
-    let mapping = [
-        ("Google", "google.com"),
-        ("Amazon", "amazon.com"),
-        ("Cloudflare", "cloudflare.com"),
-        ("Hetzner", "hetzner.com"),
-        ("Hostinger", "hostinger.com"),
-        ("Tencent", "www.tencent.com"),
-        ("DigitalOcean", "digitalocean.com"),
-        ("Vultr", "vultr.com"),
-    ];
-    for (kw, domain) in mapping.iter() {
-        if isp.to_lowercase().contains(&kw.to_lowercase()) {
-            let html = format!(
-                "<img alt=\"{}\" src=\"https://www.google.com/s2/favicons?sz=22&domain_url={}\" />",
-                isp, domain
-            );
-            return Some(html);
-        }
-    }
-
-    None
-}
-
 fn country_flag(code: &str) -> String {
-    code.chars()
-        .filter_map(|c| {
-            if c.is_ascii_alphabetic() {
-                Some(char::from_u32(0x1F1E6 + (c.to_ascii_uppercase() as u32 - 'A' as u32)).unwrap())
-            } else {
-                None
-            }
-        })
-        .collect()
+    code.chars().filter_map(|c| {
+        if c.is_ascii_alphabetic() {
+            Some(char::from_u32(0x1F1E6 + (c.to_ascii_uppercase() as u32 - 'A' as u32)).unwrap())
+        } else { None }
+    }).collect()
 }
 
 fn get_country_name(code: &str) -> String {
     match code.to_uppercase().as_str() {
+        "IR" => "Iran".to_string(),
         "US" => "United States".to_string(),
         "DE" => "Germany".to_string(),
         "GB" => "United Kingdom".to_string(),
@@ -477,45 +447,10 @@ fn get_country_name(code: &str) -> String {
         "AU" => "Australia".to_string(),
         "JP" => "Japan".to_string(),
         "CN" => "China".to_string(),
-        "SG" => "Singapore".to_string(),
-        "KR" => "South Korea".to_string(),
-        "IN" => "India".to_string(),
         "RU" => "Russia".to_string(),
-        "BR" => "Brazil".to_string(),
-        "IT" => "Italy".to_string(),
-        "ES" => "Spain".to_string(),
-        "SE" => "Sweden".to_string(),
-        "CH" => "Switzerland".to_string(),
         "TR" => "Turkey".to_string(),
-        "PL" => "Poland".to_string(),
-        "FI" => "Finland".to_string(),
-        "NO" => "Norway".to_string(),
-        "IE" => "Ireland".to_string(),
-        "BE" => "Belgium".to_string(),
-        "AT" => "Austria".to_string(),
-        "DK" => "Denmark".to_string(),
-        "CZ" => "Czech Republic".to_string(),
-        "UA" => "Ukraine".to_string(),
-        "HK" => "Hong Kong".to_string(),
-        "TW" => "Taiwan".to_string(),
-        "IR" => "Iran".to_string(),
-        "ZA" => "South Africa".to_string(),
-        "RO" => "Romania".to_string(),
-        "ID" => "Indonesia".to_string(),
-        "VN" => "Vietnam".to_string(),
-        "TH" => "Thailand".to_string(),
-        "MY" => "Malaysia".to_string(),
-        "MX" => "Mexico".to_string(),
-        "AR" => "Argentina".to_string(),
-        "CL" => "Chile".to_string(),
-        "CO" => "Colombia".to_string(),
-        "IL" => "Israel".to_string(),
         "AE" => "United Arab Emirates".to_string(),
-        "SA" => "Saudi Arabia".to_string(),
-        "PT" => "Portugal".to_string(),
-        "HU" => "Hungary".to_string(),
-        "GR" => "Greece".to_string(),
-        "BG" => "Bulgaria".to_string(),
+        "SG" => "Singapore".to_string(),
         _ => code.to_string(),
     }
 }
@@ -523,14 +458,7 @@ fn get_country_name(code: &str) -> String {
 fn read_proxy_file(file_path: &str) -> io::Result<Vec<String>> {
     let file = File::open(file_path)?;
     let reader = BufReader::new(file);
-    let mut proxies = Vec::new();
-
-    for line in reader.lines() {
-        let line = line?;
-        if !line.trim().is_empty() {
-            proxies.push(line);
-        }
-    }
-
-    Ok(proxies)
+    Ok(reader.lines().filter_map(Result::ok).filter(|l| !l.trim().is_empty()).collect())
 }
+
+fn provider_logo_html(_: &str) -> Option<String> { None }
