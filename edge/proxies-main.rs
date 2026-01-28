@@ -144,37 +144,62 @@ async fn fetch_self_ip() -> Result<String> {
     Ok(resp.trim().to_string())
 }
 
-async fn check_proxy_worker(ip: &str, port: u16, self_ip: &str) -> Result<(WorkerResponse, u128)> {
+async fn check_proxy_worker(
+    ip: &str,
+    port: u16,
+    self_ip: &str,
+) -> Result<(WorkerResponse, u128)> {
     use anyhow::anyhow;
+    use tokio::net::TcpStream;
+    use tokio::io::{AsyncReadExt, AsyncWriteExt};
+    use native_tls::TlsConnector;
+    use tokio_native_tls::TlsConnector as TokioTlsConnector;
 
-    let proxy_url = format!("http://{}:{}", ip, port);
-    let proxy = reqwest::Proxy::all(&proxy_url)?;
+    let timeout = Duration::from_secs(DEFAULT_TIMEOUT_SECONDS);
 
-    let start = Instant::now();
+    let start_ping = Instant::now();
+    let tcp = tokio::time::timeout(
+        timeout,
+        TcpStream::connect(format!("{}:{}", ip, port))
+    ).await??;
 
-    let client = reqwest::Client::builder()
-        .proxy(proxy)
-        .timeout(Duration::from_secs(DEFAULT_TIMEOUT_SECONDS))
-        .user_agent("Mozilla/5.0 (Windows NT 10.0; Win64; x64)")
-        .build()?;
+    let tls = TokioTlsConnector::from(
+        TlsConnector::builder().build()?
+    );
 
-    let resp = client
-        .get("https://speed.cloudflare.com/meta")
-        .header("Accept", "*/*")
-        .header("Accept-Encoding", "identity")
-        .header("Referer", "https://speed.cloudflare.com/")
-        .send()
-        .await?;
+    let mut stream = tokio::time::timeout(
+        timeout,
+        tls.connect("speed.cloudflare.com", tcp)
+    ).await??;
 
-    let ping = start.elapsed().as_millis();
+    let ping = start_ping.elapsed().as_millis();
 
-    let text = resp.text().await?;
+    let req = concat!(
+        "GET /meta HTTP/1.1\r\n",
+        "Host: speed.cloudflare.com\r\n",
+        "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64)\r\n",
+        "Accept: */*\r\n",
+        "Accept-Encoding: identity\r\n",
+        "Referer: https://speed.cloudflare.com/\r\n",
+        "Origin: https://speed.cloudflare.com\r\n",
+        "Connection: close\r\n\r\n"
+    );
 
-    let json_start = text.find('{').ok_or_else(|| anyhow!("no json"))?;
-    let json_end = text.rfind('}').ok_or_else(|| anyhow!("no json"))?;
-    let json_str = &text[json_start..=json_end];
+    stream.write_all(req.as_bytes()).await?;
 
-    let v: serde_json::Value = serde_json::from_str(json_str)?;
+    let mut buf = Vec::new();
+    let mut tmp = [0u8; 8192];
+    while let Ok(n) = stream.read(&mut tmp).await {
+        if n == 0 { break; }
+        buf.extend_from_slice(&tmp[..n]);
+    }
+
+    let text = String::from_utf8_lossy(&buf);
+    let s = text.find('{').ok_or_else(|| anyhow!("no json"))?;
+    let e = text.rfind('}').ok_or_else(|| anyhow!("no json"))?;
+    let json = &text[s..=e];
+
+    let v: serde_json::Value = serde_json::from_str(json)?;
 
     let out_ip = v.get("clientIp")
         .and_then(|v| v.as_str())
@@ -189,10 +214,10 @@ async fn check_proxy_worker(ip: &str, port: u16, self_ip: &str) -> Result<(Worke
         WorkerResponse {
             ip: out_ip,
             cf: WorkerCf {
-                isp: v.get("asOrganization").and_then(|v| v.as_str()).map(|s| s.to_string()),
-                city: v.get("city").and_then(|v| v.as_str()).map(|s| s.to_string()),
-                region: v.get("region").and_then(|v| v.as_str()).map(|s| s.to_string()),
-                country: v.get("country").and_then(|v| v.as_str()).map(|s| s.to_string()),
+                isp: v.get("asOrganization").and_then(|v| v.as_str()).map(String::from),
+                city: v.get("city").and_then(|v| v.as_str()).map(String::from),
+                region: v.get("region").and_then(|v| v.as_str()).map(String::from),
+                country: v.get("country").and_then(|v| v.as_str()).map(String::from),
             },
         },
         ping
