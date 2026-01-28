@@ -1,5 +1,8 @@
-use anyhow::{Context, Result};
+use anyhow::{anyhow, Context, Result};
 use clap::Parser;
+use colored::*;
+use futures::StreamExt;
+use reqwest::Client;
 use serde::Deserialize;
 use std::collections::{BTreeMap, HashMap};
 use std::fs::{self, File};
@@ -9,26 +12,23 @@ use std::sync::{Arc, Mutex};
 use std::time::{Duration, Instant};
 use chrono::{Duration as ChronoDuration, Utc};
 use chrono_tz::Asia::Tehran;
-use colored::*;
-use futures::StreamExt;
-use reqwest::Client;
 
 const DEFAULT_PROXY_FILE: &str = "edge/assets/p-list-january.txt";
 const DEFAULT_OUTPUT_FILE: &str = "sub/ProxyIP-Daily.md";
 const DEFAULT_MAX_CONCURRENT: usize = 50;
 const DEFAULT_TIMEOUT_SECONDS: u64 = 6;
 const REQUEST_DELAY_MS: u64 = 50;
-const CHECK_URL: &str = "https://ipp.nscl.ir"; 
+const CHECK_URL: &str = "https://ipp.nscl.ir";
 
 const GOOD_ISPS: &[&str] = &[
-    "M247","OVH","Vultr","GCore","IONOS","Google","Amazon","NetLab","Akamai","Turunc","Contabo",
-    "UpCloud","Tencent","Hetzner","Multacom","HostPapa","Ultahost","DataCamp","Bluehost",
-    "Scaleway","DO Space","Leaseweb","Hostinger","netcup GmbH","Protilab","ByteDance","RackSpace",
-    "SiteGround","Online Ltd","The Empire","Cloudflare","Relink LTD","PQ Hosting","Gigahost AS",
-    "White Label","G-Core Labs","3HCLOUD LLC","HOSTKEY B.V","DigitalOcean","3NT SOLUTION",
-    "Zenlayer Inc","RackNerd LLC","Plant Holding","WorkTitans","IROKO Networks","WorldStream",
-    "Cluster","The Constant Company","Cogent Communications","Metropolis networks inc",
-    "Total Uptime Technologies",
+    "M247", "OVH", "Vultr", "GCore", "IONOS", "Google", "Amazon", "NetLab", "Akamai", "Turunc",
+    "Contabo", "UpCloud", "Tencent", "Hetzner", "Multacom", "HostPapa", "Ultahost", "DataCamp",
+    "Bluehost", "Scaleway", "DO Space", "Leaseweb", "Hostinger", "netcup GmbH", "Protilab",
+    "ByteDance", "RackSpace", "SiteGround", "Online Ltd", "The Empire", "Cloudflare", "Relink LTD",
+    "PQ Hosting", "Gigahost AS", "White Label", "G-Core Labs", "3HCLOUD LLC", "HOSTKEY B.V",
+    "DigitalOcean", "3NT SOLUTION", "Zenlayer Inc", "RackNerd LLC", "Plant Holding", "WorkTitans",
+    "IROKO Networks", "WorldStream", "Cluster", "The Constant Company", "Cogent Communications",
+    "Metropolis networks inc", "Total Uptime Technologies",
 ];
 
 #[derive(Parser, Clone)]
@@ -71,6 +71,17 @@ struct ProxyInfo {
     region: String,
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+enum ProxyErrorKind {
+    Timeout,
+    Connect, // TCP / Connection Refused
+    Tls,     // SSL/TLS Handshake
+    Http,    // Bad Status Code / Protocol
+    Json,    // Parse Error
+    IpMatch, // IP Leak / Transparent Proxy
+    Unknown,
+}
+
 #[tokio::main]
 async fn main() -> Result<()> {
     let args = Args::parse();
@@ -96,33 +107,73 @@ async fn main() -> Result<()> {
             port_ok && isp_ok
         })
         .collect();
-    println!("Filtered to {} good proxies (port 443 + ISP whitelist)", proxies.len());
+    println!(
+        "Filtered to {} good proxies (port 443 + ISP whitelist)",
+        proxies.len()
+    );
 
     let self_ip = fetch_self_ip().await.unwrap_or_else(|_| "0.0.0.0".to_string());
     println!("Your real IP: {}", self_ip);
 
     let active_proxies = Arc::new(Mutex::new(BTreeMap::<String, Vec<(ProxyInfo, u128)>>::new()));
+    
+    let error_stats = Arc::new(Mutex::new(HashMap::<ProxyErrorKind, usize>::new()));
 
-    let tasks = futures::stream::iter(
-        proxies.into_iter().map(|proxy_line| {
-            let active_proxies = Arc::clone(&active_proxies);
-            let self_ip = self_ip.clone();
-            async move {
-                tokio::time::sleep(Duration::from_millis(REQUEST_DELAY_MS)).await;
-                process_proxy(proxy_line, &active_proxies, &self_ip).await;
-            }
-        })
-    )
+    let tasks = futures::stream::iter(proxies.into_iter().map(|proxy_line| {
+        let active_proxies = Arc::clone(&active_proxies);
+        let error_stats = Arc::clone(&error_stats);
+        let self_ip = self_ip.clone();
+        async move {
+            tokio::time::sleep(Duration::from_millis(REQUEST_DELAY_MS)).await;
+            process_proxy(proxy_line, &active_proxies, &error_stats, &self_ip).await;
+        }
+    }))
     .buffer_unordered(args.max_concurrent)
     .collect::<Vec<()>>();
 
     tasks.await;
 
     let locked_proxies = active_proxies.lock().unwrap_or_else(|e| e.into_inner());
-    write_markdown_file(&locked_proxies, &args.output_file).context("Failed to write Markdown file")?;
+    write_markdown_file(&locked_proxies, &args.output_file)
+        .context("Failed to write Markdown file")?;
+    
+    println!("\n{}", "=== DEAD PROXY SUMMARY ===".bold().white());
+    let stats = error_stats.lock().unwrap();
+
+    let mut sorted_stats: Vec<_> = stats.iter().collect();
+    sorted_stats.sort_by(|a, b| b.1.cmp(a.1));
+
+    for (kind, count) in sorted_stats {
+        println!("{:?}: {}", kind, count.to_string().yellow());
+    }
+    println!("==========================\n");
 
     println!("Proxy checking completed.");
     Ok(())
+}
+
+
+fn classify_error(e: &anyhow::Error) -> ProxyErrorKind {
+    let msg = e.to_string().to_lowercase();
+    if msg.contains("timeout") || msg.contains("timed out") {
+        ProxyErrorKind::Timeout
+    } else if msg.contains("tls") || msg.contains("ssl") || msg.contains("certificate") {
+        ProxyErrorKind::Tls
+    } else if msg.contains("json") || msg.contains("deserialize") {
+        ProxyErrorKind::Json
+    } else if msg.contains("ip match") {
+        ProxyErrorKind::IpMatch
+    } else if msg.contains("connection refused")
+        || msg.contains("reset by peer")
+        || msg.contains("target machine actively refused")
+        || msg.contains("network is unreachable")
+    {
+        ProxyErrorKind::Connect
+    } else if msg.contains("http") || msg.contains("status") {
+        ProxyErrorKind::Http
+    } else {
+        ProxyErrorKind::Unknown
+    }
 }
 
 async fn fetch_self_ip() -> Result<String> {
@@ -130,7 +181,6 @@ async fn fetch_self_ip() -> Result<String> {
         .timeout(Duration::from_secs(5))
         .user_agent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
         .build()?;
-    
     match client.get(CHECK_URL).send().await {
         Ok(resp) => {
             if let Ok(json) = resp.json::<WorkerResponse>().await {
@@ -139,8 +189,13 @@ async fn fetch_self_ip() -> Result<String> {
         }
         Err(_) => {}
     }
-    
-    let resp = client.get("https://api.ipify.org").send().await?.text().await?;
+
+    let resp = client
+        .get("https://api.ipify.org")
+        .send()
+        .await?
+        .text()
+        .await?;
     Ok(resp.trim().to_string())
 }
 
@@ -149,28 +204,26 @@ async fn check_proxy_worker(
     port: u16,
     self_ip: &str,
 ) -> Result<(WorkerResponse, u128)> {
-    use anyhow::anyhow;
-    use tokio::net::TcpStream;
-    use tokio::io::{AsyncReadExt, AsyncWriteExt};
     use native_tls::TlsConnector;
+    use tokio::io::{AsyncReadExt, AsyncWriteExt};
+    use tokio::net::TcpStream;
     use tokio_native_tls::TlsConnector as TokioTlsConnector;
 
     let timeout = Duration::from_secs(DEFAULT_TIMEOUT_SECONDS);
 
     let start_ping = Instant::now();
-    let tcp = tokio::time::timeout(
-        timeout,
-        TcpStream::connect(format!("{}:{}", ip, port))
-    ).await??;
+    
+    let tcp = tokio::time::timeout(timeout, TcpStream::connect(format!("{}:{}", ip, port)))
+        .await
+        .context("TCP Connect Timeout")?
+        .context("TCP Connect Failed")?;
 
-    let tls = TokioTlsConnector::from(
-        TlsConnector::builder().build()?
-    );
 
-    let mut stream = tokio::time::timeout(
-        timeout,
-        tls.connect("speed.cloudflare.com", tcp)
-    ).await??;
+    let tls = TokioTlsConnector::from(TlsConnector::builder().build()?);
+    let mut stream = tokio::time::timeout(timeout, tls.connect("speed.cloudflare.com", tcp))
+        .await
+        .context("TLS Handshake Timeout")?
+        .context("TLS Handshake Failed")?;
 
     let ping = start_ping.elapsed().as_millis();
 
@@ -184,36 +237,44 @@ async fn check_proxy_worker(
         "Origin: https://speed.cloudflare.com\r\n",
         "Connection: close\r\n\r\n"
     );
-
     stream.write_all(req.as_bytes()).await?;
 
     let mut buf = Vec::new();
     let mut tmp = [0u8; 8192];
-    while let Ok(n) = stream.read(&mut tmp).await {
-        if n == 0 { break; }
-        buf.extend_from_slice(&tmp[..n]);
+    loop {
+
+        let read_result = tokio::time::timeout(timeout, stream.read(&mut tmp)).await;
+        
+        match read_result {
+            Ok(Ok(n)) if n == 0 => break, // EOF
+            Ok(Ok(n)) => buf.extend_from_slice(&tmp[..n]),
+            Ok(Err(e)) => return Err(anyhow!("Read Error: {}", e)),
+            Err(_) => return Err(anyhow!("Read Timeout")),
+        }
     }
 
     let text = String::from_utf8_lossy(&buf);
-
-    // جدا کردن header و body
     let body = if let Some(pos) = text.find("\r\n\r\n") {
         &text[pos + 4..]
     } else {
         &text
     };
-
     let body = body.trim();
 
-    let v: serde_json::Value = serde_json::from_str(body)?;
+    if body.is_empty() {
+        return Err(anyhow!("Empty response body"));
+    }
 
-    let out_ip = v.get("clientIp")
+    let v: serde_json::Value = serde_json::from_str(body).context("JSON Parse Error")?;
+
+    let out_ip = v
+        .get("clientIp")
         .and_then(|v| v.as_str())
         .unwrap_or("")
         .to_string();
-
+    
     if out_ip.is_empty() || out_ip == self_ip {
-        return Err(anyhow!("IP match or empty"));
+        return Err(anyhow!("IP match or empty (Transparent Proxy)"));
     }
 
     Ok((
@@ -226,13 +287,14 @@ async fn check_proxy_worker(
                 country: v.get("country").and_then(|v| v.as_str()).map(String::from),
             },
         },
-        ping
+        ping,
     ))
 }
 
 async fn process_proxy(
     proxy_line: String,
     active_proxies: &Arc<Mutex<BTreeMap<String, Vec<(ProxyInfo, u128)>>>>,
+    error_stats: &Arc<Mutex<HashMap<ProxyErrorKind, usize>>>,
     self_ip: &str,
 ) {
     let parts: Vec<&str> = proxy_line.split(',').collect();
@@ -257,62 +319,87 @@ async fn process_proxy(
                 city: data.cf.city.unwrap_or_else(|| "Unknown".to_string()),
                 region: data.cf.region.unwrap_or_else(|| "Unknown".to_string()),
             };
-
             println!(
                 "{}",
                 format!("PROXY LIVE 🟩: {} ({} ms) - {}", ip, ping, info.city).green()
             );
-
             let mut active_proxies_locked =
                 active_proxies.lock().unwrap_or_else(|e| e.into_inner());
-
             active_proxies_locked
                 .entry(info.country_code.clone())
                 .or_default()
                 .push((info, ping));
         }
         Err(e) => {
-            println!("PROXY DEAD ❌: {} ({})", ip, e);
+
+            let kind = classify_error(&e);
+            {
+                let mut stats = error_stats.lock().unwrap();
+                *stats.entry(kind).or_default() += 1;
+            }
+            
+            println!(
+                "{}",
+                format!("PROXY DEAD ❌ [{:?}]: {} ({})", kind, ip, e).red()
+            );
         }
     }
 }
 
-fn write_markdown_file(proxies_by_country: &BTreeMap<String, Vec<(ProxyInfo, u128)>>, output_file: &str) -> io::Result<()> {
+fn write_markdown_file(
+    proxies_by_country: &BTreeMap<String, Vec<(ProxyInfo, u128)>>,
+    output_file: &str,
+) -> io::Result<()> {
     let mut file = File::create(output_file)?;
-
     let total_active = proxies_by_country.values().map(|v| v.len()).sum::<usize>();
     let total_countries = proxies_by_country.len();
     let avg_ping = if total_active > 0 {
-        let sum_ping: u128 = proxies_by_country.values().flatten().map(|(_, p)| *p).sum();
+        let sum_ping: u128 = proxies_by_country
+            .values()
+            .flatten()
+            .map(|(_, p)| *p)
+            .sum();
         sum_ping / total_active as u128
     } else {
         0
     };
-
     let now = Utc::now();
     let tehran_now = now.with_timezone(&Tehran);
     let tehran_next = tehran_now + ChronoDuration::days(1);
     let last_updated_str = tehran_now.format("%a, %d %b %Y %H:%M").to_string();
     let next_update_str = tehran_next.format("%a, %d %b %Y %H:%M").to_string();
-
     fn encode_badge_label(s: &str) -> String {
         s.replace(' ', "%20")
-         .replace(':', "%3A")
-         .replace(',', "%2C")
-         .replace('+', "%2B")
-         .replace('(', "%28")
-         .replace(')', "%29")
+            .replace(':', "%3A")
+            .replace(',', "%2C")
+            .replace('+', "%2B")
+            .replace('(', "%28")
+            .replace(')', "%29")
     }
 
     let last_badge_label = encode_badge_label(&format!("{} (UTC+3:30)", last_updated_str));
     let next_badge_label = encode_badge_label(&format!("{} (UTC+3:30)", next_update_str));
 
-    let last_badge = format!("<img src=\"https://img.shields.io/badge/Last_Update-{}-966600\" />", last_badge_label);
-    let next_badge = format!("<img src=\"https://img.shields.io/badge/Next_Update-{}-966600\" />", next_badge_label);
-    let active_badge = format!("<img src=\"https://img.shields.io/badge/Active_Proxies-{}-966600\" />", total_active);
-    let countries_badge = format!("<img src=\"https://img.shields.io/badge/Countries-{}-966600\" />", total_countries);
-    let latency_badge = format!("<img src=\"https://img.shields.io/badge/Avg_Latency-{}ms-darkred\" />", avg_ping);
-
+    let last_badge = format!(
+        "<img src=\"https://img.shields.io/badge/Last_Update-{}-966600\" />",
+        last_badge_label
+    );
+    let next_badge = format!(
+        "<img src=\"https://img.shields.io/badge/Next_Update-{}-966600\" />",
+        next_badge_label
+    );
+    let active_badge = format!(
+        "<img src=\"https://img.shields.io/badge/Active_Proxies-{}-966600\" />",
+        total_active
+    );
+    let countries_badge = format!(
+        "<img src=\"https://img.shields.io/badge/Countries-{}-966600\" />",
+        total_countries
+    );
+    let latency_badge = format!(
+        "<img src=\"https://img.shields.io/badge/Avg_Latency-{}ms-darkred\" />",
+        avg_ping
+    );
 
     writeln!(
         file,
@@ -410,7 +497,6 @@ fn write_markdown_file(proxies_by_country: &BTreeMap<String, Vec<(ProxyInfo, u12
         sorted_proxies.sort_by_key(|&(_, ping)| ping);
         let flag = country_flag(country_code);
         let name = get_country_name(country_code);
-
         writeln!(
             file,
             "## {} {} ({} proxies)",
@@ -459,7 +545,6 @@ fn provider_logo_html(isp: &str) -> Option<String> {
         ("DigitalOcean", "digitalocean.com"),
         ("Vultr", "vultr.com"),
     ];
-
     for (kw, domain) in mapping.iter() {
         if isp.to_lowercase().contains(&kw.to_lowercase()) {
             let html = format!(
