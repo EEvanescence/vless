@@ -195,11 +195,17 @@ async fn check_proxy_worker(
     }
 
     let text = String::from_utf8_lossy(&buf);
-    let s = text.find('{').ok_or_else(|| anyhow!("no json"))?;
-    let e = text.rfind('}').ok_or_else(|| anyhow!("no json"))?;
-    let json = &text[s..=e];
 
-    let v: serde_json::Value = serde_json::from_str(json)?;
+    // جدا کردن header و body
+    let body = if let Some(pos) = text.find("\r\n\r\n") {
+        &text[pos + 4..]
+    } else {
+        &text
+    };
+
+    let body = body.trim();
+
+    let v: serde_json::Value = serde_json::from_str(body)?;
 
     let out_ip = v.get("clientIp")
         .and_then(|v| v.as_str())
