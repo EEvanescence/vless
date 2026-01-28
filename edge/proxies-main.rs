@@ -264,31 +264,37 @@ async fn process_proxy(
     if parts.len() < 2 {
         return;
     }
+
     let ip = parts[0];
     let port = parts[1].parse::<u16>().unwrap_or(443);
-    
-    let csv_isp = if parts.len() > 3 { parts[3].trim().to_string() } else { "Unknown".to_string() };
+    let csv_isp = if parts.len() > 3 {
+        parts[3].trim().to_string()
+    } else {
+        "Unknown".to_string()
+    };
 
-    let start = Instant::now();
     match check_proxy_cloudflare_session(ip, port, self_ip).await {
-    Ok((data, ping)) => {
-        Ok(data) => {
-            if data.ip != self_ip && !data.ip.is_empty() {
-                
-                let info = ProxyInfo {
-                    ip: data.ip,
-                    isp: data.cf.isp.unwrap_or(csv_isp), 
-                    country_code: data.cf.country.unwrap_or_else(|| "XX".to_string()),
-                    city: data.cf.city.unwrap_or_else(|| "Unknown".to_string()),
-                    region: data.cf.region.unwrap_or_else(|| "Unknown".to_string()),
-                };
+        Ok((data, ping)) => {
+            let info = ProxyInfo {
+                ip: data.ip,
+                isp: data.cf.isp.unwrap_or(csv_isp),
+                country_code: data.cf.country.unwrap_or_else(|| "XX".to_string()),
+                city: data.cf.city.unwrap_or_else(|| "Unknown".to_string()),
+                region: data.cf.region.unwrap_or_else(|| "Unknown".to_string()),
+            };
 
-                println!("{}", format!("PROXY LIVE 🟩: {} ({} ms) - {}", ip, ping, info.city).green());
-                let mut active_proxies_locked = active_proxies.lock().unwrap_or_else(|e| e.into_inner());
-                active_proxies_locked.entry(info.country_code.clone()).or_default().push((info, ping));
-            } else {
-                println!("PROXY DEAD ❌: {} (IP match or empty)", ip);
-            }
+            println!(
+                "{}",
+                format!("PROXY LIVE 🟩: {} ({} ms) - {}", ip, ping, info.city).green()
+            );
+
+            let mut active_proxies_locked =
+                active_proxies.lock().unwrap_or_else(|e| e.into_inner());
+
+            active_proxies_locked
+                .entry(info.country_code.clone())
+                .or_default()
+                .push((info, ping));
         }
         Err(e) => {
             println!("PROXY DEAD ❌: {} ({})", ip, e);
