@@ -147,20 +147,22 @@ async fn fetch_self_ip() -> Result<String> {
 async fn check_proxy_worker(ip: &str, port: u16, self_ip: &str) -> Result<(WorkerResponse, u128)> {
     use anyhow::anyhow;
 
-    let proxy_url = format!("https://{}:{}", ip, port);
-    let proxy = reqwest::Proxy::https(&proxy_url)?;
+    let proxy_url = format!("http://{}:{}", ip, port);
+    let proxy = reqwest::Proxy::all(&proxy_url)?;
 
     let start = Instant::now();
 
     let client = reqwest::Client::builder()
         .proxy(proxy)
         .timeout(Duration::from_secs(DEFAULT_TIMEOUT_SECONDS))
-        .user_agent("Mozilla/5.0")
+        .user_agent("Mozilla/5.0 (Windows NT 10.0; Win64; x64)")
         .build()?;
 
     let resp = client
         .get("https://speed.cloudflare.com/meta")
+        .header("Accept", "*/*")
         .header("Accept-Encoding", "identity")
+        .header("Referer", "https://speed.cloudflare.com/")
         .send()
         .await?;
 
