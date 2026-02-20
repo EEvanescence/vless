@@ -892,11 +892,23 @@ function socks5AddressParser(address) {
  */
 function handleConfigPage(userID, hostName, proxyAddress) {
   const dream = buildLink({
-    core: "xray", proto: "tls", userID, hostName, address: hostName, port: 443, tag: `${hostName}-Xray`,
+    core: "xray",
+    proto: "tls",
+    userID,
+    hostName,
+    address: hostName,
+    port: 443,
+    tag: `${hostName}-Xray`,
   });
 
   const freedom = buildLink({
-    core: "sb", proto: "tls", userID, hostName, address: hostName, port: 443, tag: `${hostName}-Singbox`,
+    core: "sb",
+    proto: "tls",
+    userID,
+    hostName,
+    address: hostName,
+    port: 443,
+    tag: `${hostName}-Singbox`,
   });
 
   const encodedSubName = encodeURIComponent("INDEX");
@@ -910,9 +922,18 @@ function handleConfigPage(userID, hostName, proxyAddress) {
     .replace(/{{CONFIG_DREAM}}/g, dream)
     .replace(/{{CONFIG_FREEDOM}}/g, freedom)
     .replace(/{{URL_HIDDIFY}}/g, `hiddify://install-config?url=${encodeURIComponent(subXrayUrl)}`)
-    .replace(/{{URL_V2RAYNG}}/g, `v2rayng://install-config?url=${encodeURIComponent(subXrayUrl)}#${encodedSubName}`)
-    .replace(/{{URL_CLASH}}/g, `clash://install-config?url=${encodeURIComponent(`https://revil-sub.pages.dev/sub/clash-meta?url=${subSbUrl}`)}`)
-    .replace(/{{URL_EXCLAVE}}/g, `sn://subscription?url=${encodeURIComponent(subSbUrl)}&name=${encodedSubName}`);
+    .replace(
+      /{{URL_V2RAYNG}}/g,
+      `v2rayng://install-config?url=${encodeURIComponent(subXrayUrl)}#${encodedSubName}`,
+    )
+    .replace(
+      /{{URL_CLASH}}/g,
+      `clash://install-config?url=${encodeURIComponent(`https://revil-sub.pages.dev/sub/clash-meta?url=${subSbUrl}`)}`,
+    )
+    .replace(
+      /{{URL_EXCLAVE}}/g,
+      `sn://subscription?url=${encodeURIComponent(subSbUrl)}&name=${encodedSubName}`,
+    );
 
   return new Response(finalHTML, { headers: { "Content-Type": "text/html; charset=utf-8" } });
 }
@@ -953,18 +974,18 @@ export default {
         return handleIpSubscription(request, "sb", cfg.userID, url.hostname);
 
       if (url.pathname.startsWith(`/${cfg.userID}`)) {
-         // This is where we suspect the 1101 error occurs.
-         return handleConfigPage(cfg.userID, url.hostname, cfg.proxyAddress);
+        // This is where we suspect the 1101 error occurs.
+        return handleConfigPage(cfg.userID, url.hostname, cfg.proxyAddress);
       }
 
       return new Response(
-        "UUID not found. Please set the UUID environment variable in the Cloudflare dashboard.\nYour Path: " + url.pathname,
+        "UUID not found. Please set the UUID environment variable in the Cloudflare dashboard.\nYour Path: " +
+          url.pathname,
         { status: 404 },
       );
-
     } catch (err) {
       const errorText = `CRITICAL ERROR:\nMessage: ${err.message}\nStack: ${err.stack}`;
-      return new Response(errorText, { status: 500, headers: {"content-type": "text/plain"} });
+      return new Response(errorText, { status: 500, headers: { "content-type": "text/plain" } });
     }
   },
 };
