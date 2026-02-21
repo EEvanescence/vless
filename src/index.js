@@ -24,7 +24,7 @@ import { connect } from "cloudflare:sockets";
 
 const decodeSecure = (encoded) => atob(encoded);
 
-const HTML_URL = "https://nirevil.github.io/zizifn/"; 
+const HTML_URL = "https://nirevil.github.io/zizifn/";
 
 const Config = {
   userID: "be0ff9df-1468-41a0-8865-796d1c6800db",
@@ -44,7 +44,8 @@ const Config = {
    * @param {{ PROXYIP: string; UUID: any; SCAMALYTICS_USERNAME: any; SCAMALYTICS_API_KEY: any; SCAMALYTICS_BASEURL: any; SOCKS5: any; SOCKS5_RELAY: string; }} env
    */
   fromEnv(env) {
-    const selectedProxyIP = env.PROXYIP || this.proxyIPs[Math.floor(Math.random() * this.proxyIPs.length)];
+    const selectedProxyIP =
+      env.PROXYIP || this.proxyIPs[Math.floor(Math.random() * this.proxyIPs.length)];
     const [proxyHost, proxyPort = "443"] = selectedProxyIP.split(":");
 
     return {
@@ -106,13 +107,35 @@ function generateRandomPath(length = 28, query = "") {
 const CORE_PRESETS = {
   // Xray cores – Dream
   xray: {
-    tls: { path: () => generateRandomPath(12, "ed=2560"), security: "tls", fp: "chrome", alpn: "http/1.1", extra: {} },
-    tcp: { path: () => generateRandomPath(12, "ed=2560"), security: "none", fp: "chrome", extra: {} },
+    tls: {
+      path: () => generateRandomPath(12, "ed=2560"),
+      security: "tls",
+      fp: "chrome",
+      alpn: "http/1.1",
+      extra: {},
+    },
+    tcp: {
+      path: () => generateRandomPath(12, "ed=2560"),
+      security: "none",
+      fp: "chrome",
+      extra: {},
+    },
   },
   // Singbox cores – Freedom
   sb: {
-    tls: { path: () => generateRandomPath(18), security: "tls", fp: "chrome", alpn: "http/1.1", extra: CONST.ED_PARAMS },
-    tcp: { path: () => generateRandomPath(18), security: "none", fp: "chrome", extra: CONST.ED_PARAMS },
+    tls: {
+      path: () => generateRandomPath(18),
+      security: "tls",
+      fp: "chrome",
+      alpn: "http/1.1",
+      extra: CONST.ED_PARAMS,
+    },
+    tcp: {
+      path: () => generateRandomPath(18),
+      security: "none",
+      fp: "chrome",
+      extra: CONST.ED_PARAMS,
+    },
   },
 };
 
@@ -124,7 +147,19 @@ function makeName(tag, proto) {
   return `${tag}-${proto.toUpperCase()}`;
 }
 
-function createVlessLink({ userID, address, port, host, path, security, sni, fp, alpn, extra = {}, name }) {
+function createVlessLink({
+  userID,
+  address,
+  port,
+  host,
+  path,
+  security,
+  sni,
+  fp,
+  alpn,
+  extra = {},
+  name,
+}) {
   const params = new URLSearchParams({
     type: decodeSecure("d3M="), // "ws"
     host,
@@ -213,41 +248,83 @@ async function handleIpSubscription(request, core, userID, hostName) {
   const isPagesDeployment = hostName.endsWith(".pages.dev");
 
   mainDomains.forEach((domain, i) => {
-    links.push(buildLink({ core, proto: "tls", userID, hostName, address: domain, port: pick(httpsPorts), tag: `Domain${i + 1}` }));
+    links.push(
+      buildLink({
+        core,
+        proto: "tls",
+        userID,
+        hostName,
+        address: domain,
+        port: pick(httpsPorts),
+        tag: `Domain${i + 1}`,
+      }),
+    );
     if (!isPagesDeployment) {
-      links.push(buildLink({ core, proto: "tcp", userID, hostName, address: domain, port: pick(httpPorts), tag: `Domain${i + 1}` }));
+      links.push(
+        buildLink({
+          core,
+          proto: "tcp",
+          userID,
+          hostName,
+          address: domain,
+          port: pick(httpPorts),
+          tag: `Domain${i + 1}`,
+        }),
+      );
     }
   });
 
   try {
-  const cache = caches.default;
-  const cacheKey = new Request("https://cf-ip-cache.local");
+    const cache = caches.default;
+    const cacheKey = new Request("https://cf-ip-cache.local");
 
-  let response = await cache.match(cacheKey);
+    let response = await cache.match(cacheKey);
 
-  if (!response) {
-    const r = await safeFetch("https://raw.githubusercontent.com/NiREvil/vless/refs/heads/main/Cloudflare-IPs.json", {}, 4000);
-    if (r.ok) {
-      response = new Response(await r.text(), {
-        headers: {
-          "Cache-Control": "public, max-age=86400"
-        }
-      });
-      ctx.waitUntil(cache.put(cacheKey, response.clone()));
+    if (!response) {
+      const r = await safeFetch(
+        "https://raw.githubusercontent.com/NiREvil/vless/refs/heads/main/Cloudflare-IPs.json",
+        {},
+        4000,
+      );
+      if (r.ok) {
+        response = new Response(await r.text(), {
+          headers: {
+            "Cache-Control": "public, max-age=86400",
+          },
+        });
+        ctx.waitUntil(cache.put(cacheKey, response.clone()));
+      }
     }
-  }
 
-  if (response) {
-    const json = await response.json();
-    const ips = [...(json.ipv4 || []), ...(json.ipv6 || [])]
-      .slice(0, 20)
-      .map((x) => x.ip);
+    if (response) {
+      const json = await response.json();
+      const ips = [...(json.ipv4 || []), ...(json.ipv6 || [])].slice(0, 20).map((x) => x.ip);
 
       ips.forEach((ip, i) => {
         const formattedAddress = ip.includes(":") ? `[${ip}]` : ip;
-        links.push(buildLink({ core, proto: "tls", userID, hostName, address: formattedAddress, port: pick(httpsPorts), tag: `IP${i + 1}` }));
+        links.push(
+          buildLink({
+            core,
+            proto: "tls",
+            userID,
+            hostName,
+            address: formattedAddress,
+            port: pick(httpsPorts),
+            tag: `IP${i + 1}`,
+          }),
+        );
         if (!isPagesDeployment) {
-          links.push(buildLink({ core, proto: "tcp", userID, hostName, address: formattedAddress, port: pick(httpPorts), tag: `IP${i + 1}` }));
+          links.push(
+            buildLink({
+              core,
+              proto: "tcp",
+              userID,
+              hostName,
+              address: formattedAddress,
+              port: pick(httpPorts),
+              tag: `IP${i + 1}`,
+            }),
+          );
         }
       });
     }
@@ -295,7 +372,9 @@ async function ProtocolOverWSHandler(request, config) {
   let address = "";
   let portWithRandomLog = "";
   let udpStreamWriter = null;
-  const log = (info, event) => { console.log(`[${address}:${portWithRandomLog}] ${info}`, event || ""); };
+  const log = (info, event) => {
+    console.log(`[${address}:${portWithRandomLog}] ${info}`, event || "");
+  };
   const earlyDataHeader = request.headers.get("Sec-WebSocket-Protocol") || "";
   const readableWebSocketStream = MakeReadableWebSocketStream(webSocket, earlyDataHeader, log);
   let remoteSocketWapper = { value: null };
@@ -312,7 +391,16 @@ async function ProtocolOverWSHandler(request, config) {
             return;
           }
 
-          const { hasError, message, addressType, portRemote = 443, addressRemote = "", rawDataIndex, ProtocolVersion = new Uint8Array([0, 0]), isUDP } = ProcessProtocolHeader(chunk, config.userID);
+          const {
+            hasError,
+            message,
+            addressType,
+            portRemote = 443,
+            addressRemote = "",
+            rawDataIndex,
+            ProtocolVersion = new Uint8Array([0, 0]),
+            isUDP,
+          } = ProcessProtocolHeader(chunk, config.userID);
           address = addressRemote;
           portWithRandomLog = `${portRemote}--${Math.random()} ${isUDP ? "udp" : "tcp"} `;
 
@@ -332,13 +420,29 @@ async function ProtocolOverWSHandler(request, config) {
             return;
           }
 
-          HandleTCPOutBound(remoteSocketWapper, addressType, addressRemote, portRemote, rawClientData, webSocket, vlessResponseHeader, log, config);
+          HandleTCPOutBound(
+            remoteSocketWapper,
+            addressType,
+            addressRemote,
+            portRemote,
+            rawClientData,
+            webSocket,
+            vlessResponseHeader,
+            log,
+            config,
+          );
         },
-        close() { log(`readableWebSocketStream closed`); },
-        abort(err) { log(`readableWebSocketStream aborted`, err); },
-      })
+        close() {
+          log(`readableWebSocketStream closed`);
+        },
+        abort(err) {
+          log(`readableWebSocketStream aborted`, err);
+        },
+      }),
     )
-    .catch((err) => { console.error("Pipeline failed:", err.stack || err); });
+    .catch((err) => {
+      console.error("Pipeline failed:", err.stack || err);
+    });
 
   return new Response(null, { status: 101, webSocket: client });
 }
@@ -359,7 +463,8 @@ function isValidUUID(uuid) {
 function randomizeCase(str) {
   let result = "";
   // 50% chance of making a big deal out of it.
-  for (let i = 0; i < str.length; i++) result += Math.random() < 0.5 ? str[i].toUpperCase() : str[i].toLowerCase();
+  for (let i = 0; i < str.length; i++)
+    result += Math.random() < 0.5 ? str[i].toUpperCase() : str[i].toLowerCase();
   return result;
 }
 
@@ -375,13 +480,25 @@ function randomizeCase(str) {
  * @param {{ (info: any, event: any): void; (arg0: string): void; }} log
  * @param {{ socks5Relay: any; parsedSocks5Address: any; enableSocks: any; proxyIP: any; proxyPort: any; userID?: string; socks5Address?: string; }} config
  */
-async function HandleTCPOutBound(remoteSocket, addressType, addressRemote, portRemote, rawClientData, webSocket, protocolResponseHeader, log, config) {
+async function HandleTCPOutBound(
+  remoteSocket,
+  addressType,
+  addressRemote,
+  portRemote,
+  rawClientData,
+  webSocket,
+  protocolResponseHeader,
+  log,
+  config,
+) {
   async function connectAndWrite(address, port, socks = false) {
     let tcpSocket;
     if (config.socks5Relay) {
       tcpSocket = await socks5Connect(addressType, address, port, log, config.parsedSocks5Address);
     } else {
-      tcpSocket = socks ? await socks5Connect(addressType, address, port, log, config.parsedSocks5Address) : connect({ hostname: address, port: port });
+      tcpSocket = socks
+        ? await socks5Connect(addressType, address, port, log, config.parsedSocks5Address)
+        : connect({ hostname: address, port: port });
     }
     remoteSocket.value = tcpSocket;
     log(`connected to ${address}:${port}`);
@@ -394,9 +511,15 @@ async function HandleTCPOutBound(remoteSocket, addressType, addressRemote, portR
   async function retry() {
     const tcpSocket = config.enableSocks
       ? await connectAndWrite(addressRemote, portRemote, true)
-      : await connectAndWrite(config.proxyIP || addressRemote, config.proxyPort || portRemote, false);
+      : await connectAndWrite(
+          config.proxyIP || addressRemote,
+          config.proxyPort || portRemote,
+          false,
+        );
 
-    tcpSocket.closed.catch((error) => console.log("retry tcpSocket closed error", error)).finally(() => safeCloseWebSocket(webSocket));
+    tcpSocket.closed
+      .catch((error) => console.log("retry tcpSocket closed error", error))
+      .finally(() => safeCloseWebSocket(webSocket));
     RemoteSocketToWS(tcpSocket, webSocket, protocolResponseHeader, null, log);
   }
 
@@ -414,14 +537,23 @@ function MakeReadableWebSocketStream(webSocketServer, earlyDataHeader, log) {
   return new ReadableStream({
     start(controller) {
       webSocketServer.addEventListener("message", (event) => controller.enqueue(event.data));
-      webSocketServer.addEventListener("close", () => { safeCloseWebSocket(webSocketServer); controller.close(); });
-      webSocketServer.addEventListener("error", (err) => { log("webSocketServer has error"); controller.error(err); });
+      webSocketServer.addEventListener("close", () => {
+        safeCloseWebSocket(webSocketServer);
+        controller.close();
+      });
+      webSocketServer.addEventListener("error", (err) => {
+        log("webSocketServer has error");
+        controller.error(err);
+      });
       const { earlyData, error } = base64ToArrayBuffer(earlyDataHeader);
       if (error) controller.error(error);
       else if (earlyData) controller.enqueue(earlyData);
     },
     pull(_controller) {},
-    cancel(reason) { log(`ReadableStream was canceled, due to ${reason}`); safeCloseWebSocket(webSocketServer); },
+    cancel(reason) {
+      log(`ReadableStream was canceled, due to ${reason}`);
+      safeCloseWebSocket(webSocketServer);
+    },
   });
 }
 
@@ -437,7 +569,8 @@ function ProcessProtocolHeader(protocolBuffer, userID) {
 
   const optLength = dataView.getUint8(17);
   const command = dataView.getUint8(18 + optLength);
-  if (command !== 1 && command !== 2) return { hasError: true, message: `command ${command} is not supported` };
+  if (command !== 1 && command !== 2)
+    return { hasError: true, message: `command ${command} is not supported` };
 
   const portIndex = 18 + optLength + 1;
   const portRemote = dataView.getUint16(portIndex);
@@ -446,26 +579,41 @@ function ProcessProtocolHeader(protocolBuffer, userID) {
 
   switch (addressType) {
     case 1: // IPv4
-      addressLength = 4; addressValueIndex = portIndex + 3;
-      addressValue = new Uint8Array(protocolBuffer.slice(addressValueIndex, addressValueIndex + addressLength)).join(".");
+      addressLength = 4;
+      addressValueIndex = portIndex + 3;
+      addressValue = new Uint8Array(
+        protocolBuffer.slice(addressValueIndex, addressValueIndex + addressLength),
+      ).join(".");
       break;
     case 2: // Domain
-      addressLength = dataView.getUint8(portIndex + 3); addressValueIndex = portIndex + 4;
-      addressValue = new TextDecoder().decode(protocolBuffer.slice(addressValueIndex, addressValueIndex + addressLength));
+      addressLength = dataView.getUint8(portIndex + 3);
+      addressValueIndex = portIndex + 4;
+      addressValue = new TextDecoder().decode(
+        protocolBuffer.slice(addressValueIndex, addressValueIndex + addressLength),
+      );
       break;
     case 3: // IPv6
-      addressLength = 16; addressValueIndex = portIndex + 3;
-      addressValue = Array.from({ length: 8 }, (_, i) => dataView.getUint16(addressValueIndex + i * 2).toString(16)).join(":");
+      addressLength = 16;
+      addressValueIndex = portIndex + 3;
+      addressValue = Array.from({ length: 8 }, (_, i) =>
+        dataView.getUint16(addressValueIndex + i * 2).toString(16),
+      ).join(":");
       break;
     default:
       return { hasError: true, message: `invalid addressType: ${addressType}` };
   }
 
-  if (!addressValue) return { hasError: true, message: `addressValue is empty, addressType is ${addressType}` };
+  if (!addressValue)
+    return { hasError: true, message: `addressValue is empty, addressType is ${addressType}` };
 
   return {
-    hasError: false, addressRemote: addressValue, addressType, portRemote,
-    rawDataIndex: addressValueIndex + addressLength, ProtocolVersion: new Uint8Array([version]), isUDP: command === 2,
+    hasError: false,
+    addressRemote: addressValue,
+    addressType,
+    portRemote,
+    rawDataIndex: addressValueIndex + addressLength,
+    ProtocolVersion: new Uint8Array([version]),
+    isUDP: command === 2,
   };
 }
 
@@ -483,21 +631,31 @@ async function RemoteSocketToWS(remoteSocket, webSocket, protocolResponseHeader,
     await remoteSocket.readable.pipeTo(
       new WritableStream({
         async write(chunk) {
-          if (webSocket.readyState !== CONST.WS_READY_STATE_OPEN) throw new Error("WebSocket is not open");
+          if (webSocket.readyState !== CONST.WS_READY_STATE_OPEN)
+            throw new Error("WebSocket is not open");
           hasIncomingData = true;
-          const dataToSend = protocolResponseHeader ? await new Blob([protocolResponseHeader, chunk]).arrayBuffer() : chunk;
+          const dataToSend = protocolResponseHeader
+            ? await new Blob([protocolResponseHeader, chunk]).arrayBuffer()
+            : chunk;
           webSocket.send(dataToSend);
           protocolResponseHeader = null;
         },
-        close() { log(`Remote connection readable closed.`); },
-        abort(reason) { console.error(`Remote connection readable aborted:`, reason); },
-      })
+        close() {
+          log(`Remote connection readable closed.`);
+        },
+        abort(reason) {
+          console.error(`Remote connection readable aborted:`, reason);
+        },
+      }),
     );
   } catch (error) {
     console.error(`RemoteSocketToWS error:`, error.stack || error);
     safeCloseWebSocket(webSocket);
   }
-  if (!hasIncomingData && retry) { log(`No incoming data, retrying`); await retry(); }
+  if (!hasIncomingData && retry) {
+    log(`No incoming data, retrying`);
+    await retry();
+  }
 }
 
 /**
@@ -512,7 +670,9 @@ function base64ToArrayBuffer(base64Str) {
     const view = new Uint8Array(buffer);
     for (let i = 0; i < binaryStr.length; i++) view[i] = binaryStr.charCodeAt(i);
     return { earlyData: buffer, error: null };
-  } catch (error) { return { earlyData: null, error }; }
+  } catch (error) {
+    return { earlyData: null, error };
+  }
 }
 
 /**
@@ -521,8 +681,14 @@ function base64ToArrayBuffer(base64Str) {
  */
 function safeCloseWebSocket(socket) {
   try {
-    if (socket.readyState === CONST.WS_READY_STATE_OPEN || socket.readyState === CONST.WS_READY_STATE_CLOSING) socket.close();
-  } catch (error) { console.error("safeCloseWebSocket error:", error); }
+    if (
+      socket.readyState === CONST.WS_READY_STATE_OPEN ||
+      socket.readyState === CONST.WS_READY_STATE_CLOSING
+    )
+      socket.close();
+  } catch (error) {
+    console.error("safeCloseWebSocket error:", error);
+  }
 }
 
 const byteToHex = Array.from({ length: 256 }, (_, i) => (i + 0x100).toString(16).slice(1));
@@ -531,7 +697,28 @@ const byteToHex = Array.from({ length: 256 }, (_, i) => (i + 0x100).toString(16)
  * @param {Uint8Array | (string | number)[]} arr
  */
 function unsafeStringify(arr, offset = 0) {
-  return (byteToHex[arr[offset]] + byteToHex[arr[offset + 1]] + byteToHex[arr[offset + 2]] + byteToHex[arr[offset + 3]] + "-" + byteToHex[arr[offset + 4]] + byteToHex[arr[offset + 5]] + "-" + byteToHex[arr[offset + 6]] + byteToHex[arr[offset + 7]] + "-" + byteToHex[arr[offset + 8]] + byteToHex[arr[offset + 9]] + "-" + byteToHex[arr[offset + 10]] + byteToHex[arr[offset + 11]] + byteToHex[arr[offset + 12]] + byteToHex[arr[offset + 13]] + byteToHex[arr[offset + 14]] + byteToHex[arr[offset + 15]]).toLowerCase();
+  return (
+    byteToHex[arr[offset]] +
+    byteToHex[arr[offset + 1]] +
+    byteToHex[arr[offset + 2]] +
+    byteToHex[arr[offset + 3]] +
+    "-" +
+    byteToHex[arr[offset + 4]] +
+    byteToHex[arr[offset + 5]] +
+    "-" +
+    byteToHex[arr[offset + 6]] +
+    byteToHex[arr[offset + 7]] +
+    "-" +
+    byteToHex[arr[offset + 8]] +
+    byteToHex[arr[offset + 9]] +
+    "-" +
+    byteToHex[arr[offset + 10]] +
+    byteToHex[arr[offset + 11]] +
+    byteToHex[arr[offset + 12]] +
+    byteToHex[arr[offset + 13]] +
+    byteToHex[arr[offset + 14]] +
+    byteToHex[arr[offset + 15]]
+  ).toLowerCase();
 }
 
 /*
@@ -564,32 +751,46 @@ async function createDnsPipeline(webSocket, vlessResponseHeader, log) {
     },
   });
 
-  transformStream.readable.pipeTo(
-    new WritableStream({
-      async write(chunk) {
-        try {
-          // Send DNS query using DoH
-          const resp = await safeFetch(`https://1.1.1.1/dns-query`, {
-            method: "POST",
-            headers: { "content-type": "application/dns-message" },
-            body: chunk
-          }, 3000);
-          const dnsQueryResult = await resp.arrayBuffer();
-          const udpSize = dnsQueryResult.byteLength;
-          const udpSizeBuffer = new Uint8Array([(udpSize >> 8) & 0xff, udpSize & 0xff]);
+  transformStream.readable
+    .pipeTo(
+      new WritableStream({
+        async write(chunk) {
+          try {
+            // Send DNS query using DoH
+            const resp = await safeFetch(
+              `https://1.1.1.1/dns-query`,
+              {
+                method: "POST",
+                headers: { "content-type": "application/dns-message" },
+                body: chunk,
+              },
+              3000,
+            );
+            const dnsQueryResult = await resp.arrayBuffer();
+            const udpSize = dnsQueryResult.byteLength;
+            const udpSizeBuffer = new Uint8Array([(udpSize >> 8) & 0xff, udpSize & 0xff]);
 
-          if (webSocket.readyState === CONST.WS_READY_STATE_OPEN) {
-            if (isHeaderSent) {
-              webSocket.send(await new Blob([udpSizeBuffer, dnsQueryResult]).arrayBuffer());
-            } else {
-              webSocket.send(await new Blob([vlessResponseHeader, udpSizeBuffer, dnsQueryResult]).arrayBuffer());
-              isHeaderSent = true;
+            if (webSocket.readyState === CONST.WS_READY_STATE_OPEN) {
+              if (isHeaderSent) {
+                webSocket.send(await new Blob([udpSizeBuffer, dnsQueryResult]).arrayBuffer());
+              } else {
+                webSocket.send(
+                  await new Blob([
+                    vlessResponseHeader,
+                    udpSizeBuffer,
+                    dnsQueryResult,
+                  ]).arrayBuffer(),
+                );
+                isHeaderSent = true;
+              }
             }
+          } catch (error) {
+            log("DNS query error: " + error);
           }
-        } catch (error) { log("DNS query error: " + error); }
-      },
-    })
-  ).catch((e) => log("DNS stream error: " + e));
+        },
+      }),
+    )
+    .catch((e) => log("DNS stream error: " + e));
 
   const writer = transformStream.writable.getWriter();
   return {
@@ -612,13 +813,19 @@ async function socks5Connect(addressType, addressRemote, portRemote, log, parsed
   const reader = socket.readable.getReader();
   const encoder = new TextEncoder();
 
-  await writer.write(new Uint8Array([5, 2, 0, 2])); 
+  await writer.write(new Uint8Array([5, 2, 0, 2]));
   let res = (await reader.read()).value;
   if (res[0] !== 0x05 || res[1] === 0xff) throw new Error("SOCKS5 server connection failed.");
 
   if (res[1] === 0x02) {
     if (!username || !password) throw new Error("SOCKS5 auth credentials not provided.");
-    const authRequest = new Uint8Array([1, username.length, ...encoder.encode(username), password.length, ...encoder.encode(password)]);
+    const authRequest = new Uint8Array([
+      1,
+      username.length,
+      ...encoder.encode(username),
+      password.length,
+      ...encoder.encode(password),
+    ]);
     await writer.write(authRequest);
     res = (await reader.read()).value;
     if (res[0] !== 0x01 || res[1] !== 0x00) throw new Error("SOCKS5 authentication failed.");
@@ -626,10 +833,22 @@ async function socks5Connect(addressType, addressRemote, portRemote, log, parsed
 
   let DSTADDR;
   switch (addressType) {
-    case 1: DSTADDR = new Uint8Array([1, ...addressRemote.split(".").map(Number)]); break;
-    case 2: DSTADDR = new Uint8Array([3, addressRemote.length, ...encoder.encode(addressRemote)]); break;
-    case 3: DSTADDR = new Uint8Array([4, ...addressRemote.split(":").flatMap((x) => [parseInt(x.slice(0, 2), 16), parseInt(x.slice(2), 16)])]); break;
-    default: throw new Error(`Invalid addressType for SOCKS5: ${addressType}`);
+    case 1:
+      DSTADDR = new Uint8Array([1, ...addressRemote.split(".").map(Number)]);
+      break;
+    case 2:
+      DSTADDR = new Uint8Array([3, addressRemote.length, ...encoder.encode(addressRemote)]);
+      break;
+    case 3:
+      DSTADDR = new Uint8Array([
+        4,
+        ...addressRemote
+          .split(":")
+          .flatMap((x) => [parseInt(x.slice(0, 2), 16), parseInt(x.slice(2), 16)]),
+      ]);
+      break;
+    default:
+      throw new Error(`Invalid addressType for SOCKS5: ${addressType}`);
   }
 
   const socksRequest = new Uint8Array([5, 1, 0, ...DSTADDR, portRemote >> 8, portRemote & 0xff]);
@@ -655,32 +874,66 @@ function socks5AddressParser(address) {
     const port = parseInt(portStr, 10);
     if (!hostname || isNaN(port)) throw new Error();
     let username, password;
-    if (authPart) { [username, password] = authPart.split(":"); if (!username) throw new Error(); }
+    if (authPart) {
+      [username, password] = authPart.split(":");
+      if (!username) throw new Error();
+    }
     return { username, password, hostname, port };
-  } catch { throw new Error("Invalid SOCKS5 address format."); }
+  } catch {
+    throw new Error("Invalid SOCKS5 address format.");
+  }
 }
 
 async function handleScamalyticsLookup(request, config) {
   const url = new URL(request.url);
   const ipToLookup = url.searchParams.get("ip");
-  if (!ipToLookup) return new Response(JSON.stringify({ error: "Missing IP" }), { status: 400, headers: { "Content-Type": "application/json" } });
+  if (!ipToLookup)
+    return new Response(JSON.stringify({ error: "Missing IP" }), {
+      status: 400,
+      headers: { "Content-Type": "application/json" },
+    });
 
   const { username, apiKey, baseUrl } = config.scamalytics;
-  if (!username || !apiKey) return new Response(JSON.stringify({ error: "Scamalytics API not configured" }), { status: 500, headers: { "Content-Type": "application/json" } });
+  if (!username || !apiKey)
+    return new Response(JSON.stringify({ error: "Scamalytics API not configured" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
 
   const scamalyticsUrl = `${baseUrl}${username}/?key=${apiKey}&ip=${ipToLookup}`;
-  const headers = new Headers({ "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" });
+  const headers = new Headers({
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+  });
 
   try {
     const scamalyticsResponse = await fetch(scamalyticsUrl);
     const responseBody = await scamalyticsResponse.json();
     return new Response(JSON.stringify(responseBody), { headers });
-  } catch (error) { return new Response(JSON.stringify({ error: error.toString() }), { status: 500, headers }); }
+  } catch (error) {
+    return new Response(JSON.stringify({ error: error.toString() }), { status: 500, headers });
+  }
 }
 
 async function handleConfigPage(userID, hostName, proxyAddress) {
-  const dream = buildLink({ core: "xray", proto: "tls", userID, hostName, address: hostName, port: 443, tag: `${hostName}-Xray` });
-  const freedom = buildLink({ core: "sb", proto: "tls", userID, hostName, address: hostName, port: 443, tag: `${hostName}-Singbox` });
+  const dream = buildLink({
+    core: "xray",
+    proto: "tls",
+    userID,
+    hostName,
+    address: hostName,
+    port: 443,
+    tag: `${hostName}-Xray`,
+  });
+  const freedom = buildLink({
+    core: "sb",
+    proto: "tls",
+    userID,
+    hostName,
+    address: hostName,
+    port: 443,
+    tag: `${hostName}-Singbox`,
+  });
 
   const encodedSubName = encodeURIComponent("INDEX");
   const subXrayUrl = `https://${hostName}/xray/${userID}?name=${encodedSubName}`;
@@ -689,7 +942,7 @@ async function handleConfigPage(userID, hostName, proxyAddress) {
   try {
     const response = await safeFetch(HTML_URL);
     if (!response.ok) throw new Error(`Failed to load HTML from GitHub Pages: ${response.status}`);
-    
+
     let finalHTML = await response.text();
 
     finalHTML = finalHTML
@@ -697,13 +950,25 @@ async function handleConfigPage(userID, hostName, proxyAddress) {
       .replace(/{{CONFIG_DREAM}}/g, dream)
       .replace(/{{CONFIG_FREEDOM}}/g, freedom)
       .replace(/{{URL_HIDDIFY}}/g, `hiddify://install-config?url=${encodeURIComponent(subXrayUrl)}`)
-      .replace(/{{URL_V2RAYNG}}/g, `v2rayng://install-config?url=${encodeURIComponent(subXrayUrl)}#${encodedSubName}`)
-      .replace(/{{URL_CLASH}}/g, `clash://install-config?url=${encodeURIComponent(`https://revil-sub.pages.dev/sub/clash-meta?url=${subSbUrl}`)}`)
-      .replace(/{{URL_EXCLAVE}}/g, `sn://subscription?url=${encodeURIComponent(subSbUrl)}&name=${encodedSubName}`);
+      .replace(
+        /{{URL_V2RAYNG}}/g,
+        `v2rayng://install-config?url=${encodeURIComponent(subXrayUrl)}#${encodedSubName}`,
+      )
+      .replace(
+        /{{URL_CLASH}}/g,
+        `clash://install-config?url=${encodeURIComponent(`https://revil-sub.pages.dev/sub/clash-meta?url=${subSbUrl}`)}`,
+      )
+      .replace(
+        /{{URL_EXCLAVE}}/g,
+        `sn://subscription?url=${encodeURIComponent(subSbUrl)}&name=${encodedSubName}`,
+      );
 
     return new Response(finalHTML, { headers: { "Content-Type": "text/html; charset=utf-8" } });
   } catch (error) {
-    return new Response(`Error rendering panel: ${error.message}`, { status: 500, headers: { "Content-Type": "text/plain" } });
+    return new Response(`Error rendering panel: ${error.message}`, {
+      status: 500,
+      headers: { "Content-Type": "text/plain" },
+    });
   }
 }
 
@@ -723,7 +988,7 @@ export default {
         if (cfg.socks5.enabled && !parsedSocksCache) {
           parsedSocksCache = socks5AddressParser(cfg.socks5.address);
         }
-        
+
         const requestConfig = {
           userID: cfg.userID,
           proxyIP: cfg.proxyIP,
@@ -737,15 +1002,21 @@ export default {
       }
 
       if (url.pathname === "/scamalytics-lookup") return handleScamalyticsLookup(request, cfg);
-      if (url.pathname.startsWith(`/xray/${cfg.userID}`)) return handleIpSubscription(request, "xray", cfg.userID, url.hostname);
-      if (url.pathname.startsWith(`/sb/${cfg.userID}`)) return handleIpSubscription(request, "sb", cfg.userID, url.hostname);
-      if (url.pathname.startsWith(`/${cfg.userID}`)) return handleConfigPage(cfg.userID, url.hostname, cfg.proxyAddress);
+      if (url.pathname.startsWith(`/xray/${cfg.userID}`))
+        return handleIpSubscription(request, "xray", cfg.userID, url.hostname);
+      if (url.pathname.startsWith(`/sb/${cfg.userID}`))
+        return handleIpSubscription(request, "sb", cfg.userID, url.hostname);
+      if (url.pathname.startsWith(`/${cfg.userID}`))
+        return handleConfigPage(cfg.userID, url.hostname, cfg.proxyAddress);
 
-      return new Response("UUID not found. Please set the UUID environment variable in the Cloudflare dashboard.", { status: 404 });
+      return new Response(
+        "UUID not found. Please set the UUID environment variable in the Cloudflare dashboard.",
+        { status: 404 },
+      );
     } catch (err) {
-      return new Response(`Worker Logic Error: ${err.message}\n${err.stack}`, { 
-        status: 500, 
-        headers: { "Content-Type": "text/plain" }
+      return new Response(`Worker Logic Error: ${err.message}\n${err.stack}`, {
+        status: 500,
+        headers: { "Content-Type": "text/plain" },
       });
     }
   },
