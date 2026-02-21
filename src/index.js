@@ -720,6 +720,10 @@ export default {
 
       const upgradeHeader = request.headers.get("Upgrade");
       if (upgradeHeader && upgradeHeader.toLowerCase() === "websocket") {
+        if (cfg.socks5.enabled && !parsedSocksCache) {
+          parsedSocksCache = socks5AddressParser(cfg.socks5.address);
+        }
+        
         const requestConfig = {
           userID: cfg.userID,
           proxyIP: cfg.proxyIP,
@@ -727,9 +731,6 @@ export default {
           socks5Address: cfg.socks5.address,
           socks5Relay: cfg.socks5.relayMode,
           enableSocks: cfg.socks5.enabled,
-          if (cfg.socks5.enabled && !parsedSocksCache) {
-            parsedSocksCache = socks5AddressParser(cfg.socks5.address);
-          }
           parsedSocks5Address: cfg.socks5.enabled ? parsedSocksCache : {},
         };
         return ProtocolOverWSHandler(request, requestConfig);
