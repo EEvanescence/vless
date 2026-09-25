@@ -350,95 +350,88 @@ fn risk_badge_html(score: i64) -> String {
 }
 
 async fn scan_candidate(
-    ip: String,
-    port: u16,
-    isp_source: String,
-    validated_proxies: &Arc<Mutex<BTreeMap<String, Vec<ProxyInfo>>>>,
-    scanner_ip: &str,
-    api_host: &str,
-    live_count: &Arc<AtomicUsize>,
-    failed_count: &Arc<AtomicUsize>,
+ip: String,
+port: u16,
+isp_source: String,
+validated_proxies:  &Arc <Mutex <BTreeMap <String, Vec <ProxyInfo > > > >,
+scanner_ip:  &str,
+api_host:  &str,
+live_count:  &Arc <AtomicUsize >,
+failed_count:  &Arc <AtomicUsize >,
 ) {
-    let mut cookie_jar = CookieJar::new();
-
-    if make_http_request(IP_RESOLVER_HOST, CLOUDFLARE_INDEX_ENDPOINT, Some((&ip, port)), &mut cookie_jar, false).await.is_err() {
-        failed_count.fetch_add(1, Ordering::Relaxed);
-        println!("  ❌ {:<7} | {:<15} | {}", "DEAD".red().bold(), ip, "couldn't connect".dimmed());
-        return;
-    }
-
-    match make_http_request(IP_RESOLVER_HOST, CLOUDFLARE_META_ENDPOINT, Some((&ip, port)), &mut cookie_jar, true).await {
-        Ok((_, body)) => {
-            if let Ok(json) = parse_json_response(&body) {
-                if let Some(out_ip) = json.get("clientIp").and_then(|v| v.as_str()) {
-                    if out_ip != scanner_ip {
-                        let isp = json
-                            .get("asOrganization")
-                            .and_then(|v| v.as_str())
-                            .map(String::from)
-                            .unwrap_or(isp_source);
-
-                        let (fraud_score, risk) = match fetch_risk_assessment(&ip, api_host).await {
-                            Ok(result) => result,
-                            Err(e) => {
-                                println!("  ⚠️ Risk API failed for {}: {}", ip, e);
-                                (-1, "unknown".to_string())
-                            }
-                        };
-
-                        let info = ProxyInfo {
-                            ip: ip.clone(),
-                            isp,
-                            country_code: json.get("country").and_then(|v| v.as_str()).unwrap_or("XX").to_string(),
-                            city: json.get("city").and_then(|v| v.as_str()).unwrap_or("Unknown").to_string(),
-                            region: json.get("region").and_then(|v| v.as_str()).unwrap_or("Unknown").to_string(),
-                            fraud_score,
-                            risk,
-                        };
-
-                        live_count.fetch_add(1, Ordering::Relaxed);
-
-                        let (r, g, b) = {
-                            if info.fraud_score < 0 {
-                                (128, 128, 128)
-                            } else {
-                                let clamped = info.fraud_score.clamp(0, 100) as f32 / 100.0;
-                                let low = (0xC9, 0xA2, 0x27);
-                                let high = (0x8B, 0x1E, 0x1E);
-                                (
-                                    (low.0 as f32 + (high.0 as f32 - low.0 as f32) * clamped) as u8,
-                                    (low.1 as f32 + (high.1 as f32 - low.1 as f32) * clamped) as u8,
-                                    (low.2 as f32 + (high.2 as f32 - low.2 as f32) * clamped) as u8,
-                                )
-                            }
-                        };
-                        let score_display = if info.fraud_score < 0 { "N/A".to_string() } else { info.fraud_score.to_string() };
-                        let risk_badge = score_display.truecolor(r, g, b).bold();
-
-                        println!(
-                            "  ✅ {:<7} | {:<15} | Risk: {:<17} | Score: {:<3} | {} {}",
-                            "ALIVE".green().bold(),
-                            ip.bold(),
-                            risk_badge,
-                            info.fraud_score,
-                            flag,
-                            info.country_code.cyan()
-                        );
-
-                        let mut locked = validated_proxies.lock().unwrap_or_else(|e| e.into_inner());
-                        locked.entry(info.country_code.clone()).or_default().push(info);
-                        return;
-                    }
-                }
-            }
-            failed_count.fetch_add(1, Ordering::Relaxed);
-            println!("  ❌ {:<7} | {:<15} | {}", "DEAD".red().bold(), ip, "response didn't check out".dimmed());
-        }
-        Err(_) => {
-            failed_count.fetch_add(1, Ordering::Relaxed);
-            println!("  ❌ {:<7} | {:<15} | {}", "DEAD".red().bold(), ip, "meta request fell over".dimmed());
-        }
-    }
+let mut cookie_jar = CookieJar::new();
+if make_http_request(IP_RESOLVER_HOST, CLOUDFLARE_INDEX_ENDPOINT, Some((&ip, port)), &mut cookie_jar, false).await.is_err() {
+     failed_count.fetch_add(1, Ordering::Relaxed);
+     println!("  ❌ {:<7} | {:<15} | {}", "DEAD".red().bold(), ip, "couldn't connect".dimmed());
+     return;
+ }
+ match make_http_request(IP_RESOLVER_HOST, CLOUDFLARE_META_ENDPOINT, Some((&ip, port)), &mut cookie_jar, true).await {
+     Ok((_, body)) => {
+         if let Ok(json) = parse_json_response(&body) {
+             if let Some(out_ip) = json.get("clientIp").and_then(|v| v.as_str()) {
+                 if out_ip != scanner_ip {
+                     let isp = json
+                         .get("asOrganization")
+                         .and_then(|v| v.as_str())
+                         .map(String::from)
+                         .unwrap_or(isp_source);
+                     let (fraud_score, risk) = match fetch_risk_assessment(&ip, api_host).await {
+                         Ok(result) => result,
+                         Err(e) => {
+                             println!("  ⚠️ Risk API failed for {}: {}", ip, e);
+                             (-1, "unknown".to_string())
+                         }
+                     };
+                     let info = ProxyInfo {
+                         ip: ip.clone(),
+                         isp,
+                         country_code: json.get("country").and_then(|v| v.as_str()).unwrap_or("XX").to_string(),
+                         city: json.get("city").and_then(|v| v.as_str()).unwrap_or("Unknown").to_string(),
+                         region: json.get("region").and_then(|v| v.as_str()).unwrap_or("Unknown").to_string(),
+                         fraud_score,
+                         risk,
+                     };
+                     live_count.fetch_add(1, Ordering::Relaxed);
+                     let (r, g, b) = {
+                         if info.fraud_score < 0 {
+                             (128, 128, 128)
+                         } else {
+                             let clamped = info.fraud_score.clamp(0, 100) as f32 / 100.0;
+                             let low = (0xC9, 0xA2, 0x27);
+                             let high = (0x8B, 0x1E, 0x1E);
+                             (
+                                 (low.0 as f32 + (high.0 as f32 - low.0 as f32) * clamped) as u8,
+                                 (low.1 as f32 + (high.1 as f32 - low.1 as f32) * clamped) as u8,
+                                 (low.2 as f32 + (high.2 as f32 - low.2 as f32) * clamped) as u8,
+                             )
+                         }
+                     };
+                     let score_display = if info.fraud_score < 0 { "N/A".to_string() } else { info.fraud_score.to_string() };
+                     let risk_badge = score_display.clone().truecolor(r, g, b).bold();
+                     let flag = generate_country_flag_emoji(&info.country_code);
+                     println!(
+                         "  ✅ {:<7} | {:<15} | Risk: {:<17} | Score: {:<4} | {} {}",
+                         "ALIVE".green().bold(),
+                         ip.bold(),
+                         risk_badge,
+                         score_display,
+                         flag,
+                         info.country_code.cyan()
+                     );
+                     let mut locked = validated_proxies.lock().unwrap_or_else(|e| e.into_inner());
+                     locked.entry(info.country_code.clone()).or_default().push(info);
+                     return;
+                 }
+             }
+         }
+         failed_count.fetch_add(1, Ordering::Relaxed);
+         println!("  ❌ {:<7} | {:<15} | {}", "DEAD".red().bold(), ip, "response didn't check out".dimmed());
+     }
+     Err(_) => {
+         failed_count.fetch_add(1, Ordering::Relaxed);
+         println!("  ❌ {:<7} | {:<15} | {}", "DEAD".red().bold(), ip, "meta request fell over".dimmed());
+     }
+ }
 }
 
 async fn make_http_request(
