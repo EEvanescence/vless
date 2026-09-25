@@ -275,65 +275,46 @@ async fn get_scanner_ip() -> Result<String> {
 }
 
 async fn fetch_risk_assessment(ip: &str, api_host: &str) -> Result<(i64, String)> {
-    let hash = ip.bytes().fold(0u64, |acc, b| acc.wrapping_add(b as u64));
-    let delay_ms = (hash % 1500) as u64;
-    tokio::time::sleep(Duration::from_millis(delay_ms)).await;
+    let clean_host = api_host
+        .trim()
+        .trim_start_matches("https://")
+        .trim_start_matches("http://")
+        .trim_end_matches('/');
 
     let client = reqwest::Client::builder()
-        .timeout(Duration::from_secs(TIMEOUT_SECONDS * 3))
+        .timeout(Duration::from_secs(TIMEOUT_SECONDS))
         .danger_accept_invalid_certs(true)
         .build()?;
-    let url = format!("https://{}/api/{}", api_host, ip);
 
-    for attempt in 1..=3 {
-        let resp = client
-            .get(&url)
-            .header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36")
-            .header("Accept", "application/json, text/plain, */*")
-            .send()
-            .await;
+    let url = format!("https://{}/api/{}", clean_host, ip);
 
-        match resp {
-            Ok(r) => {
-                let status = r.status();
-                if status.is_success() {
-                    let body = r.text().await?;
-                    let val: Value = serde_json::from_str(&body)?;
-                    if let Some(info) = val.get("info") {
-                        let score = info.get("fraud_score").and_then(|v| v.as_i64()).unwrap_or(0);
-                        let risk = info.get("risk").and_then(|v| v.as_str()).unwrap_or("unknown").to_string();
-                        return Ok((score, risk));
-                    } else {
-                        return Err("Invalid API JSON Structure".into());
-                    }
-                } else if status.as_u16() == 429 || status.as_u16() >= 500 {
-                    if attempt < 3 {
-                        let backoff = Duration::from_millis(1000 * attempt as u64);
-                        tokio::time::sleep(backoff).await;
-                        continue;
-                    }
-                    return Err(format!("HTTP status {} after {} attempts", status.as_u16(), attempt).into());
-                } else {
-                    return Err(format!("HTTP status {}", status.as_u16()).into());
-                }
-            }
-            Err(e) => {
-                if attempt < 3 {
-                    let backoff = Duration::from_millis(1000 * attempt as u64);
-                    tokio::time::sleep(backoff).await;
-                    continue;
-                }
-                return Err(e.into());
-            }
-        }
+    let resp = client
+        .get(&url)
+        .header(
+            "User-Agent",
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+        )
+        .header("Accept", "application/json")
+        .send()
+        .await?;
+
+    let status = resp.status();
+    if !status.is_success() {
+        return Err(format!("API returned error status: {}", status).into());
     }
-    Err("Max retries exceeded".into())
+
+    let val: Value = resp.json().await?;
+
+    if let Some(info) = val.get("info") {
+        let score = info.get("fraud_score").and_then(|v| v.as_i64()).unwrap_or(100);
+        let risk = info.get("risk").and_then(|v| v.as_str()).unwrap_or("high").to_string();
+        Ok((score, risk))
+    } else {
+        Err(format!("Invalid API JSON Structure: {:?}", val).into())
+    }
 }
 
 fn risk_color_hex(score: i64) -> String {
-    if score < 0 {
-        return "808080".to_string();
-    }
     let clamped = score.clamp(0, 100) as f32 / 100.0;
     let low = (0xC9, 0xA2, 0x27);
     let high = (0x8B, 0x1E, 0x1E);
@@ -345,8 +326,7 @@ fn risk_color_hex(score: i64) -> String {
 
 fn risk_badge_html(score: i64) -> String {
     let color = risk_color_hex(score);
-    let label = if score < 0 { "N/A".to_string() } else { score.to_string() };
-    format!("<img src=\"https://img.shields.io/badge/-{}-{}\" />", label, color)
+    format!("<img src=\"https://img.shields.io/badge/-{}-{}\" />", score, color)
 }
 
 async fn scan_candidate(
@@ -376,11 +356,11 @@ if make_http_request(IP_RESOLVER_HOST, CLOUDFLARE_INDEX_ENDPOINT, Some((&ip, por
                          .map(String::from)
                          .unwrap_or(isp_source);
                      let (fraud_score, risk) = match fetch_risk_assessment(&ip, api_host).await {
-                         Ok(result) => result,
-                         Err(e) => {
-                             println!("  ⚠️ Risk API failed for {}: {}", ip, e);
-                             (-1, "unknown".to_string())
-                         }
+                          Ok(res) => res,
+                          Err(e) => {
+                              eprintln!("⚠️ Risk check failed for {}: {}", ip, e);
+                              (100, "high".to_string())
+                          }
                      };
                      let info = ProxyInfo {
                          ip: ip.clone(),
