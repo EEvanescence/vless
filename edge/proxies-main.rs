@@ -364,7 +364,7 @@ async fn scan_candidate(
                             Ok(res) => res,
                             Err(e) => {
                                 eprintln!("  ⚠️ Risk check failed for {}: {}", ip, e);
-                                (xx, "high".to_string())
+                                (69, "high".to_string())
                             }
                         };
                         drop(_permit);
