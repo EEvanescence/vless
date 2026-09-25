@@ -30,7 +30,7 @@ const TIMEOUT_SECONDS: u64 = 8;
 const TARGET_PROXY_PORT: u16 = 443;
 
 const NORTHERN_TERRITORY_ENV: &str = "NORTHERN_TERRITORY";
-const RISK_API_HOST_ENV: &str = "RISK_API_HOST";
+const PROXYCHECK_API_KEY_ENV: &str = "PROXYCHECK_API_KEY";
 
 type Result<T> = std::result::Result<T, Box<dyn std::error::Error + Send + Sync>>;
 
@@ -78,26 +78,7 @@ impl CookieJar {
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    let raw_api_hosts = std::env::var(RISK_API_HOST_ENV).expect("Environment variable RISK_API_HOST is missing");
-    
-    let api_hosts: Vec<String> = raw_api_hosts
-        .split(|c| c == ',' || c == '\n')
-        .map(|h| {
-            h.trim()
-                .trim_start_matches("https://")
-                .trim_start_matches("http://")
-                .trim_end_matches('/')
-                .to_string()
-        })
-        .filter(|h| !h.is_empty())
-        .collect();
-
-    if api_hosts.is_empty() {
-        panic!("No valid RISK_API_HOST provided!");
-    }
-    println!("📡 Configured with {} Risk API worker(s)", api_hosts.len());
-
-    let api_hosts = Arc::new(api_hosts);
+    let api_key = std::env::var(PROXYCHECK_API_KEY_ENV).expect("Environment variable PROXYCHECK_API_KEY is missing");
 
     if let Some(parent) = Path::new(DEFAULT_OUTPUT_FILE).parent() {
         fs::create_dir_all(parent)?;
@@ -140,25 +121,25 @@ async fn main() -> Result<()> {
             .filter(|l| !l.is_empty())
             .collect();
 
-        println!("🔍 Resolving {} domain(s) from the Northern Territory...", domains.len());
+        println!("🌎 Receiving {} sheets from the Northern Territory...", domains.len());
         for domain in domains {
             if let Ok(ips) = resolve_domain(&domain).await {
                 for ip in ips {
                     if seen_ips.insert(ip.clone()) {
-                        proxy_candidates.push((ip, TARGET_PROXY_PORT, "Private Domain".to_string()));
+                        proxy_candidates.push((ip, TARGET_PROXY_PORT, "Private things".to_string()));
                     }
                 }
             }
         }
     }
 
-    println!("🧮 A total of {} unique candidates queued for scanning", proxy_candidates.len());
+    println!("📥 A total of {} unique candidates queued for scanning", proxy_candidates.len());
 
     let scanner_ip = match get_scanner_ip().await {
         Ok(ip) => ip,
         Err(_) => "0.0.0.0".to_string(),
     };
-    println!("✋🏿 Our own exit IP looks like: {}\n", scanner_ip);
+    println!("📥 Own exit IP looks like: {}\n", scanner_ip);
 
     let validated_proxies = Arc::new(Mutex::new(BTreeMap::<String, Vec<ProxyInfo>>::new()));
 
@@ -166,25 +147,23 @@ async fn main() -> Result<()> {
     let live_count = Arc::new(AtomicUsize::new(0));
     let failed_count = Arc::new(AtomicUsize::new(0));
 
-    let worker_cursor = Arc::new(AtomicUsize::new(0));
-    let max_api_concurrency = 1;
+    let max_api_concurrency = 5;
     let risk_semaphore = Arc::new(Semaphore::new(max_api_concurrency));
 
-    println!("::group::🐾 Live Scan - tap to peek");
+    println!("::group::🌀 Live Scan - tap to peek");
 
     let tasks = futures::stream::iter(proxy_candidates.into_iter().map(|(ip, port, isp_source)| {
         let validated_proxies = Arc::clone(&validated_proxies);
         let scanner_ip = scanner_ip.clone();
-        let api_hosts = Arc::clone(&api_hosts);
+        let api_key = api_key.clone();
         let live_count = Arc::clone(&live_count);
         let failed_count = Arc::clone(&failed_count);
-        let worker_cursor = Arc::clone(&worker_cursor);
         let risk_semaphore = Arc::clone(&risk_semaphore);
 
         async move {
             scan_candidate(
-                ip, port, isp_source, &validated_proxies, &scanner_ip, &api_hosts,
-                &live_count, &failed_count, &worker_cursor, risk_semaphore
+                ip, port, isp_source, &validated_proxies, &scanner_ip, &api_key,
+                &live_count, &failed_count, risk_semaphore
             ).await;
         }
     }))
@@ -204,10 +183,10 @@ async fn main() -> Result<()> {
     println!("\n{}", "==============================================".cyan().bold());
     println!("{}", "       🌌  SCAN WRAPPED - HERE'S THE LOWDOWN       ".cyan().bold());
     println!("{}\n", "==============================================".cyan().bold());
-    println!("  🧶 Candidates tested  : {}", total_candidates.to_string().bold());
+    println!("  🌠 Candidates tested  : {}", total_candidates.to_string().bold());
     println!("  🟢 Alive & kicking    : {}", total_live.to_string().green().bold());
     println!("  🔴 Dead / timed out   : {}", total_failed.to_string().red());
-    println!("  🌐 Countries covered  : {}", locked_proxies.len().to_string().yellow().bold());
+    println!("  🌏 Countries covered  : {}", locked_proxies.len().to_string().yellow().bold());
     println!("\n{}", "----------------------------------------------".dimmed());
     println!("{}", "  🪩 Active proxies per country:".bold());
     
@@ -301,63 +280,36 @@ async fn get_scanner_ip() -> Result<String> {
         .ok_or_else(|| "No clientIp in response".into())
 }
 
-async fn fetch_risk_assessment(
-    ip: &str,
-    api_hosts: &[String],
-    start_index: usize,
-) -> Result<(i64, String)> {
+async fn fetch_risk_assessment(ip: &str, api_key: &str) -> Result<(i64, String)> {
     let client = reqwest::Client::builder()
         .timeout(Duration::from_secs(TIMEOUT_SECONDS))
-        .danger_accept_invalid_certs(true)
         .build()?;
 
-    let total_hosts = api_hosts.len();
-    let attempts = if total_hosts > 1 { 2 } else { 1 };
+    let url = format!("https://proxycheck.io/v3/{}?key={}", ip, api_key);
 
-    let mut last_err = String::from("Unknown error");
+    let resp = client.get(&url).send().await?;
+    let status = resp.status();
 
-    for i in 0..attempts {
-        let current_host = &api_hosts[(start_index + i) % total_hosts];
-        let url = format!("https://{}/api/{}", current_host, ip);
-
-        let resp = client
-            .get(&url)
-            .header(
-                "User-Agent",
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-            )
-            .header("Accept", "application/json")
-            .send()
-            .await;
-
-        match resp {
-            Ok(res) => {
-                let status = res.status();
-                if status.is_success() {
-                    let val: Value = res.json().await?;
-                    if let Some(info) = val.get("info") {
-                        let score = info.get("fraud_score").and_then(|v| v.as_i64()).unwrap_or(100);
-                        let risk = info.get("risk").and_then(|v| v.as_str()).unwrap_or("high").to_string();
-                        return Ok((score, risk));
-                    }
-                } else {
-                    let body = res.text().await.unwrap_or_default();
-                    let snippet: String = body.chars().take(200).collect();
-                    last_err = format!("Host {} returned HTTP {} - {}", current_host, status, snippet);
-                }
-            }
-            Err(e) => {
-                last_err = format!("Host {} failed: {}", current_host, e);
-            }
-        }
-
-        if i + 1 < attempts {
-          let backoff_ms = 500 * (i as u64 + 1);
-          tokio::time::sleep(Duration::from_millis(backoff_ms)).await;
-      }
+    if !status.is_success() {
+        let body = resp.text().await.unwrap_or_default();
+        let snippet: String = body.chars().take(200).collect();
+        return Err(format!("HTTP {} - {}", status, snippet).into());
     }
 
-    Err(last_err.into())
+    let val: Value = resp.json().await?;
+
+    let entry = val.get(ip).ok_or("No entry for IP in proxycheck response")?;
+    let detections = entry.get("detections").ok_or("No detections field")?;
+    let score = detections.get("risk").and_then(|v| v.as_i64()).unwrap_or(100);
+
+    let risk = match score {
+        0..=20 => "low",
+        21..=50 => "medium",
+        51..=80 => "high",
+        _ => "very_high",
+    }.to_string();
+
+    Ok((score, risk))
 }
 
 fn risk_color_hex(score: i64) -> String {
@@ -381,10 +333,9 @@ async fn scan_candidate(
     isp_source: String,
     validated_proxies: &Arc<Mutex<BTreeMap<String, Vec<ProxyInfo>>>>,
     scanner_ip: &str,
-    api_hosts: &[String],
+    api_key: &str,
     live_count: &Arc<AtomicUsize>,
     failed_count: &Arc<AtomicUsize>,
-    worker_cursor: &Arc<AtomicUsize>,
     risk_semaphore: Arc<Semaphore>,
 ) {
     let mut cookie_jar = CookieJar::new();
@@ -407,14 +358,13 @@ async fn scan_candidate(
                             .unwrap_or(isp_source);
 
                         let _permit = risk_semaphore.acquire().await.unwrap();
-                        let start_index = worker_cursor.fetch_add(1, Ordering::Relaxed);
                         tokio::time::sleep(Duration::from_millis(200)).await;
 
-                        let (fraud_score, risk) = match fetch_risk_assessment(&ip, api_hosts, start_index).await {
+                        let (fraud_score, risk) = match fetch_risk_assessment(&ip, api_key).await {
                             Ok(res) => res,
                             Err(e) => {
                                 eprintln!("  ⚠️ Risk check failed for {}: {}", ip, e);
-                                (100, "high".to_string())
+                                (xx, "high".to_string())
                             }
                         };
                         drop(_permit);
