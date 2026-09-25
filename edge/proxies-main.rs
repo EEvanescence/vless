@@ -351,7 +351,7 @@ async fn fetch_risk_assessment(
             }
         }
 
-        ifif i + 1 < attempts {
+        if i + 1 < attempts {
           let backoff_ms = 500 * (i as u64 + 1);
           tokio::time::sleep(Duration::from_millis(backoff_ms)).await;
       }
