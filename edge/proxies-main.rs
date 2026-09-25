@@ -165,6 +165,7 @@ async fn main() -> Result<()> {
     let total_candidates = proxy_candidates.len();
     let live_count = Arc::new(AtomicUsize::new(0));
     let failed_count = Arc::new(AtomicUsize::new(0));
+
     let worker_cursor = Arc::new(AtomicUsize::new(0));
     let max_api_concurrency = api_hosts.len().clamp(1, 3);
     let risk_semaphore = Arc::new(Semaphore::new(max_api_concurrency));
@@ -309,11 +310,6 @@ async fn fetch_risk_assessment(
         .timeout(Duration::from_secs(TIMEOUT_SECONDS))
         .danger_accept_invalid_certs(true)
         .build()?;
-        } else {
-            let body = res.text().await.unwrap_or_default();
-            let snippet: String = body.chars().take(200).collect();
-            last_err = format!("Host {} returned HTTP {} - {}", current_host, status, snippet);
-        }
 
     let total_hosts = api_hosts.len();
     let attempts = if total_hosts > 1 { 2 } else { 1 };
@@ -345,7 +341,9 @@ async fn fetch_risk_assessment(
                         return Ok((score, risk));
                     }
                 } else {
-                    last_err = format!("Host {} returned HTTP {}", current_host, status);
+                    let body = res.text().await.unwrap_or_default();
+                    let snippet: String = body.chars().take(200).collect();
+                    last_err = format!("Host {} returned HTTP {} - {}", current_host, status, snippet);
                 }
             }
             Err(e) => {
@@ -353,10 +351,10 @@ async fn fetch_risk_assessment(
             }
         }
 
-        if i + 1 < attempts {
-            let backoff_ms = 500 * (i as u64 + 1);
-            tokio::time::sleep(Duration::from_millis(backoff_ms)).await;
-        }
+        ifif i + 1 < attempts {
+          let backoff_ms = 500 * (i as u64 + 1);
+          tokio::time::sleep(Duration::from_millis(backoff_ms)).await;
+      }
     }
 
     Err(last_err.into())
