@@ -275,36 +275,65 @@ async fn get_scanner_ip() -> Result<String> {
 }
 
 async fn fetch_risk_assessment(ip: &str, api_host: &str) -> Result<(i64, String)> {
+    let hash = ip.bytes().fold(0u64, |acc, b| acc.wrapping_add(b as u64));
+    let delay_ms = (hash % 1500) as u64;
+    tokio::time::sleep(Duration::from_millis(delay_ms)).await;
+
     let client = reqwest::Client::builder()
         .timeout(Duration::from_secs(TIMEOUT_SECONDS * 3))
         .danger_accept_invalid_certs(true)
         .build()?;
     let url = format!("https://{}/api/{}", api_host, ip);
-    let resp = client
-        .get(&url)
-        .header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36")
-        .header("Accept", "application/json, text/plain, */*")
-        .send()
-        .await?;
-    let status = resp.status();
-    if !status.is_success() {
-        return Err(format!("HTTP status {}", status.as_u16()).into());
+
+    for attempt in 1..=3 {
+        let resp = client
+            .get(&url)
+            .header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36")
+            .header("Accept", "application/json, text/plain, */*")
+            .send()
+            .await;
+
+        match resp {
+            Ok(r) => {
+                let status = r.status();
+                if status.is_success() {
+                    let body = r.text().await?;
+                    let val: Value = serde_json::from_str(&body)?;
+                    if let Some(info) = val.get("info") {
+                        let score = info.get("fraud_score").and_then(|v| v.as_i64()).unwrap_or(0);
+                        let risk = info.get("risk").and_then(|v| v.as_str()).unwrap_or("unknown").to_string();
+                        return Ok((score, risk));
+                    } else {
+                        return Err("Invalid API JSON Structure".into());
+                    }
+                } else if status.as_u16() == 429 || status.as_u16() >= 500 {
+                    if attempt < 3 {
+                        let backoff = Duration::from_millis(1000 * attempt as u64);
+                        tokio::time::sleep(backoff).await;
+                        continue;
+                    }
+                    return Err(format!("HTTP status {} after {} attempts", status.as_u16(), attempt).into());
+                } else {
+                    return Err(format!("HTTP status {}", status.as_u16()).into());
+                }
+            }
+            Err(e) => {
+                if attempt < 3 {
+                    let backoff = Duration::from_millis(1000 * attempt as u64);
+                    tokio::time::sleep(backoff).await;
+                    continue;
+                }
+                return Err(e.into());
+            }
+        }
     }
-    let body = resp.text().await?;
-    if body.trim().starts_with("<!DOCTYPE") || body.trim().starts_with("<html") || body.contains("Just a moment") {
-        return Err("Cloudflare challenge or HTML response".into());
-    }
-    let val: Value = serde_json::from_str(&body)?;
-    if let Some(info) = val.get("info") {
-        let score = info.get("fraud_score").and_then(|v| v.as_i64()).unwrap_or(100);
-        let risk = info.get("risk").and_then(|v| v.as_str()).unwrap_or("high").to_string();
-        Ok((score, risk))
-    } else {
-        Err("Invalid API JSON Structure".into())
-    }
+    Err("Max retries exceeded".into())
 }
 
 fn risk_color_hex(score: i64) -> String {
+    if score < 0 {
+        return "808080".to_string();
+    }
     let clamped = score.clamp(0, 100) as f32 / 100.0;
     let low = (0xC9, 0xA2, 0x27);
     let high = (0x8B, 0x1E, 0x1E);
@@ -316,7 +345,8 @@ fn risk_color_hex(score: i64) -> String {
 
 fn risk_badge_html(score: i64) -> String {
     let color = risk_color_hex(score);
-    format!("<img src=\"https://img.shields.io/badge/-{}-{}\" />", score, color)
+    let label = if score < 0 { "N/A".to_string() } else { score.to_string() };
+    format!("<img src=\"https://img.shields.io/badge/-{}-{}\" />", label, color)
 }
 
 async fn scan_candidate(
@@ -352,7 +382,7 @@ async fn scan_candidate(
                             Ok(result) => result,
                             Err(e) => {
                                 println!("  ⚠️ Risk API failed for {}: {}", ip, e);
-                                (100, "unknown".to_string())
+                                (-1, "unknown".to_string())
                             }
                         };
 
@@ -369,18 +399,21 @@ async fn scan_candidate(
                         live_count.fetch_add(1, Ordering::Relaxed);
 
                         let (r, g, b) = {
-                            let clamped = info.fraud_score.clamp(0, 100) as f32 / 100.0;
-                            let low = (0xC9, 0xA2, 0x27);
-                            let high = (0x8B, 0x1E, 0x1E);
-                            (
-                                (low.0 as f32 + (high.0 as f32 - low.0 as f32) * clamped) as u8,
-                                (low.1 as f32 + (high.1 as f32 - low.1 as f32) * clamped) as u8,
-                                (low.2 as f32 + (high.2 as f32 - low.2 as f32) * clamped) as u8,
-                            )
+                            if info.fraud_score < 0 {
+                                (128, 128, 128)
+                            } else {
+                                let clamped = info.fraud_score.clamp(0, 100) as f32 / 100.0;
+                                let low = (0xC9, 0xA2, 0x27);
+                                let high = (0x8B, 0x1E, 0x1E);
+                                (
+                                    (low.0 as f32 + (high.0 as f32 - low.0 as f32) * clamped) as u8,
+                                    (low.1 as f32 + (high.1 as f32 - low.1 as f32) * clamped) as u8,
+                                    (low.2 as f32 + (high.2 as f32 - low.2 as f32) * clamped) as u8,
+                                )
+                            }
                         };
-                        let risk_badge = format!("{}", info.fraud_score).truecolor(r, g, b).bold();
-
-                        let flag = generate_country_flag_emoji(&info.country_code);
+                        let score_display = if info.fraud_score < 0 { "N/A".to_string() } else { info.fraud_score.to_string() };
+                        let risk_badge = score_display.truecolor(r, g, b).bold();
 
                         println!(
                             "  ✅ {:<7} | {:<15} | Risk: {:<17} | Score: {:<3} | {} {}",
