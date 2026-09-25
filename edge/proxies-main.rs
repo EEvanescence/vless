@@ -167,7 +167,7 @@ async fn main() -> Result<()> {
     let failed_count = Arc::new(AtomicUsize::new(0));
 
     let worker_cursor = Arc::new(AtomicUsize::new(0));
-    let max_api_concurrency = api_hosts.len().clamp(1, 3);
+    let max_api_concurrency = 1;
     let risk_semaphore = Arc::new(Semaphore::new(max_api_concurrency));
 
     println!("::group::🐾 Live Scan - tap to peek");
