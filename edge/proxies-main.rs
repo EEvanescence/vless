@@ -140,12 +140,12 @@ async fn main() -> Result<()> {
             .filter(|l| !l.is_empty())
             .collect();
 
-        println!("🔍 Resolving {} from the Northern Territory...", domains.len());
+        println!("🔍 Resolving {} domain(s) from the Northern Territory...", domains.len());
         for domain in domains {
             if let Ok(ips) = resolve_domain(&domain).await {
                 for ip in ips {
                     if seen_ips.insert(ip.clone()) {
-                        proxy_candidates.push((ip, TARGET_PROXY_PORT, "Private things".to_string()));
+                        proxy_candidates.push((ip, TARGET_PROXY_PORT, "Private Domain".to_string()));
                     }
                 }
             }
@@ -158,7 +158,7 @@ async fn main() -> Result<()> {
         Ok(ip) => ip,
         Err(_) => "0.0.0.0".to_string(),
     };
-    println!("🌏 Own exit IP looks like: {}\n", scanner_ip);
+    println!("✋🏿 Our own exit IP looks like: {}\n", scanner_ip);
 
     let validated_proxies = Arc::new(Mutex::new(BTreeMap::<String, Vec<ProxyInfo>>::new()));
 
@@ -166,10 +166,10 @@ async fn main() -> Result<()> {
     let live_count = Arc::new(AtomicUsize::new(0));
     let failed_count = Arc::new(AtomicUsize::new(0));
     let worker_cursor = Arc::new(AtomicUsize::new(0));
-    let max_api_concurrency = (api_hosts.len() * 2).clamp(2, 6);
+    let max_api_concurrency = api_hosts.len().clamp(1, 3);
     let risk_semaphore = Arc::new(Semaphore::new(max_api_concurrency));
 
-    println!("::group::🌀 Live Scan - tap to peek");
+    println!("::group::🐾 Live Scan - tap to peek");
 
     let tasks = futures::stream::iter(proxy_candidates.into_iter().map(|(ip, port, isp_source)| {
         let validated_proxies = Arc::clone(&validated_proxies);
@@ -201,12 +201,12 @@ async fn main() -> Result<()> {
     let total_failed = failed_count.load(Ordering::Relaxed);
 
     println!("\n{}", "==============================================".cyan().bold());
-    println!("{}", "       🌠  SCAN WRAPPED - HERE'S THE LOWDOWN       ".cyan().bold());
+    println!("{}", "       🌌  SCAN WRAPPED - HERE'S THE LOWDOWN       ".cyan().bold());
     println!("{}\n", "==============================================".cyan().bold());
-    println!("  🌌 Candidates tested  : {}", total_candidates.to_string().bold());
+    println!("  🧶 Candidates tested  : {}", total_candidates.to_string().bold());
     println!("  🟢 Alive & kicking    : {}", total_live.to_string().green().bold());
     println!("  🔴 Dead / timed out   : {}", total_failed.to_string().red());
-    println!("  🌎 Countries covered  : {}", locked_proxies.len().to_string().yellow().bold());
+    println!("  🌐 Countries covered  : {}", locked_proxies.len().to_string().yellow().bold());
     println!("\n{}", "----------------------------------------------".dimmed());
     println!("{}", "  🪩 Active proxies per country:".bold());
     
@@ -309,6 +309,11 @@ async fn fetch_risk_assessment(
         .timeout(Duration::from_secs(TIMEOUT_SECONDS))
         .danger_accept_invalid_certs(true)
         .build()?;
+        } else {
+            let body = res.text().await.unwrap_or_default();
+            let snippet: String = body.chars().take(200).collect();
+            last_err = format!("Host {} returned HTTP {} - {}", current_host, status, snippet);
+        }
 
     let total_hosts = api_hosts.len();
     let attempts = if total_hosts > 1 { 2 } else { 1 };
@@ -349,7 +354,8 @@ async fn fetch_risk_assessment(
         }
 
         if i + 1 < attempts {
-            tokio::time::sleep(Duration::from_millis(500)).await;
+            let backoff_ms = 500 * (i as u64 + 1);
+            tokio::time::sleep(Duration::from_millis(backoff_ms)).await;
         }
     }
 
@@ -401,7 +407,7 @@ async fn scan_candidate(
                             .and_then(|v| v.as_str())
                             .map(String::from)
                             .unwrap_or(isp_source);
-                        
+
                         let _permit = risk_semaphore.acquire().await.unwrap();
                         let start_index = worker_cursor.fetch_add(1, Ordering::Relaxed);
                         tokio::time::sleep(Duration::from_millis(200)).await;
@@ -410,7 +416,7 @@ async fn scan_candidate(
                             Ok(res) => res,
                             Err(e) => {
                                 eprintln!("  ⚠️ Risk check failed for {}: {}", ip, e);
-                                (0, "low".to_string())
+                                (100, "high".to_string())
                             }
                         };
                         drop(_permit);
@@ -479,7 +485,7 @@ async fn make_http_request(
     tokio::time::timeout(timeout, async {
         let mut headers = Vec::new();
         headers.push(format!("Host: {}", host));
-        headers.push("User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36".to_string());
+        headers.push("User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36".to_string());
         headers.push("Accept: */*".to_string());
         headers.push("Accept-Language: en-US,en;q=0.9".to_string());
         headers.push("Accept-Encoding: identity".to_string());
