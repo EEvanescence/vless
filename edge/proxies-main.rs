@@ -276,20 +276,25 @@ async fn get_scanner_ip() -> Result<String> {
 
 async fn fetch_risk_assessment(ip: &str, api_host: &str) -> Result<(i64, String)> {
     let client = reqwest::Client::builder()
-        .timeout(Duration::from_secs(TIMEOUT_SECONDS))
+        .timeout(Duration::from_secs(TIMEOUT_SECONDS * 3))
         .danger_accept_invalid_certs(true)
         .build()?;
-
     let url = format!("https://{}/api/{}", api_host, ip);
-
     let resp = client
         .get(&url)
-        .header("User-Agent", "RustClient/1.0")
+        .header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36")
+        .header("Accept", "application/json, text/plain, */*")
         .send()
         .await?;
-
-    let val: Value = resp.json().await?;
-
+    let status = resp.status();
+    if !status.is_success() {
+        return Err(format!("HTTP status {}", status.as_u16()).into());
+    }
+    let body = resp.text().await?;
+    if body.trim().starts_with("<!DOCTYPE") || body.trim().starts_with("<html") || body.contains("Just a moment") {
+        return Err("Cloudflare challenge or HTML response".into());
+    }
+    let val: Value = serde_json::from_str(&body)?;
     if let Some(info) = val.get("info") {
         let score = info.get("fraud_score").and_then(|v| v.as_i64()).unwrap_or(100);
         let risk = info.get("risk").and_then(|v| v.as_str()).unwrap_or("high").to_string();
@@ -343,9 +348,13 @@ async fn scan_candidate(
                             .map(String::from)
                             .unwrap_or(isp_source);
 
-                        let (fraud_score, risk) = fetch_risk_assessment(&ip, api_host)
-                            .await
-                            .unwrap_or((100, "high".to_string()));
+                        let (fraud_score, risk) = match fetch_risk_assessment(&ip, api_host).await {
+                            Ok(result) => result,
+                            Err(e) => {
+                                println!("  ⚠️ Risk API failed for {}: {}", ip, e);
+                                (100, "unknown".to_string())
+                            }
+                        };
 
                         let info = ProxyInfo {
                             ip: ip.clone(),
