@@ -14,6 +14,7 @@ use native_tls::TlsConnector as NativeTlsConnector;
 use serde_json::Value;
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use tokio::net::TcpStream;
+use tokio::sync::Semaphore;
 use tokio_native_tls::TlsConnector as TokioTlsConnector;
 
 const IP_RESOLVER_HOST: &str = "speed.cloudflare.com";
@@ -77,7 +78,26 @@ impl CookieJar {
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    let api_host = std::env::var(RISK_API_HOST_ENV).expect("Environment variable RISK_API_HOST is missing");
+    let raw_api_hosts = std::env::var(RISK_API_HOST_ENV).expect("Environment variable RISK_API_HOST is missing");
+    
+    let api_hosts: Vec<String> = raw_api_hosts
+        .split(|c| c == ',' || c == '\n')
+        .map(|h| {
+            h.trim()
+                .trim_start_matches("https://")
+                .trim_start_matches("http://")
+                .trim_end_matches('/')
+                .to_string()
+        })
+        .filter(|h| !h.is_empty())
+        .collect();
+
+    if api_hosts.is_empty() {
+        panic!("No valid RISK_API_HOST provided!");
+    }
+    println!("📡 Configured with {} Risk API worker(s)", api_hosts.len());
+
+    let api_hosts = Arc::new(api_hosts);
 
     if let Some(parent) = Path::new(DEFAULT_OUTPUT_FILE).parent() {
         fs::create_dir_all(parent)?;
@@ -120,12 +140,12 @@ async fn main() -> Result<()> {
             .filter(|l| !l.is_empty())
             .collect();
 
-        println!("🔍 Resolving {} domain(s) from the Northern Territory...", domains.len());
+        println!("🔍 Resolving {} from the Northern Territory...", domains.len());
         for domain in domains {
             if let Ok(ips) = resolve_domain(&domain).await {
                 for ip in ips {
                     if seen_ips.insert(ip.clone()) {
-                        proxy_candidates.push((ip, TARGET_PROXY_PORT, "Private Domain".to_string()));
+                        proxy_candidates.push((ip, TARGET_PROXY_PORT, "Private things".to_string()));
                     }
                 }
             }
@@ -138,26 +158,32 @@ async fn main() -> Result<()> {
         Ok(ip) => ip,
         Err(_) => "0.0.0.0".to_string(),
     };
-    println!("✋🏿 Our own exit IP looks like: {}\n", scanner_ip);
+    println!("🌏 Own exit IP looks like: {}\n", scanner_ip);
 
     let validated_proxies = Arc::new(Mutex::new(BTreeMap::<String, Vec<ProxyInfo>>::new()));
 
     let total_candidates = proxy_candidates.len();
     let live_count = Arc::new(AtomicUsize::new(0));
     let failed_count = Arc::new(AtomicUsize::new(0));
+    let worker_cursor = Arc::new(AtomicUsize::new(0));
+    let max_api_concurrency = (api_hosts.len() * 2).clamp(2, 6);
+    let risk_semaphore = Arc::new(Semaphore::new(max_api_concurrency));
 
-    println!("::group::🐾 Live Scan - tap to peek");
+    println!("::group::🌀 Live Scan - tap to peek");
 
     let tasks = futures::stream::iter(proxy_candidates.into_iter().map(|(ip, port, isp_source)| {
         let validated_proxies = Arc::clone(&validated_proxies);
         let scanner_ip = scanner_ip.clone();
-        let api_host = api_host.clone();
+        let api_hosts = Arc::clone(&api_hosts);
         let live_count = Arc::clone(&live_count);
         let failed_count = Arc::clone(&failed_count);
+        let worker_cursor = Arc::clone(&worker_cursor);
+        let risk_semaphore = Arc::clone(&risk_semaphore);
+
         async move {
             scan_candidate(
-                ip, port, isp_source, &validated_proxies, &scanner_ip, &api_host,
-                &live_count, &failed_count
+                ip, port, isp_source, &validated_proxies, &scanner_ip, &api_hosts,
+                &live_count, &failed_count, &worker_cursor, risk_semaphore
             ).await;
         }
     }))
@@ -175,12 +201,12 @@ async fn main() -> Result<()> {
     let total_failed = failed_count.load(Ordering::Relaxed);
 
     println!("\n{}", "==============================================".cyan().bold());
-    println!("{}", "       🌌  SCAN WRAPPED - HERE'S THE LOWDOWN       ".cyan().bold());
+    println!("{}", "       🌠  SCAN WRAPPED - HERE'S THE LOWDOWN       ".cyan().bold());
     println!("{}\n", "==============================================".cyan().bold());
-    println!("  🧶 Candidates tested  : {}", total_candidates.to_string().bold());
+    println!("  🌌 Candidates tested  : {}", total_candidates.to_string().bold());
     println!("  🟢 Alive & kicking    : {}", total_live.to_string().green().bold());
     println!("  🔴 Dead / timed out   : {}", total_failed.to_string().red());
-    println!("  🌐 Countries covered  : {}", locked_proxies.len().to_string().yellow().bold());
+    println!("  🌎 Countries covered  : {}", locked_proxies.len().to_string().yellow().bold());
     println!("\n{}", "----------------------------------------------".dimmed());
     println!("{}", "  🪩 Active proxies per country:".bold());
     
@@ -274,44 +300,60 @@ async fn get_scanner_ip() -> Result<String> {
         .ok_or_else(|| "No clientIp in response".into())
 }
 
-async fn fetch_risk_assessment(ip: &str, api_host: &str) -> Result<(i64, String)> {
-    let clean_host = api_host
-        .trim()
-        .trim_start_matches("https://")
-        .trim_start_matches("http://")
-        .trim_end_matches('/');
-
+async fn fetch_risk_assessment(
+    ip: &str,
+    api_hosts: &[String],
+    start_index: usize,
+) -> Result<(i64, String)> {
     let client = reqwest::Client::builder()
         .timeout(Duration::from_secs(TIMEOUT_SECONDS))
         .danger_accept_invalid_certs(true)
         .build()?;
 
-    let url = format!("https://{}/api/{}", clean_host, ip);
+    let total_hosts = api_hosts.len();
+    let attempts = if total_hosts > 1 { 2 } else { 1 };
 
-    let resp = client
-        .get(&url)
-        .header(
-            "User-Agent",
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-        )
-        .header("Accept", "application/json")
-        .send()
-        .await?;
+    let mut last_err = String::from("Unknown error");
 
-    let status = resp.status();
-    if !status.is_success() {
-        return Err(format!("API returned error status: {}", status).into());
+    for i in 0..attempts {
+        let current_host = &api_hosts[(start_index + i) % total_hosts];
+        let url = format!("https://{}/api/{}", current_host, ip);
+
+        let resp = client
+            .get(&url)
+            .header(
+                "User-Agent",
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+            )
+            .header("Accept", "application/json")
+            .send()
+            .await;
+
+        match resp {
+            Ok(res) => {
+                let status = res.status();
+                if status.is_success() {
+                    let val: Value = res.json().await?;
+                    if let Some(info) = val.get("info") {
+                        let score = info.get("fraud_score").and_then(|v| v.as_i64()).unwrap_or(100);
+                        let risk = info.get("risk").and_then(|v| v.as_str()).unwrap_or("high").to_string();
+                        return Ok((score, risk));
+                    }
+                } else {
+                    last_err = format!("Host {} returned HTTP {}", current_host, status);
+                }
+            }
+            Err(e) => {
+                last_err = format!("Host {} failed: {}", current_host, e);
+            }
+        }
+
+        if i + 1 < attempts {
+            tokio::time::sleep(Duration::from_millis(500)).await;
+        }
     }
 
-    let val: Value = resp.json().await?;
-
-    if let Some(info) = val.get("info") {
-        let score = info.get("fraud_score").and_then(|v| v.as_i64()).unwrap_or(100);
-        let risk = info.get("risk").and_then(|v| v.as_str()).unwrap_or("high").to_string();
-        Ok((score, risk))
-    } else {
-        Err(format!("Invalid API JSON Structure: {:?}", val).into())
-    }
+    Err(last_err.into())
 }
 
 fn risk_color_hex(score: i64) -> String {
@@ -330,88 +372,99 @@ fn risk_badge_html(score: i64) -> String {
 }
 
 async fn scan_candidate(
-ip: String,
-port: u16,
-isp_source: String,
-validated_proxies:  &Arc <Mutex <BTreeMap <String, Vec <ProxyInfo > > > >,
-scanner_ip:  &str,
-api_host:  &str,
-live_count:  &Arc <AtomicUsize >,
-failed_count:  &Arc <AtomicUsize >,
+    ip: String,
+    port: u16,
+    isp_source: String,
+    validated_proxies: &Arc<Mutex<BTreeMap<String, Vec<ProxyInfo>>>>,
+    scanner_ip: &str,
+    api_hosts: &[String],
+    live_count: &Arc<AtomicUsize>,
+    failed_count: &Arc<AtomicUsize>,
+    worker_cursor: &Arc<AtomicUsize>,
+    risk_semaphore: Arc<Semaphore>,
 ) {
-let mut cookie_jar = CookieJar::new();
-if make_http_request(IP_RESOLVER_HOST, CLOUDFLARE_INDEX_ENDPOINT, Some((&ip, port)), &mut cookie_jar, false).await.is_err() {
-     failed_count.fetch_add(1, Ordering::Relaxed);
-     println!("  ❌ {:<7} | {:<15} | {}", "DEAD".red().bold(), ip, "couldn't connect".dimmed());
-     return;
- }
- match make_http_request(IP_RESOLVER_HOST, CLOUDFLARE_META_ENDPOINT, Some((&ip, port)), &mut cookie_jar, true).await {
-     Ok((_, body)) => {
-         if let Ok(json) = parse_json_response(&body) {
-             if let Some(out_ip) = json.get("clientIp").and_then(|v| v.as_str()) {
-                 if out_ip != scanner_ip {
-                     let isp = json
-                         .get("asOrganization")
-                         .and_then(|v| v.as_str())
-                         .map(String::from)
-                         .unwrap_or(isp_source);
-                     let (fraud_score, risk) = match fetch_risk_assessment(&ip, api_host).await {
-                          Ok(res) => res,
-                          Err(e) => {
-                              eprintln!("⚠️ Risk check failed for {}: {}", ip, e);
-                              (100, "high".to_string())
-                          }
-                     };
-                     let info = ProxyInfo {
-                         ip: ip.clone(),
-                         isp,
-                         country_code: json.get("country").and_then(|v| v.as_str()).unwrap_or("XX").to_string(),
-                         city: json.get("city").and_then(|v| v.as_str()).unwrap_or("Unknown").to_string(),
-                         region: json.get("region").and_then(|v| v.as_str()).unwrap_or("Unknown").to_string(),
-                         fraud_score,
-                         risk,
-                     };
-                     live_count.fetch_add(1, Ordering::Relaxed);
-                     let (r, g, b) = {
-                         if info.fraud_score < 0 {
-                             (128, 128, 128)
-                         } else {
-                             let clamped = info.fraud_score.clamp(0, 100) as f32 / 100.0;
-                             let low = (0xC9, 0xA2, 0x27);
-                             let high = (0x8B, 0x1E, 0x1E);
-                             (
-                                 (low.0 as f32 + (high.0 as f32 - low.0 as f32) * clamped) as u8,
-                                 (low.1 as f32 + (high.1 as f32 - low.1 as f32) * clamped) as u8,
-                                 (low.2 as f32 + (high.2 as f32 - low.2 as f32) * clamped) as u8,
-                             )
-                         }
-                     };
-                     let score_display = if info.fraud_score < 0 { "N/A".to_string() } else { info.fraud_score.to_string() };
-                     let risk_badge = score_display.clone().truecolor(r, g, b).bold();
-                     let flag = generate_country_flag_emoji(&info.country_code);
-                     println!(
-                         "  ✅ {:<7} | {:<15} | Risk: {:<17} | Score: {:<4} | {} {}",
-                         "ALIVE".green().bold(),
-                         ip.bold(),
-                         risk_badge,
-                         score_display,
-                         flag,
-                         info.country_code.cyan()
-                     );
-                     let mut locked = validated_proxies.lock().unwrap_or_else(|e| e.into_inner());
-                     locked.entry(info.country_code.clone()).or_default().push(info);
-                     return;
-                 }
-             }
-         }
-         failed_count.fetch_add(1, Ordering::Relaxed);
-         println!("  ❌ {:<7} | {:<15} | {}", "DEAD".red().bold(), ip, "response didn't check out".dimmed());
-     }
-     Err(_) => {
-         failed_count.fetch_add(1, Ordering::Relaxed);
-         println!("  ❌ {:<7} | {:<15} | {}", "DEAD".red().bold(), ip, "meta request fell over".dimmed());
-     }
- }
+    let mut cookie_jar = CookieJar::new();
+
+    if make_http_request(IP_RESOLVER_HOST, CLOUDFLARE_INDEX_ENDPOINT, Some((&ip, port)), &mut cookie_jar, false).await.is_err() {
+        failed_count.fetch_add(1, Ordering::Relaxed);
+        println!("  ❌ {:<7} | {:<15} | {}", "DEAD".red().bold(), ip, "couldn't connect".dimmed());
+        return;
+    }
+
+    match make_http_request(IP_RESOLVER_HOST, CLOUDFLARE_META_ENDPOINT, Some((&ip, port)), &mut cookie_jar, true).await {
+        Ok((_, body)) => {
+            if let Ok(json) = parse_json_response(&body) {
+                if let Some(out_ip) = json.get("clientIp").and_then(|v| v.as_str()) {
+                    if out_ip != scanner_ip {
+                        let isp = json
+                            .get("asOrganization")
+                            .and_then(|v| v.as_str())
+                            .map(String::from)
+                            .unwrap_or(isp_source);
+                        
+                        let _permit = risk_semaphore.acquire().await.unwrap();
+                        let start_index = worker_cursor.fetch_add(1, Ordering::Relaxed);
+                        tokio::time::sleep(Duration::from_millis(200)).await;
+
+                        let (fraud_score, risk) = match fetch_risk_assessment(&ip, api_hosts, start_index).await {
+                            Ok(res) => res,
+                            Err(e) => {
+                                eprintln!("  ⚠️ Risk check failed for {}: {}", ip, e);
+                                (0, "low".to_string())
+                            }
+                        };
+                        drop(_permit);
+
+                        let info = ProxyInfo {
+                            ip: ip.clone(),
+                            isp,
+                            country_code: json.get("country").and_then(|v| v.as_str()).unwrap_or("XX").to_string(),
+                            city: json.get("city").and_then(|v| v.as_str()).unwrap_or("Unknown").to_string(),
+                            region: json.get("region").and_then(|v| v.as_str()).unwrap_or("Unknown").to_string(),
+                            fraud_score,
+                            risk,
+                        };
+
+                        live_count.fetch_add(1, Ordering::Relaxed);
+
+                        let (r, g, b) = {
+                            let clamped = info.fraud_score.clamp(0, 100) as f32 / 100.0;
+                            let low = (0xC9, 0xA2, 0x27);
+                            let high = (0x8B, 0x1E, 0x1E);
+                            (
+                                (low.0 as f32 + (high.0 as f32 - low.0 as f32) * clamped) as u8,
+                                (low.1 as f32 + (high.1 as f32 - low.1 as f32) * clamped) as u8,
+                                (low.2 as f32 + (high.2 as f32 - low.2 as f32) * clamped) as u8,
+                            )
+                        };
+                        let risk_badge = format!("{}", info.fraud_score).truecolor(r, g, b).bold();
+
+                        let flag = generate_country_flag_emoji(&info.country_code);
+
+                        println!(
+                            "  ✅ {:<7} | {:<15} | Risk: {:<17} | Score: {:<3} | {} {}",
+                            "ALIVE".green().bold(),
+                            ip.bold(),
+                            risk_badge,
+                            info.fraud_score,
+                            flag,
+                            info.country_code.cyan()
+                        );
+
+                        let mut locked = validated_proxies.lock().unwrap_or_else(|e| e.into_inner());
+                        locked.entry(info.country_code.clone()).or_default().push(info);
+                        return;
+                    }
+                }
+            }
+            failed_count.fetch_add(1, Ordering::Relaxed);
+            println!("  ❌ {:<7} | {:<15} | {}", "DEAD".red().bold(), ip, "response didn't check out".dimmed());
+        }
+        Err(_) => {
+            failed_count.fetch_add(1, Ordering::Relaxed);
+            println!("  ❌ {:<7} | {:<15} | {}", "DEAD".red().bold(), ip, "meta request fell over".dimmed());
+        }
+    }
 }
 
 async fn make_http_request(
@@ -426,7 +479,7 @@ async fn make_http_request(
     tokio::time::timeout(timeout, async {
         let mut headers = Vec::new();
         headers.push(format!("Host: {}", host));
-        headers.push("User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36".to_string());
+        headers.push("User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36".to_string());
         headers.push("Accept: */*".to_string());
         headers.push("Accept-Language: en-US,en;q=0.9".to_string());
         headers.push("Accept-Encoding: identity".to_string());
@@ -652,10 +705,10 @@ fn write_markdown_report(proxies_by_country: &BTreeMap<String, Vec<ProxyInfo>>, 
         writeln!(file, "\n</details>\n\n---\n")?;
     }
 
-if !proxies_by_country.is_empty() {
-    writeln!(
-        file,
-        r##"> <br/>
+    if !proxies_by_country.is_empty() {
+        writeln!(
+            file,
+            r##"> <br/>
 >
 > <p><b>🪶 Credits</b></p>
 >
@@ -665,8 +718,8 @@ if !proxies_by_country.is_empty() {
 >
 > <br/>
 "##
-    )?;
-}
+        )?;
+    }
     println!("💠 Markdown report refreshed at {}", output_file);
     Ok(())
 }
