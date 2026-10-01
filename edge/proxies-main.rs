@@ -30,7 +30,8 @@ const DEFAULT_OUTPUT_FILE: &str = "sub/ProxyIP-Daily.md";
 const DEFAULT_PROXY_FILE: &str = "edge/assets/p-legacies.csv";
 
 const MAX_CONCURRENT_SCANS: usize = 80;
-const TIMEOUT_SECONDS: u64 = 8;
+const TIMEOUT_SECONDS: u64 = 5;
+const RISK_TIMEOUT_SECONDS: u64 = 12;
 const TARGET_PROXY_PORT: u16 = 443;
 
 const NORTHERN_TERRITORY_ENV: &str = "NORTHERN_TERRITORY";
@@ -129,14 +130,14 @@ async fn main() -> Result<()> {
     let total_live = live_count.load(Ordering::Relaxed);
     let total_failed = failed_count.load(Ordering::Relaxed);
 
-    println!("\n{}", "==============================================".cyan().bold());
-    println!("{}", "       🌌  SCAN WRAPPED - HERE'S THE LOWDOWN       ".cyan().bold());
-    println!("{}\n", "==============================================".cyan().bold());
+    println!("\n{}", "============================================".cyan().bold());
+    println!("{}", "     🌌  SCAN WRAPPED - HERE'S THE LOWDOWN       ".cyan().bold());
+    println!("{}\n", "============================================".cyan().bold());
     println!("  🌠 Candidates tested  : {}", total_candidates.to_string().bold());
     println!("  🟢 Alive & kicking    : {}", total_live.to_string().green().bold());
     println!("  🔴 Dead / timed out   : {}", total_failed.to_string().red());
     println!("  🌏 Countries covered  : {}", locked_proxies.len().to_string().yellow().bold());
-    println!("\n{}", "----------------------------------------------".dimmed());
+    println!("\n{}", "--------------------------------------------".dimmed());
     println!("{}", "  🪩 Active proxies per country:".bold());
     
     for (country_code, proxies) in locked_proxies.iter() {
@@ -150,7 +151,7 @@ async fn main() -> Result<()> {
             proxies.len().to_string().green().bold()
         );
     }
-    println!("{}\n", "==============================================".cyan().bold());
+    println!("{}\n", "============================================".cyan().bold());
 
     Ok(())
 }
@@ -267,11 +268,11 @@ async fn register_success(
 
 async fn fetch_risk_assessment_balanced(ip: &str) -> (i64, String) {
     let client = match reqwest::Client::builder()
-        .timeout(Duration::from_secs(TIMEOUT_SECONDS))
+        .timeout(Duration::from_secs(RIS_TIMEOUT_SECONDS))
         .danger_accept_invalid_certs(true)
         .build() {
             Ok(c) => c,
-            Err(_) => return (44, "low".to_string()),
+            Err(_) => return (0, "low".to_string()),
         };
 
     let start_idx = API_INDEX_COUNTER.fetch_add(1, Ordering::Relaxed);
@@ -281,26 +282,41 @@ async fn fetch_risk_assessment_balanced(ip: &str) -> (i64, String) {
         let current_host = RISK_API_HOSTS[(start_idx + i) % total_apis];
         let url = format!("https://{}/api/{}", current_host, ip);
 
-        let resp = client.get(&url)
-            .header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36")
+        let resp_result = client.get(&url)
+            .header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36")
             .header("Accept", "application/json")
             .send()
             .await;
 
-        if let Ok(res) = resp {
-            if res.status().is_success() {
-                if let Ok(val) = res.json::<Value>().await {
-                    if let Some(info) = val.get("info") {
-                        let score = info.get("fraud_score").and_then(|v| v.as_i64()).unwrap_or(0);
-                        let risk = info.get("risk").and_then(|v| v.as_str()).unwrap_or("low").to_string();
-                        return (score, risk);
+        match resp_result {
+            Ok(res) => {
+                let status = res.status();
+                if status.is_success() {
+                    if let Ok(val) = res.json::<Value>().await {
+                        if val.get("error").and_then(|e| e.as_bool()).unwrap_or(false) {
+                            continue;
+                        }
+                        if let Some(info) = val.get("info") {
+                            let score = info.get("fraud_score").and_then(|v| v.as_i64()).unwrap_or(0);
+                            let risk = info.get("risk").and_then(|v| v.as_str()).unwrap_or("low").to_string();
+                            return (score, risk);
+                        }
                     }
+                } else {
+                    eprintln!("  ⚠️ Risk API [{}] returned HTTP {}", current_host, status);
+                }
+            }
+            Err(err) => {
+                if err.is_timeout() {
+                    eprintln!("  ⚠️ Risk API [{}] timed out for IP {}", current_host, ip);
+                } else {
+                    eprintln!("  ⚠️ Risk API [{}] request failed: {}", current_host, err);
                 }
             }
         }
     }
 
-    (0, "low".to_string())
+    (22, "low".to_string())
 }
 
 async fn raw_socket_request(
