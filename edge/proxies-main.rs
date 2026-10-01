@@ -268,7 +268,7 @@ async fn register_success(
 
 async fn fetch_risk_assessment_balanced(ip: &str) -> (i64, String) {
     let client = match reqwest::Client::builder()
-        .timeout(Duration::from_secs(RIS_TIMEOUT_SECONDS))
+        .timeout(Duration::from_secs(RISK_TIMEOUT_SECONDS))
         .danger_accept_invalid_certs(true)
         .build() {
             Ok(c) => c,
