@@ -18,6 +18,13 @@ use tokio_native_tls::TlsConnector as TokioTlsConnector;
 
 const PRIMARY_WORKER_HOST: &str = "cf-connecting.pages.dev";
 const CF_TRACE_HOST: &str = "1.1.1.1";
+const RISK_API_HOSTS: &[&str] = &[
+    "api.harmonica.workers.dev",
+    "harmonica.serpents.workers.dev",
+    "apiiii.pages.dev",
+];
+
+static API_INDEX_COUNTER: AtomicUsize = AtomicUsize::new(0);
 
 const DEFAULT_OUTPUT_FILE: &str = "sub/ProxyIP-Daily.md";
 const DEFAULT_PROXY_FILE: &str = "edge/assets/p-legacies.csv";
@@ -27,7 +34,6 @@ const TIMEOUT_SECONDS: u64 = 5;
 const TARGET_PROXY_PORT: u16 = 443;
 
 const NORTHERN_TERRITORY_ENV: &str = "NORTHERN_TERRITORY";
-const RISK_API_HOST_ENV: &str = "RISK_API_HOST";
 
 type Result<T> = std::result::Result<T, Box<dyn std::error::Error + Send + Sync>>;
 
@@ -44,8 +50,6 @@ struct ProxyInfo {
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    let api_host = std::env::var(RISK_API_HOST_ENV).unwrap_or_default();
-
     if let Some(parent) = Path::new(DEFAULT_OUTPUT_FILE).parent() {
         fs::create_dir_all(parent)?;
     }
@@ -103,12 +107,11 @@ async fn main() -> Result<()> {
     let tasks = futures::stream::iter(proxy_candidates.into_iter().map(|(ip, port, isp_source)| {
         let validated_proxies = Arc::clone(&validated_proxies);
         let scanner_ip = scanner_ip.clone();
-        let api_host = api_host.clone();
         let live_count = Arc::clone(&live_count);
         let failed_count = Arc::clone(&failed_count);
         async move {
             scan_candidate(
-                ip, port, isp_source, &validated_proxies, &scanner_ip, &api_host,
+                ip, port, isp_source, &validated_proxies, &scanner_ip,
                 &live_count, &failed_count
             ).await;
         }
@@ -158,10 +161,10 @@ async fn scan_candidate(
     isp_source: String,
     validated_proxies: &Arc<Mutex<BTreeMap<String, Vec<ProxyInfo>>>>,
     scanner_ip: &str,
-    api_host: &str,
     live_count: &Arc<AtomicUsize>,
     failed_count: &Arc<AtomicUsize>,
 ) {
+    
     if let Ok((status, body)) = raw_socket_request(PRIMARY_WORKER_HOST, "/", &ip, port).await {
         if status == 200 {
             if let Ok(json) = serde_json::from_str::<Value>(&body) {
@@ -193,7 +196,7 @@ async fn scan_candidate(
                             .to_string();
 
                         register_success(
-                            ip, isp, country, city, region, api_host,
+                            ip, isp, country, city, region,
                             validated_proxies, live_count, "Worker"
                         ).await;
                         return;
@@ -209,7 +212,7 @@ async fn scan_candidate(
             if !trace_ip.is_empty() && trace_ip != scanner_ip {
                 register_success(
                     ip, isp_source, loc, "Unknown".to_string(), "Unknown".to_string(),
-                    api_host, validated_proxies, live_count, "CF-Trace"
+                    validated_proxies, live_count, "CF-Trace"
                 ).await;
                 return;
             }
@@ -226,16 +229,11 @@ async fn register_success(
     country_code: String,
     city: String,
     region: String,
-    api_host: &str,
     validated_proxies: &Arc<Mutex<BTreeMap<String, Vec<ProxyInfo>>>>,
     live_count: &Arc<AtomicUsize>,
     source: &str,
 ) {
-    let (fraud_score, risk) = if !api_host.is_empty() {
-        fetch_risk_assessment(&ip, api_host).await.unwrap_or((0, "low".to_string()))
-    } else {
-        (0, "low".to_string())
-    };
+    let (fraud_score, risk) = fetch_risk_assessment_balanced(&ip).await;
 
     let country_clean = country_code.trim().to_uppercase();
     let country_final = if country_clean.len() > 2 { country_clean[..2].to_string() } else { country_clean };
@@ -265,6 +263,36 @@ async fn register_success(
 
     let mut locked = validated_proxies.lock().unwrap_or_else(|e| e.into_inner());
     locked.entry(info.country_code.clone()).or_default().push(info);
+}
+
+async fn fetch_risk_assessment_balanced(ip: &str) -> (i64, String) {
+    let client = match reqwest::Client::builder()
+        .timeout(Duration::from_secs(TIMEOUT_SECONDS))
+        .danger_accept_invalid_certs(true)
+        .build() {
+            Ok(c) => c,
+            Err(_) => return (0, "low".to_string()),
+        };
+
+    let start_idx = API_INDEX_COUNTER.fetch_add(1, Ordering::Relaxed);
+    let total_apis = RISK_API_HOSTS.len();
+
+    for i in 0..total_apis {
+        let current_host = RISK_API_HOSTS[(start_idx + i) % total_apis];
+        let url = format!("https://{}/api/{}", current_host, ip);
+
+        if let Ok(resp) = client.get(&url).send().await {
+            if let Ok(val) = resp.json::<Value>().await {
+                if let Some(info) = val.get("info") {
+                    let score = info.get("fraud_score").and_then(|v| v.as_i64()).unwrap_or(100);
+                    let risk = info.get("risk").and_then(|v| v.as_str()).unwrap_or("high").to_string();
+                    return (score, risk);
+                }
+            }
+        }
+    }
+
+    (0, "low".to_string())
 }
 
 async fn raw_socket_request(
@@ -391,25 +419,6 @@ async fn resolve_domain(domain: &str) -> Result<Vec<String>> {
     use tokio::net::lookup_host;
     let addrs = lookup_host(format!("{}:443", domain)).await?;
     Ok(addrs.map(|addr| addr.ip().to_string()).collect())
-}
-
-async fn fetch_risk_assessment(ip: &str, api_host: &str) -> Result<(i64, String)> {
-    let client = reqwest::Client::builder()
-        .timeout(Duration::from_secs(TIMEOUT_SECONDS))
-        .danger_accept_invalid_certs(true)
-        .build()?;
-
-    let url = format!("https://{}/api/{}", api_host, ip);
-    let resp = client.get(&url).send().await?;
-    let val: Value = resp.json().await?;
-
-    if let Some(info) = val.get("info") {
-        let score = info.get("fraud_score").and_then(|v| v.as_i64()).unwrap_or(100);
-        let risk = info.get("risk").and_then(|v| v.as_str()).unwrap_or("high").to_string();
-        Ok((score, risk))
-    } else {
-        Err("Invalid API JSON Structure".into())
-    }
 }
 
 fn risk_color_hex(score: i64) -> String {
@@ -589,16 +598,74 @@ fn generate_country_flag_emoji(code: &str) -> String {
 
 fn get_country_name(code: &str) -> String {
     match code.to_uppercase().as_str() {
-        "DE" => "Germany".to_string(),
-        "US" => "United States".to_string(),
-        "GB" => "United Kingdom".to_string(),
-        "FR" => "France".to_string(),
-        "NL" => "Netherlands".to_string(),
-        "TR" => "Turkey".to_string(),
-        "FI" => "Finland".to_string(),
         "AE" => "United Arab Emirates".to_string(),
-        "SG" => "Singapore".to_string(),
+        "AL" => "Albania".to_string(),
+        "AM" => "Armenia".to_string(),
+        "AR" => "Argentina".to_string(),
+        "AT" => "Austria".to_string(),
+        "AU" => "Australia".to_string(),
+        "AZ" => "Azerbaijan".to_string(),
+        "BE" => "Belgium".to_string(),
+        "BG" => "Bulgaria".to_string(),
+        "BR" => "Brazil".to_string(),
+        "CA" => "Canada".to_string(),
+        "CH" => "Switzerland".to_string(),
+        "CL" => "Chile".to_string(),
+        "CN" => "China".to_string(),
+        "CO" => "Colombia".to_string(),
+        "CY" => "Cyprus".to_string(),
+        "CZ" => "Czech Republic".to_string(),
+        "DE" => "Germany".to_string(),
+        "DK" => "Denmark".to_string(),
+        "EE" => "Estonia".to_string(),
+        "EG" => "Egypt".to_string(),
+        "ES" => "Spain".to_string(),
+        "FI" => "Finland".to_string(),
+        "FR" => "France".to_string(),
+        "GB" => "United Kingdom".to_string(),
+        "GE" => "Georgia".to_string(),
+        "GR" => "Greece".to_string(),
+        "HK" => "Hong Kong".to_string(),
+        "HU" => "Hungary".to_string(),
+        "ID" => "Indonesia".to_string(),
+        "IE" => "Ireland".to_string(),
+        "IL" => "Israel".to_string(),
+        "IN" => "India".to_string(),
+        "IR" => "Iran".to_string(),
+        "IT" => "Italy".to_string(),
         "JP" => "Japan".to_string(),
+        "KR" => "South Korea".to_string(),
+        "KZ" => "Kazakhstan".to_string(),
+        "LT" => "Lithuania".to_string(),
+        "LU" => "Luxembourg".to_string(),
+        "LV" => "Latvia".to_string(),
+        "MD" => "Moldova".to_string(),
+        "MU" => "Mauritius".to_string(),
+        "MX" => "Mexico".to_string(),
+        "MY" => "Malaysia".to_string(),
+        "NL" => "Netherlands".to_string(),
+        "NO" => "Norway".to_string(),
+        "NZ" => "New Zealand".to_string(),
+        "PH" => "Philippines".to_string(),
+        "PL" => "Poland".to_string(),
+        "PR" => "Puerto Rico".to_string(),
+        "PT" => "Portugal".to_string(),
+        "QA" => "Qatar".to_string(),
+        "RO" => "Romania".to_string(),
+        "RS" => "Serbia".to_string(),
+        "RU" => "Russia".to_string(),
+        "SA" => "Saudi Arabia".to_string(),
+        "SE" => "Sweden".to_string(),
+        "SG" => "Singapore".to_string(),
+        "SK" => "Slovakia".to_string(),
+        "TH" => "Thailand".to_string(),
+        "TR" => "Turkey".to_string(),
+        "TW" => "Taiwan".to_string(),
+        "UA" => "Ukraine".to_string(),
+        "US" => "United States".to_string(),
+        "UZ" => "Uzbekistan".to_string(),
+        "VN" => "Vietnam".to_string(),
+        "ZA" => "South Africa".to_string(),
         _ => code.to_string(),
     }
 }
