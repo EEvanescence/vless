@@ -25,6 +25,13 @@ const RISK_API_HOSTS: &[&str] = &[
 ];
 
 static API_INDEX_COUNTER: AtomicUsize = AtomicUsize::new(0);
+static RISK_DIRECT_SUCCESS: AtomicUsize = AtomicUsize::new(0);
+static RISK_CORSPROXY_SUCCESS: AtomicUsize = AtomicUsize::new(0);
+static RISK_CODETABS_SUCCESS: AtomicUsize = AtomicUsize::new(0);
+static RISK_ALLORIGINS_SUCCESS: AtomicUsize = AtomicUsize::new(0);
+static RISK_THINGPROXY_SUCCESS: AtomicUsize = AtomicUsize::new(0);
+static RISK_JSONP_SUCCESS: AtomicUsize = AtomicUsize::new(0);
+static RISK_UNKNOWN_SOURCE_SUCCESS: AtomicUsize = AtomicUsize::new(0);
 
 const DEFAULT_OUTPUT_FILE: &str = "sub/ProxyIP-Daily.md";
 const DEFAULT_PROXY_FILE: &str = "edge/assets/p-legacies.csv";
@@ -160,6 +167,38 @@ async fn main() -> Result<()> {
 
     if risk_failures > 0 {
         println!("  ⚠️ Risk unavailable     : {}", risk_failures);
+        println!();
+        println!("🔬 Risk acquisition diagnostics");
+        println!("--------------------------------------------");
+        println!(
+            "Direct       : {}",
+            RISK_DIRECT_SUCCESS.load(Ordering::Relaxed)
+        );
+        println!(
+            "CorsProxyIO  : {}",
+            RISK_CORSPROXY_SUCCESS.load(Ordering::Relaxed)
+        );
+        println!(
+            "Codetabs     : {}",
+            RISK_CODETABS_SUCCESS.load(Ordering::Relaxed)
+        );
+        println!(
+            "AllOrigins   : {}",
+            RISK_ALLORIGINS_SUCCESS.load(Ordering::Relaxed)
+        );
+        println!(
+            "ThingProxy   : {}",
+            RISK_THINGPROXY_SUCCESS.load(Ordering::Relaxed)
+        );
+        println!(
+            "JSONP        : {}",
+            RISK_JSONP_SUCCESS.load(Ordering::Relaxed)
+        );
+        println!(
+            "Unknown      : {}",
+            RISK_UNKNOWN_SOURCE_SUCCESS.load(Ordering::Relaxed)
+        );
+        println!("============================================");
     }
     Ok(())
 }
@@ -343,6 +382,49 @@ async fn fetch_risk_assessment_balanced(ip: &str) -> Option<(i64, String)> {
             Some(info) => info,
             None => continue,
         };
+        
+        if let Some(info) = val.get("info") {
+           let score = info
+               .get("fraud_score")
+               .and_then(|v| v.as_i64())
+               .unwrap_or(-1);
+       
+           let risk = info
+               .get("risk")
+               .and_then(|v| v.as_str())
+               .unwrap_or("unknown")
+               .to_string();
+       
+           match info
+               .get("risk_source")
+               .and_then(|v| v.as_str())
+               .unwrap_or("unknown")
+           {
+               "Direct" => {
+                   RISK_DIRECT_SUCCESS.fetch_add(1, Ordering::Relaxed);
+               }
+               "CorsProxyIO" => {
+                   RISK_CORSPROXY_SUCCESS.fetch_add(1, Ordering::Relaxed);
+               }
+               "Codetabs" => {
+                   RISK_CODETABS_SUCCESS.fetch_add(1, Ordering::Relaxed);
+               }
+               "AllOrigins" | "AllOrigins Raw" => {
+                   RISK_ALLORIGINS_SUCCESS.fetch_add(1, Ordering::Relaxed);
+               }
+               "ThingProxy" => {
+                   RISK_THINGPROXY_SUCCESS.fetch_add(1, Ordering::Relaxed);
+               }
+               "JSONPlaceholder Proxy" | "JSONP" => {
+                   RISK_JSONP_SUCCESS.fetch_add(1, Ordering::Relaxed);
+               }
+               _ => {
+                   RISK_UNKNOWN_SOURCE_SUCCESS.fetch_add(1, Ordering::Relaxed);
+               }
+           }
+       
+           return (score, risk);
+       }
 
         let score = match info.get("fraud_score").and_then(|v| v.as_i64()) {
             Some(score) if (0..=100).contains(&score) => score,
