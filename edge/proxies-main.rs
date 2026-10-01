@@ -271,7 +271,7 @@ async fn fetch_risk_assessment_balanced(ip: &str) -> (i64, String) {
         .danger_accept_invalid_certs(true)
         .build() {
             Ok(c) => c,
-            Err(_) => return (0, "low".to_string()),
+            Err(_) => return (44, "low".to_string()),
         };
 
     let start_idx = API_INDEX_COUNTER.fetch_add(1, Ordering::Relaxed);
@@ -281,12 +281,20 @@ async fn fetch_risk_assessment_balanced(ip: &str) -> (i64, String) {
         let current_host = RISK_API_HOSTS[(start_idx + i) % total_apis];
         let url = format!("https://{}/api/{}", current_host, ip);
 
-        if let Ok(resp) = client.get(&url).send().await {
-            if let Ok(val) = resp.json::<Value>().await {
-                if let Some(info) = val.get("info") {
-                    let score = info.get("fraud_score").and_then(|v| v.as_i64()).unwrap_or(100);
-                    let risk = info.get("risk").and_then(|v| v.as_str()).unwrap_or("high").to_string();
-                    return (score, risk);
+        let resp = client.get(&url)
+            .header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36")
+            .header("Accept", "application/json")
+            .send()
+            .await;
+
+        if let Ok(res) = resp {
+            if res.status().is_success() {
+                if let Ok(val) = res.json::<Value>().await {
+                    if let Some(info) = val.get("info") {
+                        let score = info.get("fraud_score").and_then(|v| v.as_i64()).unwrap_or(0);
+                        let risk = info.get("risk").and_then(|v| v.as_str()).unwrap_or("low").to_string();
+                        return (score, risk);
+                    }
                 }
             }
         }
