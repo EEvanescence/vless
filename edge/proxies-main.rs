@@ -17,13 +17,6 @@ use tokio::net::TcpStream;
 use tokio::sync::Semaphore;
 use tokio_native_tls::TlsConnector as TokioTlsConnector;
 
-const PRIMARY_WORKER_HOST: &str = "cf-connecting.pages.dev";
-const CF_TRACE_HOST: &str = "1.1.1.1";
-const RISK_API_HOSTS: &[&str] = &[
-    "api.cf-connect.workers.dev",
-    "apii.cf-connect.workers.dev",
-];
-
 static API_INDEX_COUNTER: AtomicUsize = AtomicUsize::new(0);
 static RISK_DIRECT_SUCCESS: AtomicUsize = AtomicUsize::new(0);
 static RISK_CORSPROXY_SUCCESS: AtomicUsize = AtomicUsize::new(0);
@@ -32,46 +25,26 @@ static RISK_ALLORIGINS_SUCCESS: AtomicUsize = AtomicUsize::new(0);
 static RISK_THINGPROXY_SUCCESS: AtomicUsize = AtomicUsize::new(0);
 static RISK_JSONP_SUCCESS: AtomicUsize = AtomicUsize::new(0);
 static RISK_UNKNOWN_SOURCE_SUCCESS: AtomicUsize = AtomicUsize::new(0);
-static RISK_TIMEOUT_FAILURES: AtomicUsize = AtomicUsize::new(0);
-static RISK_HTTP_FAILURES: AtomicUsize = AtomicUsize::new(0);
-static RISK_RESPONSE_FAILURES: AtomicUsize = AtomicUsize::new(0);
-static RISK_UNKNOWN_FAILURES: AtomicUsize = AtomicUsize::new(0);
-static RISK_DIRECT_TIMEOUT: AtomicUsize = AtomicUsize::new(0);
-static RISK_DIRECT_HTTP: AtomicUsize = AtomicUsize::new(0);
-static RISK_DIRECT_INVALID: AtomicUsize = AtomicUsize::new(0);
+static RISK_CONCURRENCY: Semaphore = Semaphore::const_new(6);
+static RISK_FAILURES: AtomicUsize = AtomicUsize::new(0);
 
-static RISK_CORSPROXY_TIMEOUT: AtomicUsize = AtomicUsize::new(0);
-static RISK_CORSPROXY_HTTP: AtomicUsize = AtomicUsize::new(0);
-static RISK_CORSPROXY_INVALID: AtomicUsize = AtomicUsize::new(0);
-
-static RISK_CODETABS_TIMEOUT: AtomicUsize = AtomicUsize::new(0);
-static RISK_CODETABS_HTTP: AtomicUsize = AtomicUsize::new(0);
-static RISK_CODETABS_INVALID: AtomicUsize = AtomicUsize::new(0);
-
-static RISK_ALLORIGINS_TIMEOUT: AtomicUsize = AtomicUsize::new(0);
-static RISK_ALLORIGINS_HTTP: AtomicUsize = AtomicUsize::new(0);
-static RISK_ALLORIGINS_INVALID: AtomicUsize = AtomicUsize::new(0);
-
-static RISK_THINGPROXY_TIMEOUT: AtomicUsize = AtomicUsize::new(0);
-static RISK_THINGPROXY_HTTP: AtomicUsize = AtomicUsize::new(0);
-static RISK_THINGPROXY_INVALID: AtomicUsize = AtomicUsize::new(0);
-
-static RISK_JSONP_TIMEOUT: AtomicUsize = AtomicUsize::new(0);
-static RISK_JSONP_HTTP: AtomicUsize = AtomicUsize::new(0);
-static RISK_JSONP_INVALID: AtomicUsize = AtomicUsize::new(0);
+const PRIMARY_WORKER_HOST: &str = "cf-connecting.pages.dev";
+const CF_TRACE_HOST: &str = "1.1.1.1";
+const RISK_API_HOSTS: &[&str] = &[
+    "api.cf-connect.workers.dev",
+    "apii.cf-connect.workers.dev",
+    "api.serpents.workers.dev",
+    "harmonica.serpents.workers.dev",
+];
 
 const DEFAULT_OUTPUT_FILE: &str = "sub/ProxyIP-Daily.md";
 const DEFAULT_PROXY_FILE: &str = "edge/assets/p-legacies.csv";
+const NORTHERN_TERRITORY_ENV: &str = "NORTHERN_TERRITORY";
 
 const MAX_CONCURRENT_SCANS: usize = 100;
 const TIMEOUT_SECONDS: u64 = 5;
 const RISK_TIMEOUT_SECONDS: u64 = 8;
 const TARGET_PROXY_PORT: u16 = 443;
-
-static RISK_CONCURRENCY: Semaphore = Semaphore::const_new(6);
-static RISK_FAILURES: AtomicUsize = AtomicUsize::new(0);
-
-const NORTHERN_TERRITORY_ENV: &str = "NORTHERN_TERRITORY";
 
 type Result<T> = std::result::Result<T, Box<dyn std::error::Error + Send + Sync>>;
 
@@ -193,82 +166,49 @@ async fn main() -> Result<()> {
     let risk_failures = RISK_FAILURES.load(Ordering::Relaxed);
 
     if risk_failures > 0 {
-        println!("  ⚠️ Risk unavailable     : {}", risk_failures);
-        println!();
-        println!("🔬 Risk failure diagnostics");
-        println!("--------------------------------------------");
-        println!(
-            "Timeout       : {}",
-            RISK_TIMEOUT_FAILURES.load(Ordering::Relaxed)
-        );
-        println!(
-            "HTTP errors   : {}",
-            RISK_HTTP_FAILURES.load(Ordering::Relaxed)
-        );
-        println!(
-            "Invalid data  : {}",
-            RISK_RESPONSE_FAILURES.load(Ordering::Relaxed)
-        );
-        println!(
-            "Unknown       : {}",
-            RISK_UNKNOWN_FAILURES.load(Ordering::Relaxed)
-        );
-        println!("============================================");
-        println!();
-        println!("🔬 Risk acquisition diagnostics");
-        println!("--------------------------------------------");
-        
-        println!(
-            "Direct       : SUCCESS={} TIMEOUT={} HTTP={} INVALID={}",
-            RISK_DIRECT_SUCCESS.load(Ordering::Relaxed),
-            RISK_DIRECT_TIMEOUT.load(Ordering::Relaxed),
-            RISK_DIRECT_HTTP.load(Ordering::Relaxed),
-            RISK_DIRECT_INVALID.load(Ordering::Relaxed)
-        );
-        
-        println!(
-            "CorsProxyIO  : SUCCESS={} TIMEOUT={} HTTP={} INVALID={}",
-            RISK_CORSPROXY_SUCCESS.load(Ordering::Relaxed),
-            RISK_CORSPROXY_TIMEOUT.load(Ordering::Relaxed),
-            RISK_CORSPROXY_HTTP.load(Ordering::Relaxed),
-            RISK_CORSPROXY_INVALID.load(Ordering::Relaxed)
-        );
-        
-        println!(
-            "Codetabs     : SUCCESS={} TIMEOUT={} HTTP={} INVALID={}",
-            RISK_CODETABS_SUCCESS.load(Ordering::Relaxed),
-            RISK_CODETABS_TIMEOUT.load(Ordering::Relaxed),
-            RISK_CODETABS_HTTP.load(Ordering::Relaxed),
-            RISK_CODETABS_INVALID.load(Ordering::Relaxed)
-        );
-        
-        println!(
-            "AllOrigins   : SUCCESS={} TIMEOUT={} HTTP={} INVALID={}",
-            RISK_ALLORIGINS_SUCCESS.load(Ordering::Relaxed),
-            RISK_ALLORIGINS_TIMEOUT.load(Ordering::Relaxed),
-            RISK_ALLORIGINS_HTTP.load(Ordering::Relaxed),
-            RISK_ALLORIGINS_INVALID.load(Ordering::Relaxed)
-        );
-        
-        println!(
-            "ThingProxy   : SUCCESS={} TIMEOUT={} HTTP={} INVALID={}",
-            RISK_THINGPROXY_SUCCESS.load(Ordering::Relaxed),
-            RISK_THINGPROXY_TIMEOUT.load(Ordering::Relaxed),
-            RISK_THINGPROXY_HTTP.load(Ordering::Relaxed),
-            RISK_THINGPROXY_INVALID.load(Ordering::Relaxed)
-        );
-        
-        println!(
-            "JSONP        : SUCCESS={} TIMEOUT={} HTTP={} INVALID={}",
-            RISK_JSONP_SUCCESS.load(Ordering::Relaxed),
-            RISK_JSONP_TIMEOUT.load(Ordering::Relaxed),
-            RISK_JSONP_HTTP.load(Ordering::Relaxed),
-            RISK_JSONP_INVALID.load(Ordering::Relaxed)
-        );
-        
-        println!("============================================");
-    }
-    Ok(())
+      println!("  ⚠️ Risk unavailable     : {}", risk_failures);
+      println!();
+      println!("🔬 Risk acquisition diagnostics");
+      println!("--------------------------------------------");
+  
+      println!(
+          "Direct       : SUCCESS={}",
+          RISK_DIRECT_SUCCESS.load(Ordering::Relaxed)
+      );
+  
+      println!(
+          "CorsProxyIO  : SUCCESS={}",
+          RISK_CORSPROXY_SUCCESS.load(Ordering::Relaxed)
+      );
+  
+      println!(
+          "Codetabs     : SUCCESS={}",
+          RISK_CODETABS_SUCCESS.load(Ordering::Relaxed)
+      );
+  
+      println!(
+          "AllOrigins   : SUCCESS={}",
+          RISK_ALLORIGINS_SUCCESS.load(Ordering::Relaxed)
+      );
+  
+      println!(
+          "ThingProxy   : SUCCESS={}",
+          RISK_THINGPROXY_SUCCESS.load(Ordering::Relaxed)
+      );
+  
+      println!(
+          "JSONP        : SUCCESS={}",
+          RISK_JSONP_SUCCESS.load(Ordering::Relaxed)
+      );
+  
+      println!(
+          "Unknown      : SUCCESS={}",
+          RISK_UNKNOWN_SOURCE_SUCCESS.load(Ordering::Relaxed)
+      );
+  
+      println!("============================================");
+  }
+      Ok(())
 }
 
 async fn scan_candidate(
@@ -433,32 +373,6 @@ async fn fetch_risk_assessment_balanced(ip: &str) -> Option<(i64, String)> {
         };
 
         if !response.status().is_success() {
-            if let Ok(error_value) = response.json::<Value>().await {
-                if let Some(diagnostics) = error_value
-                    .get("risk_diagnostics")
-                    .and_then(|v| v.as_array())
-                {
-                    for diagnostic in diagnostics {
-                        let reason = diagnostic
-                            .get("reason")
-                            .and_then(|v| v.as_str())
-                            .unwrap_or("UNKNOWN_ERROR");
-
-                        if reason == "TIMEOUT" {
-                            RISK_TIMEOUT_FAILURES.fetch_add(1, Ordering::Relaxed);
-                        } else if reason.starts_with("HTTP ") {
-                            RISK_HTTP_FAILURES.fetch_add(1, Ordering::Relaxed);
-                        } else if reason == "Response too short"
-                            || reason == "Fraud score not found"
-                            || reason == "Invalid fraud score"
-                        {
-                            RISK_RESPONSE_FAILURES.fetch_add(1, Ordering::Relaxed);
-                        } else {
-                            RISK_UNKNOWN_FAILURES.fetch_add(1, Ordering::Relaxed);
-                        }
-                    }
-                }
-            }
             continue;
         }
 
@@ -466,8 +380,6 @@ async fn fetch_risk_assessment_balanced(ip: &str) -> Option<(i64, String)> {
             Ok(value) => value,
             Err(_) => continue,
         };
-        
-        record_risk_diagnostics(&value);
         
         if value
             .get("error")
@@ -605,53 +517,6 @@ fn parse_trace_details(text: &str) -> (String, String) {
         }
     }
     (ip, loc)
-}
-
-fn record_risk_diagnostics(value: &Value) {
-    let diagnostics = match value
-        .get("risk_diagnostics")
-        .and_then(|v| v.as_object())
-    {
-        Some(diagnostics) => diagnostics,
-        None => return,
-    };
-
-    for (source, status) in diagnostics {
-        let status = match status.as_str() {
-            Some(status) => status,
-            None => continue,
-        };
-
-        let counter = match (source.as_str(), status) {
-            ("Direct", "TIMEOUT") => &RISK_DIRECT_TIMEOUT,
-            ("Direct", s) if s.starts_with("HTTP ") => &RISK_DIRECT_HTTP,
-            ("Direct", s) if s.starts_with("INVALID ") => &RISK_DIRECT_INVALID,
-
-            ("CorsProxyIO", "TIMEOUT") => &RISK_CORSPROXY_TIMEOUT,
-            ("CorsProxyIO", s) if s.starts_with("HTTP ") => &RISK_CORSPROXY_HTTP,
-            ("CorsProxyIO", s) if s.starts_with("INVALID ") => &RISK_CORSPROXY_INVALID,
-
-            ("Codetabs", "TIMEOUT") => &RISK_CODETABS_TIMEOUT,
-            ("Codetabs", s) if s.starts_with("HTTP ") => &RISK_CODETABS_HTTP,
-            ("Codetabs", s) if s.starts_with("INVALID ") => &RISK_CODETABS_INVALID,
-
-            ("AllOrigins", "TIMEOUT") | ("AllOrigins Raw", "TIMEOUT") => &RISK_ALLORIGINS_TIMEOUT,
-            ("AllOrigins", s) if s.starts_with("HTTP ") => &RISK_ALLORIGINS_HTTP,
-            ("AllOrigins", s) if s.starts_with("INVALID ") => &RISK_ALLORIGINS_INVALID,
-
-            ("ThingProxy", "TIMEOUT") => &RISK_THINGPROXY_TIMEOUT,
-            ("ThingProxy", s) if s.starts_with("HTTP ") => &RISK_THINGPROXY_HTTP,
-            ("ThingProxy", s) if s.starts_with("INVALID ") => &RISK_THINGPROXY_INVALID,
-
-            ("JSONP", "TIMEOUT") | ("JSONPlaceholder Proxy", "TIMEOUT") => &RISK_JSONP_TIMEOUT,
-            ("JSONP", s) if s.starts_with("HTTP ") => &RISK_JSONP_HTTP,
-            ("JSONP", s) if s.starts_with("INVALID ") => &RISK_JSONP_INVALID,
-
-            _ => continue,
-        };
-
-        counter.fetch_add(1, Ordering::Relaxed);
-    }
 }
 
 async fn get_scanner_ip() -> Result<String> {
