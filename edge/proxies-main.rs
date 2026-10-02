@@ -21,7 +21,7 @@ const PRIMARY_WORKER_HOST: &str = "cf-connecting.pages.dev";
 const CF_TRACE_HOST: &str = "1.1.1.1";
 const RISK_API_HOSTS: &[&str] = &[
     "api.cf-connect.workers.dev",
-    "cf-connected.pages.dev",
+    "apii.cf-connect.workers.dev",
 ];
 
 static API_INDEX_COUNTER: AtomicUsize = AtomicUsize::new(0);
@@ -63,9 +63,9 @@ static RISK_JSONP_INVALID: AtomicUsize = AtomicUsize::new(0);
 const DEFAULT_OUTPUT_FILE: &str = "sub/ProxyIP-Daily.md";
 const DEFAULT_PROXY_FILE: &str = "edge/assets/p-legacies.csv";
 
-const MAX_CONCURRENT_SCANS: usize = 40;
+const MAX_CONCURRENT_SCANS: usize = 80;
 const TIMEOUT_SECONDS: u64 = 5;
-const RISK_TIMEOUT_SECONDS: u64 = 5;
+const RISK_TIMEOUT_SECONDS: u64 = 10;
 const TARGET_PROXY_PORT: u16 = 443;
 
 static RISK_CONCURRENCY: Semaphore = Semaphore::const_new(6);
