@@ -36,6 +36,29 @@ static RISK_TIMEOUT_FAILURES: AtomicUsize = AtomicUsize::new(0);
 static RISK_HTTP_FAILURES: AtomicUsize = AtomicUsize::new(0);
 static RISK_RESPONSE_FAILURES: AtomicUsize = AtomicUsize::new(0);
 static RISK_UNKNOWN_FAILURES: AtomicUsize = AtomicUsize::new(0);
+static RISK_DIRECT_TIMEOUT: AtomicUsize = AtomicUsize::new(0);
+static RISK_DIRECT_HTTP: AtomicUsize = AtomicUsize::new(0);
+static RISK_DIRECT_INVALID: AtomicUsize = AtomicUsize::new(0);
+
+static RISK_CORSPROXY_TIMEOUT: AtomicUsize = AtomicUsize::new(0);
+static RISK_CORSPROXY_HTTP: AtomicUsize = AtomicUsize::new(0);
+static RISK_CORSPROXY_INVALID: AtomicUsize = AtomicUsize::new(0);
+
+static RISK_CODETABS_TIMEOUT: AtomicUsize = AtomicUsize::new(0);
+static RISK_CODETABS_HTTP: AtomicUsize = AtomicUsize::new(0);
+static RISK_CODETABS_INVALID: AtomicUsize = AtomicUsize::new(0);
+
+static RISK_ALLORIGINS_TIMEOUT: AtomicUsize = AtomicUsize::new(0);
+static RISK_ALLORIGINS_HTTP: AtomicUsize = AtomicUsize::new(0);
+static RISK_ALLORIGINS_INVALID: AtomicUsize = AtomicUsize::new(0);
+
+static RISK_THINGPROXY_TIMEOUT: AtomicUsize = AtomicUsize::new(0);
+static RISK_THINGPROXY_HTTP: AtomicUsize = AtomicUsize::new(0);
+static RISK_THINGPROXY_INVALID: AtomicUsize = AtomicUsize::new(0);
+
+static RISK_JSONP_TIMEOUT: AtomicUsize = AtomicUsize::new(0);
+static RISK_JSONP_HTTP: AtomicUsize = AtomicUsize::new(0);
+static RISK_JSONP_INVALID: AtomicUsize = AtomicUsize::new(0);
 
 const DEFAULT_OUTPUT_FILE: &str = "sub/ProxyIP-Daily.md";
 const DEFAULT_PROXY_FILE: &str = "edge/assets/p-legacies.csv";
@@ -194,34 +217,55 @@ async fn main() -> Result<()> {
         println!();
         println!("🔬 Risk acquisition diagnostics");
         println!("--------------------------------------------");
+        
         println!(
-            "Direct       : {}",
-            RISK_DIRECT_SUCCESS.load(Ordering::Relaxed)
+            "Direct       : SUCCESS={} TIMEOUT={} HTTP={} INVALID={}",
+            RISK_DIRECT_SUCCESS.load(Ordering::Relaxed),
+            RISK_DIRECT_TIMEOUT.load(Ordering::Relaxed),
+            RISK_DIRECT_HTTP.load(Ordering::Relaxed),
+            RISK_DIRECT_INVALID.load(Ordering::Relaxed)
         );
+        
         println!(
-            "CorsProxyIO  : {}",
-            RISK_CORSPROXY_SUCCESS.load(Ordering::Relaxed)
+            "CorsProxyIO  : SUCCESS={} TIMEOUT={} HTTP={} INVALID={}",
+            RISK_CORSPROXY_SUCCESS.load(Ordering::Relaxed),
+            RISK_CORSPROXY_TIMEOUT.load(Ordering::Relaxed),
+            RISK_CORSPROXY_HTTP.load(Ordering::Relaxed),
+            RISK_CORSPROXY_INVALID.load(Ordering::Relaxed)
         );
+        
         println!(
-            "Codetabs     : {}",
-            RISK_CODETABS_SUCCESS.load(Ordering::Relaxed)
+            "Codetabs     : SUCCESS={} TIMEOUT={} HTTP={} INVALID={}",
+            RISK_CODETABS_SUCCESS.load(Ordering::Relaxed),
+            RISK_CODETABS_TIMEOUT.load(Ordering::Relaxed),
+            RISK_CODETABS_HTTP.load(Ordering::Relaxed),
+            RISK_CODETABS_INVALID.load(Ordering::Relaxed)
         );
+        
         println!(
-            "AllOrigins   : {}",
-            RISK_ALLORIGINS_SUCCESS.load(Ordering::Relaxed)
+            "AllOrigins   : SUCCESS={} TIMEOUT={} HTTP={} INVALID={}",
+            RISK_ALLORIGINS_SUCCESS.load(Ordering::Relaxed),
+            RISK_ALLORIGINS_TIMEOUT.load(Ordering::Relaxed),
+            RISK_ALLORIGINS_HTTP.load(Ordering::Relaxed),
+            RISK_ALLORIGINS_INVALID.load(Ordering::Relaxed)
         );
+        
         println!(
-            "ThingProxy   : {}",
-            RISK_THINGPROXY_SUCCESS.load(Ordering::Relaxed)
+            "ThingProxy   : SUCCESS={} TIMEOUT={} HTTP={} INVALID={}",
+            RISK_THINGPROXY_SUCCESS.load(Ordering::Relaxed),
+            RISK_THINGPROXY_TIMEOUT.load(Ordering::Relaxed),
+            RISK_THINGPROXY_HTTP.load(Ordering::Relaxed),
+            RISK_THINGPROXY_INVALID.load(Ordering::Relaxed)
         );
+        
         println!(
-            "JSONP        : {}",
-            RISK_JSONP_SUCCESS.load(Ordering::Relaxed)
+            "JSONP        : SUCCESS={} TIMEOUT={} HTTP={} INVALID={}",
+            RISK_JSONP_SUCCESS.load(Ordering::Relaxed),
+            RISK_JSONP_TIMEOUT.load(Ordering::Relaxed),
+            RISK_JSONP_HTTP.load(Ordering::Relaxed),
+            RISK_JSONP_INVALID.load(Ordering::Relaxed)
         );
-        println!(
-            "Unknown      : {}",
-            RISK_UNKNOWN_SOURCE_SUCCESS.load(Ordering::Relaxed)
-        );
+        
         println!("============================================");
     }
     Ok(())
@@ -422,7 +466,9 @@ async fn fetch_risk_assessment_balanced(ip: &str) -> Option<(i64, String)> {
             Ok(value) => value,
             Err(_) => continue,
         };
-
+        
+        record_risk_diagnostics(&value);
+        
         if value
             .get("error")
             .and_then(|e| e.as_bool())
@@ -559,6 +605,53 @@ fn parse_trace_details(text: &str) -> (String, String) {
         }
     }
     (ip, loc)
+}
+
+fn record_risk_diagnostics(value: &Value) {
+    let diagnostics = match value
+        .get("risk_diagnostics")
+        .and_then(|v| v.as_object())
+    {
+        Some(diagnostics) => diagnostics,
+        None => return,
+    };
+
+    for (source, status) in diagnostics {
+        let status = match status.as_str() {
+            Some(status) => status,
+            None => continue,
+        };
+
+        let counter = match (source.as_str(), status) {
+            ("Direct", "TIMEOUT") => &RISK_DIRECT_TIMEOUT,
+            ("Direct", s) if s.starts_with("HTTP ") => &RISK_DIRECT_HTTP,
+            ("Direct", s) if s.starts_with("INVALID ") => &RISK_DIRECT_INVALID,
+
+            ("CorsProxyIO", "TIMEOUT") => &RISK_CORSPROXY_TIMEOUT,
+            ("CorsProxyIO", s) if s.starts_with("HTTP ") => &RISK_CORSPROXY_HTTP,
+            ("CorsProxyIO", s) if s.starts_with("INVALID ") => &RISK_CORSPROXY_INVALID,
+
+            ("Codetabs", "TIMEOUT") => &RISK_CODETABS_TIMEOUT,
+            ("Codetabs", s) if s.starts_with("HTTP ") => &RISK_CODETABS_HTTP,
+            ("Codetabs", s) if s.starts_with("INVALID ") => &RISK_CODETABS_INVALID,
+
+            ("AllOrigins", "TIMEOUT") | ("AllOrigins Raw", "TIMEOUT") => &RISK_ALLORIGINS_TIMEOUT,
+            ("AllOrigins", s) if s.starts_with("HTTP ") => &RISK_ALLORIGINS_HTTP,
+            ("AllOrigins", s) if s.starts_with("INVALID ") => &RISK_ALLORIGINS_INVALID,
+
+            ("ThingProxy", "TIMEOUT") => &RISK_THINGPROXY_TIMEOUT,
+            ("ThingProxy", s) if s.starts_with("HTTP ") => &RISK_THINGPROXY_HTTP,
+            ("ThingProxy", s) if s.starts_with("INVALID ") => &RISK_THINGPROXY_INVALID,
+
+            ("JSONP", "TIMEOUT") | ("JSONPlaceholder Proxy", "TIMEOUT") => &RISK_JSONP_TIMEOUT,
+            ("JSONP", s) if s.starts_with("HTTP ") => &RISK_JSONP_HTTP,
+            ("JSONP", s) if s.starts_with("INVALID ") => &RISK_JSONP_INVALID,
+
+            _ => continue,
+        };
+
+        counter.fetch_add(1, Ordering::Relaxed);
+    }
 }
 
 async fn get_scanner_ip() -> Result<String> {
