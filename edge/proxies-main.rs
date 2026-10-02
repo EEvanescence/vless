@@ -63,9 +63,9 @@ static RISK_JSONP_INVALID: AtomicUsize = AtomicUsize::new(0);
 const DEFAULT_OUTPUT_FILE: &str = "sub/ProxyIP-Daily.md";
 const DEFAULT_PROXY_FILE: &str = "edge/assets/p-legacies.csv";
 
-const MAX_CONCURRENT_SCANS: usize = 80;
+const MAX_CONCURRENT_SCANS: usize = 40;
 const TIMEOUT_SECONDS: u64 = 5;
-const RISK_TIMEOUT_SECONDS: u64 = 12;
+const RISK_TIMEOUT_SECONDS: u64 = 5;
 const TARGET_PROXY_PORT: u16 = 443;
 
 static RISK_CONCURRENCY: Semaphore = Semaphore::const_new(6);
