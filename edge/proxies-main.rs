@@ -1,9 +1,9 @@
-use std::collections::{BTreeMap, HashMap, HashSet};
 use colored::*;
-use std::sync::atomic::{AtomicUsize, Ordering};
+use std::collections::{BTreeMap, HashMap, HashSet};
 use std::fs::{self, File};
 use std::io::{self, BufRead, BufReader, Write};
 use std::path::Path;
+use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::{Arc, Mutex};
 use std::time::Duration;
 
@@ -76,7 +76,10 @@ async fn main() -> Result<()> {
                     proxy_candidates.push((ip, port, isp));
                 }
             }
-            println!("Picked up {} candidates from the proxy list", proxy_candidates.len());
+            println!(
+                "Picked up {} candidates from the proxy list",
+                proxy_candidates.len()
+            );
         }
         Err(e) => println!("⚠️ Heads up, Couldn't read the proxy file: {}", e),
     }
@@ -88,7 +91,10 @@ async fn main() -> Result<()> {
             .filter(|l| !l.is_empty())
             .collect();
 
-        println!("🔭 Receiving {} 🤷🏻‍♀️ from the Northern Territory", domains.len());
+        println!(
+            "🔭 Receiving {} 🤷🏻‍♀️ from the Northern Territory",
+            domains.len()
+        );
         for domain in domains {
             if let Ok(ips) = resolve_domain(&domain).await {
                 for ip in ips {
@@ -100,7 +106,10 @@ async fn main() -> Result<()> {
         }
     }
 
-    println!("📥 A total of {} unique candidates queued for scanning", proxy_candidates.len());
+    println!(
+        "📥 A total of {} unique candidates queued for scanning",
+        proxy_candidates.len()
+    );
 
     let scanner_ip = match get_scanner_ip().await {
         Ok(ip) => ip,
@@ -115,20 +124,27 @@ async fn main() -> Result<()> {
 
     println!("::group::🌀 Live Scan Started");
 
-    let tasks = futures::stream::iter(proxy_candidates.into_iter().map(|(ip, port, isp_source)| {
-        let validated_proxies = Arc::clone(&validated_proxies);
-        let scanner_ip = scanner_ip.clone();
-        let live_count = Arc::clone(&live_count);
-        let failed_count = Arc::clone(&failed_count);
-        async move {
-            scan_candidate(
-                ip, port, isp_source, &validated_proxies, &scanner_ip,
-                &live_count, &failed_count
-            ).await;
-        }
-    }))
-    .buffer_unordered(MAX_CONCURRENT_SCANS)
-    .collect::<Vec<()>>();
+    let tasks =
+        futures::stream::iter(proxy_candidates.into_iter().map(|(ip, port, isp_source)| {
+            let validated_proxies = Arc::clone(&validated_proxies);
+            let scanner_ip = scanner_ip.clone();
+            let live_count = Arc::clone(&live_count);
+            let failed_count = Arc::clone(&failed_count);
+            async move {
+                scan_candidate(
+                    ip,
+                    port,
+                    isp_source,
+                    &validated_proxies,
+                    &scanner_ip,
+                    &live_count,
+                    &failed_count,
+                )
+                .await;
+            }
+        }))
+        .buffer_unordered(MAX_CONCURRENT_SCANS)
+        .collect::<Vec<()>>();
 
     tasks.await;
 
@@ -140,16 +156,42 @@ async fn main() -> Result<()> {
     let total_live = live_count.load(Ordering::Relaxed);
     let total_failed = failed_count.load(Ordering::Relaxed);
 
-    println!("\n{}", "============================================".cyan().bold());
-    println!("{}", "     🌌  SCAN WRAPPED - HERE'S THE LOWDOWN       ".cyan().bold());
-    println!("{}\n", "============================================".cyan().bold());
-    println!("  🌠 Candidates tested  : {}", total_candidates.to_string().bold());
-    println!("  🟢 Alive & kicking    : {}", total_live.to_string().green().bold());
-    println!("  🔴 Dead / timed out   : {}", total_failed.to_string().red());
-    println!("  🌏 Countries covered  : {}", locked_proxies.len().to_string().yellow().bold());
-    println!("\n{}", "--------------------------------------------".dimmed());
+    println!(
+        "\n{}",
+        "============================================".cyan().bold()
+    );
+    println!(
+        "{}",
+        "     🌌  SCAN WRAPPED - HERE'S THE LOWDOWN       "
+            .cyan()
+            .bold()
+    );
+    println!(
+        "{}\n",
+        "============================================".cyan().bold()
+    );
+    println!(
+        "  🌠 Candidates tested  : {}",
+        total_candidates.to_string().bold()
+    );
+    println!(
+        "  🟢 Alive & kicking    : {}",
+        total_live.to_string().green().bold()
+    );
+    println!(
+        "  🔴 Dead / timed out   : {}",
+        total_failed.to_string().red()
+    );
+    println!(
+        "  🌏 Countries covered  : {}",
+        locked_proxies.len().to_string().yellow().bold()
+    );
+    println!(
+        "\n{}",
+        "--------------------------------------------".dimmed()
+    );
     println!("{}", "  🪩 Active proxies per country:".bold());
-    
+
     for (country_code, proxies) in locked_proxies.iter() {
         let flag = generate_country_flag_emoji(country_code);
         let country_name = get_country_name(country_code);
@@ -161,54 +203,57 @@ async fn main() -> Result<()> {
             proxies.len().to_string().green().bold()
         );
     }
-    println!("{}\n", "============================================".cyan().bold());
-    
+    println!(
+        "{}\n",
+        "============================================".cyan().bold()
+    );
+
     let risk_failures = RISK_FAILURES.load(Ordering::Relaxed);
 
     if risk_failures > 0 {
-      println!("  ⚠️ Risk unavailable     : {}", risk_failures);
-      println!();
-      println!("🔬 Risk acquisition diagnostics");
-      println!("--------------------------------------------");
-  
-      println!(
-          "Direct       : SUCCESS={}",
-          RISK_DIRECT_SUCCESS.load(Ordering::Relaxed)
-      );
-  
-      println!(
-          "CorsProxyIO  : SUCCESS={}",
-          RISK_CORSPROXY_SUCCESS.load(Ordering::Relaxed)
-      );
-  
-      println!(
-          "Codetabs     : SUCCESS={}",
-          RISK_CODETABS_SUCCESS.load(Ordering::Relaxed)
-      );
-  
-      println!(
-          "AllOrigins   : SUCCESS={}",
-          RISK_ALLORIGINS_SUCCESS.load(Ordering::Relaxed)
-      );
-  
-      println!(
-          "ThingProxy   : SUCCESS={}",
-          RISK_THINGPROXY_SUCCESS.load(Ordering::Relaxed)
-      );
-  
-      println!(
-          "JSONP        : SUCCESS={}",
-          RISK_JSONP_SUCCESS.load(Ordering::Relaxed)
-      );
-  
-      println!(
-          "Unknown      : SUCCESS={}",
-          RISK_UNKNOWN_SOURCE_SUCCESS.load(Ordering::Relaxed)
-      );
-  
-      println!("============================================");
-  }
-      Ok(())
+        println!("  ⚠️ Risk unavailable     : {}", risk_failures);
+        println!();
+        println!("🔬 Risk acquisition diagnostics");
+        println!("--------------------------------------------");
+
+        println!(
+            "Direct       : SUCCESS={}",
+            RISK_DIRECT_SUCCESS.load(Ordering::Relaxed)
+        );
+
+        println!(
+            "CorsProxyIO  : SUCCESS={}",
+            RISK_CORSPROXY_SUCCESS.load(Ordering::Relaxed)
+        );
+
+        println!(
+            "Codetabs     : SUCCESS={}",
+            RISK_CODETABS_SUCCESS.load(Ordering::Relaxed)
+        );
+
+        println!(
+            "AllOrigins   : SUCCESS={}",
+            RISK_ALLORIGINS_SUCCESS.load(Ordering::Relaxed)
+        );
+
+        println!(
+            "ThingProxy   : SUCCESS={}",
+            RISK_THINGPROXY_SUCCESS.load(Ordering::Relaxed)
+        );
+
+        println!(
+            "JSONP        : SUCCESS={}",
+            RISK_JSONP_SUCCESS.load(Ordering::Relaxed)
+        );
+
+        println!(
+            "Unknown      : SUCCESS={}",
+            RISK_UNKNOWN_SOURCE_SUCCESS.load(Ordering::Relaxed)
+        );
+
+        println!("============================================");
+    }
+    Ok(())
 }
 
 async fn scan_candidate(
@@ -220,41 +265,52 @@ async fn scan_candidate(
     live_count: &Arc<AtomicUsize>,
     failed_count: &Arc<AtomicUsize>,
 ) {
-    
     if let Ok((status, body)) = raw_socket_request(PRIMARY_WORKER_HOST, "/", &ip, port).await {
         if status == 200 {
             if let Ok(json) = serde_json::from_str::<Value>(&body) {
-                let resolved_ip = json.get("ip")
+                let resolved_ip = json
+                    .get("ip")
                     .or_else(|| json.get("clientIp"))
                     .and_then(|v| v.as_str());
 
                 if let Some(out_ip) = resolved_ip {
                     if out_ip != scanner_ip && !out_ip.is_empty() {
-                        let isp = json.get("as_organization")
+                        let isp = json
+                            .get("as_organization")
                             .or_else(|| json.get("asOrganization"))
                             .and_then(|v| v.as_str())
                             .unwrap_or(&isp_source)
                             .to_string();
 
-                        let country = json.get("country")
+                        let country = json
+                            .get("country")
                             .and_then(|v| v.as_str())
                             .unwrap_or("XX")
                             .to_string();
 
-                        let city = json.get("city")
+                        let city = json
+                            .get("city")
                             .and_then(|v| v.as_str())
                             .unwrap_or("Unknown")
                             .to_string();
 
-                        let region = json.get("region")
+                        let region = json
+                            .get("region")
                             .and_then(|v| v.as_str())
                             .unwrap_or("Unknown")
                             .to_string();
 
                         register_success(
-                            ip, isp, country, city, region,
-                            validated_proxies, live_count, "Worker"
-                        ).await;
+                            ip,
+                            isp,
+                            country,
+                            city,
+                            region,
+                            validated_proxies,
+                            live_count,
+                            "Worker",
+                        )
+                        .await;
                         return;
                     }
                 }
@@ -262,21 +318,34 @@ async fn scan_candidate(
         }
     }
 
-    if let Ok((status, body)) = raw_socket_request(CF_TRACE_HOST, "/cdn-cgi/trace", &ip, port).await {
+    if let Ok((status, body)) = raw_socket_request(CF_TRACE_HOST, "/cdn-cgi/trace", &ip, port).await
+    {
         if status == 200 {
             let (trace_ip, loc) = parse_trace_details(&body);
             if !trace_ip.is_empty() && trace_ip != scanner_ip {
                 register_success(
-                    ip, isp_source, loc, "Unknown".to_string(), "Unknown".to_string(),
-                    validated_proxies, live_count, "CF-Trace"
-                ).await;
+                    ip,
+                    isp_source,
+                    loc,
+                    "Unknown".to_string(),
+                    "Unknown".to_string(),
+                    validated_proxies,
+                    live_count,
+                    "CF-Trace",
+                )
+                .await;
                 return;
             }
         }
     }
 
     failed_count.fetch_add(1, Ordering::Relaxed);
-    println!("  ❌ {:<7} | {:<15} | {}", "DEAD".red().bold(), ip, "Failed verification".dimmed());
+    println!(
+        "  ❌ {:<7} | {:<15} | {}",
+        "DEAD".red().bold(),
+        ip,
+        "Failed verification".dimmed()
+    );
 }
 
 async fn register_success(
@@ -291,11 +360,15 @@ async fn register_success(
 ) {
     let risk_result = fetch_risk_assessment_balanced(&ip).await;
     let (fraud_score, risk) = risk_result
-      .map(|(score, risk)| (score, risk))
-      .unwrap_or((-1, "unknown".to_string()));
+        .map(|(score, risk)| (score, risk))
+        .unwrap_or((-1, "unknown".to_string()));
 
     let country_clean = country_code.trim().to_uppercase();
-    let country_final = if country_clean.len() > 2 { country_clean[..2].to_string() } else { country_clean };
+    let country_final = if country_clean.len() > 2 {
+        country_clean[..2].to_string()
+    } else {
+        country_clean
+    };
 
     let info = ProxyInfo {
         ip: ip.clone(),
@@ -311,11 +384,11 @@ async fn register_success(
 
     let flag = generate_country_flag_emoji(&info.country_code);
     let score_display = if info.fraud_score >= 0 {
-    info.fraud_score.to_string()
+        info.fraud_score.to_string()
     } else {
         "N/A".to_string()
     };
-    
+
     println!(
         "  ✅ {:<7} | {:<15} | Score: {:<3} | Via: {:<8} | {} {}",
         "ALIVE".green().bold(),
@@ -327,7 +400,10 @@ async fn register_success(
     );
 
     let mut locked = validated_proxies.lock().unwrap_or_else(|e| e.into_inner());
-    locked.entry(info.country_code.clone()).or_default().push(info);
+    locked
+        .entry(info.country_code.clone())
+        .or_default()
+        .push(info);
 }
 
 async fn fetch_risk_assessment_balanced(ip: &str) -> Option<(i64, String)> {
@@ -380,7 +456,7 @@ async fn fetch_risk_assessment_balanced(ip: &str) -> Option<(i64, String)> {
             Ok(value) => value,
             Err(_) => continue,
         };
-        
+
         if value
             .get("error")
             .and_then(|e| e.as_bool())
@@ -394,18 +470,12 @@ async fn fetch_risk_assessment_balanced(ip: &str) -> Option<(i64, String)> {
             None => continue,
         };
 
-        let score = match info
-            .get("fraud_score")
-            .and_then(|v| v.as_i64())
-        {
+        let score = match info.get("fraud_score").and_then(|v| v.as_i64()) {
             Some(score) if (0..=100).contains(&score) => score,
             _ => continue,
         };
 
-        let risk = match info
-            .get("risk")
-            .and_then(|v| v.as_str())
-        {
+        let risk = match info.get("risk").and_then(|v| v.as_str()) {
             Some(risk) if !risk.is_empty() => risk.to_string(),
             _ => continue,
         };
@@ -523,16 +593,29 @@ async fn get_scanner_ip() -> Result<String> {
     let client = reqwest::Client::builder()
         .timeout(Duration::from_secs(TIMEOUT_SECONDS))
         .build()?;
-    
-    if let Ok(resp) = client.get(format!("https://{}", PRIMARY_WORKER_HOST)).send().await {
+
+    if let Ok(resp) = client
+        .get(format!("https://{}", PRIMARY_WORKER_HOST))
+        .send()
+        .await
+    {
         if let Ok(json) = resp.json::<Value>().await {
-            if let Some(ip) = json.get("ip").or_else(|| json.get("clientIp")).and_then(|v| v.as_str()) {
+            if let Some(ip) = json
+                .get("ip")
+                .or_else(|| json.get("clientIp"))
+                .and_then(|v| v.as_str())
+            {
                 return Ok(ip.to_string());
             }
         }
     }
 
-    let resp = client.get("https://checkip.amazonaws.com").send().await?.text().await?;
+    let resp = client
+        .get("https://checkip.amazonaws.com")
+        .send()
+        .await?
+        .text()
+        .await?;
     Ok(resp.trim().to_string())
 }
 
@@ -583,10 +666,16 @@ fn risk_color_hex(score: i64) -> String {
 
 fn risk_badge_html(score: i64) -> String {
     let color = risk_color_hex(score);
-    format!("<img src=\"https://img.shields.io/badge/-{}-{}\" />", score, color)
+    format!(
+        "<img src=\"https://img.shields.io/badge/-{}-{}\" />",
+        score, color
+    )
 }
 
-fn write_markdown_report(proxies_by_country: &BTreeMap<String, Vec<ProxyInfo>>, output_file: &str) -> io::Result<()> {
+fn write_markdown_report(
+    proxies_by_country: &BTreeMap<String, Vec<ProxyInfo>>,
+    output_file: &str,
+) -> io::Result<()> {
     let mut file = File::create(output_file)?;
 
     let total_active = proxies_by_country.values().map(|v| v.len()).sum::<usize>();
@@ -610,10 +699,22 @@ fn write_markdown_report(proxies_by_country: &BTreeMap<String, Vec<ProxyInfo>>, 
     let last_badge_label = encode_badge_label(&format!("{} (UTC+3:30)", last_updated_str));
     let next_badge_label = encode_badge_label(&format!("{} (UTC+3:30)", next_update_str));
 
-    let last_badge = format!("<img src=\"https://img.shields.io/badge/Last_Update-{}-966600\" />", last_badge_label);
-    let next_badge = format!("<img src=\"https://img.shields.io/badge/Next_Update-{}-966600\" />", next_badge_label);
-    let active_badge = format!("<img src=\"https://img.shields.io/badge/validated_proxies-{}-966600\" />", total_active);
-    let countries_badge = format!("<img src=\"https://img.shields.io/badge/Countries-{}-966600\" />", total_countries);
+    let last_badge = format!(
+        "<img src=\"https://img.shields.io/badge/Last_Update-{}-966600\" />",
+        last_badge_label
+    );
+    let next_badge = format!(
+        "<img src=\"https://img.shields.io/badge/Next_Update-{}-966600\" />",
+        next_badge_label
+    );
+    let active_badge = format!(
+        "<img src=\"https://img.shields.io/badge/validated_proxies-{}-966600\" />",
+        total_active
+    );
+    let countries_badge = format!(
+        "<img src=\"https://img.shields.io/badge/Countries-{}-966600\" />",
+        total_countries
+    );
 
     writeln!(
         file,
@@ -685,7 +786,11 @@ fn write_markdown_report(proxies_by_country: &BTreeMap<String, Vec<ProxyInfo>>, 
                 for info in sorted.iter() {
                     let location = format!("{}, {}", info.region, info.city);
                     let badge = risk_badge_html(info.fraud_score);
-                    writeln!(file, "| <pre><code>{}</code></pre> | {} | {} | {} |", info.ip, info.isp, location, badge)?;
+                    writeln!(
+                        file,
+                        "| <pre><code>{}</code></pre> | {} | {} | {} |",
+                        info.ip, info.isp, location, badge
+                    )?;
                 }
                 writeln!(file, "\n</details>\n\n---\n")?;
             }
@@ -698,7 +803,13 @@ fn write_markdown_report(proxies_by_country: &BTreeMap<String, Vec<ProxyInfo>>, 
         let flag = generate_country_flag_emoji(country_code);
         let name = get_country_name(country_code);
 
-        writeln!(file, "## {} {} ({} proxies)", flag, name, sorted_proxies.len())?;
+        writeln!(
+            file,
+            "## {} {} ({} proxies)",
+            flag,
+            name,
+            sorted_proxies.len()
+        )?;
         writeln!(file, "<details>")?;
         writeln!(file, "<summary>Click to expand</summary>\n")?;
         writeln!(file, "|   IP   |   ISP   |   Location   |  Risk Score  |")?;
@@ -707,15 +818,19 @@ fn write_markdown_report(proxies_by_country: &BTreeMap<String, Vec<ProxyInfo>>, 
         for info in sorted_proxies.iter() {
             let location = format!("{}, {}", info.region, info.city);
             let badge = risk_badge_html(info.fraud_score);
-            writeln!(file, "| <pre><code>{}</code></pre> | {} | {} | {} |", info.ip, info.isp, location, badge)?;
+            writeln!(
+                file,
+                "| <pre><code>{}</code></pre> | {} | {} | {} |",
+                info.ip, info.isp, location, badge
+            )?;
         }
         writeln!(file, "\n</details>\n\n---\n")?;
     }
 
-if !proxies_by_country.is_empty() {
-    writeln!(
-        file,
-        r##"> <br/>
+    if !proxies_by_country.is_empty() {
+        writeln!(
+            file,
+            r##"> <br/>
 >
 > <p><b>🪶 Credits</b></p>
 >
@@ -725,8 +840,8 @@ if !proxies_by_country.is_empty() {
 >
 > <br/>
 "##
-    )?;
-}
+        )?;
+    }
     println!("💠 Markdown report refreshed at {}", output_file);
     Ok(())
 }
@@ -758,7 +873,9 @@ fn generate_country_flag_emoji(code: &str) -> String {
     code.chars()
         .filter_map(|c| {
             if c.is_ascii_alphabetic() {
-                Some(char::from_u32(0x1F1E6 + (c.to_ascii_uppercase() as u32 - 'A' as u32)).unwrap())
+                Some(
+                    char::from_u32(0x1F1E6 + (c.to_ascii_uppercase() as u32 - 'A' as u32)).unwrap(),
+                )
             } else {
                 None
             }
