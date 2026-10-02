@@ -374,7 +374,7 @@ async fn fetch_risk_assessment_balanced(ip: &str) -> Option<(i64, String)> {
         let current_host = RISK_API_HOSTS[(start_idx + i) % total_apis];
         let url = format!("https://{}/api/{}", current_host, ip);
 
-        let resp_result = client
+        let response = match client
             .get(&url)
             .header(
                 "User-Agent",
@@ -382,18 +382,12 @@ async fn fetch_risk_assessment_balanced(ip: &str) -> Option<(i64, String)> {
             )
             .header("Accept", "application/json")
             .send()
-            .await;
-
-        let response = match resp_result {
+            .await
+        {
             Ok(response) => response,
             Err(_) => continue,
         };
 
-        let response = match resp_result {
-            Ok(response) => response,
-            Err(_) => continue,
-        };
-        
         if !response.status().is_success() {
             if let Ok(error_value) = response.json::<Value>().await {
                 if let Some(diagnostics) = error_value
@@ -405,7 +399,7 @@ async fn fetch_risk_assessment_balanced(ip: &str) -> Option<(i64, String)> {
                             .get("reason")
                             .and_then(|v| v.as_str())
                             .unwrap_or("UNKNOWN_ERROR");
-        
+
                         if reason == "TIMEOUT" {
                             RISK_TIMEOUT_FAILURES.fetch_add(1, Ordering::Relaxed);
                         } else if reason.starts_with("HTTP ") {
@@ -421,10 +415,9 @@ async fn fetch_risk_assessment_balanced(ip: &str) -> Option<(i64, String)> {
                     }
                 }
             }
-        
             continue;
         }
-        
+
         let value = match response.json::<Value>().await {
             Ok(value) => value,
             Err(_) => continue,
