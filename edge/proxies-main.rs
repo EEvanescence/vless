@@ -32,6 +32,10 @@ static RISK_ALLORIGINS_SUCCESS: AtomicUsize = AtomicUsize::new(0);
 static RISK_THINGPROXY_SUCCESS: AtomicUsize = AtomicUsize::new(0);
 static RISK_JSONP_SUCCESS: AtomicUsize = AtomicUsize::new(0);
 static RISK_UNKNOWN_SOURCE_SUCCESS: AtomicUsize = AtomicUsize::new(0);
+static RISK_TIMEOUT_FAILURES: AtomicUsize = AtomicUsize::new(0);
+static RISK_HTTP_FAILURES: AtomicUsize = AtomicUsize::new(0);
+static RISK_RESPONSE_FAILURES: AtomicUsize = AtomicUsize::new(0);
+static RISK_UNKNOWN_FAILURES: AtomicUsize = AtomicUsize::new(0);
 
 const DEFAULT_OUTPUT_FILE: &str = "sub/ProxyIP-Daily.md";
 const DEFAULT_PROXY_FILE: &str = "edge/assets/p-legacies.csv";
@@ -167,6 +171,26 @@ async fn main() -> Result<()> {
 
     if risk_failures > 0 {
         println!("  ⚠️ Risk unavailable     : {}", risk_failures);
+        println!();
+        println!("🔬 Risk failure diagnostics");
+        println!("--------------------------------------------");
+        println!(
+            "Timeout       : {}",
+            RISK_TIMEOUT_FAILURES.load(Ordering::Relaxed)
+        );
+        println!(
+            "HTTP errors   : {}",
+            RISK_HTTP_FAILURES.load(Ordering::Relaxed)
+        );
+        println!(
+            "Invalid data  : {}",
+            RISK_RESPONSE_FAILURES.load(Ordering::Relaxed)
+        );
+        println!(
+            "Unknown       : {}",
+            RISK_UNKNOWN_FAILURES.load(Ordering::Relaxed)
+        );
+        println!("============================================");
         println!();
         println!("🔬 Risk acquisition diagnostics");
         println!("--------------------------------------------");
@@ -366,6 +390,33 @@ async fn fetch_risk_assessment_balanced(ip: &str) -> Option<(i64, String)> {
         };
 
         if !response.status().is_success() {
+            if let Ok(error_value) = response.json::<Value>().await {
+                if let Some(diagnostics) = error_value
+                    .get("risk_diagnostics")
+                    .and_then(|v| v.as_array())
+                {
+                    for diagnostic in diagnostics {
+                        let reason = diagnostic
+                            .get("reason")
+                            .and_then(|v| v.as_str())
+                            .unwrap_or("UNKNOWN_ERROR");
+        
+                        if reason == "TIMEOUT" {
+                            RISK_TIMEOUT_FAILURES.fetch_add(1, Ordering::Relaxed);
+                        } else if reason.starts_with("HTTP ") {
+                            RISK_HTTP_FAILURES.fetch_add(1, Ordering::Relaxed);
+                        } else if reason == "Response too short"
+                            || reason == "Fraud score not found"
+                            || reason == "Invalid fraud score"
+                        {
+                            RISK_RESPONSE_FAILURES.fetch_add(1, Ordering::Relaxed);
+                        } else {
+                            RISK_UNKNOWN_FAILURES.fetch_add(1, Ordering::Relaxed);
+                        }
+                    }
+                }
+            }
+        
             continue;
         }
 
@@ -374,11 +425,7 @@ async fn fetch_risk_assessment_balanced(ip: &str) -> Option<(i64, String)> {
             Err(_) => continue,
         };
 
-        if value
-            .get("error")
-            .and_then(|e| e.as_bool())
-            .unwrap_or(false)
-        {
+        if value.get("error").and_then(|e| e.as_bool()).unwrap_or(false) {
             continue;
         }
 
@@ -386,50 +433,59 @@ async fn fetch_risk_assessment_balanced(ip: &str) -> Option<(i64, String)> {
             Some(info) => info,
             None => continue,
         };
+        
+        if let Some(info) = val.get("info") {
+           let score = info
+               .get("fraud_score")
+               .and_then(|v| v.as_i64())
+               .unwrap_or(-1);
+       
+           let risk = info
+               .get("risk")
+               .and_then(|v| v.as_str())
+               .unwrap_or("unknown")
+               .to_string();
+       
+           match info
+               .get("risk_source")
+               .and_then(|v| v.as_str())
+               .unwrap_or("unknown")
+           {
+               "Direct" => {
+                   RISK_DIRECT_SUCCESS.fetch_add(1, Ordering::Relaxed);
+               }
+               "CorsProxyIO" => {
+                   RISK_CORSPROXY_SUCCESS.fetch_add(1, Ordering::Relaxed);
+               }
+               "Codetabs" => {
+                   RISK_CODETABS_SUCCESS.fetch_add(1, Ordering::Relaxed);
+               }
+               "AllOrigins" | "AllOrigins Raw" => {
+                   RISK_ALLORIGINS_SUCCESS.fetch_add(1, Ordering::Relaxed);
+               }
+               "ThingProxy" => {
+                   RISK_THINGPROXY_SUCCESS.fetch_add(1, Ordering::Relaxed);
+               }
+               "JSONPlaceholder Proxy" | "JSONP" => {
+                   RISK_JSONP_SUCCESS.fetch_add(1, Ordering::Relaxed);
+               }
+               _ => {
+                   RISK_UNKNOWN_SOURCE_SUCCESS.fetch_add(1, Ordering::Relaxed);
+               }
+           }
+       
+           return (score, risk);
+       }
 
-        let score = match info
-            .get("fraud_score")
-            .and_then(|v| v.as_i64())
-        {
+        let score = match info.get("fraud_score").and_then(|v| v.as_i64()) {
             Some(score) if (0..=100).contains(&score) => score,
             _ => continue,
         };
 
-        let risk = match info
-            .get("risk")
-            .and_then(|v| v.as_str())
-        {
+        let risk = match info.get("risk").and_then(|v| v.as_str()) {
             Some(risk) if !risk.is_empty() => risk.to_string(),
             _ => continue,
         };
-
-        match info
-            .get("risk_source")
-            .and_then(|v| v.as_str())
-            .unwrap_or("unknown")
-        {
-            "Direct" => {
-                RISK_DIRECT_SUCCESS.fetch_add(1, Ordering::Relaxed);
-            }
-            "CorsProxyIO" => {
-                RISK_CORSPROXY_SUCCESS.fetch_add(1, Ordering::Relaxed);
-            }
-            "Codetabs" => {
-                RISK_CODETABS_SUCCESS.fetch_add(1, Ordering::Relaxed);
-            }
-            "AllOrigins" | "AllOrigins Raw" => {
-                RISK_ALLORIGINS_SUCCESS.fetch_add(1, Ordering::Relaxed);
-            }
-            "ThingProxy" => {
-                RISK_THINGPROXY_SUCCESS.fetch_add(1, Ordering::Relaxed);
-            }
-            "JSONPlaceholder Proxy" | "JSONP" => {
-                RISK_JSONP_SUCCESS.fetch_add(1, Ordering::Relaxed);
-            }
-            _ => {
-                RISK_UNKNOWN_SOURCE_SUCCESS.fetch_add(1, Ordering::Relaxed);
-            }
-        }
 
         return Some((score, risk));
     }
